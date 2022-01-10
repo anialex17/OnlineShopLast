@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block content %}
+
+<button class="bg-transparent border-0 px-3 py-2 btn-close">
+    <i class="fas fa-times"></i>
+</button>
+<div class="bg-close"></div>
+
+<section class="gallery-content py-4 divider">
+    <div class="right-bottom-bg pb-4">
+        <div class="container">
+
+            <div class="header-block pb-4">
+                <div class="icon-line"></div>
+                <p class="header-text text-center mt-5">{% trans ' Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                    Beatae dicta illo nihil omnis voluptatibus? Excepturi minus
+                    quae sit, suscipit velit voluptatem? Ipsum maiores necessitatibus
+                    quaerat!' %}
+
+                </p>
+            </div>
+
+            <div class="row">
+{% for image in images %}
+                <div class="col-sm-4 py-2 px-sm-2">
+                    <button class="product-img-btn left">
+                        <img src="{{ image.image.url }}" alt="" class="img">
+                        <span class="flex-center search-plus">
+                            <i class="fas fa-search-plus"></i>
+                        </span>
+                    </button>
+                </div>
+{% endfor %}
+            </div>
+
+
+        </div>
+    </div>
+
+</section>
+
+    <script>
+
+    </script>
+
+{% endblock %}
+
+
+
+

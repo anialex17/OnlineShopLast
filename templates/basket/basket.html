@@ -1,0 +1,138 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block content %}
+<section class="basket-content pb-4 divider">
+
+    <div class="container py-2">
+
+        <div class="header-block">
+            <h3 class="site-color py-3 header">
+                <i class="fas fa-shopping-basket"></i>
+                <span class="font-weight-bold">{% trans 'My Basket' %}</span>
+            </h3>
+        </div>
+
+
+        <table class="table py-3">
+            <thead class="thead-light">
+            <tr>
+                <th scope="col">{% trans 'Image' %}</th>
+                <th scope="col">{% trans 'Name' %}</th>
+                <th scope="col">{% trans 'Price' %}</th>
+                <th scope="col">{% trans 'Quantity' %}</th>
+                <th scope="col">{% trans 'Total' %}</th>
+                <th scope="col">{% trans 'Delete' %}</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            {% for item in basket.productItems.all %}
+            <tr class="py-3">
+            <th scope="row">
+
+                <div class="basket-img">
+                {% if item.product.image %}
+                    <img src="{{ item.product.image.url }}" alt="product" class="img">
+                {% endif %}
+                </div>
+            </th>
+            <td class="font-weight-bold">
+                <span class="d-sm-none">{% trans 'Product name' %}</span>
+                <a href="{% url 'product' item.product.category.url item.product.url %}" class="site-color food-name">{{ item.product.title }}</a>
+            </td>
+            <td>
+                <span class="d-sm-none font-weight-bold">{% trans 'Food Price' %}</span>
+                <span class="food-price">{{ item.product.price }}</span>
+                <span>{% trans 'amd' %} </span>
+            </td>
+            <td class="quantity">
+                <span class="d-sm-none font-weight-bold">{% trans 'Product Quantity' %}</span>
+                <div class="d-flex add-to-basket-block">
+                    <form action="{% url 'change_qty_minus' %}" method="post">
+                        {% csrf_token %}
+                        <input type="number" name="decrement_item" hidden value="{{ item.id }}">
+                        <button type="submit" class="btn shadow-none btn-dec flex-center mr-2 border-0 btn-dec">
+                            <i class="fas fa-minus site-color"></i>
+                        </button>
+                    </form>
+                    <span class="mr-2 product-quantity">{{item.quantity}}</span>
+                    <form action="{% url 'change_qty_plus' %}" method="post">
+                        {% csrf_token %}
+                        <input type="number" hidden name="increment_item" value="{{ item.id }}">
+                        <button type="submit" class="btn shadow-none btn-inc flex-center mr-2 border-0">
+                            <i class="fas fa-plus site-color"></i>
+                        </button>
+                    </form>
+                </div>
+            </td>
+            <td>
+                <span class="d-sm-none font-weight-bold">{% trans 'Total Price' %}</span>
+                <span class="total-price">{{ item.total_price }}</span>
+                <span> {% trans 'amd' %}</span>
+            </td>
+            <td>
+                <span class="d-sm-none font-weight-bold">{% trans 'Delete' %}</span>
+                <form action="{% url 'basket_remove' %}" method="post">
+                    {% csrf_token %}
+                    <input type="text" hidden value="{{ item.id }}" name="remove_item">
+                <button type="submit" class="bg-transparent border-0 site-color delete-btn">
+                    <i class="fas fa-times"></i>
+                </button>
+                </form>
+            </td>
+
+        </tr>
+
+            {% endfor %}
+            </tbody>
+        </table>
+
+
+        <div class="d-flex align-items-center justify-content-between flex-wrap">
+            <div class="py-3 pr-5">
+{#                <div class="custom-control custom-radio">#}
+{#                    <input type="radio" id="customRadio1" name="customRadio" class="custom-control-input" checked>#}
+{#                    <label class="custom-control-label" for="customRadio1">{% trans 'Toggle this custom radio' %}</label>#}
+{#                </div>#}
+{#                <div class="custom-control custom-radio">#}
+{#                    <input type="radio" id="customRadio2" name="customRadio" class="custom-control-input">#}
+{#                    <label class="custom-control-label" for="customRadio2">{% trans 'Or toggle this other custom radio' %}</label>#}
+{#                </div>#}
+{#                <div class="custom-control custom-radio">#}
+{#                    <input type="radio" id="customRadio3" name="customRadio" class="custom-control-input">#}
+{#                    <label class="custom-control-label" for="customRadio3">{% trans 'Or toggle this other custom radio' %}</label>#}
+{#                </div>#}
+            </div>
+
+            <div class="cost">
+                <div class="shipping-price py-3 font-weight-bold">
+                    <span class="font-weight-bold pr-2">{% trans 'Shipping Price' %}</span>
+                    <span class="price site-color">0</span>
+                    <span class="site-color pl-2"> {% trans 'amd' %}</span>
+                </div>
+                  <div class="shipping-price py-3 font-weight-bold">
+                    <span class="font-weight-bold pr-2">{% trans 'Total Count' %}</span>
+                    <span class="price site-color">{{ basket.total_quantity }}</span>
+                    <span class="site-color pl-2"> {% trans 'item' %}</span>
+                </div>
+                <div class="products-price font-weight-bold">
+                    <span class="pr-2">{% trans 'Total Price ' %}</span>
+                    <span class="price site-color products-total-price">{{ basket.finale_price }}</span>
+                    <span class="site-color pl-2">{% trans 'amd' %} </span>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="order-buttons d-flex justify-content-between py-3">
+            <a href="{% url 'home' %}" class="btn shadow-none btn-lg">{% trans 'Continue Ordering' %}</a>
+            <a href="{% url 'ordering' %}"><button type="submit" class="btn shadow-none btn-lg">{% trans 'Order' %}</button></a>
+        </div>
+
+    </div>
+    <!--End of container-->
+</section>
+
+{% endblock %}

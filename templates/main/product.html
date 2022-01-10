@@ -1,0 +1,116 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block content %}
+
+
+<section class="product-content pb-4 divider">
+
+    <div class="product-header text-center flex-center">
+        <h4 class="header site-color">{% trans 'Food Details' %}</h4>
+    </div>
+    <!--End of menu-header-->
+
+    <div class="container py-4">
+
+        <div class="d-flex">
+            <div class="product-container d-flex pr-lg-4">
+                <div class="food-img">
+                    <img src="{{ product.image.url }}" alt="" class="img">
+                </div>
+                <div class="food-info pl-sm-3">
+                    <div class="food-name font-weight-bold" id="food-name">{{ product.title }}</div>
+                    <div class="price py-2 site-color">
+                        <del><span>{{ product.price }}</span>{% trans 'dr' %}</del>
+                        <span class="font-weight-bold"><span id="food-price">{{ product.new_price }}</span>{% trans 'dr' %}</span>
+                    </div>
+                    <div class="description py-2">
+                        <p>
+                        {{ product.description }}
+                        </p>
+                    </div>
+                    <div class="food-type font-weight-bold">
+                        <span>{% trans 'Food Type' %} : <span>{{ product.product_type }}</span></span>
+                    </div>
+                    <form class="product-form js-product-form" data-login="{% if user.is_authenticated %}is_active{% endif %}" action="{% url 'add_to_basket' %}" method="post">
+                        {% csrf_token %}
+
+                        <div class="add-to-basket-block py-3">
+                            <button type="button" class="btn shadow-none btn-dec flex-center mr-2 js-btn-inc">-</button>
+                            <h2 id="counter-label" class="mr-2">
+                                <input type="text" value="1" class="product-quantity" name="product_quantity">
+                            </h2>
+                            <button type="button" class="btn shadow-none btn-inc flex-center mr-2 js-btn-dec">+</button>
+
+                            <input type="text" hidden name="product_url" value="{{ product_item.url }}">
+                            <button type="submit" class="btn shadow-none add-to-basket-btn" data-toggle="modal" data-target="#add-to-basket">
+                                <span>{% trans 'Add to Basket' %}</span>
+                            </button>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+            <!--product-container-->
+
+            <div class="other-products-container">
+                <h5 class="dishes-header">{% trans 'Similar Dishes' %}</h5>
+        {% for product in products %}
+                <div class="food-block d-flex py-2">
+                    <a href="{% url 'product' product.category.url product.url %}" class="d-block food-image">
+                        <img src="{{ product.image.url }}" alt="" class="img">
+                    </a>
+                    <div class="pl-2">
+                        <a href="{% url 'product' product.category.url product.url %}" class="title font-weight-bold site-color">{{ product.title }}</a>
+                        <div class="description">
+                            <span>
+                                {{ product.description|truncatewords:6 }}
+                            </span>
+                            <span>...</span>
+                        </div>
+                    </div>
+                    <!--food-info-->
+                </div>
+                <!--food-block-->
+        {% endfor %}
+
+            </div>
+            <!--other-products-container-->
+        </div>
+    </div>
+    <!--End of container-->
+</section>
+
+<script>
+    window.onload = function () {
+        const inputs = document.querySelectorAll('input.product-quantity');
+        const buttonsDec = document.querySelectorAll('.js-btn-dec');
+        const buttonsInc = document.querySelectorAll('.js-btn-inc');
+
+        buttonsDec && buttonsDec.forEach(function (item) {
+            item.addEventListener('click', function () {
+                const input = this.closest('form').querySelector('.product-quantity');
+                input.value = +input.value + 1;
+            });
+        });
+        buttonsInc && buttonsInc.forEach(function (item) {
+            item.addEventListener('click', function () {
+                const input = this.closest('form').querySelector('.product-quantity');
+                if (+input.value > 1) {
+                    input.value = +input.value - 1;
+                }
+            });
+        });
+        inputs && inputs.forEach(function (item) {
+            item.addEventListener('change', function (e) {
+                const value = e.target.value;
+                if (+value !== +value || value < 2) {
+                    this.value = 1;
+                }
+            });
+        });
+
+    }
+</script>
+
+{% endblock %}

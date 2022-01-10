@@ -1,0 +1,124 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<section class="basket-content pb-4 divider">
+
+    <div class="container py-2">
+
+        <div class="header-block">
+            <h3 class="site-color py-3 header">
+                <i class="fas fa-shopping-basket"></i>
+                <span class="font-weight-bold">My Basket</span>
+            </h3>
+        </div>
+
+
+        <table class="table py-3">
+            <thead class="thead-light">
+            <tr>
+                <th scope="col">Image</th>
+                <th scope="col">Name</th>
+                <th scope="col">Price</th>
+                <th scope="col">Quantity</th>
+                <th scope="col">Total</th>
+                <th scope="col">Delete</th>
+            </tr>
+            </thead>
+            <tbody>
+             {% for product in cart.products.all %}
+
+                <tr class="py-3">
+                <th scope="row">
+                    <div class="basket-img">
+                        {% if product.image %}
+                        <img src="{{ product.image.url }}" alt="product" class="img">
+                        {% endif %}
+                    </div>
+                </th>
+                <td class="font-weight-bold">
+                    <span class="d-sm-none">Product name</span>
+                    <a href="./product.html" class="site-color food-name">{{ product.title }}</a>
+                </td>
+                <td>
+                    <span class="d-sm-none font-weight-bold">Food Price</span>
+                    <span class="food-price">{{ product.new_price }}</span>
+                    <span> դր</span>
+                </td>
+                <td class="quantity">
+                    <span class="d-sm-none font-weight-bold">Product Quantity</span>
+                    <div class="d-flex add-to-basket-block">
+                        <a href="#">
+                        <button  data-product="{{item.product.id}}" data-action="remove" class="btn shadow-none btn-dec flex-center mr-2 border-0 btn-dec chg-quantity update-cart">
+                            <i class="fas fa-minus site-color"></i>
+                        </button>
+                            </a>
+{#                        <input type="text" value="${el.foodQuantity}" class="mr-2">#}
+                        <p class="mr-2" type="text"></p>
+                        <a href="#">
+                        <button data-product="{{item.product.id}}" data-action="add" class="btn shadow-none btn-inc flex-center mr-2 border-0 btn-inc chg-quantity update-cart">
+                            <i class="fas fa-plus site-color"></i>
+                        </button>
+                        </a>
+                    </div>
+                </td>
+                <td>
+                    <span class="d-sm-none font-weight-bold">Total Price</span>
+                    <span class="total-price"></span>
+                    <span> դր</span>
+                </td>
+                <td>
+                    <a href="{% url 'delete_from_cart' product.url %}">
+                    <span class="d-sm-none font-weight-bold">Delete</span>
+                    <button class="bg-transparent border-0 site-color delete-btn">
+                        <i class="fas fa-times"></i>
+                    </button>
+                    </a>
+                </td>
+
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+
+        <div class="d-flex align-items-center justify-content-between flex-wrap">
+            <div class="py-3 pr-5">
+                <div class="custom-control custom-radio">
+                    <input type="radio" id="customRadio1" name="customRadio" class="custom-control-input" checked>
+                    <label class="custom-control-label" for="customRadio1">Toggle this custom radio</label>
+                </div>
+                <div class="custom-control custom-radio">
+                    <input type="radio" id="customRadio2" name="customRadio" class="custom-control-input">
+                    <label class="custom-control-label" for="customRadio2">Or toggle this other custom radio</label>
+                </div>
+                <div class="custom-control custom-radio">
+                    <input type="radio" id="customRadio3" name="customRadio" class="custom-control-input">
+                    <label class="custom-control-label" for="customRadio3">Or toggle this other custom radio</label>
+                </div>
+            </div>
+
+            <div class="cost">
+                <div class="shipping-price py-3 font-weight-bold">
+                    <span class="font-weight-bold pr-2">Shipping Price</span>
+                    <span class="price site-color"></span>
+                    <span class="site-color pl-2"> դր</span>
+                </div>
+                <div class="products-price font-weight-bold">
+                    <span class="pr-2">Total Price </span>
+                    <span class="price site-color products-total-price"></span>
+                    <span class="site-color pl-2"> դր</span>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="order-buttons d-flex justify-content-between py-3">
+            <a href="{% url 'home' %}" class="btn shadow-none btn-lg">Continue Ordering</a>
+            <a href="{% url 'checkout' %}"><button type="submit" class="btn shadow-none btn-lg">Order</button></a>
+        </div>
+
+    </div>
+    <!--End of container-->
+</section>
+{% endblock %}

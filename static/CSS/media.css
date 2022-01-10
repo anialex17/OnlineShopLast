@@ -1,0 +1,159 @@
+/* Media Queries */
+
+@media only screen and (max-width: 450px) {
+    .basket-content .table td {
+        justify-content: center !important;
+    }
+    .basket-content .table td span.d-sm-none {
+        display: none;
+    }
+    .basket-content .order-buttons .btn {
+        padding: .375rem .75rem;
+        font-weight: 600;
+        font-size: 1rem;
+    }
+    .order-content .table th,
+    .order-content .table td {
+        font-size: 13px !important;
+    }
+}
+
+@media only screen and (max-width: 576px) {
+    .menu-content .food-container {
+        flex-direction: column;
+    }
+    .menu-content .food-img {
+        max-width: 100%;
+        height: 180px;
+    }
+    .menu-content .food-block {
+        padding-top: 10px;
+    }
+    .product-content .product-header {
+        height: 100px !important;
+    }
+    .product-content .product-container {
+        flex-direction: column;
+    }
+    .product-content .food-info,
+    .product-content .food-img {
+        max-width: 100%;
+    }
+    .product-content .food-img {
+        height: 280px;
+    }
+    .error-content .error {
+        font-size: 100px;
+    }
+    .error-content .page-not-pound {
+        font-size: 12vw;
+    }
+    .error-content .go-to-home a {
+        display: block;
+    }
+    .modal-content {
+        padding: 5px;
+    }
+    .modal .sign-in-register-block .btn {
+        font-size: 18px;
+    }
+    .modal .line {
+        width: 22px;
+    }
+    .gallery-content .product-img-btn .gallery-big-img {
+        max-width: 100%;
+        max-height: 285px;
+    }
+    .basket-content .table {
+        border: 0;
+    }
+    .basket-content .table thead {
+        display: none;
+    }
+    .basket-content .table tr {
+        display: flex;
+        flex-direction: column;
+    }
+    .basket-content .table td {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+    .basket-content .basket-img {
+        max-width: 100%;
+        height: 100px;
+    }
+    .order-content ol li ul {
+        padding-left: 8px;
+    }
+    .order-content ol li ul li .d-flex {
+        flex-direction: column;
+        align-items: flex-start !important;
+    }
+    .order-content .table th,
+    .order-content .table td {
+        font-size: 14px;
+        padding-left: 2px;
+        padding-right: 2px;
+    }
+    .confirm-block .confirm {
+        display: block;
+        width: 100%;
+    }
+    .user-content .ordered-product {
+        flex-direction: column;
+    }
+    .provisions-content h3.text-left {
+        font-size: 22px;
+    }
+}
+@media only screen and (max-width: 768px) {
+    .container {
+        max-width: 100%;
+    }
+    .menu-content .food-container {
+        justify-content: center;
+    }
+    .product-content .product-header {
+        height: 150px;
+    }
+    .contact-content .for-customers .help-container {
+        flex-direction: column;
+    }
+}
+@media only screen and (max-width: 992px) {
+    .navbar {
+        height: unset;
+    }
+    .navbar .navbar-nav .dropdown-menu {
+        right: unset;
+        left: 0;
+    }
+    .navbar-expand-lg .navbar-nav .nav-item {
+        width: 100%;
+    }
+    .navbar .nav-height {
+        height: unset;
+    }
+    .navbar .sign-in-basket-line {
+        display: none;
+    }
+    .navbar .product-quantity {
+        top: -5px;
+        left: 80px;
+    }
+    .divider {
+        margin-top: 62px;
+    }
+    .product-content .container>.d-flex {
+        flex-direction: column;
+    }
+    .product-content .product-container {
+        max-width: 100%;
+    }
+    .product-content .other-products-container .dishes-header {
+        padding-top: 30px;
+    }
+}
+
+/* End of Media Queries */

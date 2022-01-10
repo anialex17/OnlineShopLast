@@ -1,0 +1,30 @@
+{% load static %}
+{% load i18n %}
+
+<footer class="footer py-2">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-sm-4 py-1">
+                <div class="cards-img">
+                    <img src="{% static 'Images/footer/cards.jpg' %}" alt="cards" class="img">
+                </div>
+            </div>
+            <div class="col-sm-4 py-1">
+                <div>
+                    <a href="{% url 'terms_order' %}">
+                      {% trans 'General Terms and Conditions' %}
+                    </a>
+                </div>
+                <div>
+                    <a href="{% url 'terms_order' %}">
+                        {% trans 'How to order' %}
+                    </a>
+                </div>
+            </div>
+            <div class="col-sm-4 py-1">
+                <div>{% trans 'Email' %}: Username@gmail.com</div>
+                <div>{% trans 'Phone' %}: (+660 256 24857)</div>
+            </div>
+        </div>
+    </div>
+</footer>

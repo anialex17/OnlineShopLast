@@ -1,0 +1,141 @@
+{% load static %}
+{% load i18n %}
+<nav class="navbar navbar-expand-lg navbar-light fixed-top bg-white py-0">
+    <div class="container nav-height">
+        <a class="navbar-brand" href="{% url 'home' %}">
+            <img src="{% static 'Images/logo/logo.jpg' %}" alt="" class="img">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end nav-height" id="navbarNav">
+            <ul class="navbar-nav nav-height">
+                <li class="nav-item nav-height">
+                    <a class="nav-link site-color font-weight-bold nav-height"
+                       href="{% url 'home' %}">{% trans 'HOME' %}</a>
+                </li>
+                <li class="nav-item nav-height">
+                    <a class="nav-link site-color font-weight-bold nav-height"
+                       href="{% url 'terms_order' %}">{% trans 'ORDER' %}</a>
+                </li>
+                <li class="nav-item nav-height">
+                    <a class="nav-link site-color font-weight-bold nav-height"
+                       href="{% url 'gallery' %}">{% trans 'GALLERY' %}</a>
+                </li>
+                <li class="nav-item nav-height">
+                    <a class="nav-link site-color font-weight-bold nav-height"
+                       href="{% url 'contact' %}">{% trans 'CONTACT' %}</a>
+                </li>
+                <li class="nav-item nav-height dropdown">
+                    <span class="nav-link site-color font-weight-bold nav-height">
+                        <form action="{% url 'set_language' %}" class="site-lang-form" method="post">
+                            {% csrf_token %}
+                            <input name="next" type="hidden" value="{{ redirect_to }}">
+                            <select name="language" id="page-language-select">
+                                {% get_current_language as LANGUAGE_CODE %}
+                                {% get_available_languages as LANGUAGES %}
+                                {% get_language_info_list for LANGUAGES as languages %}
+                                {% for language in languages %}
+                                    <option value="{{ language.code }}"{% if language.code == LANGUAGE_CODE %}
+                                            selected{% endif %}>
+                                        {{ language.name_local }} ({{ language.code }})
+                                    </option>
+                                {% endfor %}
+                            </select>
+                        </form>
+                    </span>
+                </li>
+
+                {% if request.user.is_authenticated %}
+                    <li class="nav-item nav-height">
+                        <a class="nav-link site-color font-weight-bold nav-height"
+                           href="{% url 'profile' request.user.id %}">{{ user.username }}</a>
+                    </li>
+                    <li class="nav-item nav-height">
+                        <a class="nav-link site-color font-weight-bold nav-height" href="{% url 'logout' %}">{% trans 'Logout' %}</a>
+                    </li>
+                {% else %}
+                    <li class="nav-item nav-height pl-lg-5">
+                        <button class="btn sign-in shadow-none px-lg-3 px-0 py-2" data-toggle="modal"
+                                data-target="#sign-in-modal">
+                            <span class="d-lg-none font-weight-bold pr-2">{% trans 'SIGN IN' %}</span>
+                            <i class="fas fa-sign-in-alt"></i>
+                            <!--<i class="fas fa-sign-out-alt"></i>-->
+                            <!--<i class="fas fa-user"></i>-->
+                        </button>
+                        <div class="pb-1 sign-in-basket-line">|</div>
+                    </li>
+
+                {% endif %}
+
+                <li class="nav-item nav-height px-lg-2 px-0 py-1">
+                    <a class="nav-link site-color font-weight-bold nav-height basket" href="{% url 'basket' %}">
+                        <span class="d-lg-none pr-2">{% trans 'Basket' %}</span>
+                        <i class="fas fa-shopping-basket"></i>
+                        <span class="product-quantity">{{ request.user.customer.baskets.total_quantity }}</span>
+                    </a>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+
+</nav>
+
+<div class="modal fade" id="sign-in-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="sign-in-register-block">
+                    <button type="button" class="btn shadow-none sign-in site-color">{% trans 'Sign In' %}</button>
+                    <span class="line"></span>
+                    <button type="button" class="btn shadow-none register">{% trans 'Register' %}</button>
+                </div>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="{% url 'login' %}" method="post" class="login-form">
+                    {% csrf_token %}
+                    {{ form.non_field_errors }}
+                    {% for field in form %}
+                        <div class="form-group py-2">
+                            {{ field }}
+                            {{ field.errors }}
+
+                        </div>
+                    {% endfor %}
+                    <div class="custom-control custom-checkbox pb-3 pl-4 pr-3 ml-1">
+                        <input type="checkbox" class="custom-control-input" id="customCheck1">
+                        <label class="custom-control-label font-weight-bold"
+                               for="customCheck1">{% trans 'Remember me' %}</label>
+                    </div>
+                    <div class="pt-4">
+                        <button type="submit"
+                                class="btn btn-block shadow-none modal-sign-in-btn">{% trans 'Sign In' %}</button>
+                    </div>
+                </form>
+
+                <form action="{% url 'register' %}" method="post" class="register-form d-none">
+                    {% csrf_token %}
+                    {{ form.non_field_errors }}
+                    {% for field in register_form %}
+                        <div class="form-group py-2">
+                            {{ field }}
+                            {{ field.errors }}
+
+                        </div>
+                    {% endfor %}
+                    <div class="pt-4">
+                        <button type="submit"
+                                class="btn btn-block shadow-none modal-sign-in-btn">{% trans 'Register' %}</button>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer"></div>
+        </div>
+    </div>
+</div>

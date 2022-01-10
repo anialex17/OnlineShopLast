@@ -1,0 +1,409 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-12-21 14:13+0400\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: templates/basket/basket.html:13
+msgid "My Basket"
+msgstr "Իմ զամբյուղը"
+
+#: templates/basket/basket.html:21
+msgid "Image"
+msgstr "Նակր"
+
+#: templates/basket/basket.html:22
+msgid "Name"
+msgstr "Անուն"
+
+#: templates/basket/basket.html:23
+msgid "Price"
+msgstr "Գին"
+
+#: templates/basket/basket.html:24
+msgid "Quantity"
+msgstr "Քանակ"
+
+#: templates/basket/basket.html:25
+msgid "Total"
+msgstr "Ընդամենը"
+
+#: templates/basket/basket.html:26 templates/basket/basket.html:76
+msgid "Delete"
+msgstr "Ջնջել"
+
+#: templates/basket/basket.html:42
+msgid "Product name"
+msgstr "Ապրանքի անուն"
+
+#: templates/basket/basket.html:46
+#, fuzzy
+#| msgid "Food Price"
+msgid "Food Price"
+msgstr "Սննդի գինը"
+
+#: templates/basket/basket.html:48 templates/basket/basket.html:73
+#: templates/basket/basket.html:113 templates/basket/basket.html:118
+msgid "dr"
+msgstr "դր"
+
+#: templates/basket/basket.html:51
+msgid "Product Quantity"
+msgstr "Քանակ"
+
+#: templates/basket/basket.html:71
+msgid "Total Price"
+msgstr "Ընդհանուր գին"
+
+#: templates/basket/basket.html:97
+msgid "Toggle this custom radio"
+msgstr "Միացնել կոճակը"
+
+#: templates/basket/basket.html:101 templates/basket/basket.html:105
+msgid "Or toggle this other custom radio"
+msgstr "Կամ միացնել այս կոճակը"
+
+#: templates/basket/basket.html:111
+msgid "hipping Price"
+msgstr "Առաքման Գինը"
+
+#: templates/basket/basket.html:116
+msgid "Total Price "
+msgstr "Ընդհանուր գինը"
+
+#: templates/basket/basket.html:125
+msgid "Continue Ordering"
+msgstr "Շարունակեք պատվիրել"
+
+#: templates/basket/basket.html:126
+msgid "Order"
+msgstr "Պատվեր"
+
+#: templates/include/footer.html:15
+#, fuzzy
+#| msgid "weather conditions"
+msgid "General Terms and Conditions"
+msgstr "եղանակային պայմանները"
+
+#: templates/include/footer.html:20
+#, fuzzy
+#| msgid "How to order?"
+msgid "How to order"
+msgstr "Ինչպես պատվիրել"
+
+#: templates/include/footer.html:25 templates/pages/contact.html:24
+#: templates/pages/contact.html:42 templates/pages/contact.html:136
+msgid "Email"
+msgstr "Էլ․ հասցե"
+
+#: templates/include/footer.html:26
+msgid "Phone"
+msgstr "Հեռախոսահամար"
+
+#: templates/include/header.html:14
+msgid "HOME"
+msgstr "Գլխավոր"
+
+#: templates/include/header.html:17
+msgid "ORDER"
+msgstr "Պատվեր"
+
+#: templates/include/header.html:20
+msgid "GALLERY"
+msgstr "Պատկերասրահ"
+
+#: templates/include/header.html:23
+msgid "CONTACT"
+msgstr "Կապ"
+
+#: templates/include/header.html:67
+msgid "SIGN IN"
+msgstr "Մուտք"
+
+#: templates/include/header.html:82
+msgid "Basket"
+msgstr "Զամբյուղ"
+
+#: templates/include/header.html:98 templates/include/header.html:124
+msgid "Sign In"
+msgstr "Մուտք"
+
+#: templates/include/header.html:100 templates/include/header.html:139
+msgid "Register"
+msgstr "Գրանցվել"
+
+#: templates/include/header.html:121
+msgid "Remember me"
+msgstr "Հիշել"
+
+#: templates/main/customer.html:10
+msgid "Personal information"
+msgstr "Անձնական տվյալներ"
+
+#: templates/main/customer.html:11
+msgid "You can change your personal information"
+msgstr "Դուք կարող եք փոխել ձեր անձնական տվյալները"
+
+#: templates/main/customer.html:24
+msgid "Confirm"
+msgstr "Հաստատել"
+
+#: templates/main/customer.html:30
+msgid "My orders"
+msgstr "Իմ պատվերները"
+
+#: templates/main/customer.html:41
+msgid "item"
+msgstr "հատ"
+
+#: templates/main/customer.html:47 templates/main/product.html:24
+#: templates/main/product.html:25
+msgid "dr"
+msgstr "դր"
+
+#: templates/main/home.html:11
+msgid "Our Menu"
+msgstr "Մենյու"
+
+#: templates/main/menu.html:8
+msgid "Lorem ipsum dolor sit."
+msgstr "Լորեմ իպսում"
+
+#: templates/main/menu.html:36 templates/main/product.html:33
+msgid "Food Type"
+msgstr "Մթերքի տեսակը"
+
+#: templates/main/menu.html:40
+msgid "Delivery Time"
+msgstr "Արաքման տևողությունը"
+
+#: templates/main/menu.html:41
+msgid "min, Delivery Cost"
+msgstr "րոպե, առաքման արժեքը"
+
+#: templates/main/password_change.html:5 templates/main/password_change.html:15
+msgid "Change Password"
+msgstr "Փոխել գաղտնաբառը"
+
+#: templates/main/password_success.html:5
+msgid "Password Update"
+msgstr "Գաղտնաբառի թարմացում"
+
+#: templates/main/password_success.html:14
+msgid "Your Password was changed successfull"
+msgstr "Ձեր գաղտնաբառը հաջողությամբ փոխվել է"
+
+#: templates/main/product.html:10
+msgid "Food Details"
+msgstr "Սննդի մանրամասները"
+
+#: templates/main/product.html:47
+msgid "Add to Basket"
+msgstr "Ավելացնել զամբյուղում"
+
+#: templates/main/product.html:57
+msgid "Similar Dishes"
+msgstr "Նմանատիպ ուտեստներ"
+
+#: templates/pages/contact.html:9
+msgid "Contact"
+msgstr "Կապ"
+
+#: templates/pages/contact.html:14
+msgid "For customers"
+msgstr "Հաճախորդների համար"
+
+#: templates/pages/contact.html:22
+msgid "Help"
+msgstr "Օգնություն"
+
+#: templates/pages/contact.html:28
+msgid "Hot line"
+msgstr "Թեժ գիծ"
+
+#: templates/pages/contact.html:40
+msgid "Payment issues"
+msgstr "Վճարման հետ կապված խնդիրներ"
+
+#: templates/pages/contact.html:46
+msgid "Response time: 1 working day"
+msgstr "Պատասխանելու ժամանակը` 1 աշխատանքային օր"
+
+#: templates/pages/contact.html:59
+msgid "Write us a message"
+msgstr "Գրեք մեզ հաղորդագրություն"
+
+#: templates/pages/contact.html:60
+msgid "We are always ready to answer your questions"
+msgstr "Մենք միշտ պատրաստ ենք պատասխանել ձեր հարցերին"
+
+#: templates/pages/contact.html:88
+msgid "Attach file"
+msgstr "Կցել ֆայլը"
+
+#: templates/pages/contact.html:93
+msgid "Download"
+msgstr "Բերնել"
+
+#: templates/pages/contact.html:103
+msgid "Send"
+msgstr "Ուղարկել"
+
+#: templates/pages/contact.html:115
+#, fuzzy
+#| msgid "Head Office Address և Contacts"
+msgid "Head Office Address and Contacts"
+msgstr "Գլխամասային գրասենյակի հասցեն և կոնտակտներ"
+
+#: templates/pages/contact.html:120
+msgid " Hot line"
+msgstr "Թեժ գիծ"
+
+#: templates/pages/contact.html:121
+msgid "for orders only"
+msgstr "միայն պատվերների համար"
+
+#: templates/pages/contact.html:125
+msgid "Address"
+msgstr "Հասցե"
+
+#: templates/pages/contact.html:130
+msgid "Phone number"
+msgstr "Հերախոսահամար"
+
+#: templates/pages/order.html:10
+msgid "How to order?"
+msgstr "Ինչպես պատվիրել"
+
+#: templates/pages/order.html:14
+msgid "Fill in your address where to ship"
+msgstr "Լրացրեք ձեր հասցեն, որտեղ առաքել"
+
+#: templates/pages/order.html:17
+msgid "Choose your favorite dish or product from many restaurants և specialty stores"
+msgstr "Ընտրեք ձեր նախընտրած ուտեստը կամ ապրանքը բազմաթիվ ռեստորաններից և մասնագիտացված խանութներից"
+
+
+#: templates/pages/order.html:20
+msgid "Place an online order through the website or meat.am mobile application"
+msgstr "Կատարեք առցանց պատվեր կայքի կամ meat.am բջջային հավելվածի միջոցով"
+
+#: templates/pages/order.html:23
+msgid "Choose the payment method"
+msgstr "Ընտրեք վճարման տեսակը"
+
+#: templates/pages/order.html:25
+msgid "Payment on the spot after delivery"
+msgstr "Ընտրեք վճարման եղանակը"
+
+#: templates/pages/order.html:26
+msgid "Credit card with website or mobile application"
+msgstr "Վարկային քարտ վեբկայքով կամ բջջային հավելվածով"
+
+#: templates/pages/order.html:32
+msgid "through payment systems"
+msgstr "վճարային համակարգերի միջոցով"
+
+#: templates/pages/order.html:37
+msgid "Open the door, we are already on the threshold"
+msgstr "Բացեք դուռը, մենք արդեն շեմին ենք"
+
+#: templates/pages/order.html:40
+msgid "How long does it take to deliver?"
+msgstr "Որքա՞ն ժամանակ է պահանջվում առաքման համար:"
+
+#: templates/pages/order.html:48
+msgid "How much does shipping cost?"
+msgstr "Որքա՞ն արժե առաքումը:"
+
+#: templates/pages/order.html:50
+msgid "Shipping cost varies depending on"
+msgstr "Առաքման արժեքը տատանվում է կախված"
+
+#: templates/pages/order.html:53
+msgid "distance from the food point / specialty և customer"
+msgstr "հեռավորությունը սննդի կետից / մասնագիտությունից և հաճախորդից"
+
+#: templates/pages/order.html:54
+msgid "How many food outlets / specialty stores deliver?"
+msgstr "Քանի՞ սննդի կետեր / մասնագիտացված խանութներ են առաքում:"
+
+#: templates/pages/order.html:55
+msgid "weather conditions"
+msgstr "եղանակային պայմանները"
+
+#: templates/pages/order.html:56
+msgid "due to traffic congestion."
+msgstr "խցանումների պատճառով."
+
+#: templates/pages/order.html:59
+msgid "You can see the cost of delivery at the moment in the data on the item page"
+msgstr "Առաքման արժեքը տվյալ պահին կարող եք տեսնել ապրանքի էջի տվյալների մեջ"
+
+#: templates/pages/order.html:65
+msgid "Distance:"
+msgstr "Հեռավորությունը:"
+
+#: templates/pages/order.html:66
+msgid "Order from 1 point"
+msgstr "Պատվիրեք 1 միավորից"
+
+#: templates/pages/order.html:67
+msgid "order from each of the following items"
+msgstr "պատվիրել հետևյալ կետերից յուրաքանչյուրից"
+
+#: templates/pages/order.html:72
+msgid "up to 3 km"
+msgstr "մինչև 3 կմ"
+
+#: templates/pages/order.html:73
+msgid "400 dram"
+msgstr "400 դրամ"
+
+#: templates/pages/order.html:74
+msgid "400 drams each"
+msgstr "400-ական դրամ"
+
+#: templates/pages/order.html:77
+msgid "3,01 – 5km"
+msgstr "3,01 ֊ 5կմ"
+
+#: templates/pages/order.html:78
+msgid "600 dram"
+msgstr "600 դրամ"
+
+#: templates/pages/order.html:79
+msgid "600 drams each"
+msgstr "600-ական դրամ"
+
+#: templates/pages/order.html:82
+msgid "5,01 - 7km"
+msgstr "5,01 - 7կմ"
+
+#: templates/pages/order.html:83
+msgid "800 dram"
+msgstr "800 դրամ"
+
+#: templates/pages/order.html:84
+msgid "800-drams each"
+msgstr "800-ական դրամ"
+
+
+
+
+
+

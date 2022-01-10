@@ -1,0 +1,118 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+
+<section class="basket-content pb-4 divider">
+
+    <div class="container py-2">
+
+        <div class="header-block">
+            <h3 class="site-color py-3 header">
+                <i class="fas fa-shopping-basket"></i>
+                <span class="font-weight-bold">My Basket</span>
+            </h3>
+        </div>
+
+
+        <table class="table py-3">
+            <thead class="thead-light">
+            <tr>
+                <th scope="col">Image</th>
+                <th scope="col">Name</th>
+                <th scope="col">Price</th>
+                <th scope="col">Quantity</th>
+                <th scope="col">Total</th>
+                <th scope="col">Delete</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for item in items %}
+            <tr class="py-3">
+            <th scope="row">
+                <div class="basket-img">
+                    {% if item.product %}
+                    <img src="{{ item.product.image.url }}" alt="product" class="img">
+                    {% endif %}
+                </div>
+            </th>
+            <td class="font-weight-bold">
+                <span class="d-sm-none">Product name</span>
+                <a href="./product.html" class="site-color food-name">{{ item.product.title }}</a>
+            </td>
+            <td>
+                <span class="d-sm-none font-weight-bold">Food Price</span>
+                <span class="food-price">{{ item.product.price }}</span>
+                <span> դր</span>
+            </td>
+            <td class="quantity">
+                <span class="d-sm-none font-weight-bold">Product Quantity</span>
+                <div class="d-flex add-to-basket-block">
+                    <button class="btn shadow-none btn-dec flex-center mr-2 border-0 js-btn-dec">
+                       -
+                    </button>
+                    <h2 id="counter-label" class="mr-2"> 0 </h2>
+                    <button class="btn shadow-none btn-inc flex-center mr-2 border-0 js-btn-inc">
+                        +
+                    </button>
+                </div>
+            </td>
+            <td>
+                <span class="d-sm-none font-weight-bold">Total Price</span>
+                <span class="total-price">{{ item.get_total }}</span>
+                <span> դր</span>
+            </td>
+            <td>
+                <span class="d-sm-none font-weight-bold">Delete</span>
+                <button class="bg-transparent border-0 site-color delete-btn">
+                    <i class="fas fa-times"></i>
+                </button>
+            </td>
+        </tr>
+            {% endfor %}
+
+            </tbody>
+        </table>
+
+
+        <div class="d-flex align-items-center justify-content-between flex-wrap">
+            <div class="py-3 pr-5">
+                <div class="custom-control custom-radio">
+                    <input type="radio" id="customRadio1" name="customRadio" class="custom-control-input" checked>
+                    <label class="custom-control-label" for="customRadio1">Toggle this custom radio</label>
+                </div>
+                <div class="custom-control custom-radio">
+                    <input type="radio" id="customRadio2" name="customRadio" class="custom-control-input">
+                    <label class="custom-control-label" for="customRadio2">Or toggle this other custom radio</label>
+                </div>
+                <div class="custom-control custom-radio">
+                    <input type="radio" id="customRadio3" name="customRadio" class="custom-control-input">
+                    <label class="custom-control-label" for="customRadio3">Or toggle this other custom radio</label>
+                </div>
+            </div>
+
+            <div class="cost">
+                <div class="shipping-price py-3 font-weight-bold">
+                    <span class="font-weight-bold pr-2">Total count</span>
+                    <span class="price site-color "></span>
+                    <span class="site-color pl-2">{{ order.get_cart_items }}</span>
+                </div>
+                <div class="products-price font-weight-bold">
+                    <span class="pr-2">Total Price </span>
+                    <span class="price site-color products-total-price"></span>
+                    <span class="site-color pl-2">{{ order.get_cart_total }}դր</span>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="order-buttons d-flex justify-content-between py-3">
+            <a href="{% url 'home' %}" class="btn shadow-none btn-lg">Continue Ordering</a>
+            <button type="submit" class="btn shadow-none btn-lg"><a href="{% url 'checkout' %}">Order</a></button>
+        </div>
+
+    </div>
+    <!--End of container-->
+</section>
+
+{% endblock %}

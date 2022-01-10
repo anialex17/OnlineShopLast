@@ -1,0 +1,157 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load i18n %}
+
+<section class="contact-content pb-4 divider">
+
+    <div class="container py-2">
+
+        <h2 class="site-color font-weight-bold pb-4">{% trans 'Contact' %}</h2>
+
+        <div class="row">
+
+            <div class="col-lg-4 for-customers pb-4">
+                <h4 class="site-color text-center">{% trans 'For customers' %}</h4>
+
+                <div class="d-flex flex-lg-column help-container">
+                    <div class="text-center help-block">
+                        {% for contact in contacts %}
+                        <div class="site-color pt-3">
+                            <i class="far fa-question-circle"></i>
+                        </div>
+                        <div class="help pt-3 pb-2">{% trans 'Help' %}</div>
+                        <div class="email-block">
+                            <span>{% trans 'Email' %}: </span>
+                            <span class="email site-color">{{ contact.email }}</span>
+                        </div>
+                        <div class="phone-number">
+                            <span>{% trans 'Hot line' %}:</span>
+                            <span>{{ contact.phone_number_1 }}</span>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    <!--help-block-->
+
+                    <div class="text-center help-block">
+                        {% for contact in contacts %}
+                        <div class="site-color pt-3">
+                            <i class="fas fa-money-check-alt"></i>
+                        </div>
+                        <div class="help pt-3 pb-2">{% trans 'Payment issues' %}</div>
+                        <div class="email-block">
+                            <span>{% trans 'Email' %}: </span>
+                            <span class="email site-color">{{ contact.email }}</span>
+                        </div>
+                        <div class="phone-number">
+                            <span>{% trans 'Response time: 1 working day' %}</span>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    <!--help-block-->
+                </div>
+
+            </div>
+            <!--for-customers-->
+
+            <div class="form-container col-lg-8">
+
+                <div class="header text-center pb-4">
+                    <h5 class="site-color font-weight-bold">{% trans 'Write us a message' %}</h5>
+                    <span>{% trans 'We are always ready to answer your questions' %}</span>
+                </div>
+                <form action="{% url 'send_messages' %}" method="post">
+                    {% csrf_token %}
+                    <div class="d-sm-flex justify-content-between form-name-lastname">
+                        <div class="form-group py-2 pr-sm-2">
+                            <label for="name_contact" class="col-form-label font-weight-bold d-none"></label>
+                            {{form.name}}
+                        </div>
+
+                        <div class="form-group py-2 pl-sm-2">
+                            <label for="lastname_contact" class="col-form-label font-weight-bold d-none"></label>
+                            {{ form.lastname }}
+                        </div>
+                    </div>
+
+
+                    <div class="form-group py-2">
+                        <label for="email_contact" class="col-form-label font-weight-bold d-none"></label>
+                        {{ form.email }}
+                    </div>
+
+                    <div class="form-group">
+                        <label for="exampleFormControlTextarea1" class="d-none"></label>
+                        {{ form.message }}
+                    </div>
+
+                    <!--upload file-->
+                    <div class="form_hint font-weight-bold py-2">{% trans 'Attach file' %}</div>
+                    <div class="form_block fl site-color">
+                        <label class="d-flex">
+                            <i class="fas fa-upload"></i>
+                            {{ form.file }}
+                            <span class="input_button font-weight-bold">{% trans 'Download' %}</span>
+                            <span class="file_name font-weight-bold pl-2"></span>
+                        </label>
+                        <span class="file_delete font-weight-bold">
+                        <i class="fas fa-times"></i>
+                    </span>
+                    </div>
+                    <!--End of upload file-->
+
+                    <div class="pt-4 send-btn">
+                        <button type="submit" class="btn btn-block shadow-none">{% trans 'Send' %}</button>
+                    </div>
+
+                </form>
+
+
+            </div>
+            <!--form-container-->
+        </div>
+        <!--row-->
+
+
+        <h4 class="text-center site-color py-5">{% trans 'Head Office Address and Contacts' %}</h4>
+        <div class="row">
+            <div class="col-md-4 pb-3">
+{% for contact in contacts %}
+                <div class="p-2">
+                    <span class="site-color">{% trans ' Hot line' %}: {{ contact.phone_number_1 }}</span>
+                    <span>({% trans 'for orders only' %})</span>
+                </div>
+
+                <div class="p-2">
+                    <span>{% trans 'Address' %}՝ </span>
+                    {{ contact.address }}
+                </div>
+
+                <div class="p-2">
+                    <span>{% trans 'Phone number' %}` </span>
+                    <span>{{ contact.phone_number_1 }},</span>
+                    <span>{{ contact.phone_number_2}}</span>
+                </div>
+
+                <div class="p-2">
+                    <span>{% trans 'Email' %} </span>
+                    <span>{{ contact.email}}</span>
+                </div>
+{% endfor %}
+            </div>
+            <!--col-md-4-->
+
+            <div class="col-md-8">
+                <script type="text/javascript" charset="utf-8" async src="https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3Aa6d4d73fe680ad022fddc95eb2287b1cae96d2c1e15a25f8debb86db04aef289&amp;width=100%25&amp;height=300&amp;lang=ru_RU&amp;scroll=true"></script>
+            </div>
+
+        </div>
+
+
+    </div>
+    <!--End of container-->
+</section>
+{% endblock %}
+
+
+
+

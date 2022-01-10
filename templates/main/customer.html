@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block content %}
+    <section class="user-content pb-4 divider">
+
+        <div class="container py-2">
+
+            <div class="header text-center pb-4 pt-2">
+                <h5 class="site-color font-weight-bold">{% trans 'Personal information' %}</h5>
+                <span>{% trans 'You can change your personal information' %}</span>
+            </div>
+
+            <form action="{% url 'edit_profile' %}" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+
+                <div class="row form-item">
+                    <div class="form-group site-color col-sm-6">
+                        <label for="user_name" class="col-form-label font-weight-bold"></label>
+                        {{ form }}
+                    </div>
+                </div>
+                <div class="confirm-block d-flex justify-content-end">
+                    <button type="submit" class="btn shadow-none btn-lg confirm">{% trans 'Confirm' %}</button>
+                </div>
+
+            </form>
+
+
+            <h5 class="site-color font-weight-bold py-2">{% trans 'My orders' %}</h5>
+            {% for order in orders %}
+
+                <div class="row">
+                    <div class="col-md-6 py-2">
+                        <div class="p-3 ordered-product order">
+                            {% for product in order.product_items.all %}
+                                <div class="product-info">
+                                    <div class="food-name-block">
+                                        <a href="#" class="food-name site-color">{{ product.product }}</a>
+                                    </div>
+                                    <div class="quantity">
+                                        <span class="order-info">{{ product.quantity }} <span>{% trans 'item' %}</span></span>
+                                    </div>
+                                </div>
+                            {% endfor %}
+{#                            <div class="total-price d-flex align-items-center justify-content-between">#}
+{#                                <div class="price">Total Price</div>#}
+{#                                <div class="order-info">{{ order.order_price }}<span>{% trans 'dr' %}</span></div>#}
+{#                            </div>#}
+
+                        </div>
+                    </div>
+
+
+                </div>
+                <!--row-->
+            {% endfor %}
+
+
+        </div>
+        <!--End of container-->
+    </section>
+
+{% endblock %}

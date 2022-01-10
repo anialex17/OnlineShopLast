@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block content %}
+<main>
+
+    <form action="{% url 'shipping' %}" method="post">
+        {% csrf_token %}
+
+    <div class="container divider">
+        <section class="personal-form">
+            <div class="row">
+                <div class="col-lg-4 personal-text-parts">
+                    <h3 class="personal-forms-text">Քաղաք՝</h3>
+                </div>
+                <div class="col-lg-6 personal-input-parts">
+                    {{ form.city }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 personal-text-parts">
+                    <h3 class="personal-forms-text">Հասցե՝</h3>
+                </div>
+                <div class="col-lg-6 personal-input-parts">
+                    {{form.address}}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 personal-text-parts">
+                    <h3 class="personal-forms-text">Հեռախոսահամար՝</h3>
+                </div>
+                <div class="col-lg-6 personal-input-parts">
+                    {{form.phone}}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 personal-text-parts">
+                    <h3 class="personal-forms-text">Ամսաթիվ՝</h3>
+                </div>
+                <div class="col-lg-6 personal-input-parts">
+                 {{ form.date_shipping }}
+                </div>
+            </div>
+            <div>
+            </div>
+            <div class="personal-btn-part">
+                <button type="submit" class="order-btn">Պատվիրել</button>
+            </div>
+        </section>
+    </div>
+        </form>
+
+
+<div class="container my-5 border">
+{#        <iframe src="https://money.idram.am/AM/ccepayMerchant.aspx?EDP_REC_ACCOUNT=1000#}
+{#00114&EDP_AMOUNT=1000&EDP_BILL_NO=1" frameborder="0" width="100%" height="100%"></iframe>#}
+
+
+    <h1>katarel vcharum</h1>
+<form action="https://money.idram.am/payment.aspx" method="POST">
+    <input type="hidden" name="EDP_LANGUAGE" value="EN">
+    <input type="hidden" name="EDP_REC_ACCOUNT" value="100000114">
+    <input type="hidden" name="EDP_DESCRIPTION" value="Order description">
+    <input type="hidden" name="EDP_AMOUNT" value="1900">
+    <input type="hidden" name="EDP_BILL_NO" value="1806">
+    <input type="submit" value="submit" class="btn btn-primary">
+</form>
+</div>
+
+</main>
+{% endblock %}
+
+
+
