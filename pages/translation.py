@@ -7,6 +7,7 @@ from .models import *
 class TermsOrderTranslationOptions(TranslationOptions):
     fields = ('title','description' )
 
+
 @register(Contact)
 class ContactTranslationOptions(TranslationOptions):
-    fields = ('address' ,)
+    fields = ('address', )

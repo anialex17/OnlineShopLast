@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-12-27 15:44+0400\n"
+"POT-Creation-Date: 2022-01-12 12:56+0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -83,7 +83,7 @@ msgstr "цена доставки"
 msgid "Total Count"
 msgstr "Всего"
 
-#: templates/basket/basket.html:118 templates/main/customer.html:41
+#: templates/basket/basket.html:118 templates/main/customer.html:42
 msgid "item"
 msgstr "пункт"
 
@@ -176,11 +176,6 @@ msgstr "Подтверждать"
 msgid "My orders"
 msgstr "Мои заказы"
 
-#: templates/main/customer.html:47 templates/main/product.html:24
-#: templates/main/product.html:25
-msgid "dr"
-msgstr "др"
-
 #: templates/main/home.html:11
 msgid "Our Menu"
 msgstr "Наше меню"
@@ -216,6 +211,10 @@ msgstr "Ваш пароль был успешно изменен"
 #: templates/main/product.html:10
 msgid "Food Details"
 msgstr "Детали еды"
+
+#: templates/main/product.html:24 templates/main/product.html:25
+msgid "dr"
+msgstr "др"
 
 #: templates/main/product.html:47
 msgid "Add to Basket"
@@ -256,14 +255,6 @@ msgstr "Напишите нам сообщение:"
 #: templates/pages/contact.html:60
 msgid "We are always ready to answer your questions"
 msgstr "Мы всегда готовы ответить на ваши вопросы:"
-
-#: templates/pages/contact.html:88
-msgid "Attach file"
-msgstr "Прикрепить файл:"
-
-#: templates/pages/contact.html:93
-msgid "Download"
-msgstr "Скачать:"
 
 #: templates/pages/contact.html:103
 msgid "Send"
@@ -414,6 +405,12 @@ msgstr "800 драм"
 #: templates/pages/order.html:84
 msgid "800-drams each"
 msgstr "800-drams each"
+
+#~ msgid "Attach file"
+#~ msgstr "Прикрепить файл:"
+
+#~ msgid "Download"
+#~ msgstr "Скачать:"
 
 #~ msgid "Toggle this custom radio"
 #~ msgstr "Переключить это настраиваемое радио"

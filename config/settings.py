@@ -32,7 +32,6 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'modeltranslation',
-
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -42,6 +41,7 @@ INSTALLED_APPS = [
     'main',
     'pages',
     'basket',
+    'payment'
 ]
 
 MIDDLEWARE = [

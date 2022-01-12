@@ -10,9 +10,4 @@ urlpatterns = [
     path('change_qty_plus/', views.change_qty_plus, name='change_qty_plus'),
     path('change_qty_minus/', views.change_qty_minus, name='change_qty_minus'),
 
-    path('success/', views.success, name='success'),
-    path('fail/', views.fail, name='fail')
-
-
-
 ]

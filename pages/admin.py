@@ -13,4 +13,8 @@ class ContactAdmin(TranslationAdmin):
     list_display = ('address',)
 
 
+admin.site.register(SendMessage)
+
+
+
 

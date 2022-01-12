@@ -9,10 +9,10 @@ from django.views import View
 from django.views.generic import ListView, UpdateView, DetailView, CreateView
 from .email import send_activate_mail
 from .forms import *
+from .models import *
 
 
 class GetContextDataMixin(ListView):
-
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['register_form'] = RegisterUserForm()
@@ -150,36 +150,6 @@ def customer(request, pk):
     return render(request, 'main/customer.html', context)
 
 
-#
-#
-# def edit_profile(request):
-#
-#     if request.method == 'POST':
-#         form = EditCustomerForm(request.POST, instance=request.user)
-#         profile_form = ProfileForm(request.POST, request.FILES, instance=request.user.userprofile)  # request.FILES is show the selected image or file
-#
-#         if form.is_valid():
-#             user_form = form.save()
-#             custom_form = profile_form.save(False)
-#             custom_form.user = user_form
-#             custom_form.save()
-#             return redirect('accounts:view_profile')
-#     else:
-#         form = EditProfileForm(instance=request.user)
-#         profile_form = ProfileForm(instance=request.user.userprofile)
-#         args = {}
-#         # args.update(csrf(request))
-#         args['form'] = form
-#         args['profile_form'] = profile_form
-#         return render(request, 'main/customer.html', args)
-
-# def edit_user(request):
-#     if request.method=='POST':
-#         form = EditCustomerForm(data=request.POST)
-#         if form.is_valid():
-#             customer= Customer.objects.update(self, {username:form.username,})
-
-
 class UserEditView(UpdateView):
     form_class = EditCustomerForm
     template_name = 'main/customer.html'
@@ -188,39 +158,11 @@ class UserEditView(UpdateView):
     def get_object(self):
         return self.request.user
 
-    # def form_valid(self, form):
-    #     user = self.request.user
-    #     user.username = form.cleaned_data.get('username')
-    #     user.first_name = form.cleaned_data.get('first_name')
-    #     user.last_name = form.cleaned_data.get('last_name')
-    #     # user.phone = form.cleaned_data.get('phone')
-    #     user.save()
-    #     return redirect(self.request.META.get('HTTP_REFERER'))
-
-
-# class PasswordsChangeView(PasswordChangeView):
-#     form_class = PasswordChangingForm
-#     success_url = reverse_lazy('/')
-
-# def form_valid(self, form):
-#     user = self.request.user
-#     user.old_password = form.cleaned_data.get('old_password')
-#     user.new_password1 = form.cleaned_data.get('new_password1')
-#     user.new_password2 = form.cleaned_data.get('new_password2')
-#
-#     user.save()
-#     return redirect(self.request.META.get('HTTP_REFERER'))
-#
-# def get_form_kwargs(self):
-#     kwargs = super().get_form_kwargs()
-#     kwargs['user'] = self.request.user
-#     return kwargs
-
 
 class PasswordsChangeView(PasswordChangeView):
     form_class = PasswordChangingForm
     success_url = reverse_lazy('password_success')
-
+    template_name = 'main/password_change.html'
 
 def password_success(request):
     return render(request, 'main/password_success.html', {})

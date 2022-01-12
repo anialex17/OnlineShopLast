@@ -11,12 +11,12 @@ class AddToBasketForm(forms.ModelForm):
 class ShippingForm(forms.ModelForm):
     class Meta:
         model=Shipping
-        # fields = ('city', 'address', 'phone' , 'date_shipping')
-        fields = '__all__'
+        fields = ('city', 'address', 'phone' , 'date_time_shipping')
+        # fields = '__all__'
         widgets = {
             'city':forms.TextInput(attrs={'class':'form-control shadow-none personal-','id':"name", 'placeholder':"Ձեր քաղաքը․․․"}),
             'address':forms.TextInput(attrs={'type':"text", 'class':"form-control shadow-none", 'id':"name", 'placeholder':"Ձեր հասցեն․․․"}),
             'phone':forms.TextInput(attrs={'type':"text", 'class':"form-control shadow-none", 'id':"name", 'placeholder':"+374 ** ******"}),
-            'date_shipping':forms.DateInput(attrs={'type':"date", 'id':"start", 'class':"date-input", 'name':"trip-start",
+            'date_time_shipping':forms.DateInput(attrs={'type':"datetime-local", 'id':"start", 'class':"date-input", 'name':"trip-start",
                         'value':"2021-12-15",'min':"2021-12-15", 'max':"2022-12-31"}),
         }

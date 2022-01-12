@@ -24,6 +24,7 @@ def add_to_basket(request):
         customer = request.user.customer
         product = Product.objects.get(url=request.POST.get('product_url'))
         product_quantity = int(request.POST.get('product_quantity'))
+        print(product_quantity)
         basket = Basket.objects.get(customer=customer)
         product_item, created = ProductItem.objects.get_or_create(product=product, customer=customer)
         # product_item = ProductItem.objects.create(product=product, customer=customer)
@@ -39,8 +40,9 @@ def add_to_basket(request):
         if created:
             product_item.quantity = product_quantity
             basket.productItems.add(product_item)
+            product_item.save()
         else:
-            product_item.quantity = product_item.quantity + product_quantity
+            product_item.quantity = product_quantity
             product_item.save()
     return redirect('basket')
 
@@ -98,19 +100,11 @@ def order(request):
 def shipping(request):
     if request.method =='POST':
         customer = request.user.customer
+        order=Order.objects.filter(customer=customer).last()
         form = ShippingForm(data=request.POST)
-
         if form.is_valid():
-            Shipping.objects.create(**form.cleaned_data, customer=customer)
-        return redirect('ordering')
+            Shipping.objects.create(**form.cleaned_data, customer=customer, order=order)
+        return redirect('home')
     else:
         form = ShippingForm()
-    return redirect('ordering')
-
-
-def success(request):
-    return render(request, 'basket/success.html')
-
-
-def fail(request):
-    return render(request, 'basket/fail.html')
+    return redirect('home')

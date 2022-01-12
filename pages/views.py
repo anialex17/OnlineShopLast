@@ -19,15 +19,17 @@ def message(request):
     if request.method == 'POST':
         form = ContactForm(request.POST)
         if form.is_valid():
-            mail = send_mail(form.cleaned_data['name'+'lasname'], form.cleaned_data['message'],form.cleaned_data['email'],
+            form.save()
+            mail = send_mail(form.cleaned_data['name']+form.cleaned_data['lastname'], form.cleaned_data['message'],form.cleaned_data['email'],
                               ['netfornetenyu@gmail.com'], fail_silently=False)
             if mail:
                 messages.success(request, 'Ok!!!')
-                return redirect('message')
+                return redirect('home')
             else:
                 messages.error(request, 'Upss!!!')
         else:
             messages.error(request, 'Upss!!!')
+
     else:
         form = ContactForm()
     return render(request, 'pages/contact.html', {'form': form})

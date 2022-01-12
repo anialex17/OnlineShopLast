@@ -38,7 +38,7 @@ class Product(models.Model):
 
     class Meta:
         verbose_name = 'Ապրանք'
-        verbose_name_plural = 'Ապրանքներներ'
+        verbose_name_plural = 'Ապրանքներ'
 
     def __str__(self):
         return self.title
@@ -76,16 +76,17 @@ class Customer(models.Model):
         verbose_name_plural = 'Օգտագործողներ'
 
     def __str__(self):
-        return f'{self.user.first_name} {self.user.last_name}'
+        # return f'{self.user.first_name} {self.user.last_name}'
+        return f'{self.user.username} '
 
     def get_absolute_url(self):
         return reverse('product', kwargs={"pk": self.id})
 
 
 class ProductItem(models.Model):
-    customer = models.ForeignKey(Customer, on_delete=models.CASCADE, null=True)
-    product = models.ForeignKey(Product, on_delete=models.CASCADE)
-    quantity = models.IntegerField(default=1)
+    customer = models.ForeignKey(Customer, on_delete=models.CASCADE, null=True,verbose_name="Օգտագործող")
+    product = models.ForeignKey(Product, on_delete=models.CASCADE,verbose_name="Ապրանք")
+    quantity = models.IntegerField(default=1,verbose_name="Քանակ")
 
     def total_price(self):
         return self.product.price * self.quantity
@@ -93,13 +94,18 @@ class ProductItem(models.Model):
     def __str__(self):
         return f'{self.product.title}---{self.quantity}'
 
+    class Meta:
+        verbose_name = 'Ընտրված ապրանք'
+        verbose_name_plural = 'Ընտրված ապրանքներ'
+        ordering = ['-id']
+
 
 class Basket(models.Model):
-    customer = models.OneToOneField(Customer, on_delete=models.CASCADE, related_name='baskets')
-    productItems = models.ManyToManyField(ProductItem, related_name='product_item', blank=True)
+    customer = models.OneToOneField(Customer, on_delete=models.CASCADE, related_name='baskets', verbose_name="Օգտագործող")
+    productItems = models.ManyToManyField(ProductItem, related_name='product_item', blank=True, verbose_name="Զամբյուղի ապրանք")
 
     def __str__(self):
-        return str(self.customer.user.first_name)
+        return str(self.customer.user.username)
 
     def finale_price(self):
         finale_price = 0
@@ -114,26 +120,42 @@ class Basket(models.Model):
             total += i.quantity
         return total
 
+    class Meta:
+        verbose_name = 'Զամբյուղ'
+        verbose_name_plural = 'Զամբյուղներ'
+        ordering = ['-id']
+
 
 class Order(models.Model):
-    customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
-    product_items = models.ManyToManyField(ProductItem)
+    customer = models.ForeignKey(Customer, on_delete=models.CASCADE,verbose_name="Պատվեր կատարող")
+    product_items = models.ManyToManyField(ProductItem, verbose_name="Պատվերի ապրանքներ")
+    date_added = models.DateTimeField(auto_now_add=True, verbose_name="Ավելացվել է", null=True)
 
     def __str__(self):
         return str(self.customer.user.first_name)
 
+    class Meta:
+        verbose_name = 'Պատվեր'
+        verbose_name_plural = 'Պատվերներ'
+        ordering = ['date_added']
+
 
 class Shipping(models.Model):
-    customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, null=True)
-    order = models.ForeignKey(Order, on_delete=models.SET_NULL, null=True)
-    city = models.CharField(max_length=200, null=False)
-    address = models.CharField(max_length=200, null=False)
-    phone = models.CharField(max_length=100)
-    date_added = models.DateTimeField(auto_now_add=True)
-    date_shipping = models.DateTimeField()
+    customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, null=True, verbose_name="Պատվիրատու")
+    order = models.ForeignKey(Order, on_delete=models.SET_NULL, null=True, verbose_name="Պատվեր")
+    city = models.CharField(max_length=200, null=False, verbose_name="Քաղաք")
+    address = models.CharField(max_length=200, null=False, verbose_name="Հասցե")
+    phone = models.CharField(max_length=100, verbose_name="Հերախոսահամար")
+    date_time_shipping = models.DateTimeField(verbose_name="Պատվերի օր և ժամ", null=True)
 
     def __str__(self):
         return str(self.customer)
+
+    class Meta:
+        verbose_name = 'Առաքում'
+        verbose_name_plural = 'Առաքումներ'
+        ordering = ['date_time_shipping']
+
 
 # class Order(models.Model):
 #     customer = models.ForeignKey(Customer, verbose_name='Գնորդ', related_name='related_orders',
