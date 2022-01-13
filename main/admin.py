@@ -5,19 +5,20 @@ from django.contrib.contenttypes.admin import GenericTabularInline
 
 
 @admin.register(Product)
-class ProductAdmin(TranslationAdmin):
+class ProductAdmin(admin.ModelAdmin):
     list_display = ('title', 'product_type', 'price')
     prepopulated_fields = {'url': ('title',)}
+    save_on_top = True
 
 
 @admin.register(Category)
-class CategoryAdmin(TranslationAdmin):
+class CategoryAdmin(admin.ModelAdmin):
     list_display = ('title', )
     prepopulated_fields = {'url': ('title',)}
 
 
 @admin.register(Customer)
-class CustomerAdmin(TranslationAdmin):
+class CustomerAdmin(admin.ModelAdmin):
     list_display = ('user',)
 
 

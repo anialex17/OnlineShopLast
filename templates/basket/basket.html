@@ -128,7 +128,15 @@
 
         <div class="order-buttons d-flex justify-content-between py-3">
             <a href="{% url 'home' %}" class="btn shadow-none btn-lg">{% trans 'Continue Ordering' %}</a>
+
+            {% if request.user.is_authenticated %}
             <a href="{% url 'ordering' %}"><button type="submit" class="btn shadow-none btn-lg">{% trans 'Order' %}</button></a>
+                {% else %}
+
+{#                <a href="{% url 'home' %}"><button type="submit" class="btn shadow-none btn-lg">{% trans 'Order' %}</button></a>#}
+                <button type="submit" class="btn shadow-none btn-lg">{% trans 'Order' %}</button>
+
+            {% endif %}
         </div>
 
     </div>
