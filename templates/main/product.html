@@ -16,7 +16,7 @@
         <div class="d-flex">
             <div class="product-container d-flex pr-lg-4">
                 <div class="food-img">
-                    <img src="{{ product.image.url }}" alt="" class="img">
+                    <img src="{{ product.image.url }}" alt="" class="img product-pic">
                 </div>
                 <div class="food-info pl-sm-3">
                     <div class="food-name font-weight-bold" id="food-name">{{ product.title }}</div>
@@ -58,7 +58,7 @@
         {% for product in products %}
                 <div class="food-block d-flex py-2">
                     <a href="{% url 'product' product.category.url product.url %}" class="d-block food-image">
-                        <img src="{{ product.image.url }}" alt="" class="img">
+                        <img src="{{ product.image.url }}" alt="" class="img product-pic">
                     </a>
                     <div class="pl-2">
                         <a href="{% url 'product' product.category.url product.url %}" class="title font-weight-bold site-color">{{ product.title }}</a>

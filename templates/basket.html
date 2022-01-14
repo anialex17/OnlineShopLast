@@ -94,42 +94,65 @@
 
             </tbody>
         </table>
+        <div class="basket-order-part d-flex flex-wrap">
+            <div class="basket-delivery">
+                <div class="delivery-card-header-part">
+                    <div class="delivery-card-icon-part">
+                        <img src=".../static/Images/icons/delivery.png">
+                    </div>
+                    <div class="delivery-card-header">
 
-
-        <div class="d-flex align-items-center justify-content-between flex-wrap">
-            <div class="py-3 pr-5">
-                <div class="custom-control custom-radio">
-                    <input type="radio" id="customRadio1" name="customRadio" class="custom-control-input" checked>
-                    <label class="custom-control-label" for="customRadio1">Toggle this custom radio</label>
+                    </div>
                 </div>
-                <div class="custom-control custom-radio">
-                    <input type="radio" id="customRadio2" name="customRadio" class="custom-control-input">
-                    <label class="custom-control-label" for="customRadio2">Or toggle this other custom radio</label>
-                </div>
-                <div class="custom-control custom-radio">
-                    <input type="radio" id="customRadio3" name="customRadio" class="custom-control-input">
-                    <label class="custom-control-label" for="customRadio3">Or toggle this other custom radio</label>
-                </div>
+                <div class="delivery-card-content"></div>
             </div>
+            <div class="order-buttons py-3">
+                <a href="{% url 'home' %}" class="btn shadow-none btn-lg">{% trans 'Continue Ordering' %}</a>
 
-            <div class="cost">
-                <div class="shipping-price py-3 font-weight-bold">
-                    <span class="font-weight-bold pr-2">Shipping Price</span>
-                    <span class="price site-color"></span>
-                    <span class="site-color pl-2"> դր</span>
-                </div>
-                <div class="products-price font-weight-bold">
-                    <span class="pr-2">Total Price </span>
-                    <span class="price site-color products-total-price"></span>
-                    <span class="site-color pl-2"> դր</span>
-                </div>
+                {% if request.user.is_authenticated %}
+                <a href="{% url 'ordering' %}"><button type="submit" class="btn shadow-none btn-lg">{% trans 'Order' %}</button></a>
+                {% else %}
+
+                {#                <a href="{% url 'home' %}"><button type="submit" class="btn shadow-none btn-lg">{% trans 'Order' %}</button></a>#}
+                <button type="submit" class="btn shadow-none btn-lg">{% trans 'Order' %}</button>
+
+                {% endif %}
             </div>
+            <div class="">
+                <div class="py-3 pr-5">
+                    {#                <div class="custom-control custom-radio">#}
+                    {#                    <input type="radio" id="customRadio1" name="customRadio" class="custom-control-input" checked>#}
+                    {#                    <label class="custom-control-label" for="customRadio1">{% trans 'Toggle this custom radio' %}</label>#}
+                    {#                </div>#}
+                    {#                <div class="custom-control custom-radio">#}
+                    {#                    <input type="radio" id="customRadio2" name="customRadio" class="custom-control-input">#}
+                    {#                    <label class="custom-control-label" for="customRadio2">{% trans 'Or toggle this other custom radio' %}</label>#}
+                    {#                </div>#}
+                    {#                <div class="custom-control custom-radio">#}
+                    {#                    <input type="radio" id="customRadio3" name="customRadio" class="custom-control-input">#}
+                    {#                    <label class="custom-control-label" for="customRadio3">{% trans 'Or toggle this other custom radio' %}</label>#}
+                    {#                </div>#}
+                </div>
 
-        </div>
+                <div class="cost">
+                    <div class="shipping-price py-3 font-weight-bold">
+                        <span class="font-weight-bold pr-2">{% trans 'Shipping Price' %}</span>
+                        <span class="price site-color">0</span>
+                        <span class="site-color pl-2"> {% trans 'amd' %}</span>
+                    </div>
+                    <div class="shipping-price py-3 font-weight-bold">
+                        <span class="font-weight-bold pr-2">{% trans 'Total Count' %}</span>
+                        <span class="price site-color">{{ basket.total_quantity }}</span>
+                        <span class="site-color pl-2"> {% trans 'item' %}</span>
+                    </div>
+                    <div class="products-price font-weight-bold">
+                        <span class="pr-2">{% trans 'Total Price ' %}</span>
+                        <span class="price site-color products-total-price">{{ basket.finale_price }}</span>
+                        <span class="site-color pl-2">{% trans 'amd' %} </span>
+                    </div>
+                </div>
 
-        <div class="order-buttons d-flex justify-content-between py-3">
-            <a href="main/menu.html" class="btn shadow-none btn-lg">Continue Ordering</a>
-            <button type="submit" class="btn shadow-none btn-lg">Order</button>
+            </div>
         </div>
 
     </div>

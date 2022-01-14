@@ -13,8 +13,6 @@
                 <span class="font-weight-bold">{% trans 'My Basket' %}</span>
             </h3>
         </div>
-<p>blablabla</p>
-
         <table class="table py-3">
             <thead class="thead-light">
             <tr>
@@ -34,7 +32,7 @@
 
                 <div class="basket-img">
                 {% if item.product.image %}
-                    <img src="{{ item.product.image.url }}" alt="product" class="img">
+                    <img src="{{ item.product.image.url }}" alt="product" class="img product-pic">
                 {% endif %}
                 </div>
             </th>
@@ -88,57 +86,53 @@
             {% endfor %}
             </tbody>
         </table>
-
-
-        <div class="d-flex align-items-center justify-content-between flex-wrap">
-            <div class="py-3 pr-5">
-{#                <div class="custom-control custom-radio">#}
-{#                    <input type="radio" id="customRadio1" name="customRadio" class="custom-control-input" checked>#}
-{#                    <label class="custom-control-label" for="customRadio1">{% trans 'Toggle this custom radio' %}</label>#}
-{#                </div>#}
-{#                <div class="custom-control custom-radio">#}
-{#                    <input type="radio" id="customRadio2" name="customRadio" class="custom-control-input">#}
-{#                    <label class="custom-control-label" for="customRadio2">{% trans 'Or toggle this other custom radio' %}</label>#}
-{#                </div>#}
-{#                <div class="custom-control custom-radio">#}
-{#                    <input type="radio" id="customRadio3" name="customRadio" class="custom-control-input">#}
-{#                    <label class="custom-control-label" for="customRadio3">{% trans 'Or toggle this other custom radio' %}</label>#}
-{#                </div>#}
-            </div>
-
-            <div class="cost">
-                <div class="shipping-price py-3 font-weight-bold">
-                    <span class="font-weight-bold pr-2">{% trans 'Shipping Price' %}</span>
-                    <span class="price site-color">0</span>
-                    <span class="site-color pl-2"> {% trans 'amd' %}</span>
+        <div class="basket-order-part d-flex flex-wrap">
+            <div class="basket-delivery">
+                <div class="delivery-card-header-part d-flex">
+                    <div class="delivery-card-icon-part">
+                        <img src="{% static 'Images/icons/delivery.png'%}">
+                    </div>
+                    <div class="delivery-card-header">
+                        <h4 class="site-color">Առաքում</h4>
+                    </div>
                 </div>
-                  <div class="shipping-price py-3 font-weight-bold">
-                    <span class="font-weight-bold pr-2">{% trans 'Total Count' %}</span>
-                    <span class="price site-color">{{ basket.total_quantity }}</span>
-                    <span class="site-color pl-2"> {% trans 'item' %}</span>
-                </div>
-                <div class="products-price font-weight-bold">
-                    <span class="pr-2">{% trans 'Total Price ' %}</span>
-                    <span class="price site-color products-total-price">{{ basket.finale_price }}</span>
-                    <span class="site-color pl-2">{% trans 'amd' %} </span>
+                <div class="delivery-card-content">
+                    <p class="site-color">10 000 դրամ և ավելի գնումների <br> դեպքում` առաքումն անվճար:</p>
                 </div>
             </div>
+            <div class="order-buttons py-3">
+                <a href="{% url 'home' %}" class="btn shadow-none btn-lg"><span><i class="fas fa-angle-left"></i>&nbsp;&nbsp;{% trans 'Continue Ordering' %}</span></a>
 
-        </div>
-
-        <div class="order-buttons d-flex justify-content-between py-3">
-            <a href="{% url 'home' %}" class="btn shadow-none btn-lg">{% trans 'Continue Ordering' %}</a>
-
-            {% if request.user.is_authenticated %}
-            <a href="{% url 'ordering' %}"><button type="submit" class="btn shadow-none btn-lg">{% trans 'Order' %}</button></a>
+                {% if request.user.is_authenticated %}
+                <a href="{% url 'ordering' %}"><button type="submit" class="btn shadow-none btn-lg"><span>{% trans 'Order' %}&nbsp;&nbsp;<i class="fas fa-angle-right"></i></span></button></a>
                 {% else %}
 
-{#                <a href="{% url 'home' %}"><button type="submit" class="btn shadow-none btn-lg">{% trans 'Order' %}</button></a>#}
+                {#                <a href="{% url 'home' %}"><button type="submit" class="btn shadow-none btn-lg">{% trans 'Order' %}</button></a>#}
                 <button type="submit" class="btn shadow-none btn-lg">{% trans 'Order' %}</button>
 
-            {% endif %}
-        </div>
+                {% endif %}
+            </div>
+            <div class="order-summary">
+                <div class="cost">
+                    <div class="shipping-price py-3 font-weight-bold">
+                        <span class="font-weight-bold pr-2">{% trans 'Shipping Price' %}</span>
+                        <span class="price site-color">0</span>
+                        <span class="site-color pl-2"> {% trans 'amd' %}</span>
+                    </div>
+                    <div class="shipping-price py-3 font-weight-bold">
+                        <span class="font-weight-bold pr-2">{% trans 'Total Count' %}</span>
+                        <span class="price site-color">{{ basket.total_quantity }}</span>
+                        <span class="site-color pl-2"> {% trans 'item' %}</span>
+                    </div>
+                    <div class="products-price font-weight-bold">
+                        <span class="pr-2">{% trans 'Total Price ' %}</span>
+                        <span class="price site-color products-total-price">{{ basket.finale_price }}</span>
+                        <span class="site-color pl-2">{% trans 'amd' %} </span>
+                    </div>
+                </div>
 
+            </div>
+        </div>
     </div>
     <!--End of container-->
 </section>
