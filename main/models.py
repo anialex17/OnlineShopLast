@@ -33,8 +33,8 @@ class Product(models.Model):
     price = models.DecimalField(max_digits=10, decimal_places=2)
     new_price = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
     product_type = models.CharField(max_length=255)
-    delivery_time = models.CharField(max_length=10)
-    delivery_cost = models.CharField(max_length=50)
+    # delivery_time = models.CharField(max_length=10)
+    # delivery_cost = models.CharField(max_length=50)
 
     class Meta:
         verbose_name = 'Ապրանք'
@@ -103,6 +103,7 @@ class ProductItem(models.Model):
 class Basket(models.Model):
     customer = models.OneToOneField(Customer, on_delete=models.CASCADE, related_name='baskets', verbose_name="Օգտագործող")
     productItems = models.ManyToManyField(ProductItem, related_name='product_item', blank=True, verbose_name="Զամբյուղի ապրանք")
+    delivery_cost = models.PositiveIntegerField(default=0)
 
     def __str__(self):
         return str(self.customer.user.username)
@@ -111,7 +112,7 @@ class Basket(models.Model):
         finale_price = 0
         for i in self.productItems.all():
             print(i)
-            finale_price += i.product.price * i.quantity
+            finale_price += i.product.price * i.quantity+self.delivery_cost
         return finale_price
 
     def total_quantity(self):
@@ -130,6 +131,8 @@ class Order(models.Model):
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE,verbose_name="Պատվեր կատարող")
     product_items = models.ManyToManyField(ProductItem, verbose_name="Պատվերի ապրանքներ")
     date_added = models.DateTimeField(auto_now_add=True, verbose_name="Ավելացվել է", null=True)
+    finale_price = models.PositiveIntegerField(default=0)
+    delivery_cost = models.PositiveIntegerField(default=0)
 
     def __str__(self):
         return str(self.customer.user.first_name)
@@ -157,54 +160,9 @@ class Shipping(models.Model):
         ordering = ['date_time_shipping']
 
 
-# class Order(models.Model):
-#     customer = models.ForeignKey(Customer, verbose_name='Գնորդ', related_name='related_orders',
-#                                  on_delete=models.SET_NULL, null=True)
-#     date_ordered = models.DateTimeField(auto_now_add=True)
-#     transaction_id = models.CharField(max_length=200, null=True)
-#
-#     class Meta:
-#         verbose_name = 'Պատվեր'
-#         verbose_name_plural = 'Պատվերներ'
-#
-#     def __str__(self):
-#         return f'{self.id}'
-#
-#     @property
-#     def get_cart_total(self):
-#         orderitems = self.orderitem_set.all()
-#         total = sum([item.get_total for item in orderitems])
-#         return total
-#
-#     @property
-#     def get_cart_items(self):
-#         orderitems = self.orderitem_set.all()
-#         total = sum([item.quantity for item in orderitems])
-#         return total
 
 
-# class OrderItem(models.Model):
-#     product = models.ForeignKey(Product, on_delete=models.SET_NULL, blank=True, null=True)
-#     order = models.ForeignKey(Order, on_delete=models.SET_NULL, blank=True, null=True)
-#     quantity = models.IntegerField(default=0, null=True, blank=True)
-#     date_added = models.DateTimeField(auto_now_add=True)
-#
-#     def __str__(self):
-#         return str(self.id)
-#
-#     @property
-#     def get_total(self):
-#         total = self.product.price * self.quantity
-#         return total
 
 
-# class ShippingAddress(models.Model):
-#     customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, blank=True, null=True)
-#     order = models.ForeignKey(Order, on_delete=models.SET_NULL, blank=True, null=True)
-#     city = models.CharField(max_length=200, null=True)
-#     address = models.CharField(max_length=200, null=True)
-#     phone = models.CharField(max_length=200, null=True)
-#     date_added = models.DateTimeField(auto_now_add=True)
-#
-#     def __str__(self):
-#         return self.address
+
+

@@ -116,14 +116,10 @@
                 <div class="cost">
                     <div class="shipping-price py-3 font-weight-bold">
                         <span class="font-weight-bold pr-2">{% trans 'Shipping Price' %}</span>
-                        <span class="price site-color">0</span>
+                        <span class="price site-color">{{basket.delivery_cost}}</span>
                         <span class="site-color pl-2"> {% trans 'amd' %}</span>
                     </div>
-                    <div class="shipping-price py-3 font-weight-bold">
-                        <span class="font-weight-bold pr-2">{% trans 'Total Count' %}</span>
-                        <span class="price site-color">{{ basket.total_quantity }}</span>
-                        <span class="site-color pl-2"> {% trans 'item' %}</span>
-                    </div>
+
                     <div class="products-price font-weight-bold">
                         <span class="pr-2">{% trans 'Total Price ' %}</span>
                         <span class="price site-color products-total-price">{{ basket.finale_price }}</span>

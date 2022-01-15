@@ -45,12 +45,13 @@ class ShippingAdmin(admin.ModelAdmin):
 
 class ShippingInline(admin.TabularInline):
     model = Shipping
-    extra=1
+    extra=0
 
 
 class ProductItemInline(admin.TabularInline):
     model = Order.product_items.through
     # fields = ['product', 'quantity']
+    extra=0
 
 
 @admin.register(Order)
