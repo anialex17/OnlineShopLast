@@ -13,6 +13,8 @@ def basket(request):
     if request.user.is_authenticated:
         customer = request.user.customer
         basket = Basket.objects.get(customer_id=customer.id)
+        if basket.finale_price()<10000:
+            basket.delivery_cost=500
         context = {'basket': basket, 'productItems': basket.productItems.all()}
     return render(request, 'basket/basket.html', context)
 
@@ -27,16 +29,6 @@ def add_to_basket(request):
         print(product_quantity)
         basket = Basket.objects.get(customer=customer)
         product_item, created = ProductItem.objects.get_or_create(product=product, customer=customer)
-        # product_item = ProductItem.objects.create(product=product, customer=customer)
-        # if product_item in basket.productItems.all():
-        # if created:
-        #     # product_item = ProductItem.objects.get(product=product, customer=customer)
-        #     product_item.quantity = + product_quantity
-        #     product_item.save()
-        # else:
-        #     product_item.quantity = product_quantity
-        #     basket.productItems.add(product_item)
-
         if created:
             product_item.quantity = product_quantity
             basket.productItems.add(product_item)
@@ -89,9 +81,15 @@ def order(request):
         customer = request.user.customer
         basket = Basket.objects.get(customer=customer)
         # order, created = Order.objects.get_or_create(customer=customer)
-        order = Order.objects.create(customer=customer)
-        for item in basket.productItems.all():
-            order.product_items.add(item)
+        # order = Order.objects.create(customer=customer, finale_price=basket.finale_price())
+
+        if basket.finale_price()>10000:
+            order = Order.objects.create(customer=customer, finale_price=basket.finale_price())
+        else:
+            order = Order.objects.create(customer=customer, finale_price=basket.finale_price(), delivery_cost=500)
+
+    for item in basket.productItems.all():
+        order.product_items.add(item)
         form = ShippingForm()
         context = {'order':order, 'form':form}
     return render(request, 'basket/order.html', context)
