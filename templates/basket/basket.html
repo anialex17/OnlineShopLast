@@ -36,16 +36,16 @@
                 {% endif %}
                 </div>
             </th>
-            <td class="font-weight-bold">
+            <td class="font-weight-bold align-middle">
                 <span class="d-sm-none">{% trans 'Product name' %}</span>
                 <a href="{% url 'product' item.product.category.url item.product.url %}" class="site-color food-name">{{ item.product.title }}</a>
             </td>
-            <td>
+            <td class="align-middle">
                 <span class="d-sm-none font-weight-bold">{% trans 'Food Price' %}</span>
                 <span class="food-price">{{ item.product.price }}</span>
                 <span>{% trans 'amd' %} </span>
             </td>
-            <td class="quantity">
+            <td class="quantity align-middle">
                 <span class="d-sm-none font-weight-bold">{% trans 'Product Quantity' %}</span>
                 <div class="d-flex add-to-basket-block">
                     <form action="{% url 'change_qty_minus' %}" method="post">
@@ -55,7 +55,7 @@
                             <i class="fas fa-minus site-color"></i>
                         </button>
                     </form>
-                    <span class="mr-2 product-quantity">{{item.quantity}}</span>
+                    <span class="mr-2 product-quantity align-middle">{{item.quantity}}</span>
                     <form action="{% url 'change_qty_plus' %}" method="post">
                         {% csrf_token %}
                         <input type="number" hidden name="increment_item" value="{{ item.id }}">
@@ -65,12 +65,12 @@
                     </form>
                 </div>
             </td>
-            <td>
+            <td class="align-middle">
                 <span class="d-sm-none font-weight-bold">{% trans 'Total Price' %}</span>
                 <span class="total-price">{{ item.total_price }}</span>
                 <span> {% trans 'amd' %}</span>
             </td>
-            <td>
+            <td class="align-middle">
                 <span class="d-sm-none font-weight-bold">{% trans 'Delete' %}</span>
                 <form action="{% url 'basket_remove' %}" method="post">
                     {% csrf_token %}
