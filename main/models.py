@@ -1,6 +1,5 @@
 from django.utils import timezone
 import datetime
-
 from django.contrib.auth import get_user_model
 from django.contrib.auth.models import User
 from django.db import models
@@ -24,6 +23,13 @@ class Category(models.Model):
         return self.title
 
 
+class Measurement(models.Model):
+    type = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.type
+
+
 class Product(models.Model):
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, verbose_name='Կատեգորիա', null=True, blank=True)
     title = models.CharField(max_length=255)
@@ -32,9 +38,8 @@ class Product(models.Model):
     description = models.TextField()
     price = models.DecimalField(max_digits=10, decimal_places=2)
     new_price = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
-    product_type = models.CharField(max_length=255)
-    # delivery_time = models.CharField(max_length=10)
-    # delivery_cost = models.CharField(max_length=50)
+    measurement = models.ForeignKey(Measurement, on_delete=models.SET_NULL,null=True, verbose_name='Չափման միավոր')
+    start_quantity = models.DecimalField(default=1,max_digits=10, decimal_places=2)
 
     class Meta:
         verbose_name = 'Ապրանք'
@@ -86,7 +91,7 @@ class Customer(models.Model):
 class ProductItem(models.Model):
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE, null=True,verbose_name="Օգտագործող")
     product = models.ForeignKey(Product, on_delete=models.CASCADE,verbose_name="Ապրանք")
-    quantity = models.IntegerField(default=1,verbose_name="Քանակ")
+    quantity = models.DecimalField(default=1,verbose_name="Քանակ", max_digits=10, decimal_places=2)
 
     def total_price(self):
         return self.product.price * self.quantity
@@ -111,14 +116,13 @@ class Basket(models.Model):
     def finale_price(self):
         finale_price = 0
         for i in self.productItems.all():
-            print(i)
-            finale_price += i.product.price * i.quantity+self.delivery_cost
+            finale_price += i.product.price * i.quantity
         return finale_price
 
     def total_quantity(self):
         total = 0
         for i in self.productItems.all():
-            total += i.quantity
+            total += 1
         return total
 
     class Meta:

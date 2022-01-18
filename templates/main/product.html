@@ -29,9 +29,9 @@
                         {{ product.description }}
                         </p>
                     </div>
-                    <div class="food-type font-weight-bold">
-                        <span>{% trans 'Food Type' %} : <span>{{ product.product_type }}</span></span>
-                    </div>
+<!--                    <div class="food-type font-weight-bold">-->
+<!--                        <span>{% trans 'Food Type' %} : <span>{{ product.product_type }}</span></span>-->
+<!--                    </div>-->
                     <form class="product-form js-product-form" data-login="{% if user.is_authenticated %}is_active{% endif %}" action="{% url 'add_to_basket' %}" method="post">
                         {% csrf_token %}
 

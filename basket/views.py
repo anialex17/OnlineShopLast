@@ -13,8 +13,8 @@ def basket(request):
     if request.user.is_authenticated:
         customer = request.user.customer
         basket = Basket.objects.get(customer_id=customer.id)
-        if basket.finale_price()<10000:
-            basket.delivery_cost=500
+        if basket.finale_price() < 10000:
+            basket.delivery_cost = 500
         context = {'basket': basket, 'productItems': basket.productItems.all()}
     return render(request, 'basket/basket.html', context)
 
@@ -26,7 +26,6 @@ def add_to_basket(request):
         customer = request.user.customer
         product = Product.objects.get(url=request.POST.get('product_url'))
         product_quantity = int(request.POST.get('product_quantity'))
-        print(product_quantity)
         basket = Basket.objects.get(customer=customer)
         product_item, created = ProductItem.objects.get_or_create(product=product, customer=customer)
         if created:
@@ -56,7 +55,8 @@ def change_qty_plus(request):
         basket = Basket.objects.get(customer=customer)
         product_item = ProductItem.objects.get(pk=request.POST.get('increment_item'))
         if product_item:
-            product_item.quantity += 1
+            print(product_item.product.start_quantity)
+            product_item.quantity += product_item.product.start_quantity
             product_item.save()
         return redirect('basket')
 
@@ -67,38 +67,36 @@ def change_qty_minus(request):
         basket = Basket.objects.get(customer=customer)
         product_item = ProductItem.objects.get(pk=request.POST.get('decrement_item'))
         if product_item:
-            product_item.quantity -= 1
-            if product_item.quantity<=0:
+            product_item.quantity -= product_item.product.start_quantity
+            if product_item.quantity <= 0:
                 product_item.delete()
             else:
                 product_item.save()
         return redirect('basket')
 
 
-def order(request):
-    context = {}
-    if request.user.is_authenticated:
-        customer = request.user.customer
-        basket = Basket.objects.get(customer=customer)
-        # order, created = Order.objects.get_or_create(customer=customer)
-        # order = Order.objects.create(customer=customer, finale_price=basket.finale_price())
-
-        if basket.finale_price()>10000:
-            order = Order.objects.create(customer=customer, finale_price=basket.finale_price())
-        else:
-            order = Order.objects.create(customer=customer, finale_price=basket.finale_price(), delivery_cost=500)
-
-    for item in basket.productItems.all():
-        order.product_items.add(item)
-        form = ShippingForm()
-        context = {'order':order, 'form':form}
-    return render(request, 'basket/order.html', context)
-
-
+# def order(request):
+#     context = {}
+#     if request.user.is_authenticated:
+#         customer = request.user.customer
+#         basket = Basket.objects.get(customer=customer)
+#         if basket.finale_price()>10000:
+#             order = Order.objects.create(customer=customer, finale_price=basket.finale_price())
+#         else:
+#             order = Order.objects.create(customer=customer, finale_price=basket.finale_price(), delivery_cost=500)
+#
+#     for item in basket.productItems.all():
+#         order.product_items.add(item)
+#         form = ShippingForm()
+#         context = {'order':order, 'form':form}
+#     return render(request, 'basket/order.html', context)
+# #
+#
 def shipping(request):
     if request.method =='POST':
         customer = request.user.customer
         order=Order.objects.filter(customer=customer).last()
+        print(order)
         form = ShippingForm(data=request.POST)
         if form.is_valid():
             Shipping.objects.create(**form.cleaned_data, customer=customer, order=order)
@@ -106,3 +104,20 @@ def shipping(request):
     else:
         form = ShippingForm()
     return redirect('home')
+
+
+def order(request):
+    context = {}
+    if request.user.is_authenticated:
+        customer = request.user.customer
+        basket = Basket.objects.get(customer=customer)
+        if basket.finale_price()>10000:
+            order = Order.objects.create(customer=customer, finale_price=basket.finale_price())
+        else:
+            order = Order.objects.create(customer=customer, finale_price=basket.finale_price(), delivery_cost=500)
+
+        for item in basket.productItems.all():
+            order.product_items.add(item)
+        form = ShippingForm()
+        context = {'order':order, 'form':form}
+    return render(request, 'basket/order.html', context)
