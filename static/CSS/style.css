@@ -41,6 +41,7 @@ body {
 
 .divider {
     margin-top: 90px;
+    min-height: 600px;
 }
 
 .text-ellipsis {
@@ -207,6 +208,9 @@ body {
     color: white;
     padding: 0 5px;
     text-align: center;
+}
+.lang-drop {
+    padding-left: 30px;
 }
 
 /* End of Navbar */

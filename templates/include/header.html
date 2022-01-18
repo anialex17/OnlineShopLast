@@ -27,25 +27,11 @@
                     <a class="nav-link site-color font-weight-bold nav-height"
                        href="{% url 'contact' %}">{% trans 'CONTACT' %}</a>
                 </li>
-                <li class="nav-item nav-height dropdown">
-                    <span class="nav-link site-color font-weight-bold nav-height">
-                        <form action="{% url 'set_language' %}" class="site-lang-form" method="post">
-                            {% csrf_token %}
-                            <input name="next" type="hidden" value="{{ redirect_to }}">
-                            <select name="language" id="page-language-select">
-                                {% get_current_language as LANGUAGE_CODE %}
-                                {% get_available_languages as LANGUAGES %}
-                                {% get_language_info_list for LANGUAGES as languages %}
-                                {% for language in languages %}
-                                    <option value="{{ language.code }}"{% if language.code == LANGUAGE_CODE %}
-                                            selected{% endif %}>
-                                        {{ language.name_local }} ({{ language.code }})
-                                    </option>
-                                {% endfor %}
-                            </select>
-                        </form>
-                    </span>
+                <li class="nav-item nav-height">
+                    <a class="nav-link site-color font-weight-bold nav-height"
+                       href="#">ABOUT US</a>
                 </li>
+
 
                 {% if request.user.is_authenticated %}
                     <li class="nav-item nav-height">
@@ -75,6 +61,25 @@
                         <i class="fas fa-shopping-basket"></i>
                         <span class="product-quantity">{{ request.user.customer.baskets.total_quantity }}</span>
                     </a>
+                </li>
+                <li class="nav-item nav-height dropdown lang-drop">
+                    <span class="nav-link site-color font-weight-bold nav-height">
+                        <form action="{% url 'set_language' %}" class="site-lang-form" method="post">
+                            {% csrf_token %}
+                            <input name="next" type="hidden" value="{{ redirect_to }}">
+                            <select name="language" id="page-language-select">
+                                {% get_current_language as LANGUAGE_CODE %}
+                                {% get_available_languages as LANGUAGES %}
+                                {% get_language_info_list for LANGUAGES as languages %}
+                                {% for language in languages %}
+                                    <option value="{{ language.code }}"{% if language.code == LANGUAGE_CODE %}
+                                            selected{% endif %}>
+                                        {{ language.name_local }} ({{ language.code }})
+                                    </option>
+                                {% endfor %}
+                            </select>
+                        </form>
+                    </span>
                 </li>
 
             </ul>
