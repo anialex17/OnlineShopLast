@@ -6,7 +6,7 @@ from django.contrib.contenttypes.admin import GenericTabularInline
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ('title', 'product_type', 'price')
+    list_display = ('title', 'price')
     prepopulated_fields = {'url': ('title',)}
     save_on_top = True
 
@@ -41,16 +41,17 @@ class ProductItemInline(admin.TabularInline):
 class ShippingAdmin(admin.ModelAdmin):
     list_display = ('customer','date_time_shipping')
     list_filter = ('customer','date_time_shipping')
+    readonly_fields = ('customer', 'order', 'city', 'address', 'phone', 'date_time_shipping')
 
 
 class ShippingInline(admin.TabularInline):
     model = Shipping
     extra=0
+    readonly_fields = ('customer', 'order', 'city', 'address', 'phone', 'date_time_shipping')
 
 
 class ProductItemInline(admin.TabularInline):
     model = Order.product_items.through
-    # fields = ['product', 'quantity']
     extra=0
 
 
@@ -59,8 +60,11 @@ class OrderAdmin(admin.ModelAdmin):
     list_display = ('id', 'customer')
     inlines = [ShippingInline, ProductItemInline]
     exclude = ('product_items',)
+    readonly_fields = ('customer','product_items','date_added', 'finale_price','delivery_cost' )
+
 
 
 admin.site.register(Basket)
 admin.site.register(Image)
+admin.site.register(Measurement)
 

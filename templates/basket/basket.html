@@ -28,60 +28,61 @@
 
             {% for item in basket.productItems.all %}
             <tr class="py-3">
-            <th scope="row">
+                <th scope="row">
 
-                <div class="basket-img">
-                {% if item.product.image %}
-                    <img src="{{ item.product.image.url }}" alt="product" class="img product-pic">
-                {% endif %}
-                </div>
-            </th>
-            <td class="font-weight-bold align-middle">
-                <span class="d-sm-none">{% trans 'Product name' %}</span>
-                <a href="{% url 'product' item.product.category.url item.product.url %}" class="site-color food-name">{{ item.product.title }}</a>
-            </td>
-            <td class="align-middle">
-                <span class="d-sm-none font-weight-bold">{% trans 'Food Price' %}</span>
-                <span class="food-price">{{ item.product.price }}</span>
-                <span>{% trans 'amd' %} </span>
-            </td>
-            <td class="quantity align-middle">
-                <span class="d-sm-none font-weight-bold">{% trans 'Product Quantity' %}</span>
-                <div class="d-flex add-to-basket-block">
-                    <form action="{% url 'change_qty_minus' %}" method="post">
+                    <div class="basket-img">
+                        {% if item.product.image %}
+                        <img src="{{ item.product.image.url }}" alt="product" class="img product-pic">
+                        {% endif %}
+                    </div>
+                </th>
+                <td class="font-weight-bold align-middle">
+                    <span class="d-sm-none">{% trans 'Product name' %}</span>
+                    <a href="{% url 'product' item.product.category.url item.product.url %}"
+                       class="site-color food-name">{{ item.product.title }}</a>
+                </td>
+                <td class="align-middle">
+                    <span class="d-sm-none font-weight-bold">{% trans 'Food Price' %}</span>
+                    <span class="food-price">{{ item.product.price }}</span>
+                    <span>{% trans 'amd' %} </span>
+                </td>
+                <td class="quantity align-middle">
+                    <span class="d-sm-none font-weight-bold">{% trans 'Product Quantity' %}</span>
+                    <div class="d-flex add-to-basket-block">
+                        <form action="{% url 'change_qty_minus' %}" method="post">
+                            {% csrf_token %}
+                            <input type="number" name="decrement_item" hidden value="{{ item.id }}">
+                            <button type="submit" class="btn shadow-none btn-dec flex-center mr-2 border-0 btn-dec">
+                                <i class="fas fa-minus site-color"></i>
+                            </button>
+                        </form>
+                        <span class="mr-2 product-quantity align-middle">{{item.quantity}}{{item.product.measurement}}</span>
+                        <form action="{% url 'change_qty_plus' %}" method="post">
+                            {% csrf_token %}
+                            <input type="number" hidden name="increment_item" value="{{ item.id }}">
+                            <button type="submit" class="btn shadow-none btn-inc flex-center mr-2 border-0">
+                                <i class="fas fa-plus site-color"></i>
+                            </button>
+                        </form>
+                    </div>
+                </td>
+                <td class="align-middle">
+                    <span class="d-sm-none font-weight-bold">{% trans 'Total Price' %}</span>
+                    <span class="total-price">{{ item.total_price }}</span>
+                    <span> {% trans 'amd' %}</span>
+                </td>
+                <td class="align-middle">
+                    <span class="d-sm-none font-weight-bold">{% trans 'Delete' %}</span>
+                    <form action="{% url 'basket_remove' %}" method="post">
                         {% csrf_token %}
-                        <input type="number" name="decrement_item" hidden value="{{ item.id }}">
-                        <button type="submit" class="btn shadow-none btn-dec flex-center mr-2 border-0 btn-dec">
-                            <i class="fas fa-minus site-color"></i>
+                        <input type="text" hidden value="{{ item.id }}" name="remove_item">
+                        <button type="submit" class="bg-transparent border-0 site-color delete-btn">
+                            <i class="fas fa-times"></i>
                         </button>
                     </form>
-                    <span class="mr-2 product-quantity align-middle">{{item.quantity}}</span>
-                    <form action="{% url 'change_qty_plus' %}" method="post">
-                        {% csrf_token %}
-                        <input type="number" hidden name="increment_item" value="{{ item.id }}">
-                        <button type="submit" class="btn shadow-none btn-inc flex-center mr-2 border-0">
-                            <i class="fas fa-plus site-color"></i>
-                        </button>
-                    </form>
-                </div>
-            </td>
-            <td class="align-middle">
-                <span class="d-sm-none font-weight-bold">{% trans 'Total Price' %}</span>
-                <span class="total-price">{{ item.total_price }}</span>
-                <span> {% trans 'amd' %}</span>
-            </td>
-            <td class="align-middle">
-                <span class="d-sm-none font-weight-bold">{% trans 'Delete' %}</span>
-                <form action="{% url 'basket_remove' %}" method="post">
-                    {% csrf_token %}
-                    <input type="text" hidden value="{{ item.id }}" name="remove_item">
-                <button type="submit" class="bg-transparent border-0 site-color delete-btn">
-                    <i class="fas fa-times"></i>
-                </button>
-                </form>
-            </td>
+                </td>
 
-        </tr>
+            </tr>
 
             {% endfor %}
             </tbody>
@@ -104,10 +105,16 @@
                 <a href="{% url 'home' %}" class="btn shadow-none btn-lg"><span><i class="fas fa-angle-left"></i>&nbsp;&nbsp;{% trans 'Continue Ordering' %}</span></a>
 
                 {% if request.user.is_authenticated %}
-                <a href="{% url 'ordering' %}"><button type="submit" class="btn shadow-none btn-lg"><span>{% trans 'Order' %}&nbsp;&nbsp;<i class="fas fa-angle-right"></i></span></button></a>
+<!--                <a href="{% url 'ordering' %}">-->
+<!--                    <button type="submit" class="btn shadow-none btn-lg"><span>{% trans 'Order' %}&nbsp;&nbsp;<i-->
+<!--                            class="fas fa-angle-right"></i></span></button>-->
+<!--                </a>-->
+                <a href="{% url 'ordering' %}">Order</a>
                 {% else %}
 
-                {#                <a href="{% url 'home' %}"><button type="submit" class="btn shadow-none btn-lg">{% trans 'Order' %}</button></a>#}
+                {# <a href="{% url 'home' %}">
+                <button type="submit" class="btn shadow-none btn-lg">{% trans 'Order' %}</button>
+                </a>#}
                 <button type="submit" class="btn shadow-none btn-lg">{% trans 'Order' %}</button>
 
                 {% endif %}
