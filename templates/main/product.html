@@ -21,8 +21,12 @@
                 <div class="food-info pl-sm-3">
                     <div class="food-name font-weight-bold" id="food-name">{{ product.title }}</div>
                     <div class="price py-2 site-color">
+                        {% if product.new_price %}
                         <del><span>{{ product.price }}</span>{% trans 'dr' %}</del>
                         <span class="font-weight-bold"><span id="food-price">{{ product.new_price }}</span>{% trans 'dr' %}</span>
+                         {% else %}
+                        <span class="font-weight-bold"><span id="food-price">{{ product.price }}</span>{% trans 'dr' %}</span>
+                        {% endif %}
                     </div>
                     <div class="description py-2">
                         <p>

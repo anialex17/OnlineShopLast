@@ -55,8 +55,10 @@ def change_qty_plus(request):
         basket = Basket.objects.get(customer=customer)
         product_item = ProductItem.objects.get(pk=request.POST.get('increment_item'))
         if product_item:
-            print(product_item.product.start_quantity)
-            product_item.quantity += product_item.product.start_quantity
+            if product_item.product.start_quantity_kg:
+                product_item.quantity += product_item.product.start_quantity_kg
+            else:
+                product_item.quantity += product_item.product.start_quantity_item
             product_item.save()
         return redirect('basket')
 
@@ -67,13 +69,34 @@ def change_qty_minus(request):
         basket = Basket.objects.get(customer=customer)
         product_item = ProductItem.objects.get(pk=request.POST.get('decrement_item'))
         if product_item:
-            product_item.quantity -= product_item.product.start_quantity
+            if product_item.product.start_quantity_kg:
+                product_item.quantity -= product_item.product.start_quantity_kg
+            else:
+                product_item.quantity -= product_item.product.start_quantity_item
             if product_item.quantity <= 0:
                 product_item.delete()
             else:
                 product_item.save()
         return redirect('basket')
 
+
+def order(request):
+    if request.method =='POST':
+        customer = request.user.customer
+        basket = Basket.objects.get(customer=customer)
+        form = ShippingForm(data=request.POST)
+        if form.is_valid():
+            if basket.finale_price() > 10000:
+                order = Order.objects.create(customer=customer, finale_price=basket.finale_price())
+            else:
+                order = Order.objects.create(customer=customer, finale_price=basket.finale_price(), delivery_cost=500)
+            for item in basket.productItems.all():
+                order.product_items.add(item)
+            Shipping.objects.create(**form.cleaned_data, customer=customer, order=order)
+        return redirect('home')
+    else:
+        form = ShippingForm()
+    return render(request, 'basket/order.html', {'form':form})
 
 # def order(request):
 #     context = {}
@@ -92,32 +115,22 @@ def change_qty_minus(request):
 #     return render(request, 'basket/order.html', context)
 # #
 #
-def shipping(request):
-    if request.method =='POST':
-        customer = request.user.customer
-        order=Order.objects.filter(customer=customer).last()
-        print(order)
-        form = ShippingForm(data=request.POST)
-        if form.is_valid():
-            Shipping.objects.create(**form.cleaned_data, customer=customer, order=order)
-        return redirect('home')
-    else:
-        form = ShippingForm()
-    return redirect('home')
+# def shipping(request):
+#     if request.method =='POST':
+#         customer = request.user.customer
+#         order=Order.objects.filter(customer=customer).last()
+#         print(order)
+#         form = ShippingForm(data=request.POST)
+#         if form.is_valid():
+#             Shipping.objects.create(**form.cleaned_data, customer=customer, order=order)
+#         return redirect('home')
+#     else:
+#         form = ShippingForm()
+#     return redirect('home')
+#
 
 
-def order(request):
-    context = {}
-    if request.user.is_authenticated:
-        customer = request.user.customer
-        basket = Basket.objects.get(customer=customer)
-        if basket.finale_price()>10000:
-            order = Order.objects.create(customer=customer, finale_price=basket.finale_price())
-        else:
-            order = Order.objects.create(customer=customer, finale_price=basket.finale_price(), delivery_cost=500)
 
-        for item in basket.productItems.all():
-            order.product_items.add(item)
-        form = ShippingForm()
-        context = {'order':order, 'form':form}
-    return render(request, 'basket/order.html', context)
+
+
+

@@ -23,23 +23,25 @@ class Category(models.Model):
         return self.title
 
 
-class Measurement(models.Model):
-    type = models.CharField(max_length=50)
-
-    def __str__(self):
-        return self.type
+# class Measurement(models.Model):
+#     type = models.CharField(max_length=50)
+#
+#     def __str__(self):
+#         return self.type
 
 
 class Product(models.Model):
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, verbose_name='Կատեգորիա', null=True, blank=True)
-    title = models.CharField(max_length=255)
-    image = models.ImageField(upload_to='media', null=True, blank=True)
+    title = models.CharField(max_length=255, verbose_name='Անուն')
+    image = models.ImageField(upload_to='media', null=True, blank=True, verbose_name='Նկար')
     url = models.SlugField(unique=True)
-    description = models.TextField()
-    price = models.DecimalField(max_digits=10, decimal_places=2)
-    new_price = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
-    measurement = models.ForeignKey(Measurement, on_delete=models.SET_NULL,null=True, verbose_name='Չափման միավոր')
-    start_quantity = models.DecimalField(default=1,max_digits=10, decimal_places=2)
+    description = models.TextField(verbose_name='Նկարագրություն')
+    price = models.DecimalField(max_digits=10, decimal_places=0, verbose_name='Գին')
+    new_price = models.DecimalField(max_digits=10, decimal_places=0, blank=True, null=True, verbose_name='Նոր գին')
+    # measurement = models.ForeignKey(Measurement, on_delete=models.SET_NULL, null=True, verbose_name='Չափման միավոր')
+    start_quantity_kg = models.DecimalField(max_digits=10, decimal_places=2, verbose_name='Սկզբնական չափ (կգ)', blank=True, null=True)
+    start_quantity_item = models.PositiveIntegerField(verbose_name='Սկզբնական չափ (հատ)', blank=True, null=True)
+    # start_quantity = models.DecimalField(default=1, max_digits=10, decimal_places=2, verbose_name='Սկզբնական չափ')
 
     class Meta:
         verbose_name = 'Ապրանք'
@@ -89,15 +91,20 @@ class Customer(models.Model):
 
 
 class ProductItem(models.Model):
-    customer = models.ForeignKey(Customer, on_delete=models.CASCADE, null=True,verbose_name="Օգտագործող")
-    product = models.ForeignKey(Product, on_delete=models.CASCADE,verbose_name="Ապրանք")
-    quantity = models.DecimalField(default=1,verbose_name="Քանակ", max_digits=10, decimal_places=2)
+    customer = models.ForeignKey(Customer, on_delete=models.CASCADE, null=True, verbose_name="Օգտագործող")
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, verbose_name="Ապրանք")
+    quantity = models.DecimalField(default=1, verbose_name="Քանակ", max_digits=10, decimal_places=1)
 
     def total_price(self):
         return self.product.price * self.quantity
 
+    def qty(self):
+        if self.product.start_quantity_item:
+            self.quantity=int(self.quantity)
+        return self.quantity
+
     def __str__(self):
-        return f'{self.product.title}---{self.quantity}'
+        return f'{self.product.title}---{self.quantity} -- {self.total_price()}dr\n'
 
     class Meta:
         verbose_name = 'Ընտրված ապրանք'
@@ -106,9 +113,11 @@ class ProductItem(models.Model):
 
 
 class Basket(models.Model):
-    customer = models.OneToOneField(Customer, on_delete=models.CASCADE, related_name='baskets', verbose_name="Օգտագործող")
-    productItems = models.ManyToManyField(ProductItem, related_name='product_item', blank=True, verbose_name="Զամբյուղի ապրանք")
-    delivery_cost = models.PositiveIntegerField(default=0)
+    customer = models.OneToOneField(Customer, on_delete=models.CASCADE, related_name='baskets',
+                                    verbose_name="Օգտագործող")
+    productItems = models.ManyToManyField(ProductItem, related_name='product_item', blank=True,
+                                          verbose_name="Զամբյուղի ապրանք")
+    delivery_cost = models.PositiveIntegerField(default=0, verbose_name="Առաքման արժեքը")
 
     def __str__(self):
         return str(self.customer.user.username)
@@ -132,11 +141,11 @@ class Basket(models.Model):
 
 
 class Order(models.Model):
-    customer = models.ForeignKey(Customer, on_delete=models.CASCADE,verbose_name="Պատվեր կատարող")
+    customer = models.ForeignKey(Customer, on_delete=models.CASCADE, verbose_name="Պատվեր կատարող")
     product_items = models.ManyToManyField(ProductItem, verbose_name="Պատվերի ապրանքներ")
     date_added = models.DateTimeField(auto_now_add=True, verbose_name="Ավելացվել է", null=True)
-    finale_price = models.PositiveIntegerField(default=0)
-    delivery_cost = models.PositiveIntegerField(default=0)
+    finale_price = models.PositiveIntegerField(default=0, verbose_name="Ընդհանուր գումար")
+    delivery_cost = models.PositiveIntegerField(default=0, verbose_name="Առաքման արժեք")
 
     def __str__(self):
         return str(self.customer.user.first_name)
@@ -147,13 +156,26 @@ class Order(models.Model):
         ordering = ['date_added']
 
 
+class Time_Shipping(models.Model):
+    time_shipping = models.CharField(max_length=100, verbose_name="Առաքման ժամ")
+
+    def __str__(self):
+        return self.time_shipping
+
+    class Meta:
+        verbose_name = 'Արաքման ժամ'
+        verbose_name_plural = 'Արաքման ժամեր'
+
+
 class Shipping(models.Model):
     customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, null=True, verbose_name="Պատվիրատու")
     order = models.ForeignKey(Order, on_delete=models.SET_NULL, null=True, verbose_name="Պատվեր")
     city = models.CharField(max_length=200, null=False, verbose_name="Քաղաք")
     address = models.CharField(max_length=200, null=False, verbose_name="Հասցե")
     phone = models.CharField(max_length=100, verbose_name="Հերախոսահամար")
-    date_time_shipping = models.DateTimeField(verbose_name="Պատվերի օր և ժամ", null=True)
+    # date_time_shipping = models.DateField(verbose_name="Պատվերի օր", null=True)
+    date_shipping = models.DateField(verbose_name="Արաքման օր", null=True)
+    time_shipping = models.ForeignKey(Time_Shipping, on_delete=models.SET_NULL, null=True, verbose_name="Արաքման ժամ")
 
     def __str__(self):
         return str(self.customer)
@@ -161,12 +183,4 @@ class Shipping(models.Model):
     class Meta:
         verbose_name = 'Առաքում'
         verbose_name_plural = 'Առաքումներ'
-        ordering = ['date_time_shipping']
-
-
-
-
-
-
-
-
+        ordering = ['date_shipping']

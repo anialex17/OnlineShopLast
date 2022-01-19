@@ -5,56 +5,64 @@
 {% block content %}
 <main>
 
-    <form action="{% url 'shipping' %}" method="post">
+    <form action="{% url 'ordering' %}" method="post">
         {% csrf_token %}
 
-    <div class="container divider">
-        <section class="personal-form">
-            <div class="row">
-                <div class="col-lg-4 personal-text-parts">
-                    <h3 class="personal-forms-text">Քաղաք՝</h3>
+        <div class="container divider">
+            <section class="personal-form">
+                <div class="row">
+                    <div class="col-lg-4 personal-text-parts">
+                        <h3 class="personal-forms-text">Քաղաք՝</h3>
+                    </div>
+                    <div class="col-lg-6 personal-input-parts">
+                        {{ form.city }}
+                    </div>
                 </div>
-                <div class="col-lg-6 personal-input-parts">
-                    {{ form.city }}
+                <div class="row">
+                    <div class="col-lg-4 personal-text-parts">
+                        <h3 class="personal-forms-text">Հասցե՝</h3>
+                    </div>
+                    <div class="col-lg-6 personal-input-parts">
+                        {{form.address}}
+                    </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-4 personal-text-parts">
-                    <h3 class="personal-forms-text">Հասցե՝</h3>
+                <div class="row">
+                    <div class="col-lg-4 personal-text-parts">
+                        <h3 class="personal-forms-text">Հեռախոսահամար՝</h3>
+                    </div>
+                    <div class="col-lg-6 personal-input-parts">
+                        {{form.phone}}
+                    </div>
                 </div>
-                <div class="col-lg-6 personal-input-parts">
-                    {{form.address}}
+                <div class="row">
+                    <div class="col-lg-4 personal-text-parts">
+                        <h3 class="personal-forms-text">Ամսաթիվ՝</h3>
+                    </div>
+                    <div class="col-lg-6 personal-input-parts">
+                        {{ form.date_shipping }}
+                    </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-4 personal-text-parts">
-                    <h3 class="personal-forms-text">Հեռախոսահամար՝</h3>
+                <div class="row">
+                    <div class="col-lg-4 personal-text-parts">
+                        <h3 class="personal-forms-text">Առաքման ժամ՝</h3>
+                    </div>
+                    <div class="col-lg-6 personal-input-parts">
+                        {{ form.time_shipping }}
+                    </div>
                 </div>
-                <div class="col-lg-6 personal-input-parts">
-                    {{form.phone}}
+                <div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-4 personal-text-parts">
-                    <h3 class="personal-forms-text">Ամսաթիվ՝</h3>
+                <div class="personal-btn-part">
+                    <button type="submit" class="order-btn">Պատվիրել</button>
                 </div>
-                <div class="col-lg-6 personal-input-parts">
-                 {{ form.date_time_shipping }}
-                </div>
-            </div>
-            <div>
-            </div>
-            <div class="personal-btn-part">
-                <button type="submit" class="order-btn">Պատվիրել</button>
-            </div>
-        </section>
+            </section>
+        </div>
+    </form>
+
+
+    <div class="container my-5 border">
+
     </div>
-        </form>
-
-
-<div class="container my-5 border">
-
-</div>
 
 </main>
 {% endblock %}
