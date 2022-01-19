@@ -17,5 +17,21 @@ $(document).ready(function () {
         $('.register-form').removeClass('d-none');
         $('.login-form').addClass('d-none');
     });
+
+    // Footer fixed bottom
+    const footer = $('.footer');
+    fixedBottom();
+
+    function fixedBottom(elHeight = 0) {
+        if ($("html").height() < $(window).height() - elHeight) {
+            footer.addClass('fixed-bottom');
+        } else {
+            footer.removeClass('fixed-bottom');
+        }
+    }
+
+    $(window).resize(function() {
+        fixedBottom();
+    });
 })
 
