@@ -56,7 +56,7 @@
                                 <i class="fas fa-minus site-color"></i>
                             </button>
                         </form>
-                        <span class="mr-2 product-quantity align-middle">{{item.quantity}} {{item.product.measurement}}</span>
+                        <span class="mr-2 product-quantity align-middle">{{item.qty}}</span>
                         <form action="{% url 'change_qty_plus' %}" method="post">
                             {% csrf_token %}
                             <input type="number" hidden name="increment_item" value="{{ item.id }}">
@@ -105,17 +105,17 @@
                 <a href="{% url 'home' %}" class="btn shadow-none btn-lg"><span><i class="fas fa-angle-left"></i>&nbsp;&nbsp;{% trans 'Continue Ordering' %}</span></a>
 
                 {% if request.user.is_authenticated %}
-                <a href="{% url 'ordering' %}">
-                    <button type="submit" class="btn shadow-none btn-lg"><span>{% trans 'Order' %}&nbsp;&nbsp;<i
-                            class="fas fa-angle-right"></i></span></button>
-                </a>
-<!--                <a href="{% url 'ordering' %}">Order</a>-->
+<!--                <a href="{% url 'ordering' %}">-->
+<!--                    <button type="submit" class="btn shadow-none btn-lg"><span>{% trans 'Order' %}&nbsp;&nbsp;<i-->
+<!--                            class="fas fa-angle-right"></i></span></button>-->
+<!--                </a>-->
+                <a class="btn shadow-none btn-lg" href="{% url 'ordering' %}">Order</a>
                 {% else %}
 
-                {# <a href="{% url 'home' %}">
-                <button type="submit" class="btn shadow-none btn-lg">{% trans 'Order' %}</button>
-                </a>#}
-                <button type="submit" class="btn shadow-none btn-lg">{% trans 'Order' %}</button>
+                <a class="btn shadow-none btn-lg"  href="{% url 'home' %}">Order
+<!--                <button type="submit" class="btn shadow-none btn-lg">{% trans 'Order' %}</button>-->
+                </a>
+<!--                <button type="submit" class="btn shadow-none btn-lg">{% trans 'Order' %}</button>-->
 
                 {% endif %}
             </div>

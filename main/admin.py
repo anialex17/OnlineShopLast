@@ -26,11 +26,12 @@ class CustomerAdmin(admin.ModelAdmin):
 class ProductItemAdmin(admin.ModelAdmin):
     list_display = ('customer','product', 'quantity')
     list_filter = ('customer', 'product')
-
+    readonly_fields = ('product',)
 
 class ProductItemInline(admin.TabularInline):
     model = ProductItem
     extra=1
+
 #
 # class ShippingInline(admin.TabularInline):
 #     model = Shipping
@@ -39,15 +40,15 @@ class ProductItemInline(admin.TabularInline):
 
 @admin.register(Shipping)
 class ShippingAdmin(admin.ModelAdmin):
-    list_display = ('customer','date_time_shipping')
-    list_filter = ('customer','date_time_shipping')
-    readonly_fields = ('customer', 'order', 'city', 'address', 'phone', 'date_time_shipping')
+    list_display = ('customer','date_shipping','time_shipping' )
+    list_filter = ('customer','date_shipping', 'time_shipping')
+    readonly_fields = ('customer', 'order', 'city', 'address', 'phone', 'date_shipping', 'time_shipping')
 
 
 class ShippingInline(admin.TabularInline):
     model = Shipping
     extra=0
-    readonly_fields = ('customer', 'order', 'city', 'address', 'phone', 'date_time_shipping')
+    readonly_fields = ('customer', 'order', 'city', 'address', 'phone', 'date_shipping', 'time_shipping')
 
 
 class ProductItemInline(admin.TabularInline):
@@ -66,5 +67,6 @@ class OrderAdmin(admin.ModelAdmin):
 
 admin.site.register(Basket)
 admin.site.register(Image)
-admin.site.register(Measurement)
+# admin.site.register(Measurement)
+admin.site.register(Time_Shipping)
 

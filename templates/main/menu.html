@@ -2,7 +2,7 @@
 {% load i18n %}
 
 {% block content %}
-    <section class="menu-content py-4 divider">
+<section class="menu-content py-4 divider">
 
     <div class="menu-header text-center p-3">
         <h4>{% trans 'Lorem ipsum dolor sit.' %}</h4>
@@ -28,45 +28,63 @@
                     </a>
                     <div class="food-block pl-sm-3">
                         <div class="food-info d-flex justify-content-between pb-2">
-                            <a href="{% url 'product' product.category.url product.url %}" class="food-name font-weight-bold">
-                               {{ product.title }}
+                            <a href="{% url 'product' product.category.url product.url %}"
+                               class="food-name font-weight-bold">
+                                {{ product.title }}
                             </a>
                         </div>
-                        <div class="food-type">
-<!--                            <span>{% trans 'Food Type' %} :  </span>-->
-<!--                            <span>{{ product.product_type }}</span>-->
+
+
+                        <div class="price py-2 site-color">
+                            {% if product.new_price %}
+                                {% if product.start_quantity_kg %}
+                                <span>{{product.start_quantity_kg}}kg -</span>
+                                <del><span>{{ product.price }}</span>{% trans 'dr' %}</del>
+                                <span class="font-weight-bold"><span id="food-price">{{ product.new_price }}</span>{% trans 'dr' %}</span>
+                                {% else %}
+                                <span>{{product.start_quantity_item}}item -</span>
+                                <del><span>{{ product.price }}</span>{% trans 'dr' %}</del>
+                                <span class="font-weight-bold"><span id="food-price">{{ product.new_price }}</span>{% trans 'dr' %}</span>
+                                {% endif %}
+
+                            {% else %}
+                                {% if product.start_quantity_kg %}
+                                <span>{{product.start_quantity_kg}}kg-</span>
+                                <span class="font-weight-bold"><span id="food-price">{{ product.price }}</span>{% trans 'dr' %}</span>
+                                {% else %}
+                                <span>{{product.start_quantity_item}}item-</span>
+                                <span class="font-weight-bold"><span id="food-price">{{ product.price }}</span>{% trans 'dr' %}</span>
+                                {% endif %}
+                            {% endif %}
                         </div>
-                        <div class="delivery-time">
-                            <span>Price:{{product.price}}dr </span>
-                        </div>
+
                     </div>
                 </div>
             </div>
-            <!--col-md-6-->
-             {% endfor %}
+            {% endfor %}
         </div>
-        <!--End of row-->
 
     </div>
-                {% if page_obj.has_other_pages%}
-            <div class="pegination">
+    {% if page_obj.has_other_pages%}
+    <div class="pegination">
 
-                <div class="nav-links">
-                    {% for p in page_obj.paginator.page_range %}
-                    {% if page_obj.number == p %}
-                    <span class="page-numbers current">{{p}}</span>
-                    {% elif p > page_obj.number|add:-3 and p < page_obj.number|add:3 %}
-                     <a class="page-numbers" href="?page={{p}}">{{p}}</a>
-                    {% endif %}
-                    {% endfor %}
+        <div class="nav-links">
+            {% for p in page_obj.paginator.page_range %}
+            {% if page_obj.number == p %}
+            <span class="page-numbers current">{{p}}</span>
+            {% elif p > page_obj.number|add:-3 and p < page_obj.number|add:3 %}
+            <a class="page-numbers" href="?page={{p}}">{{p}}</a>
+            {% endif %}
+            {% endfor %}
 
-                     {% if page_obj.has_next%}
+            {% if page_obj.has_next%}
 
-                    <a class="page-numbers" href="?page={{page_obj.next_page_number}}"><i class="fa fa-angle-right" aria-hidden="true"></i></a>
-                    {% endif %}
-                </div>
-            </div>
-            {% endif%}
+            <a class="page-numbers" href="?page={{page_obj.next_page_number}}"><i class="fa fa-angle-right"
+                                                                                  aria-hidden="true"></i></a>
+            {% endif %}
+        </div>
+    </div>
+    {% endif%}
     <!--End of container-->
 </section>
 
