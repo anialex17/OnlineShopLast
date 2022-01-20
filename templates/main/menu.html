@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% load i18n %}
-
+{% block title%}VitaMix | Menu{% endblock %}
 {% block content %}
 <section class="menu-content py-4 divider">
 
@@ -35,24 +35,12 @@
                         </div>
                         <div class="price py-2 site-color">
                             {% if product.new_price %}
-                                {% if product.start_quantity_kg %}
-                                <span>{{product.start_quantity_kg}}kg -</span>
+                                <span>{{product.start_quantity}}</span>
                                 <del><span>{{ product.price }}</span>{% trans 'dr' %}</del>
                                 <span class="font-weight-bold"><span id="food-price">{{ product.new_price }}</span>{% trans 'dr' %}</span>
-                                {% else %}
-                                <span>{{product.start_quantity_item}}item -</span>
-                                <del><span>{{ product.price }}</span>{% trans 'dr' %}</del>
-                                <span class="font-weight-bold"><span id="food-price">{{ product.new_price }}</span>{% trans 'dr' %}</span>
-                                {% endif %}
-
                             {% else %}
-                                {% if product.start_quantity_kg %}
-                                <span>{{product.start_quantity_kg}}kg-</span>
+                                <span>{{product.start_quantity}}</span>
                                 <span class="font-weight-bold"><span id="food-price">{{ product.price }}</span>{% trans 'dr' %}</span>
-                                {% else %}
-                                <span>{{product.start_quantity_item}}item-</span>
-                                <span class="font-weight-bold"><span id="food-price">{{ product.price }}</span>{% trans 'dr' %}</span>
-                                {% endif %}
                             {% endif %}
                         </div>
                         <div class="d-flex add-to-basket-block">

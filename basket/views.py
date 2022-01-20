@@ -29,10 +29,14 @@ def add_to_basket(request):
         basket = Basket.objects.get(customer=customer)
         product_item, created = ProductItem.objects.get_or_create(product=product, customer=customer)
         if created:
+            print('created')
+            print(product_item.product.measurement)
             product_item.quantity = product_quantity
             basket.productItems.add(product_item)
             product_item.save()
         else:
+            print('not created')
+            print(product_item.product.measurement)
             product_item.quantity = product_quantity
             product_item.save()
     return redirect('basket')
@@ -55,10 +59,7 @@ def change_qty_plus(request):
         basket = Basket.objects.get(customer=customer)
         product_item = ProductItem.objects.get(pk=request.POST.get('increment_item'))
         if product_item:
-            if product_item.product.start_quantity_kg:
-                product_item.quantity += product_item.product.start_quantity_kg
-            else:
-                product_item.quantity += product_item.product.start_quantity_item
+            product_item.quantity += product_item.product.start_quantity
             product_item.save()
         return redirect('basket')
 
@@ -69,10 +70,7 @@ def change_qty_minus(request):
         basket = Basket.objects.get(customer=customer)
         product_item = ProductItem.objects.get(pk=request.POST.get('decrement_item'))
         if product_item:
-            if product_item.product.start_quantity_kg:
-                product_item.quantity -= product_item.product.start_quantity_kg
-            else:
-                product_item.quantity -= product_item.product.start_quantity_item
+            product_item.quantity -= product_item.product.start_quantity
             if product_item.quantity <= 0:
                 product_item.delete()
             else:
