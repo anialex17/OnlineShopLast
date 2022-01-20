@@ -33,8 +33,6 @@
                                 {{ product.title }}
                             </a>
                         </div>
-
-
                         <div class="price py-2 site-color">
                             {% if product.new_price %}
                                 {% if product.start_quantity_kg %}
@@ -57,7 +55,23 @@
                                 {% endif %}
                             {% endif %}
                         </div>
-
+                        <div class="d-flex add-to-basket-block">
+                            <form action="{% url 'change_qty_minus' %}" method="post">
+                                {% csrf_token %}
+                                <input type="number" name="decrement_item" hidden value="{{ item.id }}">
+                                <button type="submit" class="btn shadow-none btn-dec flex-center mr-2 border-0 btn-dec">
+                                    <i class="fas fa-minus site-color"></i>
+                                </button>
+                            </form>
+                            <span class="mr-2 product-quantity align-middle">{{item.qty}}</span>
+                            <form action="{% url 'change_qty_plus' %}" method="post">
+                                {% csrf_token %}
+                                <input type="number" hidden name="increment_item" value="{{ item.id }}">
+                                <button type="submit" class="btn shadow-none btn-inc flex-center mr-2 border-0">
+                                    <i class="fas fa-plus site-color"></i>
+                                </button>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>

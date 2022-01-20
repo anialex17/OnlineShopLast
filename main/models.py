@@ -172,10 +172,10 @@ class Shipping(models.Model):
     order = models.ForeignKey(Order, on_delete=models.SET_NULL, null=True, verbose_name="Պատվեր")
     city = models.CharField(max_length=200, null=False, verbose_name="Քաղաք")
     address = models.CharField(max_length=200, null=False, verbose_name="Հասցե")
-    phone = models.CharField(max_length=100, verbose_name="Հերախոսահամար")
+    phone = models.CharField(max_length=100, verbose_name="Հեռախոսահամար")
     # date_time_shipping = models.DateField(verbose_name="Պատվերի օր", null=True)
-    date_shipping = models.DateField(verbose_name="Արաքման օր", null=True)
-    time_shipping = models.ForeignKey(Time_Shipping, on_delete=models.SET_NULL, null=True, verbose_name="Արաքման ժամ")
+    date_shipping = models.DateField(verbose_name="Առաքման օր", null=True)
+    time_shipping = models.ForeignKey(Time_Shipping, on_delete=models.SET_NULL, null=True, verbose_name="Առաքման ժամ")
 
     def __str__(self):
         return str(self.customer)
@@ -183,4 +183,3 @@ class Shipping(models.Model):
     class Meta:
         verbose_name = 'Առաքում'
         verbose_name_plural = 'Առաքումներ'
-        ordering = ['date_shipping']
