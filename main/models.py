@@ -23,11 +23,11 @@ class Category(models.Model):
         return self.title
 
 
-# class Measurement(models.Model):
-#     type = models.CharField(max_length=50)
-#
-#     def __str__(self):
-#         return self.type
+class Measurement(models.Model):
+    type = models.CharField(max_length=50, verbose_name='Չափման միավոր')
+
+    def __str__(self):
+        return self.type
 
 
 class Product(models.Model):
@@ -38,10 +38,10 @@ class Product(models.Model):
     description = models.TextField(verbose_name='Նկարագրություն')
     price = models.DecimalField(max_digits=10, decimal_places=0, verbose_name='Գին')
     new_price = models.DecimalField(max_digits=10, decimal_places=0, blank=True, null=True, verbose_name='Նոր գին')
-    # measurement = models.ForeignKey(Measurement, on_delete=models.SET_NULL, null=True, verbose_name='Չափման միավոր')
-    start_quantity_kg = models.DecimalField(max_digits=10, decimal_places=2, verbose_name='Սկզբնական չափ (կգ)', blank=True, null=True)
-    start_quantity_item = models.PositiveIntegerField(verbose_name='Սկզբնական չափ (հատ)', blank=True, null=True)
-    # start_quantity = models.DecimalField(default=1, max_digits=10, decimal_places=2, verbose_name='Սկզբնական չափ')
+    measurement = models.ForeignKey(Measurement, on_delete=models.SET_NULL, null=True, verbose_name='Չափման միավոր')
+    # start_quantity_kg = models.DecimalField(max_digits=10, decimal_places=2, verbose_name='Սկզբնական չափ (կգ)', blank=True, null=True)
+    # start_quantity_item = models.PositiveIntegerField(verbose_name='Սկզբնական չափ (հատ)', blank=True, null=True)
+    start_quantity = models.DecimalField(default=1, max_digits=10, decimal_places=2, verbose_name='Սկզբնական չափ')
 
     class Meta:
         verbose_name = 'Ապրանք'
@@ -99,7 +99,7 @@ class ProductItem(models.Model):
         return self.product.price * self.quantity
 
     def qty(self):
-        if self.product.start_quantity_item:
+        if self.product.start_quantity=='item':
             self.quantity=int(self.quantity)
         return self.quantity
 

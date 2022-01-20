@@ -67,6 +67,6 @@ class OrderAdmin(admin.ModelAdmin):
 
 admin.site.register(Basket)
 admin.site.register(Image)
-# admin.site.register(Measurement)
+admin.site.register(Measurement)
 admin.site.register(Time_Shipping)
 
