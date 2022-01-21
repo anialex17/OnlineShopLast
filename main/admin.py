@@ -42,7 +42,7 @@ class ProductItemInline(admin.TabularInline):
 class ShippingAdmin(admin.ModelAdmin):
     list_display = ('customer','date_shipping','time_shipping' )
     list_filter = ('customer','date_shipping', 'time_shipping')
-    readonly_fields = ('customer', 'order', 'city', 'address', 'phone', 'date_shipping', 'time_shipping')
+    readonly_fields = ('customer', 'order', 'city', 'address', 'phone', 'date_shipping', 'time_shipping', 'payment_type')
 
 
 class ShippingInline(admin.TabularInline):
@@ -62,7 +62,6 @@ class OrderAdmin(admin.ModelAdmin):
     inlines = [ShippingInline, ProductItemInline]
     exclude = ('product_items',)
     readonly_fields = ('customer','product_items','date_added', 'finale_price','delivery_cost' )
-
 
 
 admin.site.register(Basket)

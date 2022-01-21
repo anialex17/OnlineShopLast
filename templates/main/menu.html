@@ -35,11 +35,11 @@
                         </div>
                         <div class="price py-2 site-color">
                             {% if product.new_price %}
-                                <span>{{product.start_quantity}}</span>
+                                <span>{{product.start_quantity}}{{product.measurement}} -</span>
                                 <del><span>{{ product.price }}</span>{% trans 'dr' %}</del>
                                 <span class="font-weight-bold"><span id="food-price">{{ product.new_price }}</span>{% trans 'dr' %}</span>
                             {% else %}
-                                <span>{{product.start_quantity}}</span>
+                                <span>{{product.start_quantity}}{{product.measurement}} -</span>
                                 <span class="font-weight-bold"><span id="food-price">{{ product.price }}</span>{% trans 'dr' %}</span>
                             {% endif %}
                         </div>
