@@ -5,14 +5,12 @@
 <section class="menu-content py-4 divider">
 
     <div class="menu-header text-center p-3">
-        <h4>{% trans 'Lorem ipsum dolor sit.' %}</h4>
-        <p>
-            {% trans 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-            Consequuntur distinctio error, illo ipsa odit quas qui similique?
-            Minima praesentium, veritatis? Ab iusto praesentium quis soluta.
-            Cumque eum id nihil numquam.' %}
-
-        </p>
+        <h1 class="header site-color">{% trans 'Fruits' %}</h1>
+            <p class="header-text text-center mt-5 mb-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                Consequuntur distinctio error, illo ipsa odit quas qui similique?
+                Minima praesentium, veritatis? Ab iusto praesentium quis soluta.
+                Cumque eum id nihil numquam.
+            </p>
     </div>
     <!--End of menu-header-->
 
@@ -23,10 +21,12 @@
 
             <div class="col-md-6 py-4">
                 <div class="d-flex food-container">
-                    <a href="{% url 'product' product.category.url product.url %}" class="food-img">
-                        <img src="{{ product.image.url }}" alt="" class="img">
-                    </a>
-                    <div class="food-block pl-sm-3">
+                    <div class="food-img">
+                        <a href="{% url 'product' product.category.url product.url %}">
+                            <img src="{{ product.image.url }}" alt="" class="img">
+                        </a>
+                    </div>
+                    <div class="food-block pl-sm-4">
                         <div class="food-info d-flex justify-content-between pb-2">
                             <a href="{% url 'product' product.category.url product.url %}"
                                class="food-name font-weight-bold">
@@ -35,29 +35,36 @@
                         </div>
                         <div class="price py-2 site-color">
                             {% if product.new_price %}
-                                <span>{{product.start_quantity}}</span>
-                                <del><span>{{ product.price }}</span>{% trans 'dr' %}</del>
-                                <span class="font-weight-bold"><span id="food-price">{{ product.new_price }}</span>{% trans 'dr' %}</span>
+                                <span class="category-product-price"><span id="food-price">{{ product.new_price }}</span>{% trans 'dr' %}</span>
+                                <del><span class="category-product-discount">{{ product.price }}</span>{% trans 'dr' %}</del>
+                                <span class="category-product-quantity">{{product.start_quantity}}{{product.measurement}}</span>
                             {% else %}
-                                <span>{{product.start_quantity}}</span>
-                                <span class="font-weight-bold"><span id="food-price">{{ product.price }}</span>{% trans 'dr' %}</span>
+                                <span class="category-product-price"><span id="food-price">{{ product.price }}</span>{% trans 'dr' %}</span>
+                                <span class="category-product-quantity">{{product.start_quantity}}</span>
                             {% endif %}
                         </div>
-                        <div class="d-flex add-to-basket-block">
-                            <form action="{% url 'change_qty_minus' %}" method="post">
+                        <div class="add-to-basket-block">
+                            <form class="product-form js-product-form" data-login="{% if user.is_authenticated %}is_active{% endif %}" action="{% url 'add_to_basket' %}" method="post">
                                 {% csrf_token %}
-                                <input type="number" name="decrement_item" hidden value="{{ item.id }}">
-                                <button type="submit" class="btn shadow-none btn-dec flex-center mr-2 border-0 btn-dec">
-                                    <i class="fas fa-minus site-color"></i>
-                                </button>
-                            </form>
-                            <span class="mr-2 product-quantity align-middle">{{item.qty}}</span>
-                            <form action="{% url 'change_qty_plus' %}" method="post">
-                                {% csrf_token %}
-                                <input type="number" hidden name="increment_item" value="{{ item.id }}">
-                                <button type="submit" class="btn shadow-none btn-inc flex-center mr-2 border-0">
-                                    <i class="fas fa-plus site-color"></i>
-                                </button>
+
+                                <div class="add-to-basket-block d-flex py-3">
+                                    <div class="d-flex">
+                                        <button type="button" class="btn shadow-none btn-dec flex-center mr-2 js-btn-inc">
+                                            <i class="fas fa-minus site-color"></i>
+                                        </button>
+                                        <h2 id="counter-label" class="mr-2">
+                                            <input type="text" value="1" class="product-quantity" name="product_quantity">
+                                        </h2>
+                                        <button type="button" class="btn shadow-none btn-inc flex-center mr-2 js-btn-dec">
+                                            <i class="fas fa-plus site-color"></i>
+                                        </button>
+
+                                        <input type="text" hidden name="product_url" value="{{ product_item.url }}">
+                                    </div>
+                                    <button type="submit" class="btn shadow-none add-to-basket-btn" data-toggle="modal" data-target="#add-to-basket">
+                                        <span>{% trans 'Add to Basket' %}</span>
+                                    </button>
+                                </div>
                             </form>
                         </div>
                     </div>

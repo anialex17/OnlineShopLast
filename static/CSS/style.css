@@ -357,10 +357,15 @@ body {
     flex-direction: column;
     line-height: 1.3;
 }
-
-.menu-content .food-img {
-    max-width: 30%;
-    height: 120px;
+.category-product-price {
+    font-size: 28px;
+    font-weight: 500;
+}
+.category-product-discount {
+    font-size: 20px;
+}
+.category-product-quantity {
+    font-size: 22px;
 }
 
 .menu-content .food-info {
@@ -383,6 +388,87 @@ body {
     color: white;
     font-size: 14px;
     line-height: 1.5;
+}
+.menu-content .add-to-basket-block .btn-dec,
+.menu-content .add-to-basket-block .btn-inc {
+    color: #6c757d;
+    border-radius: 0;
+    width: 39px;
+    height: 39px;
+    font-size: 20px;
+    background-color: #f8f9fa;
+    text-align: center;
+}
+
+.menu-content .add-to-basket-block input {
+    color: #6c757d;
+    width: 40px;
+    height: 40px;
+    font-size: 30px;
+    font-weight: 500;
+    background-color: #f8f9fa;
+    text-align: center;
+}
+
+.menu-content .add-to-basket-btn {
+    background-image: linear-gradient(#d50c0d 0.61%, #a10809 99.56%);
+    box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.1)!important;
+    font-weight: bold;
+    color: white;
+    transition: 0.3s;
+    border-radius: 0.3rem;
+    width: 130px;
+    border: transparent;
+    height: 40px;
+}
+
+.menu-content .add-to-basket-btn:hover,
+.menu-content .add-to-basket-btn:focus {
+    background-image: linear-gradient(#e60203 0.61%, #910001 99.56%);
+}
+.menu-content .food-container {
+    background: #00000080;
+    padding: 20px;
+}
+
+.menu-content .food-container img {
+    object-fit: contain;
+}
+.menu-content .product-quantity {
+    box-shadow: 0px 0px 4px 1px rgb(133 136 139 / 20%) inset;
+    border: 1px solid #c0c2c4;
+}
+.menu-content .food-img {
+    max-width: 175px;
+    width: 100%;
+    height: 175px;
+    background: #FFFFFF;
+}
+.menu-content .header {
+    font-family: 'Great Vibes', cursive, sans-serif;
+    font-weight: bold;
+    position: relative;
+}
+.menu-content .menu-header .header:before {
+    background: #e54c2a none repeat scroll 0 0;
+    position: absolute;
+    left: 50%;
+    bottom: -20px;
+    content: "";
+    width: 138px;
+    height: 1px;
+    transform: translate(-50%, 0);
+}
+
+.menu-content .menu-header .header:after {
+    background: #f8f9fa url(./../Images/icons/title.png) no-repeat scroll center center;
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    content: "";
+    width: 42px;
+    height: 30px;
+    transform: translate(-50%, 0%);
 }
 
 /* End of Menu Page */
@@ -417,6 +503,7 @@ body {
     max-width: 350px;
     width: 100%;
     height: 350px;
+    background: #FFFFFF;
 }
 
 .product-content .price {
@@ -510,25 +597,27 @@ body {
 
 /* Gallery Page */
 
-.gallery-content .icon-line {
+.gallery-content .header-block .header {
     position: relative;
+    font-family: 'Great Vibes', cursive, sans-serif;
+    font-weight: bold;
 }
 
-.gallery-content .icon-line:before {
+.gallery-content .header-block .header:before {
     background: #e54c2a none repeat scroll 0 0;
     position: absolute;
     left: 50%;
-    bottom: 25px;
+    bottom: -20px;
     content: "";
     width: 138px;
     height: 1px;
     transform: translate(-50%, 0);
 }
 
-.gallery-content .icon-line:after {
+.gallery-content .header-block .header:after {
     background: #f8f9fa url(./../Images/icons/title.png) no-repeat scroll center center;
     position: absolute;
-    top: -45px;
+    top: 100%;
     left: 50%;
     content: "";
     width: 42px;
@@ -653,7 +742,7 @@ body {
     border: none;
 }
 .basket-content .product-quantity {
-    width: 50px;
+    width: 75px;
     height: 40px;
     text-align: center;
     box-shadow: 0px 0px 4px 1px rgba(133, 136, 139, 0.2) inset;
@@ -887,10 +976,31 @@ body {
     padding: 20px 0 20px 0;
 }
 
-.about-us-content .header {
-    font-size: 40px;
+.about-us-content .about-us-header-part .header {
     font-weight: bold;
     font-family: 'Great Vibes', cursive, sans-serif;
+    position: relative;
+}
+.about-us-content .about-us-header-part .header:before {
+    background: #e54c2a none repeat scroll 0 0;
+    position: absolute;
+    left: 50%;
+    bottom: -20px;
+    content: "";
+    width: 138px;
+    height: 1px;
+    transform: translate(-50%, 0);
+}
+
+.about-us-content .about-us-header-part .header:after {
+    background: #f8f9fa url(./../Images/icons/title.png) no-repeat scroll center center;
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    content: "";
+    width: 42px;
+    height: 30px;
+    transform: translate(-50%, 0%);
 }
 .about-us-img {
     max-width: 100%;
@@ -912,6 +1022,10 @@ body {
 .order-content .cards-img {
     max-width: 200px;
     height: 40px;
+}
+.order-content .container .header {
+    font-family: 'Great Vibes', cursive, sans-serif;
+    font-weight: bold;
 }
 
 /* End of How to Order */
