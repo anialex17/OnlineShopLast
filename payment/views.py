@@ -7,3 +7,6 @@ def success(request):
 
 def fail(request):
     return render(request, 'basket/fail.html')
+
+def payment(request):
+    return render(request, 'basket/payment.html')

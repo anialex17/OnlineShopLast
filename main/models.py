@@ -29,6 +29,9 @@ class Measurement(models.Model):
     def __str__(self):
         return self.type
 
+    class Meta:
+        verbose_name = 'Չափման միավոր'
+        verbose_name_plural = 'Չափման միավորներ'
 
 class Product(models.Model):
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, verbose_name='Կատեգորիա', null=True, blank=True)
@@ -141,11 +144,25 @@ class Basket(models.Model):
 
 
 class Order(models.Model):
+
+    STATUS_CHOICES = (
+        ('STATUS_NEW', 'Նոր պատվեր'),
+        ('STATUS_READY', 'Պատվերը պատրաստ է'),
+        ('STATUS_COMPLETED', 'Պատվերը առաքված է'),
+    )
+
+    # PAYMENT_TYPE_CHOICES = (
+    #     ('TYPE_PAYMENT_CASH', 'Կանխիկ'),
+    #     ('TYPE_PAYMENT_NON_CASH', 'Անկանխիկ')
+    # )
+
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE, verbose_name="Պատվեր կատարող")
     product_items = models.ManyToManyField(ProductItem, verbose_name="Պատվերի ապրանքներ")
     date_added = models.DateTimeField(auto_now_add=True, verbose_name="Ավելացվել է", null=True)
     finale_price = models.PositiveIntegerField(default=0, verbose_name="Ընդհանուր գումար")
     delivery_cost = models.PositiveIntegerField(default=0, verbose_name="Առաքման արժեք")
+    status = models.CharField(max_length=100, choices=STATUS_CHOICES, default='STATUS_NEW')
+    # payment_type = models.CharField(max_length=100, choices=PAYMENT_TYPE_CHOICES, null=True)
 
     def __str__(self):
         return str(self.customer.user.first_name)
@@ -163,19 +180,38 @@ class Time_Shipping(models.Model):
         return self.time_shipping
 
     class Meta:
-        verbose_name = 'Արաքման ժամ'
-        verbose_name_plural = 'Արաքման ժամեր'
+        verbose_name = 'Առաքման ժամ'
+        verbose_name_plural = 'Առաքման ժամեր'
+
+
+# class Payment_Type(models.Model):
+#
+#     type = models.CharField(max_length=100, verbose_name="Վաճարման տարբերակ")
+#     icon = models.ImageField(upload_to='media/payment_icon', null=True, blank=True)
+#     button = models.BooleanField(default=False)
+#
+#     def __str__(self):
+#         return self.type
+#
+#     class Meta:
+#         verbose_name = 'Վաճարման տարբերակ'
+#         verbose_name_plural = 'Վաճարման տարբերակներ'
 
 
 class Shipping(models.Model):
+    PAYMENT_TYPE_CHOICES = (
+        ('TYPE_PAYMENT_CASH', 'Կանխիկ'),
+        ('TYPE_PAYMENT_NON_CASH', 'Անկանխիկ')
+    )
     customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, null=True, verbose_name="Պատվիրատու")
     order = models.ForeignKey(Order, on_delete=models.SET_NULL, null=True, verbose_name="Պատվեր")
+    time_shipping = models.ForeignKey(Time_Shipping, on_delete=models.SET_NULL, null=True, verbose_name="Առաքման ժամ")
     city = models.CharField(max_length=200, null=False, verbose_name="Քաղաք")
     address = models.CharField(max_length=200, null=False, verbose_name="Հասցե")
     phone = models.CharField(max_length=100, verbose_name="Հեռախոսահամար")
     # date_time_shipping = models.DateField(verbose_name="Պատվերի օր", null=True)
     date_shipping = models.DateField(verbose_name="Առաքման օր", null=True)
-    time_shipping = models.ForeignKey(Time_Shipping, on_delete=models.SET_NULL, null=True, verbose_name="Առաքման ժամ")
+    payment_type = models.CharField(max_length=100, choices=PAYMENT_TYPE_CHOICES, null=True)
 
     def __str__(self):
         return str(self.customer)

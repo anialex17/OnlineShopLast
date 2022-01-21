@@ -90,11 +90,18 @@ def order(request):
                 order = Order.objects.create(customer=customer, finale_price=basket.finale_price(), delivery_cost=500)
             for item in basket.productItems.all():
                 order.product_items.add(item)
-            Shipping.objects.create(**form.cleaned_data, customer=customer, order=order)
-        return redirect('home')
+            shipping=Shipping.objects.create(**form.cleaned_data, customer=customer, order=order)
+            print(shipping.payment_type)
+            if shipping.payment_type=='TYPE_PAYMENT_NON_CASH':
+                return redirect('basket')
+            elif shipping.payment_type=='TYPE_PAYMENT_CASH':
+                return redirect('home')
     else:
         form = ShippingForm()
     return render(request, 'basket/order.html', {'form':form})
+
+
+
 
 # def order(request):
 #     context = {}
