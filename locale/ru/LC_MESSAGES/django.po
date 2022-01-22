@@ -1,0 +1,421 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-01-22 12:42+0400\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n"
+"%100>=11 && n%100<=14)? 2 : 3);\n"
+
+#: templates/basket/basket.html:15
+msgid "My Basket"
+msgstr ""
+
+#: templates/basket/basket.html:21
+msgid "Image"
+msgstr ""
+
+#: templates/basket/basket.html:22
+msgid "Name"
+msgstr ""
+
+#: templates/basket/basket.html:23
+msgid "Price"
+msgstr ""
+
+#: templates/basket/basket.html:24
+msgid "Quantity"
+msgstr ""
+
+#: templates/basket/basket.html:25
+msgid "Total"
+msgstr ""
+
+#: templates/basket/basket.html:26 templates/basket/basket.html:77
+msgid "Delete"
+msgstr ""
+
+#: templates/basket/basket.html:42
+msgid "Product name"
+msgstr ""
+
+#: templates/basket/basket.html:47
+msgid "Food Price"
+msgstr ""
+
+#: templates/basket/basket.html:49 templates/basket/basket.html:74
+#: templates/basket/basket.html:129 templates/basket/basket.html:135
+msgid "amd"
+msgstr ""
+
+#: templates/basket/basket.html:52
+msgid "Product Quantity"
+msgstr ""
+
+#: templates/basket/basket.html:72
+msgid "Total Price"
+msgstr ""
+
+#: templates/basket/basket.html:107
+msgid "Continue Ordering"
+msgstr ""
+
+#: templates/basket/basket.html:111 templates/basket/basket.html:118
+#: templates/basket/basket.html:120
+msgid "Order"
+msgstr ""
+
+#: templates/basket/basket.html:127
+msgid "Shipping Price"
+msgstr ""
+
+#: templates/basket/basket.html:133
+msgid "Total Price "
+msgstr ""
+
+#: templates/include/footer.html:15
+msgid "General Terms and Conditions"
+msgstr ""
+
+#: templates/include/footer.html:20
+msgid "How to order"
+msgstr ""
+
+#: templates/include/footer.html:25 templates/pages/contact.html:26
+#: templates/pages/contact.html:44 templates/pages/contact.html:138
+msgid "Email"
+msgstr ""
+
+#: templates/include/footer.html:26
+msgid "Phone"
+msgstr ""
+
+#: templates/include/header.html:16
+msgid "HOME"
+msgstr ""
+
+#: templates/include/header.html:20
+msgid "ORDER"
+msgstr ""
+
+#: templates/include/header.html:24
+msgid "GALLERY"
+msgstr ""
+
+#: templates/include/header.html:28
+msgid "CONTACT"
+msgstr ""
+
+#: templates/include/header.html:42
+msgid "Logout"
+msgstr ""
+
+#: templates/include/header.html:48
+msgid "SIGN IN"
+msgstr ""
+
+#: templates/include/header.html:60
+msgid "Basket"
+msgstr ""
+
+#: templates/include/header.html:109 templates/include/header.html:135
+msgid "Sign In"
+msgstr ""
+
+#: templates/include/header.html:111 templates/include/header.html:151
+msgid "Register"
+msgstr ""
+
+#: templates/main/customer.html:11
+msgid "Personal information"
+msgstr ""
+
+#: templates/main/customer.html:12
+msgid "You can change your personal information"
+msgstr ""
+
+#: templates/main/customer.html:25
+msgid "Confirm"
+msgstr ""
+
+#: templates/main/customer.html:32
+msgid "My orders"
+msgstr ""
+
+#: templates/main/customer.html:47
+msgid "item"
+msgstr ""
+
+#: templates/main/home.html:11
+msgid "Our Menu"
+msgstr ""
+
+#: templates/main/menu.html:8
+msgid "Fruits"
+msgstr ""
+
+#: templates/main/menu.html:38 templates/main/menu.html:39
+#: templates/main/menu.html:42 templates/main/product.html:27
+#: templates/main/product.html:28 templates/main/product.html:30
+msgid "dr"
+msgstr ""
+
+#: templates/main/menu.html:65 templates/main/product.html:57
+msgid "Add to Basket"
+msgstr ""
+
+#: templates/main/password_change.html:5 templates/main/password_change.html:15
+msgid "Change Password"
+msgstr ""
+
+#: templates/main/password_success.html:5
+msgid "Password Update"
+msgstr ""
+
+#: templates/main/password_success.html:14
+msgid "Your Password was changed successfull"
+msgstr ""
+
+#: templates/main/product.html:12
+msgid "Food Details"
+msgstr ""
+
+#: templates/main/product.html:39
+msgid "Food Type"
+msgstr ""
+
+#: templates/main/product.html:67
+msgid "Similar Dishes"
+msgstr ""
+
+#: templates/pages/contact.html:11
+msgid "Contact"
+msgstr ""
+
+#: templates/pages/contact.html:16
+msgid "For customers"
+msgstr ""
+
+#: templates/pages/contact.html:24
+msgid "Help"
+msgstr ""
+
+#: templates/pages/contact.html:30
+msgid "Hot line"
+msgstr ""
+
+#: templates/pages/contact.html:42
+msgid "Payment issues"
+msgstr ""
+
+#: templates/pages/contact.html:48
+msgid "Response time: 1 working day"
+msgstr ""
+
+#: templates/pages/contact.html:61
+msgid "Write us a message"
+msgstr ""
+
+#: templates/pages/contact.html:62
+msgid "We are always ready to answer your questions"
+msgstr ""
+
+#: templates/pages/contact.html:105
+msgid "Send"
+msgstr ""
+
+#: templates/pages/contact.html:117
+msgid "Head Office Address and Contacts"
+msgstr ""
+
+#: templates/pages/contact.html:122
+msgid " Hot line"
+msgstr ""
+
+#: templates/pages/contact.html:123
+msgid "for orders only"
+msgstr ""
+
+#: templates/pages/contact.html:127
+msgid "Address"
+msgstr ""
+
+#: templates/pages/contact.html:132
+msgid "Phone number"
+msgstr ""
+
+#: templates/pages/order.html:11
+msgid "How to order?"
+msgstr ""
+
+#: templates/pages/order.html:15
+msgid "Fill in your address where to ship"
+msgstr ""
+
+#: templates/pages/order.html:18
+msgid ""
+"Choose your favorite dish or product from many restaurants և specialty stores"
+msgstr ""
+
+#: templates/pages/order.html:21
+msgid "Place an online order through the website or meat.am mobile application"
+msgstr ""
+
+#: templates/pages/order.html:24
+msgid "Choose the payment method"
+msgstr ""
+
+#: templates/pages/order.html:26
+msgid "Payment on the spot after delivery"
+msgstr ""
+
+#: templates/pages/order.html:27
+msgid "Credit card with website or mobile application"
+msgstr ""
+
+#: templates/pages/order.html:33
+msgid "through payment systems"
+msgstr ""
+
+#: templates/pages/order.html:38
+msgid "Open the door, we are already on the threshold"
+msgstr ""
+
+#: templates/pages/order.html:41
+msgid "How long does it take to deliver?"
+msgstr ""
+
+#: templates/pages/order.html:49
+msgid "How much does shipping cost?"
+msgstr ""
+
+#: templates/pages/order.html:51
+msgid "Shipping cost varies depending on"
+msgstr ""
+
+#: templates/pages/order.html:54
+msgid "distance from the food point / specialty և customer"
+msgstr ""
+
+#: templates/pages/order.html:55
+msgid "How many food outlets / specialty stores deliver?"
+msgstr ""
+
+#: templates/pages/order.html:56
+msgid "weather conditions"
+msgstr ""
+
+#: templates/pages/order.html:57
+msgid "due to traffic congestion."
+msgstr ""
+
+#: templates/pages/order.html:60
+msgid ""
+"You can see the cost of delivery at the moment in the data on the item page"
+msgstr ""
+
+#: templates/pages/order.html:66
+msgid "Distance:"
+msgstr ""
+
+#: templates/pages/order.html:67
+msgid "Order from 1 point"
+msgstr ""
+
+#: templates/pages/order.html:68
+msgid "order from each of the following items"
+msgstr ""
+
+#: templates/pages/order.html:73
+msgid "up to 3 km"
+msgstr ""
+
+#: templates/pages/order.html:74
+msgid "400 dram"
+msgstr ""
+
+#: templates/pages/order.html:75
+msgid "400 drams each"
+msgstr ""
+
+#: templates/pages/order.html:78
+msgid "3,01 – 5km"
+msgstr ""
+
+#: templates/pages/order.html:79
+msgid "600 dram"
+msgstr ""
+
+#: templates/pages/order.html:80
+msgid "600 drams each"
+msgstr ""
+
+#: templates/pages/order.html:83
+msgid "5,01 - 7km"
+msgstr ""
+
+#: templates/pages/order.html:84
+msgid "800 dram"
+msgstr ""
+
+#: templates/pages/order.html:85
+msgid "800-drams each"
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/views/templates/default_urlconf.html:7
+#: venv/lib/python3.8/site-packages/django/views/templates/default_urlconf.html:221
+msgid "The install worked successfully! Congratulations!"
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/views/templates/default_urlconf.html:207
+#, python-format
+msgid ""
+"View <a href=\"https://docs.djangoproject.com/en/%(version)s/releases/\" "
+"target=\"_blank\" rel=\"noopener\">release notes</a> for Django %(version)s"
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/views/templates/default_urlconf.html:222
+#, python-format
+msgid ""
+"You are seeing this page because <a href=\"https://docs.djangoproject.com/en/"
+"%(version)s/ref/settings/#debug\" target=\"_blank\" rel=\"noopener"
+"\">DEBUG=True</a> is in your settings file and you have not configured any "
+"URLs."
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/views/templates/default_urlconf.html:230
+msgid "Django Documentation"
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/views/templates/default_urlconf.html:231
+msgid "Topics, references, &amp; how-to’s"
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/views/templates/default_urlconf.html:239
+msgid "Tutorial: A Polling App"
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/views/templates/default_urlconf.html:240
+msgid "Get started with Django"
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/views/templates/default_urlconf.html:248
+msgid "Django Community"
+msgstr ""
+
+#: venv/lib/python3.8/site-packages/django/views/templates/default_urlconf.html:249
+msgid "Connect, get help, or contribute"
+msgstr ""
