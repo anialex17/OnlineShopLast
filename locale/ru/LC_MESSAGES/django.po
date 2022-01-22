@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-01-22 12:42+0400\n"
+"POT-Creation-Date: 2022-01-22 17:38+0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -22,293 +22,344 @@ msgstr ""
 
 #: templates/basket/basket.html:15
 msgid "My Basket"
-msgstr ""
+msgstr "Корзина"
 
 #: templates/basket/basket.html:21
 msgid "Image"
-msgstr ""
+msgstr "Изображение"
 
 #: templates/basket/basket.html:22
 msgid "Name"
-msgstr ""
+msgstr "Название"
 
 #: templates/basket/basket.html:23
 msgid "Price"
-msgstr ""
+msgstr "Цена"
 
 #: templates/basket/basket.html:24
 msgid "Quantity"
-msgstr ""
+msgstr "Количество"
 
 #: templates/basket/basket.html:25
 msgid "Total"
-msgstr ""
+msgstr "Итого"
 
 #: templates/basket/basket.html:26 templates/basket/basket.html:77
 msgid "Delete"
-msgstr ""
+msgstr "Удалить"
 
 #: templates/basket/basket.html:42
 msgid "Product name"
-msgstr ""
+msgstr "Название продукта"
 
 #: templates/basket/basket.html:47
 msgid "Food Price"
-msgstr ""
+msgstr "Цена продукта"
 
 #: templates/basket/basket.html:49 templates/basket/basket.html:74
 #: templates/basket/basket.html:129 templates/basket/basket.html:135
 msgid "amd"
-msgstr ""
+msgstr "драм"
 
 #: templates/basket/basket.html:52
 msgid "Product Quantity"
-msgstr ""
+msgstr "Количество"
 
 #: templates/basket/basket.html:72
 msgid "Total Price"
-msgstr ""
+msgstr "Итоговая цена"
+
+#: templates/basket/basket.html:99
+msgid "Delivery"
+msgstr "Доставка"
+
+#: templates/basket/basket.html:103
+msgid "Free delivery in case of"
+msgstr "Бесплатная доставка в случае"
+
+#: templates/basket/basket.html:103
+msgid "dr and over."
+msgstr "драм и больше"
 
 #: templates/basket/basket.html:107
 msgid "Continue Ordering"
-msgstr ""
+msgstr "Продолжить покупки"
 
-#: templates/basket/basket.html:111 templates/basket/basket.html:118
-#: templates/basket/basket.html:120
+#: templates/basket/basket.html:111 templates/basket/basket.html:114
+#: templates/basket/basket.html:117 templates/basket/basket.html:118
+#: templates/basket/basket.html:120 templates/basket/order.html:67
 msgid "Order"
-msgstr ""
+msgstr "Заказать"
 
 #: templates/basket/basket.html:127
 msgid "Shipping Price"
-msgstr ""
+msgstr "Цена доставки"
 
 #: templates/basket/basket.html:133
 msgid "Total Price "
-msgstr ""
+msgstr "Итоговая цена"
+
+#: templates/basket/order.html:16
+msgid "City"
+msgstr "Город"
+
+#: templates/basket/order.html:24 templates/pages/contact.html:127
+msgid "Address"
+msgstr "Адрес"
+
+#: templates/basket/order.html:32 templates/pages/contact.html:132
+msgid "Phone number"
+msgstr "Номер телефона"
+
+#: templates/basket/order.html:40
+msgid "Date"
+msgstr "Дата"
+
+#: templates/basket/order.html:48
+#, fuzzy
+#| msgid "Delivery"
+msgid "Delivery time"
+msgstr "Время доставки"
+
+#: templates/basket/order.html:56
+#, fuzzy
+#| msgid "Choose the payment method"
+msgid "Payment method"
+msgstr "Выберите метод оплаты"
 
 #: templates/include/footer.html:15
 msgid "General Terms and Conditions"
-msgstr ""
+msgstr "Общие положения и условия"
 
 #: templates/include/footer.html:20
 msgid "How to order"
-msgstr ""
+msgstr "Как заказать"
 
 #: templates/include/footer.html:25 templates/pages/contact.html:26
 #: templates/pages/contact.html:44 templates/pages/contact.html:138
 msgid "Email"
-msgstr ""
+msgstr "Email"
 
 #: templates/include/footer.html:26
 msgid "Phone"
-msgstr ""
+msgstr "Номер телефона"
 
 #: templates/include/header.html:16
 msgid "HOME"
-msgstr ""
+msgstr "ГЛАВНАЯ"
 
 #: templates/include/header.html:20
 msgid "ORDER"
-msgstr ""
+msgstr "ЗАКАЗ"
 
 #: templates/include/header.html:24
 msgid "GALLERY"
-msgstr ""
+msgstr "ГАЛЕРЕЯ"
 
 #: templates/include/header.html:28
 msgid "CONTACT"
-msgstr ""
+msgstr "ОБРАТНАЯ СВЯЗЬ"
+
+#: templates/include/header.html:32
+msgid "ABOUT US"
+msgstr "О НАС"
 
 #: templates/include/header.html:42
 msgid "Logout"
-msgstr ""
+msgstr "Выйти"
 
 #: templates/include/header.html:48
 msgid "SIGN IN"
-msgstr ""
+msgstr "Войти"
 
 #: templates/include/header.html:60
 msgid "Basket"
-msgstr ""
+msgstr "Корзина"
 
-#: templates/include/header.html:109 templates/include/header.html:135
+#: templates/include/header.html:109 templates/include/header.html:129
 msgid "Sign In"
-msgstr ""
+msgstr "Войти"
 
-#: templates/include/header.html:111 templates/include/header.html:151
+#: templates/include/header.html:111 templates/include/header.html:144
 msgid "Register"
-msgstr ""
+msgstr "Регистрация"
 
 #: templates/main/customer.html:11
 msgid "Personal information"
-msgstr ""
+msgstr "Личная информация"
 
 #: templates/main/customer.html:12
 msgid "You can change your personal information"
-msgstr ""
+msgstr "Вы можете изменить личную информацию"
 
-#: templates/main/customer.html:25
+#: templates/main/customer.html:34 templates/main/customer.html:53
 msgid "Confirm"
-msgstr ""
+msgstr "Подтвердить"
 
-#: templates/main/customer.html:32
+#: templates/main/customer.html:41
+msgid "Username"
+msgstr "Имя пользователя"
+
+#: templates/main/customer.html:45
+#, fuzzy
+#| msgid "Name"
+msgid "Last Name"
+msgstr "Название"
+
+#: templates/main/customer.html:49
+msgid "First Name"
+msgstr "Имя"
+
+#: templates/main/customer.html:58 templates/main/password_change.html:5
+#: templates/main/password_change.html:15
+msgid "Change Password"
+msgstr "Изменить пароль"
+
+#: templates/main/customer.html:62
 msgid "My orders"
-msgstr ""
-
-#: templates/main/customer.html:47
-msgid "item"
-msgstr ""
+msgstr "Мои заказы"
 
 #: templates/main/home.html:11
 msgid "Our Menu"
-msgstr ""
+msgstr "Категория"
 
-#: templates/main/menu.html:8
-msgid "Fruits"
-msgstr ""
-
-#: templates/main/menu.html:38 templates/main/menu.html:39
-#: templates/main/menu.html:42 templates/main/product.html:27
+#: templates/main/menu.html:42 templates/main/menu.html:43
+#: templates/main/menu.html:46 templates/main/product.html:27
 #: templates/main/product.html:28 templates/main/product.html:30
 msgid "dr"
-msgstr ""
+msgstr "др"
 
-#: templates/main/menu.html:65 templates/main/product.html:57
+#: templates/main/menu.html:69 templates/main/product.html:57
 msgid "Add to Basket"
-msgstr ""
-
-#: templates/main/password_change.html:5 templates/main/password_change.html:15
-msgid "Change Password"
-msgstr ""
+msgstr "В корзину"
 
 #: templates/main/password_success.html:5
 msgid "Password Update"
-msgstr ""
+msgstr "Обновление пароля"
 
 #: templates/main/password_success.html:14
 msgid "Your Password was changed successfull"
-msgstr ""
+msgstr "Ваш пароль был успешно изменен"
 
 #: templates/main/product.html:12
 msgid "Food Details"
-msgstr ""
+msgstr "Описание товара"
 
 #: templates/main/product.html:39
 msgid "Food Type"
-msgstr ""
+msgstr "Тип товара"
 
 #: templates/main/product.html:67
 msgid "Similar Dishes"
-msgstr ""
+msgstr "Похожие товары"
+
+#: templates/pages/about-us.html:11
+msgid "About Vitamix"
+msgstr "О Vitamix"
 
 #: templates/pages/contact.html:11
 msgid "Contact"
-msgstr ""
+msgstr "Связь"
 
 #: templates/pages/contact.html:16
 msgid "For customers"
-msgstr ""
+msgstr "Для покупателей"
 
 #: templates/pages/contact.html:24
 msgid "Help"
-msgstr ""
+msgstr "Помощь"
 
 #: templates/pages/contact.html:30
 msgid "Hot line"
-msgstr ""
+msgstr "Горячая линия"
 
 #: templates/pages/contact.html:42
 msgid "Payment issues"
-msgstr ""
+msgstr "Способы оплаты"
 
 #: templates/pages/contact.html:48
 msgid "Response time: 1 working day"
-msgstr ""
+msgstr "Время отклика: 1 рабочий день"
 
 #: templates/pages/contact.html:61
 msgid "Write us a message"
-msgstr ""
+msgstr "Написать нам сообщение"
 
 #: templates/pages/contact.html:62
 msgid "We are always ready to answer your questions"
-msgstr ""
+msgstr "Мы всегда готовы ответить на Ваши вопросы"
 
 #: templates/pages/contact.html:105
 msgid "Send"
-msgstr ""
+msgstr "Отправить"
 
 #: templates/pages/contact.html:117
 msgid "Head Office Address and Contacts"
-msgstr ""
+msgstr "Адрес головного офиса и контакты"
 
 #: templates/pages/contact.html:122
 msgid " Hot line"
-msgstr ""
+msgstr "Горячая линия"
 
 #: templates/pages/contact.html:123
 msgid "for orders only"
-msgstr ""
+msgstr "только для заказов"
 
-#: templates/pages/contact.html:127
-msgid "Address"
-msgstr ""
-
-#: templates/pages/contact.html:132
-msgid "Phone number"
-msgstr ""
+#: templates/pages/gallery.html:17
+msgid "Gallery"
+msgstr "Галерея"
 
 #: templates/pages/order.html:11
 msgid "How to order?"
-msgstr ""
+msgstr "Как заказать?"
 
 #: templates/pages/order.html:15
 msgid "Fill in your address where to ship"
-msgstr ""
+msgstr "Заполните ваш адрес для доставки"
 
 #: templates/pages/order.html:18
-msgid ""
-"Choose your favorite dish or product from many restaurants և specialty stores"
-msgstr ""
+msgid "Choose your favorite dish or product from many restaurants և specialty stores"
+msgstr "Выберите ваше любимое блюдо или товар из множеств ресторанов или магазинов"
 
 #: templates/pages/order.html:21
 msgid "Place an online order through the website or meat.am mobile application"
-msgstr ""
+msgstr "Оформить заказ через веб-сайт или мобильное приложение"
 
 #: templates/pages/order.html:24
 msgid "Choose the payment method"
-msgstr ""
+msgstr "Выберите метод оплаты"
 
 #: templates/pages/order.html:26
 msgid "Payment on the spot after delivery"
-msgstr ""
+msgstr "Оплата по факту доставки"
 
 #: templates/pages/order.html:27
 msgid "Credit card with website or mobile application"
-msgstr ""
+msgstr "Кредитной картой через сайт или приложение"
 
 #: templates/pages/order.html:33
 msgid "through payment systems"
-msgstr ""
+msgstr "через платежные системы"
 
 #: templates/pages/order.html:38
 msgid "Open the door, we are already on the threshold"
-msgstr ""
+msgstr "Откройте дверь, мы уже подъезжаем"
 
 #: templates/pages/order.html:41
 msgid "How long does it take to deliver?"
-msgstr ""
+msgstr "Как долго длится доставка"
 
 #: templates/pages/order.html:49
 msgid "How much does shipping cost?"
-msgstr ""
+msgstr "Сколько стоит доставка"
 
 #: templates/pages/order.html:51
 msgid "Shipping cost varies depending on"
-msgstr ""
+msgstr "Цена доставки зависит от"
 
 #: templates/pages/order.html:54
 msgid "distance from the food point / specialty և customer"
-msgstr ""
+msgstr "расстояние от точки / "
 
 #: templates/pages/order.html:55
 msgid "How many food outlets / specialty stores deliver?"
@@ -316,64 +367,64 @@ msgstr ""
 
 #: templates/pages/order.html:56
 msgid "weather conditions"
-msgstr ""
+msgstr "погодные условия"
 
 #: templates/pages/order.html:57
 msgid "due to traffic congestion."
-msgstr ""
+msgstr "состояние трафика на дорогах"
 
 #: templates/pages/order.html:60
 msgid ""
 "You can see the cost of delivery at the moment in the data on the item page"
-msgstr ""
+msgstr "Вы можете увидеть стоимость доставки в момент оплаты на странице"
 
 #: templates/pages/order.html:66
 msgid "Distance:"
-msgstr ""
+msgstr "Расстояние:"
 
 #: templates/pages/order.html:67
 msgid "Order from 1 point"
-msgstr ""
+msgstr "Заказ от 1 единицы"
 
 #: templates/pages/order.html:68
 msgid "order from each of the following items"
-msgstr ""
+msgstr "заказать каждый из следующих товаров"
 
 #: templates/pages/order.html:73
 msgid "up to 3 km"
-msgstr ""
+msgstr "до 3-х км"
 
 #: templates/pages/order.html:74
 msgid "400 dram"
-msgstr ""
+msgstr "400 драм"
 
 #: templates/pages/order.html:75
 msgid "400 drams each"
-msgstr ""
+msgstr "400 драм каждый"
 
 #: templates/pages/order.html:78
 msgid "3,01 – 5km"
-msgstr ""
+msgstr "3,01 – 5 км"
 
 #: templates/pages/order.html:79
 msgid "600 dram"
-msgstr ""
+msgstr "600 драм"
 
 #: templates/pages/order.html:80
 msgid "600 drams each"
-msgstr ""
+msgstr "600 драм каждый"
 
 #: templates/pages/order.html:83
 msgid "5,01 - 7km"
-msgstr ""
+msgstr "5,01 - 7 км"
 
 #: templates/pages/order.html:84
 msgid "800 dram"
-msgstr ""
+msgstr "800 драм"
 
 #: templates/pages/order.html:85
 msgid "800-drams each"
-msgstr ""
+msgstr "800 драм каждый"
 
 #: venv/lib/python3.8/site-packages/django/views/templates/default_urlconf.html:7
 #: venv/lib/python3.8/site-packages/django/views/templates/default_urlconf.html:221

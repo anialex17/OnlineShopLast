@@ -5,11 +5,15 @@
 <section class="menu-content py-4 divider">
 
     <div class="menu-header text-center p-3">
-        <h1 class="header site-color">{% trans 'Fruits' %}</h1>
-            <p class="header-text text-center mt-5 mb-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+        {% for product in products %}
+        {%if forloop.first%}
+        <h1 class="header site-color">{{product.category}}</h1>
+        {%endif%}
+        {%endfor%}
+            <p class="header-text text-center mt-5 mb-4">{% trans 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.
                 Consequuntur distinctio error, illo ipsa odit quas qui similique?
                 Minima praesentium, veritatis? Ab iusto praesentium quis soluta.
-                Cumque eum id nihil numquam.
+                Cumque eum id nihil numquam.' %}
             </p>
     </div>
     <!--End of menu-header-->

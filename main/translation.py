@@ -14,16 +14,12 @@ class MeasurementTranslationOptions(TranslationOptions):
 
 @register(Product)
 class ProductTranslationOptions(TranslationOptions):
-    fields = ('category','title', 'description','measurement')
+    fields = ('title', 'description')
 
-
-@register(Image)
-class ImageTranslationOptions(TranslationOptions):
-    fields = ('product',)
 
 
 @register(Customer)
 class CustomerTranslationOptions(TranslationOptions):
-    fields = ('user','address', )
+    fields = ('address', )
 
 

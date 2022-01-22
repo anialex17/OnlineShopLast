@@ -35,7 +35,7 @@ class Measurement(models.Model):
 
 
 class Product(models.Model):
-    category = models.ForeignKey(Category, on_delete=models.SET_NULL, verbose_name='Կատեգորիա', null=True, blank=True)
+    category = models.ForeignKey(Category, on_delete=models.SET_NULL, verbose_name='Կատեգորիա', null=True, blank=True, db_constraint=False)
     title = models.CharField(max_length=255, verbose_name='Անուն')
     image = models.ImageField(upload_to='media', null=True, blank=True, verbose_name='Նկար')
     url = models.SlugField(unique=True)

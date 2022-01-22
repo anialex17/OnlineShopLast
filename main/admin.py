@@ -23,10 +23,10 @@ class CustomerAdmin(TranslationAdmin):
 
 
 @admin.register(ProductItem)
-class ProductItemAdmin(TranslationAdmin):
+class ProductItemAdmin(admin.ModelAdmin):
     list_display = ('customer', 'product', 'quantity')
     list_filter = ('customer', 'product')
-    readonly_fields = ('product',)
+
 
 
 # class ProductItemInline(admin.TabularInline):
@@ -70,7 +70,7 @@ class OrderAdmin(TranslationAdmin):
 
 
 @admin.register(Basket)
-class BasketAdmin(TranslationAdmin):
+class BasketAdmin(admin.ModelAdmin):
     list_display = ('customer',)
 
 

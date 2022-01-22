@@ -3,67 +3,95 @@
 {% block title%}VitaMix | {{request.user}}{% endblock %}
 
 {% block content %}
-    <section class="user-content pb-4 divider">
+<section class="user-content pb-4 divider">
 
-        <div class="container py-2">
+    <div class="container py-2">
 
-            <div class="header text-center pb-4 pt-2">
-                <h5 class="site-color font-weight-bold">{% trans 'Personal information' %}</h5>
-                <span>{% trans 'You can change your personal information' %}</span>
+        <div class="header text-center pb-4 pt-2">
+            <h5 class="site-color font-weight-bold">{% trans 'Personal information' %}</h5>
+            <span>{% trans 'You can change your personal information' %}</span>
+        </div>
+
+        <!--        <form action="{% url 'edit_profile' %}" method="post" enctype="multipart/form-data">-->
+        <!--            {% csrf_token %}-->
+
+        <!--            <div class="row form-item">-->
+        <!--                <div class="form-group site-color col-sm-6">-->
+        <!--                    <label for="user_name" class="col-form-label font-weight-bold"></label>-->
+        <!--                    {{ form.username }}-->
+        <!--                </div>-->
+        <!--                <div class="form-group site-color col-sm-6">-->
+        <!--                    <label for="user_name" class="col-form-label font-weight-bold"></label>-->
+        <!--                    {{ form.first_name }}-->
+        <!--                </div>-->
+        <!--                <div class="form-group site-color col-sm-6">-->
+        <!--                    <label for="user_name" class="col-form-label font-weight-bold"></label>-->
+        <!--                    {{ form.last_name }}-->
+        <!--                </div>-->
+
+        <!--            </div>-->
+        <!--            <div class="confirm-block d-flex justify-content-end">-->
+        <!--                <button type="submit" class="btn shadow-none btn-lg confirm">{% trans 'Confirm' %}</button>-->
+        <!--            </div>-->
+
+        <!--        </form>-->
+        <form action="{% url 'edit_profile' %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="formGroupExampleInput">{%trans 'Username'%}</label>
+                {{form.username}}
             </div>
+            <div class="form-group">
+                <label for="formGroupExampleInput2">{%trans 'Last Name'%}</label>
+                {{form.last_name}}
+            </div>
+            <div class="form-group">
+                <label for="formGroupExampleInput2">{%trans 'First Name'%}</label>
+                {{form.first_name}}
+            </div>
+            <div class="confirm-block d-flex justify-content-start py-3">
+                <button type="submit" class="btn shadow-none btn-lg confirm">{% trans 'Confirm' %}</button>
+            </div>
+        </form>
+        <div class="">
+            <a href="{% url 'password_change' %}">
+                <button type="button" class="btn btn-danger">{% trans 'Change Password' %}</button>
+            </a>
+        </div>
 
-            <form action="{% url 'edit_profile' %}" method="post" enctype="multipart/form-data">
-                {% csrf_token %}
+        <h5 class="site-color font-weight-bold py-2">{% trans 'My orders' %}</h5>
 
-                <div class="row form-item">
-                    <div class="form-group site-color col-sm-6">
-                        <label for="user_name" class="col-form-label font-weight-bold"></label>
-                        {{ form }}
+        {% for order in orders %}
+
+        <div class="row">
+            <div class="col-md-6 py-2">
+                <div class="p-3 ordered-product order">
+                    <div class="food-name-block">
+                        {{ order.date_added | date:"d M Y"}}
                     </div>
-                </div>
-                <div class="confirm-block d-flex justify-content-end">
-                    <button type="submit" class="btn shadow-none btn-lg confirm">{% trans 'Confirm' %}</button>
-                </div>
-
-            </form>
-
-           <a href="{% url 'password_change' %}"><button type="button" class="btn btn-danger">Change Password</button></a>
-
-            <h5 class="site-color font-weight-bold py-2">{% trans 'My orders' %}</h5>
-            {% for order in orders %}
-
-                <div class="row">
-                    <div class="col-md-6 py-2">
-                        <div class="p-3 ordered-product order">
-                               <div class="food-name-block">
-                                        {{ order.date_added | date:"d M Y"}}
-                                    </div>
-                            {% for product in order.product_items.all %}
-                                <div class="product-info">
-                                    <div class="food-name-block">
-                                        <a href="#" class="food-name site-color">{{ product.product }}</a>
-                                    </div>
-                                    <div class="quantity">
-                                        <span class="order-info">{{ product.quantity }} <span>{% trans 'item' %}</span></span>
-                                    </div>
-                                </div>
-                            {% endfor %}
-{#                            <div class="total-price d-flex align-items-center justify-content-between">#}
-{#                                <div class="price">Total Price</div>#}
-{#                                <div class="order-info">{{ order.order_price }}<span>{% trans 'dr' %}</span></div>#}
-{#                            </div>#}
-
+                    {% for product in order.product_items.all %}
+                    <div class="product-info">
+                        <div class="food-name-block">
+                            <a href="#" class="food-name site-color">{{ product.product }}</a>
+                        </div>
+                        <div class="quantity">
+                            <span class="order-info">{{ product.quantity }}<span>{{product.measurement}}</span></span>
                         </div>
                     </div>
+                    {% endfor %}
 
 
                 </div>
-                <!--row-->
-            {% endfor %}
+            </div>
 
 
         </div>
-        <!--End of container-->
-    </section>
+        <!--row-->
+        {% endfor %}
+
+
+    </div>
+    <!--End of container-->
+</section>
 
 {% endblock %}

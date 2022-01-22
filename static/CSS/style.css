@@ -216,9 +216,9 @@ body {
     padding-left: 30px;
 
 }
-.lang-old {
-    display: none!important;
-}
+/*.lang-old {*/
+/*    display: none!important;*/
+/*}*/
 
 .dropdown select {
     border: 0 !important;
@@ -1142,7 +1142,16 @@ body {
     font-size: 22px;
     color: #959595;
 }
+/*.user-content .form-group .helptext {*/
+/*    display: none;*/
+/*}*/
+/*.user-content #id_password {*/
+/*    display: none;*/
+/*}*/
 
+/*.user-content .form-group label #id_password {*/
+/*    display: none;*/
+/*}*/
 /* End of User Page */
 
 

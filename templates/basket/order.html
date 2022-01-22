@@ -13,7 +13,7 @@
             <section class="personal-form">
                 <div class="row">
                     <div class="col-lg-4 personal-text-parts">
-                        <h3 class="personal-forms-text">Քաղաք՝</h3>
+                        <h3 class="personal-forms-text">{% trans 'City'%}</h3>
                     </div>
                     <div class="col-lg-6 personal-input-parts">
                         {{ form.city }}
@@ -21,7 +21,7 @@
                 </div>
                 <div class="row">
                     <div class="col-lg-4 personal-text-parts">
-                        <h3 class="personal-forms-text">Հասցե՝</h3>
+                        <h3 class="personal-forms-text">{% trans 'Address'%}</h3>
                     </div>
                     <div class="col-lg-6 personal-input-parts">
                         {{form.address}}
@@ -29,7 +29,7 @@
                 </div>
                 <div class="row">
                     <div class="col-lg-4 personal-text-parts">
-                        <h3 class="personal-forms-text">Հեռախոսահամար՝</h3>
+                        <h3 class="personal-forms-text">{% trans 'Phone number'%}</h3>
                     </div>
                     <div class="col-lg-6 personal-input-parts">
                         {{form.phone}}
@@ -37,7 +37,7 @@
                 </div>
                 <div class="row">
                     <div class="col-lg-4 personal-text-parts">
-                        <h3 class="personal-forms-text">Ամսաթիվ՝</h3>
+                        <h3 class="personal-forms-text">{% trans 'Date'%}</h3>
                     </div>
                     <div class="col-lg-6 personal-input-parts">
                         {{ form.date_shipping }}
@@ -45,7 +45,7 @@
                 </div>
                 <div class="row">
                     <div class="col-lg-4 personal-text-parts">
-                        <h3 class="personal-forms-text">Առաքման ժամ՝</h3>
+                        <h3 class="personal-forms-text">{% trans 'Delivery time'%}</h3>
                     </div>
                     <div class="col-lg-6 personal-input-parts">
                         {{ form.time_shipping }}
@@ -53,7 +53,7 @@
                 </div>
                 <div class="row">
                     <div class="col-lg-4 personal-text-parts">
-                        <h3 class="personal-forms-text">Վճարման տարբերակ՝</h3>
+                        <h3 class="personal-forms-text">{% trans 'Payment method'%}</h3>
                     </div>
                     <div class="col-lg-6 personal-input-parts">
                         {{ form.payment_type }}
@@ -64,7 +64,7 @@
                 </div>
 
                 <div class="personal-btn-part">
-                    <button type="submit" class="order-btn">Պատվիրել</button>
+                    <button type="submit" class="order-btn">{% trans 'Order'%}</button>
                 </div>
             </section>
         </div>

@@ -164,6 +164,7 @@ class PasswordsChangeView(PasswordChangeView):
     success_url = reverse_lazy('password_success')
     template_name = 'main/password_change.html'
 
+
 def password_success(request):
     return render(request, 'main/password_success.html', {})
 
