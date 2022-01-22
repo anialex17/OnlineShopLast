@@ -33,5 +33,30 @@ $(document).ready(function () {
     $(window).resize(function() {
         fixedBottom();
     });
+
+    // Gallery modal
+
+    let modal = document.getElementById("galModal");
+    let i;
+    let search = document.getElementsByClassName("gallsearch");
+
+    let picdiv = document.querySelectorAll(".picdiv");
+    let img = document.getElementsByClassName("gallpic");
+    let modalImg = document.getElementById("img01");
+
+    picdiv.forEach((el, i) => {
+        el.addEventListener('click', () => {
+            modal.style.display = "block";
+            modalImg.src = el.querySelector('.product-img-btn .img').src;
+        })
+    })
+
+    let span = document.getElementsByClassName("modalclose")[0];
+
+    span.onclick = function() {
+        modal.style.display = "none";
+    };
+
+
 })
 
