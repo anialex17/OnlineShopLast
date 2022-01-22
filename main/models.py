@@ -33,6 +33,7 @@ class Measurement(models.Model):
         verbose_name = 'Չափման միավոր'
         verbose_name_plural = 'Չափման միավորներ'
 
+
 class Product(models.Model):
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, verbose_name='Կատեգորիա', null=True, blank=True)
     title = models.CharField(max_length=255, verbose_name='Անուն')

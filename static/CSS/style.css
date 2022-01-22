@@ -215,6 +215,10 @@ body {
 .lang-drop {
     padding-left: 30px;
 }
+.lang-old {
+    display: none!important;
+}
+
 .dropdown select {
     border: 0 !important;
     -webkit-appearance: none;

@@ -10,4 +10,5 @@ class TermsOrderTranslationOptions(TranslationOptions):
 
 @register(Contact)
 class ContactTranslationOptions(TranslationOptions):
-    fields = ('address', )
+    fields = ('address',)
+

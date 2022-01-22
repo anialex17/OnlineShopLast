@@ -62,25 +62,25 @@
                         <span class="product-quantity">{{ request.user.customer.baskets.total_quantity }}</span>
                     </a>
                 </li>
-<!--                <li class="nav-item nav-height dropdown lang-drop">-->
-<!--                    <span class="nav-link site-color font-weight-bold nav-height">-->
-<!--                        <form action="{% url 'set_language' %}" class="site-lang-form" method="post">-->
-<!--                            {% csrf_token %}-->
-<!--                            <input name="next" type="hidden" value="{{ redirect_to }}">-->
-<!--                            <select name="language" id="page-language-select">-->
-<!--                                {% get_current_language as LANGUAGE_CODE %}-->
-<!--                                {% get_available_languages as LANGUAGES %}-->
-<!--                                {% get_language_info_list for LANGUAGES as languages %}-->
-<!--                                {% for language in languages %}-->
-<!--                                    <option value="{{ language.code }}"{% if language.code == LANGUAGE_CODE %}-->
-<!--                                            selected{% endif %}>-->
-<!--                                        {{ language.name_local }} ({{ language.code }})-->
-<!--                                    </option>-->
-<!--                                {% endfor %}-->
-<!--                            </select>-->
-<!--                        </form>-->
-<!--                    </span>-->
-<!--                </li>-->
+                <li class="nav-item nav-height dropdown lang-drop lang-old" >
+                    <span class="nav-link site-color font-weight-bold nav-height">
+                        <form action="{% url 'set_language' %}" class="site-lang-form" method="post">
+                            {% csrf_token %}
+                            <input name="next" type="hidden" value="{{ redirect_to }}">
+                            <select name="language" id="page-language-select">
+                                {% get_current_language as LANGUAGE_CODE %}
+                                {% get_available_languages as LANGUAGES %}
+                                {% get_language_info_list for LANGUAGES as languages %}
+                                {% for language in languages %}
+                                    <option value="{{ language.code }}"{% if language.code == LANGUAGE_CODE %}
+                                            selected{% endif %}>
+                                        {{ language.name_local }} ({{ language.code }})
+                                    </option>
+                                {% endfor %}
+                            </select>
+                        </form>
+                    </span>
+                </li>
                 <li class="nav-item nav-height dropdown lang-drop">
                     <span class="nav-link site-color font-weight-bold nav-height">
                         <form action="#" class="site-lang-form" method="post">
@@ -122,20 +122,13 @@
                         <div class="form-group py-2">
                             {{ field }}
                             {{ field.errors }}
-
                         </div>
                     {% endfor %}
-{#                    <div class="custom-control custom-checkbox pb-3 pl-4 pr-3 ml-1">#}
-{#                        <input type="checkbox" class="custom-control-input" id="customCheck1">#}
-{#                        <label class="custom-control-label font-weight-bold"#}
-{#                               for="customCheck1">{% trans 'Remember me' %}</label>#}
-{#                    </div>#}
                     <div class="pt-4">
                         <button type="submit"
                                 class="btn btn-block shadow-none modal-sign-in-btn">{% trans 'Sign In' %}</button>
                     </div>
                 </form>
-
                 <form action="{% url 'register' %}" method="post" class="register-form d-none">
                     {% csrf_token %}
                     {{ form.non_field_errors }}
