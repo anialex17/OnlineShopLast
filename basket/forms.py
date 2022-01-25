@@ -1,6 +1,6 @@
 from django import forms
 
-from main.models import Basket, ProductItem, Shipping, Time_Shipping
+from main.models import Basket, ProductItem, Order, Time_Shipping
 
 
 class AddToBasketForm(forms.ModelForm):
@@ -9,15 +9,14 @@ class AddToBasketForm(forms.ModelForm):
         fields = ['product', 'quantity']
 
 
-class ShippingForm(forms.ModelForm):
+class OrderForm(forms.ModelForm):
     time_shipping = forms.ModelChoiceField(queryset=Time_Shipping.objects.all(),
                                            empty_label='Ընտրեք առաքման ժամանակահատնածը',
                                           widget=forms.Select(attrs={'class': "form-control shadow-none"}))
-    # payment_type = forms.ModelChoiceField(queryset=Payment_Type.objects.all(),
-    #                                        empty_label='Ընտրեք վճարման տարբերակը',
+    # payment_type = forms.CharField(empty_label='Ընտրեք վճարման տարբերակը',
     #                                       widget=forms.Select(attrs={'class': "form-control shadow-none"}))
     class Meta:
-        model = Shipping
+        model = Order
         fields = ('city', 'address', 'phone', 'date_shipping', 'time_shipping', 'payment_type')
         # fields = '__all__'
         widgets = {

@@ -75,7 +75,7 @@
                             <a href="#" class="food-name site-color">{{ product.product }}</a>
                         </div>
                         <div class="quantity">
-                            <span class="order-info">{{ product.quantity }}<span>{{product.measurement}}</span></span>
+                            <span class="order-info">{{ product.quantity }}{{ product.product.measurement }}</span>
                         </div>
                     </div>
                     {% endfor %}
