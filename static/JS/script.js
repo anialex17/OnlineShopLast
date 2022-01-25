@@ -57,6 +57,38 @@ $(document).ready(function () {
         modal.style.display = "none";
     };
 
+    // Language dropdown
+
+    $(".selectlang").click(function() {
+        let is_open = $(this).hasClass("open");
+        if (is_open) {
+            $(this).removeClass("open");
+        } else {
+            $(this).addClass("open");
+        }
+    });
+
+    $(".selectlang li").click(function() {
+
+        let selected_value = $(this).html();
+        let first_li = $(".selectlang li:first-child").html();
+
+        $(".selectlang li:first-child").html(selected_value);
+        $(this).html(first_li);
+
+    });
+
+    $(document).mouseup(function(event) {
+
+        let target = event.target;
+        let selectlang = $(".selectlang");
+
+        if (!selectlang.is(target) && selectlang.has(target).length === 0) {
+            selectlang.removeClass("open");
+        }
+
+    });
+
 
 })
 

@@ -214,23 +214,86 @@ body {
 }
 .lang-drop {
     padding-left: 30px;
+    display: none;
 
 }
 /*.lang-old {*/
 /*    display: none!important;*/
 /*}*/
 
-.dropdown select {
-    border: 0 !important;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    background: url("../Images/icons/drop.png") no-repeat right;
-    background-position: 35px 5px;
-    width: 60px;
-    text-indent: 0.01px;
-    cursor: pointer;
-    border-radius: 5px!important;
-}
+/*.selectlang li {*/
+/*    display: none;*/
+/*    cursor: pointer;*/
+/*    padding: 5px 15px;*/
+/*    border-top: 1px solid #c9c9c9;*/
+/*    min-width: 50px;*/
+/*    font-weight: bold;*/
+/*    color: #535353;*/
+/*}*/
+
+/*.selectlang li:first-child {*/
+/*    display: block;*/
+/*    border-top: 0px;*/
+/*}*/
+
+/*.selectlang {*/
+/*    display: inline-block;*/
+/*    padding: 10px;*/
+/*    border-radius: 4px;*/
+/*    position: relative;*/
+/*    background: #FFFFFF;*/
+/*}*/
+/*.open {*/
+/*    border: 1px solid #c9c9c9;*/
+/*    top: 30px;*/
+/*}*/
+
+/*.selectlang li:hover {*/
+/*    background-color: #ddd;*/
+/*}*/
+
+/*.selectlang li:first-child:hover {*/
+/*    background-color: transparent;*/
+/*}*/
+
+/*.selectlang.open li {*/
+/*    display: block;*/
+/*}*/
+/*.open li:first-child {*/
+/*    background-color: transparent;*/
+/*    padding-left: 5px;*/
+/*    color: #d50c0d;*/
+/*}*/
+/*.selectlang span:before {*/
+/*    position: absolute;*/
+/*    top: 15px;*/
+/*    right: 1px;*/
+/*    content: url("../Images/icons/drop.png");*/
+/*    cursor: pointer;*/
+/*}*/
+/*.selectlang.open span:before {*/
+/*    content: url("../Images/icons/drop.png");*/
+/*    cursor: pointer;*/
+/*    top: 15px;*/
+/*    right: 10px;*/
+/*}*/
+/*.selectlang a {*/
+/*    text-decoration: none;*/
+/*}*/
+
+
+
+/*.dropdown select {*/
+/*    border: 0 !important;*/
+/*    -webkit-appearance: none;*/
+/*    -moz-appearance: none;*/
+/*    background: url("../Images/icons/drop.png") no-repeat right;*/
+/*    background-position: 35px 5px;*/
+/*    width: 60px;*/
+/*    text-indent: 0.01px;*/
+/*    cursor: pointer;*/
+/*    border-radius: 5px!important;*/
+/*}*/
 
 /* End of Navbar */
 

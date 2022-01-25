@@ -48,8 +48,7 @@ class ProductItemInline(admin.TabularInline):
 class ShippingAdmin(TranslationAdmin):
     list_display = ('customer', 'date_shipping', 'time_shipping')
     list_filter = ('customer', 'date_shipping', 'time_shipping')
-    readonly_fields = (
-    'customer', 'order', 'city', 'address', 'phone', 'date_shipping', 'time_shipping', 'payment_type')
+    readonly_fields = ('customer', 'order', 'city', 'address', 'phone', 'date_shipping', 'time_shipping', 'payment_type')
 
 
 class ShippingInline(admin.TabularInline):
@@ -62,7 +61,7 @@ class ShippingInline(admin.TabularInline):
 
 
 @admin.register(Order)
-class OrderAdmin(TranslationAdmin):
+class OrderAdmin(admin.ModelAdmin):
     list_display = ('id', 'customer')
     inlines = [ShippingInline, ProductItemInline]
     exclude = ('product_items',)

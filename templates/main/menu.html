@@ -27,7 +27,9 @@
                 <div class="d-flex food-container">
                     <div class="food-img">
                         <a href="{% url 'product' product.category.url product.url %}">
+                            {% if product.image %}
                             <img src="{{ product.image.url }}" alt="" class="img">
+                            {% endif %}
                         </a>
                     </div>
                     <div class="food-block pl-sm-4">
