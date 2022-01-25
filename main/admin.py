@@ -28,7 +28,6 @@ class ProductItemAdmin(admin.ModelAdmin):
     list_filter = ('customer', 'product')
 
 
-
 # class ProductItemInline(admin.TabularInline):
 #     model = ProductItem
 #     extra = 1
@@ -44,28 +43,29 @@ class ProductItemInline(admin.TabularInline):
 #     extra = 1
 
 
-@admin.register(Shipping)
-class ShippingAdmin(TranslationAdmin):
-    list_display = ('customer', 'date_shipping', 'time_shipping')
-    list_filter = ('customer', 'date_shipping', 'time_shipping')
-    readonly_fields = ('customer', 'order', 'city', 'address', 'phone', 'date_shipping', 'time_shipping', 'payment_type')
+# @admin.register(Shipping)
+# class ShippingAdmin(admin.ModelAdmin):
+#     list_display = ('customer', 'date_shipping', 'time_shipping')
+#     list_filter = ('customer', 'date_shipping', 'time_shipping')
+#     readonly_fields = ('customer', 'order', 'city', 'address', 'phone', 'date_shipping', 'time_shipping', 'payment_type')
+#
 
-
-class ShippingInline(admin.TabularInline):
-    model = Shipping
-    extra = 0
-    readonly_fields = ('customer', 'order', 'city', 'address', 'phone', 'date_shipping', 'time_shipping')
-    fk_name = 'order'
-
-
+# class ShippingInline(admin.TabularInline):
+#     model = Shipping
+#     extra = 0
+#     readonly_fields = ('customer', 'order', 'city', 'address', 'phone', 'date_shipping', 'time_shipping')
+#     fk_name = 'order'
 
 
 @admin.register(Order)
 class OrderAdmin(admin.ModelAdmin):
-    list_display = ('id', 'customer')
-    inlines = [ShippingInline, ProductItemInline]
-    exclude = ('product_items',)
-    readonly_fields = ('customer', 'product_items', 'date_added', 'finale_price', 'delivery_cost')
+    list_display = ('id', 'customer','date_shipping','status')
+    list_display_links = ('id', 'customer','date_shipping','status')
+    inlines = [ProductItemInline]
+    # exclude = ('product_items',)
+    readonly_fields=('customer','payment_type', 'finale_price', 'delivery_cost','product_items', 'date_shipping', 'time_shipping', 'city', 'address', 'phone' )
+    fields = ('status','customer','payment_type', 'finale_price', 'delivery_cost','product_items', 'date_shipping', 'time_shipping', 'city', 'address', 'phone' )
+
 
 
 @admin.register(Basket)

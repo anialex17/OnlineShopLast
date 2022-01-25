@@ -5,7 +5,7 @@ import datetime
 from django.views.generic import CreateView, UpdateView
 from main.views import GetContextDataMixin
 from main.models import *
-from .form import AddToBasketForm, ShippingForm
+from .forms import AddToBasketForm, OrderForm
 
 
 def basket(request):
@@ -82,23 +82,42 @@ def order(request):
     if request.method =='POST':
         customer = request.user.customer
         basket = Basket.objects.get(customer=customer)
-        form = ShippingForm(data=request.POST)
+        form = OrderForm(data=request.POST)
         if form.is_valid():
             if basket.finale_price() > 10000:
-                order = Order.objects.create(customer=customer, finale_price=basket.finale_price())
+                order = Order.objects.create(**form.cleaned_data,customer=customer,basket=basket, finale_price=basket.finale_price())
             else:
-                order = Order.objects.create(customer=customer, finale_price=basket.finale_price(), delivery_cost=500)
+                order = Order.objects.create(**form.cleaned_data,customer=customer,basket=basket, finale_price=basket.finale_price(), delivery_cost=500)
             for item in basket.productItems.all():
                 order.product_items.add(item)
-            shipping=Shipping.objects.create(**form.cleaned_data, customer=customer, order=order)
-            print(shipping.payment_type)
-            if shipping.payment_type=='TYPE_PAYMENT_NON_CASH':
+            if order.payment_type=='TYPE_PAYMENT_NON_CASH':
                 return redirect('basket')
-            elif shipping.payment_type=='TYPE_PAYMENT_CASH':
+            elif order.payment_type=='TYPE_PAYMENT_CASH':
                 return redirect('home')
     else:
-        form = ShippingForm()
+        form = OrderForm()
     return render(request, 'basket/order.html', {'form':form})
+
+# def order(request):
+#     if request.method =='POST':
+#         customer = request.user.customer
+#         basket = Basket.objects.get(customer=customer)
+#         form = ShippingForm(data=request.POST)
+#         if form.is_valid():
+#             if basket.finale_price() > 10000:
+#                 order = Order.objects.create(customer=customer, finale_price=basket.finale_price())
+#             else:
+#                 order = Order.objects.create(customer=customer, finale_price=basket.finale_price(), delivery_cost=500)
+#             for item in basket.productItems.all():
+#                 order.product_items.add(item)
+#             shipping=Shipping.objects.create(**form.cleaned_data, customer=customer, order=order)
+#             if shipping.payment_type=='TYPE_PAYMENT_NON_CASH':
+#                 return redirect('basket')
+#             elif shipping.payment_type=='TYPE_PAYMENT_CASH':
+#                 return redirect('home')
+#     else:
+#         form = ShippingForm()
+#     return render(request, 'basket/order.html', {'form':form})
 
 
 
