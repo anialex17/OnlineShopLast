@@ -29,14 +29,10 @@ def add_to_basket(request):
         basket = Basket.objects.get(customer=customer)
         product_item, created = ProductItem.objects.get_or_create(product=product, customer=customer)
         if created:
-            print('created')
-            print(product_item.product.measurement)
             product_item.quantity = product_quantity
             basket.productItems.add(product_item)
             product_item.save()
         else:
-            print('not created')
-            print(product_item.product.measurement)
             product_item.quantity = product_quantity
             product_item.save()
     return redirect('basket')
@@ -91,9 +87,9 @@ def order(request):
             for item in basket.productItems.all():
                 order.product_items.add(item)
             if order.payment_type=='TYPE_PAYMENT_NON_CASH':
-                return redirect('basket')
+                return redirect('payment')
             elif order.payment_type=='TYPE_PAYMENT_CASH':
-                return redirect('home')
+                return redirect('success')
     else:
         form = OrderForm()
     return render(request, 'basket/order.html', {'form':form})

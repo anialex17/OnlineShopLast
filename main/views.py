@@ -57,7 +57,6 @@ def register(request):
         register_form = RegisterUserForm(request.POST)
         if register_form.is_valid():
             user = register_form.save()
-            print('register_form.is_valid')
             import time
             customer = Customer.objects.create(user=user)
             Basket.objects.create(customer=customer)
@@ -67,8 +66,6 @@ def register(request):
             messages.success(request, 'send_activate_mail Ok!!!')
             return redirect('home')
         else:
-            print(register_form.errors())
-
             # return redirect(request.META.get('HTTP_REFERER'))
             return redirect('home')
     else:
@@ -78,7 +75,6 @@ def register(request):
 
 
 def user_login(request):
-    print(request.user.pk)
     if request.method == 'POST':
         context = {'data': request.POST}
         username = request.POST.get('username')
