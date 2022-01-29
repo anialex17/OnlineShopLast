@@ -41,17 +41,16 @@
                     <form class="product-form js-product-form" data-login="{% if user.is_authenticated %}is_active{% endif %}" action="{% url 'add_to_basket' %}" method="post">
                         {% csrf_token %}
 
-                        <div class="add-to-basket-block py-3">
-                            <button type="button" class="btn shadow-none btn-dec flex-center mr-2 js-btn-inc">
+                        <div class="add-to-basket-block d-flex flex-wrap py-3">
+                            <button type="button" class="btn shadow-none js-btn-dec flex-center mr-2">
                                 <i class="fas fa-minus site-color"></i>
                             </button>
                             <h2 id="counter-label" class="mr-2">
                                 <input type="text" value="1" class="product-quantity" name="product_quantity">
                             </h2>
-                            <button type="button" class="btn shadow-none btn-inc flex-center mr-2 js-btn-dec">
+                            <button type="button" class="btn shadow-none js-btn-inc flex-center mr-2">
                                 <i class="fas fa-plus site-color"></i>
                             </button>
-
                             <input type="text" hidden name="product_url" value="{{ product_item.url }}">
                             <button type="submit" class="btn shadow-none add-to-basket-btn" data-toggle="modal" data-target="#add-to-basket">
                                 <span>{% trans 'Add to Basket' %}</span>
@@ -90,37 +89,5 @@
     </div>
     <!--End of container-->
 </section>
-
-<script>
-    window.onload = function () {
-        const inputs = document.querySelectorAll('input.product-quantity');
-        const buttonsDec = document.querySelectorAll('.js-btn-dec');
-        const buttonsInc = document.querySelectorAll('.js-btn-inc');
-
-        buttonsDec && buttonsDec.forEach(function (item) {
-            item.addEventListener('click', function () {
-                const input = this.closest('form').querySelector('.product-quantity');
-                input.value = +input.value + 1;
-            });
-        });
-        buttonsInc && buttonsInc.forEach(function (item) {
-            item.addEventListener('click', function () {
-                const input = this.closest('form').querySelector('.product-quantity');
-                if (+input.value > 1) {
-                    input.value = +input.value - 1;
-                }
-            });
-        });
-        inputs && inputs.forEach(function (item) {
-            item.addEventListener('change', function (e) {
-                const value = e.target.value;
-                if (+value !== +value || value < 2) {
-                    this.value = 1;
-                }
-            });
-        });
-
-    }
-</script>
 
 {% endblock %}

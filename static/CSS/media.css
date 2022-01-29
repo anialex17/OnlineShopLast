@@ -160,5 +160,13 @@
         padding-top: 30px;
     }
 }
+@media only screen and (max-width: 1200px){
+    .nav-link {
+        font-size: 14px;
+    }
+    .nav-item {
+        padding-right: 5px;
+    }
+}
 
 /* End of Media Queries */

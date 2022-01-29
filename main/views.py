@@ -24,14 +24,14 @@ class HomeView(GetContextDataMixin):
     model = Category
     template_name = 'main/home.html'
     context_object_name = 'categories'
-    paginate_by = 6
+#     paginate_by = 6
 
 
 class ProductListView(ListView):
     model = Product
     template_name = 'main/menu.html'
     context_object_name = "products"
-    paginate_by = 12
+#     paginate_by = 12
 
     def get_queryset(self):
         return Product.objects.filter(category__url=self.kwargs.get("category_slug")).select_related('category')

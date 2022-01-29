@@ -3,13 +3,13 @@
 <nav class="navbar navbar-expand-lg navbar-light fixed-top bg-white py-0">
     <div class="container nav-height">
         <a class="navbar-brand" href="{% url 'home' %}">
-            <img src="{% static 'Images/logo/logo-1.png' %}" alt="" class="img">
+            <img src="{% static 'Images/logo/logo-1.png' %}" alt="" class="img nav-logo">
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse justify-content-end nav-height" id="navbarNav">
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
             <ul class="navbar-nav nav-height">
                 <li class="nav-item nav-height">
                     <a class="nav-link site-color font-weight-bold nav-height"
@@ -31,30 +31,26 @@
                     <a class="nav-link site-color font-weight-bold nav-height"
                        href="{% url 'about_us' %}">{% trans 'ABOUT US' %}</a>
                 </li>
-
-
                 {% if request.user.is_authenticated %}
-                    <li class="nav-item nav-height">
-                        <a class="nav-link site-color font-weight-bold nav-height"
+                <li class="nav-item nav-height">
+                    <a class="nav-link site-color font-weight-bold nav-height"
                            href="{% url 'profile' request.user.id %}">{{ user.username }}</a>
-                    </li>
-                    <li class="nav-item nav-height">
-                        <a class="nav-link site-color font-weight-bold nav-height" href="{% url 'logout' %}">{% trans 'Logout' %}</a>
-                    </li>
+                </li>
+                <li class="nav-item nav-height">
+                    <a class="nav-link site-color font-weight-bold nav-height" href="{% url 'logout' %}">{% trans 'Logout' %}</a>
+                </li>
                 {% else %}
-                    <li class="nav-item nav-height pl-lg-5">
-                        <button class="btn sign-in shadow-none px-lg-3 px-0 py-2" data-toggle="modal"
-                                data-target="#sign-in-modal">
-                            <span class="d-lg-none font-weight-bold pr-2">{% trans 'SIGN IN' %}</span>
-                            <i class="fas fa-sign-in-alt"></i>
-                            <!--<i class="fas fa-sign-out-alt"></i>-->
-                            <!--<i class="fas fa-user"></i>-->
-                        </button>
-                        <div class="pb-1 sign-in-basket-line">|</div>
-                    </li>
-
+                <li class="nav-item nav-height pl-lg-5">
+                    <button class="btn sign-in shadow-none px-lg-3 px-0 py-2" data-toggle="modal"
+                            data-target="#sign-in-modal">
+                        <span class="d-lg-none font-weight-bold pr-2">{% trans 'SIGN IN' %}</span>
+                        <i class="fas fa-sign-in-alt"></i>
+                        <!--<i class="fas fa-sign-out-alt"></i>-->
+                        <!--<i class="fas fa-user"></i>-->
+                    </button>
+                    <div class="pb-1 sign-in-basket-line">|</div>
+                </li>
                 {% endif %}
-
                 <li class="nav-item nav-height px-lg-2 px-0 py-1">
                     <a class="nav-link site-color font-weight-bold nav-height basket" href="{% url 'basket' %}">
                         <span class="d-lg-none pr-2">{% trans 'Basket' %}</span>
@@ -81,25 +77,18 @@
                         </form>
                     </span>
                 </li>
-<!--                <li>-->
-<!--                    <ul class="selectlang">-->
-<!--                        <li>AM</li>-->
-<!--                        <li>EN</li>-->
-<!--                        <li>RU</li>-->
-<!--                        <span></span>-->
-<!--                    </ul>-->
-<!--                </li>-->
-<!--                <li>-->
-<!--                    <select class="form-select" id="exampleFormControlSelect1">-->
-<!--                        <option selected>1</option>-->
-<!--                        <option>2</option>-->
-<!--                        <option>3</option>-->
-<!--                    </select>-->
-<!--                </li>-->
+                <li>
+                    <form action="#">
+                        <select class="form-select">
+                            <option selected value="Armenian">AM</option>
+                            <option value="English">EN</option>
+                            <option value="Russian">RU</option>
+                        </select>
+                    </form>
+                </li>
             </ul>
         </div>
     </div>
-
 </nav>
 
 <div class="modal fade" id="sign-in-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"

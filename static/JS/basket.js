@@ -1,6 +1,6 @@
 $(document).ready(function () {
-    const dec_btn = $('.product-content .btn-dec');
-    const inc_btn = $('.product-content .btn-inc');
+    const dec_btn = $('.product-content .js-btn-dec');
+    const inc_btn = $('.product-content .js-btn-inc');
     const input = $('.product-content .add-to-basket-block input');
     const basket_dec_btn = $('.basket-content .btn-dec');
     const basket_inc_btn = $('.basket-content .btn-inc');
@@ -9,7 +9,7 @@ $(document).ready(function () {
     const add_to_basket = $('.product-content .add-to-basket-btn');
     const food_name = $('.product-content .food-info #food-name');
     const food_price = $('.product-content .food-info #food-price');
-    const INPUT_MIN = 1;
+    const INPUT_MIN = 0.5;
     const INPUT_MAX = 99;
     let basket = {
         food_info: []
@@ -167,13 +167,13 @@ $(document).ready(function () {
 
     $(dec_btn).each((i, el) => {
         $(el).on('click', () => {
-            dec_inc(input, i, -1);
+            dec_inc(input, i, -0.5);
         })
     })
 
     $(inc_btn).each((i, el) => {
         $(el).on('click', () => {
-            dec_inc(input, i, 1);
+            dec_inc(input, i, 0.5);
         })
     })
 
@@ -196,7 +196,7 @@ $(document).ready(function () {
 
     $(basket_dec_btn).each((i, el) => {
         $(el).on('click', () => {
-            dec_inc(basket_input, i, -1);
+            dec_inc(basket_input, i, -0.5);
             changeQuantity(i);
             count_total_price();
             document.location.reload();
@@ -205,7 +205,7 @@ $(document).ready(function () {
 
     $(basket_inc_btn).each((i, el) => {
         $(el).on('click', () => {
-            dec_inc(basket_input, i, 1);
+            dec_inc(basket_input, i, 0.5);
             changeQuantity(i);
             count_total_price();
             document.location.reload();
