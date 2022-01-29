@@ -5,7 +5,8 @@ from django.contrib.auth.models import User
 from django.db import models
 from django.db.models.signals import post_save
 from django.urls import reverse
-
+from django.db.models.signals import post_save
+from django.utils.safestring import mark_safe
 
 # User = get_user_model()
 
@@ -80,7 +81,7 @@ class Customer(models.Model):
     user = models.OneToOneField(User, verbose_name='Օգտագործող', on_delete=models.CASCADE)
     phone = models.CharField(max_length=20, verbose_name='Հեռախոսահամար', null=True, blank=True)
     address = models.TextField(verbose_name='Հասցե', null=True, blank=True)
-    orders = models.ManyToManyField('Order', verbose_name='Պատվերներ', related_name='related_order')
+    orders = models.ManyToManyField('Order', verbose_name='Պատվերներ', related_name='related_order', )
     is_email_verified = models.BooleanField(default=False)
 
     class Meta:
@@ -194,6 +195,13 @@ class Order(models.Model):
         verbose_name = 'Պատվեր'
         verbose_name_plural = 'Պատվերներ'
         ordering = ['date_added']
+
+
+# def save_order(sender, instance, **kwargs):
+#     instance.order.save()
+#
+#
+# post_save.connect(save_order, sender=Order)
 
 
 
