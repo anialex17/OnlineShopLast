@@ -8,6 +8,7 @@ from django.utils.http import urlsafe_base64_decode
 from django.views import View
 from django.views.generic import ListView, UpdateView, DetailView, CreateView
 from .email import send_activate_mail
+from django.db.models import Count, F
 from .forms import *
 from .models import *
 
@@ -24,7 +25,14 @@ class HomeView(GetContextDataMixin):
     model = Category
     template_name = 'main/home.html'
     context_object_name = 'categories'
-#     paginate_by = 6
+    queryset = Category.objects.annotate(cnt=Count('product')).filter(product__wholesale=False).filter(cnt__gt=0)
+
+
+class WholeSaleView(GetContextDataMixin):
+    model = Category
+    template_name = 'main/wholesale.html'
+    context_object_name = 'categories'
+    queryset = Category.objects.annotate(cnt=Count('product', filter=F('product__wholesale'))).filter(cnt__gt=0)
 
 
 class ProductListView(ListView):
@@ -34,7 +42,17 @@ class ProductListView(ListView):
 #     paginate_by = 12
 
     def get_queryset(self):
-        return Product.objects.filter(category__url=self.kwargs.get("category_slug")).select_related('category')
+        return Product.objects.filter(category__url=self.kwargs.get("category_slug"),wholesale=False).select_related('category')
+
+
+class ProductWholeSaleListView(ListView):
+    model = Product
+    template_name = 'main/menu.html'
+    context_object_name = "products"
+#     paginate_by = 12
+
+    def get_queryset(self):
+        return Product.objects.filter(category__url=self.kwargs.get("category_slug"), wholesale=True).select_related('category')
 
 
 class ProductDetailView(DetailView):
@@ -45,7 +63,7 @@ class ProductDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['products'] = Product.objects.filter(category__url=self.kwargs.get("category_slug"))
+        context['products'] = Product.objects.filter(category__url=self.kwargs.get("category_slug")).select_related('category')
         context['product_item'] = Product.objects.filter(url=self.kwargs.get("slug")).first()
         context['register_form'] = RegisterUserForm()
         context['form'] = LoginUserForm()

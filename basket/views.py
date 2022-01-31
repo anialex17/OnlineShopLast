@@ -54,9 +54,11 @@ def change_qty_plus(request):
         customer = request.user.customer
         basket = Basket.objects.get(customer=customer)
         product_item = ProductItem.objects.get(pk=request.POST.get('increment_item'))
-        if product_item:
+        if product_item and product_item.product.wholesale==False:
             product_item.quantity += product_item.product.start_quantity
-            product_item.save()
+        elif product_item and product_item.product.wholesale:
+            product_item.quantity += 10
+        product_item.save()
         return redirect('basket')
 
 
@@ -65,9 +67,15 @@ def change_qty_minus(request):
         customer = request.user.customer
         basket = Basket.objects.get(customer=customer)
         product_item = ProductItem.objects.get(pk=request.POST.get('decrement_item'))
-        if product_item:
+        if product_item and product_item.product.wholesale==False:
             product_item.quantity -= product_item.product.start_quantity
             if product_item.quantity <= 0:
+                product_item.delete()
+            else:
+                product_item.save()
+        elif product_item and product_item.product.wholesale:
+            product_item.quantity -= 10
+            if product_item.quantity < product_item.product.min_order_quantity:
                 product_item.delete()
             else:
                 product_item.save()

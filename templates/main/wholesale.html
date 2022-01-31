@@ -23,14 +23,14 @@
                     {% for category in categories %}
 
                         <div class="col-sm-4 py-2 px-sm-2">
-                            <a href="{% url 'category_product_list' category.url %}" class="product-item">
+                                <a href="{% url 'category_wholesale_product_list' category.url %}" class="product-item">
                                 <img src="{{ category.image.url }}" alt="" class="img product-pic">
 
                                 <span class="flex-center">
                             <i class="fas fa-eye"></i>
                         </span>
                             </a>
-                            <a href="{% url 'category_product_list' category.url %}"
+                            <a href="{% url 'category_wholesale_product_list' category.url %}"
                                class="food-name">{{ category.title }}</a>
                         </div>
 
