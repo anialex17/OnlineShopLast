@@ -34,8 +34,14 @@ class Measurement(models.Model):
         verbose_name = 'Չափման միավոր'
         verbose_name_plural = 'Չափման միավորներ'
 
+#
+# class SaleType(models.Model):
+#     wholesale = models.CharField(max_length=)
+
 
 class Product(models.Model):
+    # SALE_TYPE = (('WHOLESALE', 'մեծածախ'), ('RETAIL', 'մանրածախ'))
+
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, verbose_name='Կատեգորիա', null=True, blank=True, db_constraint=False)
     title = models.CharField(max_length=255, verbose_name='Անուն')
     image = models.ImageField(upload_to='media', null=True, blank=True, verbose_name='Նկար')
@@ -47,6 +53,9 @@ class Product(models.Model):
     # start_quantity_kg = models.DecimalField(max_digits=10, decimal_places=2, verbose_name='Սկզբնական չափ (կգ)', blank=True, null=True)
     # start_quantity_item = models.PositiveIntegerField(verbose_name='Սկզբնական չափ (հատ)', blank=True, null=True)
     start_quantity = models.DecimalField(default=1, max_digits=10, decimal_places=2, verbose_name='Սկզբնական չափ')
+    # sale_type = models.CharField(max_length=20, choices=SALE_TYPE, null=True, verbose_name='վածարքի տեսակ')
+    wholesale = models.BooleanField(default=False)
+    min_order_quantity = models.DecimalField(max_digits=10, decimal_places=2, verbose_name='Պատվերի մինիմալ չափ', null=True, blank=True)
 
     class Meta:
         verbose_name = 'Ապրանք'
@@ -81,7 +90,7 @@ class Customer(models.Model):
     user = models.OneToOneField(User, verbose_name='Օգտագործող', on_delete=models.CASCADE)
     phone = models.CharField(max_length=20, verbose_name='Հեռախոսահամար', null=True, blank=True)
     address = models.TextField(verbose_name='Հասցե', null=True, blank=True)
-    orders = models.ManyToManyField('Order', verbose_name='Պատվերներ', related_name='related_order', )
+    orders = models.ManyToManyField('Order', verbose_name='Պատվերներ', related_name='related_order',blank=True )
     is_email_verified = models.BooleanField(default=False)
 
     class Meta:

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-01-22 17:37+0400\n"
+"POT-Creation-Date: 2022-01-31 15:47+0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -155,18 +155,22 @@ msgid "GALLERY"
 msgstr "ՆԿԱՐՆԵՐ"
 
 #: templates/include/header.html:28
+msgid "WHOLESALE"
+msgstr "ՄԵԾԱԾԱԽ ՎԱՃԱՐՔ"
+
+#: templates/include/header.html:32
 msgid "CONTACT"
 msgstr "ՀԵՏԱԴԱՐՁ ԿԱՊ"
 
-#: templates/include/header.html:32
+#: templates/include/header.html:36
 msgid "ABOUT US"
 msgstr "ՄԵՐ ՄԱՍԻՆ"
 
-#: templates/include/header.html:42
+#: templates/include/header.html:44
 msgid "Logout"
 msgstr "ԵԼՔ"
 
-#: templates/include/header.html:48
+#: templates/include/header.html:50
 msgid "SIGN IN"
 msgstr "ՄՈՒՏՔ"
 
@@ -174,11 +178,11 @@ msgstr "ՄՈՒՏՔ"
 msgid "Basket"
 msgstr "ԶԱՄԲՅՈՒՂ"
 
-#: templates/include/header.html:109 templates/include/header.html:129
+#: templates/include/header.html:104 templates/include/header.html:124
 msgid "Sign In"
 msgstr "Մուտք"
 
-#: templates/include/header.html:111 templates/include/header.html:144
+#: templates/include/header.html:106 templates/include/header.html:139
 msgid "Register"
 msgstr "Գրանցվել"
 
@@ -217,17 +221,21 @@ msgstr "Փոխել գաղտնաբառը"
 msgid "My orders"
 msgstr "Իմ պատվերները"
 
-#: templates/main/home.html:11
+#: templates/main/home.html:11 templates/main/wholesale.html:11
 msgid "Our Menu"
 msgstr "Կատեգորիա"
 
-#: templates/main/menu.html:42 templates/main/menu.html:43
-#: templates/main/menu.html:46 templates/main/product.html:27
+#: templates/main/menu.html:45 templates/main/menu.html:46
+#: templates/main/menu.html:49 templates/main/product.html:27
 #: templates/main/product.html:28 templates/main/product.html:30
 msgid "dr"
 msgstr "դրամ"
 
-#: templates/main/menu.html:69 templates/main/product.html:57
+#: templates/main/menu.html:54
+msgid "Min order quantity "
+msgstr ""
+
+#: templates/main/menu.html:75 templates/main/product.html:56
 msgid "Add to Basket"
 msgstr "Ավելացնել զամբյուղ"
 
@@ -247,7 +255,7 @@ msgstr "Ապրանքի նկարագրություն"
 msgid "Food Type"
 msgstr "Ապրանքի տեսակ"
 
-#: templates/main/product.html:67
+#: templates/main/product.html:66
 msgid "Similar Dishes"
 msgstr "Նմանատիպ ապրանքներ"
 
