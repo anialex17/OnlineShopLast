@@ -39,15 +39,23 @@
             {% csrf_token %}
             <div class="form-group">
                 <label for="formGroupExampleInput">{%trans 'Username'%}</label>
-                {{form.username}}
+                {{user_form.username}}
             </div>
             <div class="form-group">
                 <label for="formGroupExampleInput2">{%trans 'Last Name'%}</label>
-                {{form.last_name}}
+                {{user_form.last_name}}
             </div>
             <div class="form-group">
                 <label for="formGroupExampleInput2">{%trans 'First Name'%}</label>
-                {{form.first_name}}
+                {{user_form.first_name}}
+            </div>
+            <div class="form-group">
+                <label for="formGroupExampleInput2">{%trans 'Phone'%}</label>
+                {{customer_form.phone}}
+            </div>
+            <div class="form-group">
+                <label for="formGroupExampleInput2">{%trans 'Address'%}</label>
+                {{customer_form.address}}
             </div>
             <div class="confirm-block d-flex justify-content-start py-3">
                 <button type="submit" class="btn shadow-none btn-lg confirm">{% trans 'Confirm' %}</button>

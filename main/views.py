@@ -151,26 +151,38 @@ def logout_user(request):
 def customer(request, pk):
     customer = Customer.objects.get(user=request.user)
     orders = Order.objects.filter(customer=customer)
-    form = EditCustomerForm(initial={
+    user_form = EditUserForm(initial={
         'username': request.user.username,
         'first_name': request.user.first_name,
         'last_name': request.user.last_name,
-        'phone': customer.phone,
+    })
+    customer_form = EditCustomerForm(initial={
+        'phone':customer.phone,
+        'address':customer.address
     })
     context = {'customer': customer,
-               'form': form,
+               'user_form': user_form,
+               'customer_form':customer_form,
                'orders':orders,
                }
     return render(request, 'main/customer.html', context)
 
 
-class UserEditView(UpdateView):
-    form_class = EditCustomerForm
-    template_name = 'main/customer.html'
-    success_url = reverse_lazy('home')
+def edit_profile(request):
+    customer = Customer.objects.get(user=request.user)
+    if request.method == 'POST':
+        user_form = EditUserForm(request.POST, instance=request.user)
+        customer_form = EditCustomerForm(request.POST, instance=customer)
+        if user_form.is_valid() and customer_form.is_valid():
+            user_form.save()
+            customer_form.save()
+            # messages.success(request, 'Your profile is updated successfully')
+            return redirect('profile', request.user.id )
+    else:
+        user_form = EditUserForm(instance=request.user)
+        customer_form = EditCustomerForm(instance=customer)
 
-    def get_object(self):
-        return self.request.user
+    return redirect('profile', request.user.id )
 
 
 class PasswordsChangeView(PasswordChangeView):

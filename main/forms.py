@@ -33,11 +33,11 @@ class LoginUserForm(AuthenticationForm):
         attrs={'type': "password", 'class': "form-control shadow-none", 'id': "password", 'placeholder': "Password"}))
 
 
-class EditCustomerForm(UserChangeForm):
+class EditUserForm(UserChangeForm):
     first_name = forms.CharField(max_length=100, widget=forms.TextInput(
         attrs={'class': 'form-control', 'placeholder': 'Your First Name', 'id': 'formGroupExampleInput2'}))
     last_name = forms.CharField(max_length=100, widget=forms.TextInput(
-        attrs={'class': 'form-control', 'placeholder': 'Your Your Last Name', 'id': 'formGroupExampleInput2'}))
+        attrs={'class': 'form-control', 'placeholder': 'Your Last Name', 'id': 'formGroupExampleInput2'}))
     username = forms.CharField(widget=forms.TextInput(
         attrs={'class': 'form-control', 'placeholder': 'Your username', 'id': 'formGroupExampleInput2'}))
 
@@ -46,10 +46,20 @@ class EditCustomerForm(UserChangeForm):
         fields = ('username', 'first_name', 'last_name')
 
 
-class ProfileForm(forms.ModelForm):
+class EditCustomerForm(forms.ModelForm):
     class Meta:
         model = Customer
         fields = ('phone', 'address')
+        widgets = {
+            'phone':forms.TextInput(attrs={'class': 'form-control','placeholder': 'Your phone' }),
+            'address':forms.TextInput(attrs={'class': 'form-control','placeholder': 'Your address'})
+        }
+
+
+# class ProfileForm(forms.ModelForm):
+#     class Meta:
+#         model = Customer
+#         fields = ('phone', 'address')
 
 
 class PasswordChangingForm(PasswordChangeForm):
