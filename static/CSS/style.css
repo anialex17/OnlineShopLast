@@ -233,10 +233,16 @@ body {
 }
 .lang-drop {
     padding-left: 30px;
-    display: none;
-
 }
-
+.arm-opt {
+    background-image: url(./../Images/icons/armenia.png);
+}
+.eng-opt {
+    background-image: url(./../Images/icons/united-states.png);
+}
+.rus-opt {
+    background-image: url(./../Images/icons/russia.png);
+}
 /* End of Navbar */
 
 
