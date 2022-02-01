@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% load i18n %}
+{% load static i18n %}
 
 {% block title%}VitaMix | Product{% endblock %}
 
@@ -42,13 +42,11 @@
                         {% csrf_token %}
 
                         <div class="add-to-basket-block d-flex flex-wrap py-3">
-                            <button type="button" class="btn shadow-none js-btn-dec flex-center mr-2">
+                            <button class="btn shadow-none js-btn-dec flex-center mr-2">
                                 <i class="fas fa-minus site-color"></i>
                             </button>
-                            <h2 id="counter-label" class="mr-2">
-                                <input type="text" value="1" class="product-quantity" name="product_quantity">
-                            </h2>
-                            <button type="button" class="btn shadow-none js-btn-inc flex-center mr-2">
+                            <input type="text" value="1" class="product-quantity" name="product_quantity">
+                            <button class="btn shadow-none js-btn-inc flex-center mr-2">
                                 <i class="fas fa-plus site-color"></i>
                             </button>
                             <input type="text" hidden name="product_url" value="{{ product_item.url }}">
@@ -87,7 +85,7 @@
             <!--other-products-container-->
         </div>
     </div>
-    <!--End of container-->
+    <script src="{% static 'JS/basket.js' %}"></script>
 </section>
 
 {% endblock %}

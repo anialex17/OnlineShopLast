@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% load i18n %}
+{% load static i18n %}
 {% block title%}VitaMix | Menu{% endblock %}
 {% block content %}
 <section class="menu-content py-4 divider">
@@ -86,6 +86,6 @@
     </div>
     <!--End of container-->
 </section>
-
+<script src="{% static 'JS/basket.js' %}"></script>
 {% endblock %}
 
