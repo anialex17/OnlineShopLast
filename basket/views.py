@@ -3,19 +3,23 @@ from django.http import JsonResponse, HttpResponseRedirect
 import datetime
 
 from django.views.generic import CreateView, UpdateView
+
+from main.forms import RegisterUserForm, LoginUserForm
 from main.views import GetContextDataMixin
 from main.models import *
 from .forms import AddToBasketForm, OrderForm
 
 
 def basket(request):
-    context = {}
+    register_form = RegisterUserForm()
+    form = LoginUserForm()
+    context = {'register_form':register_form, 'form':form}
     if request.user.is_authenticated:
         customer = request.user.customer
         basket = Basket.objects.get(customer_id=customer.id)
         if basket.finale_price() < 10000:
             basket.delivery_cost = 500
-        context = {'basket': basket, 'productItems': basket.productItems.all()}
+        context = {'basket': basket, 'productItems': basket.productItems.all(),'register_form':register_form, 'form':form }
     return render(request, 'basket/basket.html', context)
 
 
@@ -25,7 +29,7 @@ def add_to_basket(request):
     if request.method == "POST":
         customer = request.user.customer
         product = Product.objects.get(url=request.POST.get('product_url'))
-        product_quantity = int(request.POST.get('product_quantity'))
+        product_quantity = request.POST.get('product_quantity')
         basket = Basket.objects.get(customer=customer)
         product_item, created = ProductItem.objects.get_or_create(product=product, customer=customer)
         if created:

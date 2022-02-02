@@ -42,11 +42,16 @@
                         {% csrf_token %}
 
                         <div class="add-to-basket-block d-flex flex-wrap py-3">
-                            <button class="btn shadow-none js-btn-dec flex-center mr-2">
+                            <button type="button" class="btn shadow-none js-btn-dec flex-center mr-2 js-btn-dec">
                                 <i class="fas fa-minus site-color"></i>
                             </button>
-                            <input type="text" value="1" class="product-quantity" name="product_quantity">
-                            <button class="btn shadow-none js-btn-inc flex-center mr-2">
+                            {%if product.wholesale%}
+                            <input type="text" value="{{product.min_order_quantity}}" data-change-size="10" class="product-quantity" name="product_quantity">
+                            {%else%}
+                            <input type="text" value="{{product.min_order_quantity}}" data-change-size="{{product.start_quantity}}" class="product-quantity" name="product_quantity">
+
+                            {% endif %}
+                            <button type="button" class="btn shadow-none js-btn-inc flex-center mr-2 js-btn-inc">
                                 <i class="fas fa-plus site-color"></i>
                             </button>
                             <input type="text" hidden name="product_url" value="{{ product_item.url }}">

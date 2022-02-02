@@ -10,6 +10,7 @@ urlpatterns = [
     path('activate/<uidb64>/<token>/', VerificationView.as_view(), name='activate'),
     path('register/', register, name='register'),
     path('login/', user_login, name='login'),
+    # path('login/', LoginView.as_view(), name='login'),
     path('logout/', logout_user, name='logout'),
     path('wholesale/<str:category_slug>', ProductWholeSaleListView.as_view(), name='category_wholesale_product_list'),
     path('category/<str:category_slug>', ProductListView.as_view(), name='category_product_list'),

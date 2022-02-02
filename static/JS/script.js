@@ -1,5 +1,20 @@
 $(document).ready(function () {
+    $('.js-btn-inc').on('click', function () {
+        const input = $(this).parent().find('.product-quantity');
+        const q = +input.data('change-size');
+        input.val(+input.val() + q);
+    });
+
+    $('.js-btn-dec').on('click', function () {
+        const input = $(this).parent().find('.product-quantity');
+        const q = +input.data('change-size');
+        const v = +input.val();
+        const val = v - q < q ? q : v - q;
+        input.val(val);
+    });
+
     // languages
+    // $('#page-language-select').select2();
     $('#page-language-select').on('change', function () {
         $(this).parents('form').submit();
     });
@@ -58,6 +73,4 @@ $(document).ready(function () {
     }
 
 });
-
-
 

@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 import os
 from pathlib import Path
 
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -31,6 +32,8 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+
+    # 'django_translation_flags',
     'modeltranslation',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -138,6 +141,12 @@ LANGUAGES = (
     ('ru', gettext('Russia')),
     ('en', gettext('English')),
 )
+
+# LANGUAGES = [
+#   ('hy', _('Armenian')),
+#   ('ru', _('Russia')),
+#   ('en', _('English'))
+# ]
 
 LOCALE_PATHS = (
     (BASE_DIR/ 'locale'),

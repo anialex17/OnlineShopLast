@@ -19,11 +19,11 @@
                     <a class="nav-link site-color font-weight-bold nav-height"
                        href="{% url 'terms_order' %}">{% trans 'ORDER' %}</a>
                 </li>
-<!--                <li class="nav-item nav-height">-->
-<!--                    <a class="nav-link site-color font-weight-bold nav-height"-->
-<!--                       href="{% url 'gallery' %}">{% trans 'GALLERY' %}</a>-->
-<!--                </li>-->
-                 <li class="nav-item nav-height">
+                <!--                <li class="nav-item nav-height">-->
+                <!--                    <a class="nav-link site-color font-weight-bold nav-height"-->
+                <!--                       href="{% url 'gallery' %}">{% trans 'GALLERY' %}</a>-->
+                <!--                </li>-->
+                <li class="nav-item nav-height">
                     <a class="nav-link site-color font-weight-bold nav-height"
                        href="{% url 'wholesale' %}">{% trans 'WHOLESALE' %}</a>
                 </li>
@@ -38,10 +38,12 @@
                 {% if request.user.is_authenticated %}
                 <li class="nav-item nav-height">
                     <a class="nav-link site-color font-weight-bold nav-height"
-                           href="{% url 'profile' request.user.id %}">{{ user.username }}</a>
+                       href="{% url 'profile' request.user.id %}">{{ user.username }}</a>
+
                 </li>
                 <li class="nav-item nav-height">
-                    <a class="nav-link site-color font-weight-bold nav-height" href="{% url 'logout' %}">{% trans 'Logout' %}</a>
+                    <a class="nav-link site-color font-weight-bold nav-height" href="{% url 'logout' %}">
+                        {% trans 'Logout' %}</a>
                 </li>
                 {% else %}
                 <li class="nav-item nav-height pl-lg-5">
@@ -62,7 +64,7 @@
                         <span class="product-quantity">{{ request.user.customer.baskets.total_quantity }}</span>
                     </a>
                 </li>
-                <li class="nav-item nav-height dropdown lang-drop lang-old" >
+                <li class="nav-item nav-height dropdown lang-drop lang-old">
                     <span class="nav-link site-color font-weight-bold nav-height">
                         <form action="{% url 'set_language' %}" class="site-lang-form" method="post">
                             {% csrf_token %}
@@ -72,16 +74,12 @@
                                 {% get_available_languages as LANGUAGES %}
                                 {% get_language_info_list for LANGUAGES as languages %}
                                 {% for language in languages %}
-                                    <option value="{{ language.code }}"{% if language.code == LANGUAGE_CODE %}
-                                            selected{% endif %}>
-                                        {{ language.name_local|slice:'0' }} {{ language.code }}
-
-                                    </option>
-
+                                       <option value="{{ language.code }}"{% if language.code == LANGUAGE_CODE %}
+                                           selected{% endif %}>
+                                             {{ language.name_local|slice:'0' }}
+                                                   {{ language.code }}
+                                           </option>
                                 {% endfor %}
-<!--                                <option selected value="Armenian" class="arm-opt">AM</option>-->
-<!--                                <option value="English" class="eng-opt">EN</option>-->
-<!--                                <option value="Russian" class="rus-opt">RU</option>-->
                             </select>
                         </form>
                     </span>
@@ -110,29 +108,32 @@
                     {% csrf_token %}
                     {{ form.non_field_errors }}
                     {% for field in form %}
-                        <div class="form-group py-2">
-                            {{ field }}
-                            {{ field.errors }}
-                        </div>
+                    <div class="form-group py-2">
+                        {{ field }}
+                        {{ field.errors }}
+                    </div>
                     {% endfor %}
                     <div class="pt-4">
                         <button type="submit"
-                                class="btn btn-block shadow-none modal-sign-in-btn">{% trans 'Sign In' %}</button>
+                                class="btn btn-block shadow-none modal-sign-in-btn">{% trans 'Sign In' %}
+                        </button>
                     </div>
                 </form>
                 <form action="{% url 'register' %}" method="post" class="register-form d-none">
                     {% csrf_token %}
-                    {{ form.non_field_errors }}
-                    {% for field in register_form %}
-                        <div class="form-group py-2">
-                            {{ field }}
-                            {{ field.errors }}
+                    <div style="background: red">{{register_form.errors}}</div>
 
-                        </div>
+                    {{ register_form.non_field_errors }}
+                    {% for field in register_form %}
+                    <div class="form-group py-2">
+                        {{ field.errors }}
+                        {{ field }}
+                    </div>
                     {% endfor %}
                     <div class="pt-4">
                         <button type="submit"
-                                class="btn btn-block shadow-none modal-sign-in-btn">{% trans 'Register' %}</button>
+                                class="btn btn-block shadow-none modal-sign-in-btn">{% trans 'Register' %}
+                        </button>
                     </div>
                 </form>
             </div>

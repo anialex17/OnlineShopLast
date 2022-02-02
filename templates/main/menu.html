@@ -10,11 +10,11 @@
         <h1 class="header site-color">{{product.category}}</h1>
         {%endif%}
         {%endfor%}
-            <p class="header-text text-center mt-5 mb-4">{% trans 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                Consequuntur distinctio error, illo ipsa odit quas qui similique?
-                Minima praesentium, veritatis? Ab iusto praesentium quis soluta.
-                Cumque eum id nihil numquam.' %}
-            </p>
+        <p class="header-text text-center mt-5 mb-4">{% trans 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+            Consequuntur distinctio error, illo ipsa odit quas qui similique?
+            Minima praesentium, veritatis? Ab iusto praesentium quis soluta.
+            Cumque eum id nihil numquam.' %}
+        </p>
     </div>
     <!--End of menu-header-->
 
@@ -42,36 +42,50 @@
                         </div>
                         <div class="price py-2 site-color">
                             {% if product.new_price %}
-                                <span class="category-product-price"><span id="food-price">{{ product.new_price }}</span>{% trans 'dr' %}</span>
-                                <del><span class="category-product-discount">{{ product.price }}</span>{% trans 'dr' %}</del>
-                                <span class="category-product-quantity">{{product.start_quantity}}{{product.measurement}}</span>
+                            <span class="category-product-price"><span id="food-price">{{ product.new_price }}</span>{% trans 'dr' %}</span>
+                            <del><span class="category-product-discount">{{ product.price }}</span>{% trans 'dr' %}
+                            </del>
+                            <span class="category-product-quantity">{{product.start_quantity}}{{product.measurement}}</span>
                             {% else %}
-                                <span class="category-product-price"><span id="food-price">{{ product.price }}</span>{% trans 'dr' %}</span>
-                                <span class="category-product-quantity">{{product.start_quantity}}{{product.measurement}}</span>
+                            <span class="category-product-price"><span id="food-price">{{ product.price }}</span>{% trans 'dr' %}</span>
+                            <span class="category-product-quantity">{{product.start_quantity}}{{product.measurement}}</span>
                             {% endif %}
                         </div>
                         <div class="price py-2 site-color">
-                                <span class="category-product-quantity">{% trans 'Min order quantity ' %}{{product.min_order_quantity}}{{product.measurement}}</span>
+                            <span class="category-product-quantity">{% trans 'Min order quantity ' %}{{product.min_order_quantity}}{{product.measurement}}</span>
                         </div>
                         <div class="add-to-basket-block">
-                            <form class="product-form js-product-form" data-login="{% if user.is_authenticated %}is_active{% endif %}" action="{% url 'add_to_basket' %}" method="post">
+                            <form class="product-form js-product-form"
+                                  data-login="{% if user.is_authenticated %}is_active{% endif %}"
+                                  action="{% url 'add_to_basket' %}" method="post">
                                 {% csrf_token %}
 
                                 <div class="add-to-basket-block d-flex py-3">
                                     <div class="d-flex">
-                                        <button type="button" class="btn shadow-none btn-dec flex-center mr-2 js-btn-inc">
+                                        <button type="button"
+                                                class="btn shadow-none btn-dec flex-center mr-2 js-btn-dec">
                                             <i class="fas fa-minus site-color"></i>
                                         </button>
                                         <h2 id="counter-label" class="mr-2">
-                                            <input type="text" value="1" class="product-quantity" name="product_quantity">
-                                        </h2>
-                                        <button type="button" class="btn shadow-none btn-inc flex-center mr-2 js-btn-dec">
+                                            {%if product.wholesale%}
+                                            <input type="text" value="{{product.min_order_quantity}}"
+                                                   data-change-size="10" class="product-quantity"
+                                                   name="product_quantity">
+                                            {%else%}
+                                            <input type="text" value="{{product.min_order_quantity}}"
+                                                   data-change-size="{{product.start_quantity}}"
+                                                   class="product-quantity" name="product_quantity">
+
+                                            {% endif %} </h2>
+                                        <button type="button"
+                                                class="btn shadow-none btn-inc flex-center mr-2 js-btn-inc">
                                             <i class="fas fa-plus site-color"></i>
                                         </button>
 
-                                        <input type="text" hidden name="product_url" value="{{ product_item.url }}">
+                                        <input type="text" hidden name="product_url" value="{{ product.url }}">
                                     </div>
-                                    <button type="submit" class="btn shadow-none add-to-basket-btn" data-toggle="modal" data-target="#add-to-basket">
+                                    <button type="submit" class="btn shadow-none add-to-basket-btn" data-toggle="modal"
+                                            data-target="#add-to-basket">
                                         <span>{% trans 'Add to Basket' %}</span>
                                     </button>
                                 </div>
@@ -88,4 +102,5 @@
 </section>
 <script src="{% static 'JS/basket.js' %}"></script>
 {% endblock %}
+
 

@@ -1,10 +1,11 @@
 from django.contrib.auth.tokens import default_token_generator
 from django.contrib.auth.views import PasswordChangeView
-from django.contrib.auth import login, logout, authenticate
+from django.contrib.auth import login, logout, authenticate, views
 from django.contrib import messages
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.utils.http import urlsafe_base64_decode
+from django import views
 from django.views import View
 from django.views.generic import ListView, UpdateView, DetailView, CreateView
 from .email import send_activate_mail
@@ -76,7 +77,7 @@ def register(request):
         if register_form.is_valid():
             user = register_form.save()
             import time
-            customer = Customer.objects.create(user=user)
+            customer = Customer.objects.create(user=user, phone=register_form.cleaned_data['phone'])
             Basket.objects.create(customer=customer)
             # url = str(round(time.time() * 1000))
             send_activate_mail(request=request, user=user)
@@ -84,12 +85,37 @@ def register(request):
             messages.success(request, 'send_activate_mail Ok!!!')
             return redirect('home')
         else:
+            messages.error(request, 'Upss!!!')
             # return redirect(request.META.get('HTTP_REFERER'))
-            return redirect('home')
+
     else:
         register_form = RegisterUserForm(request.POST)
         messages.error(request, 'some error message here')
     return render(request, 'include/header.html', {'register_form': register_form})
+
+
+# class LoginView(views.View):
+#
+#     def get(self, request, *args, **kwargs):
+#         form = LoginUserForm(request.POST or None)
+#         print(form)
+#         print(request.POST)
+#         context = {'form':form}
+#         return redirect(reverse('home'))
+#
+#     def post(self, request, *args, **kwargs):
+#         form = LoginUserForm(request.POST or None)
+#         if form.is_valid():
+#             context = {'data': request.POST}
+#             username = request.POST.get('username')
+#             password = request.POST.get('password')
+#             user= authenticate(request, username=username, password=password)
+#             login(request, user)
+#             return redirect(reverse('home'))
+#         context = {
+#             'form':form
+#         }
+#         return redirect(reverse('home'))
 
 
 def user_login(request):
@@ -99,25 +125,13 @@ def user_login(request):
         password = request.POST.get('password')
 
         user = authenticate(request, username=username, password=password)
-
-        # if user and not user.is_email_verified:
-        #     messages.add_message(request, messages.ERROR,
-        #                          'Email is not verified, please check your email inbox')
-        #     return redirect(request.META.get('HTTP_REFERER'))
-
-        # if not user:
-        #     messages.add_message(request, messages.ERROR,
-        #                          'Invalid credentials, try again')
-        #     return redirect(request.META.get('HTTP_REFERER'))
-
         login(request, user)
-
-        messages.add_message(request, messages.SUCCESS,
-                             f'Welcome {user.username}')
-
+        messages.add_message(request, messages.SUCCESS,f'Welcome {user.username}')
         return redirect(reverse('home'))
 
     return render(request, 'include/header.html')
+
+
     # if request.method == 'POST':
     #     context = {'data': request.POST}
     #     username = request.POST.get('username')
