@@ -68,12 +68,12 @@
                                         </button>
                                         <h2 id="counter-label" class="mr-2">
                                             {%if product.wholesale%}
-                                            <input type="text" value="{{product.min_order_quantity}}"
+                                            <input type="text" value="10"
                                                    data-change-size="10" class="product-quantity"
                                                    name="product_quantity">
                                             {%else%}
-                                            <input type="text" value="{{product.min_order_quantity}}"
-                                                   data-change-size="{{product.start_quantity}}"
+                                            <input type="text" value="10"
+                                                   data-change-size="10"
                                                    class="product-quantity" name="product_quantity">
 
                                             {% endif %} </h2>

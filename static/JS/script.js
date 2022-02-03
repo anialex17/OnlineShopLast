@@ -74,3 +74,23 @@ $(document).ready(function () {
 
 });
 
+// Language dropdown
+
+let currentLanguage = 'armenian';
+
+const onLanguageChange = (event) => {
+    let newLanguage = event.target.value;
+
+    if (newLanguage !== currentLanguage) {
+        let currentLanguageSelector = '.language-dropdown .flag[id="'+ currentLanguage +'"]';
+        let newLanguageSelector = '.language-dropdown .flag[id="'+ newLanguage +'"]';
+
+        document.querySelector(currentLanguageSelector).classList.remove('display');
+        document.querySelector(newLanguageSelector).classList.add('display');
+        currentLanguage = newLanguage;
+    }
+};
+
+document
+    .querySelector('.language-dropdown select')
+    .addEventListener('change', onLanguageChange);

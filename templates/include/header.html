@@ -75,7 +75,7 @@
                                 {% get_language_info_list for LANGUAGES as languages %}
                                 {% for language in languages %}
                                        <option value="{{ language.code }}"{% if language.code == LANGUAGE_CODE %}
-                                           selected{% endif %}>
+                                               selected{% endif %}>
                                              {{ language.name_local|slice:'0' }}
                                                    {{ language.code }}
                                            </option>
@@ -83,6 +83,27 @@
                             </select>
                         </form>
                     </span>
+                </li>
+                <li>
+                    <div class="language-dropdown" tabindex="0">
+
+                        <select>
+                            <option value="armenian" selected>Armenian</option>
+                            <option value="russian">Russian</option>
+                            <option value="english">English</option>
+                        </select>
+
+                        <div class="lang-background"></div>
+
+                        <div class="flags">
+                            <img id="armenian" class="flag display" src="{% static 'Images/icons/armenia.png' %}" alt="Armenia Flag" />
+
+                            <img id="russian" class="flag" src="{% static 'Images/icons/russia.png' %}" alt="Russia Flag" />
+
+                            <img id="english" class="flag" src="{% static 'Images/icons/united-states.png' %}" alt="United States Flag" />
+                        </div>
+
+                    </div>
                 </li>
             </ul>
         </div>

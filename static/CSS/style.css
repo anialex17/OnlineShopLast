@@ -243,7 +243,96 @@ body {
 .rus-opt {
     background-image: url(./../Images/icons/russia.png);
 }
+
 /* End of Navbar */
+
+/* Language dropdown*/
+
+.language-dropdown {
+    height: 32px;
+    position: relative;
+    width: 80px;
+    display: block;
+}
+
+.language-dropdown:before {
+    background-color: rgba(0, 0, 0, 0.15);
+    height: 20px;
+    left: 44px;
+    top: 6px;
+    width: 1px;
+    content: "";
+    z-index: 2;
+}
+
+.language-dropdown:after {
+    content: '';
+    background-image: url(./../Images/icons/drop.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 15px 10px;
+    height: 24px;
+    right: 5px;
+    top: 4px;
+    width: 24px;
+    z-index: 2;
+}
+
+.language-dropdown select {
+    cursor: pointer;
+    display: block;
+    opacity: 0;
+    z-index: 3;
+}
+
+.language-dropdown .lang-background {
+    background-color: #fff;
+    border-radius: 4px;
+    z-index: 1;
+}
+
+.language-dropdown .flags {
+    height: 24px;
+    left: 10px;
+    top: 4px;
+    width: 24px;
+    z-index: 2;
+}
+.language-dropdown .flags .flag.display {
+    display: block;
+}
+
+.language-dropdown .flags .flag {
+    display: none;
+    width: inherit;
+    height: inherit;
+    font-size: 0;
+    line-height: 0;
+}
+
+.language-dropdown:before, .language-dropdown:after, .language-dropdown > * {
+    display: block;
+    position: absolute;
+}
+
+
+.language-dropdown select, .language-dropdown .lang-background {
+    height: 100%;
+    left: 0;
+    top: 0;
+    width: 100%;
+}
+
+.lang-background:hover {
+    border-color: #9ea0a3
+}
+.lang-backgroundd:focus {
+    box-shadow: -3px -3px 0 #a5bffc, 3px -3px 0 #a5bffc, 3px 3px 0 #a5bffc, -3px 3px 0 #a5bffc
+}
+
+/* End of Language dropdown*/
+
+
 
 
 /* Home Page */

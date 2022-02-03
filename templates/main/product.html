@@ -46,9 +46,9 @@
                                 <i class="fas fa-minus site-color"></i>
                             </button>
                             {%if product.wholesale%}
-                            <input type="text" value="{{product.min_order_quantity}}" data-change-size="10" class="product-quantity" name="product_quantity">
+                            <input type="text" value="10" data-change-size="10" class="product-quantity" name="product_quantity">
                             {%else%}
-                            <input type="text" value="{{product.min_order_quantity}}" data-change-size="{{product.start_quantity}}" class="product-quantity" name="product_quantity">
+                            <input type="text" value="10" data-change-size="10" class="product-quantity" name="product_quantity">
 
                             {% endif %}
                             <button type="button" class="btn shadow-none js-btn-inc flex-center mr-2 js-btn-inc">
