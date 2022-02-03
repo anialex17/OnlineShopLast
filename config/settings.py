@@ -32,8 +32,6 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-
-    # 'django_translation_flags',
     'modeltranslation',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -142,11 +140,6 @@ LANGUAGES = (
     ('en', gettext('English')),
 )
 
-# LANGUAGES = [
-#   ('hy', _('Armenian')),
-#   ('ru', _('Russia')),
-#   ('en', _('English'))
-# ]
 
 LOCALE_PATHS = (
     (BASE_DIR/ 'locale'),

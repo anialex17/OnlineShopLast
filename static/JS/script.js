@@ -1,16 +1,18 @@
 $(document).ready(function () {
+
     $('.js-btn-inc').on('click', function () {
         const input = $(this).parent().find('.product-quantity');
-        const q = +input.data('change-size');
+        input.val(parseFloat(`${input.val()}`.replaceAll(',', '.')))
+        let q = parseFloat(`${input.data('change-size')}`.replaceAll(',', '.'))
         input.val(+input.val() + q);
     });
 
     $('.js-btn-dec').on('click', function () {
         const input = $(this).parent().find('.product-quantity');
-        const q = +input.data('change-size');
-        const v = +input.val();
-        const val = v - q < q ? q : v - q;
-        input.val(val);
+        input.val(parseFloat(`${input.val()}`.replaceAll(',', '.')))
+        let q = parseFloat(`${input.data('change-size')}`.replaceAll(',', '.'))
+        if (+input.val() === q) return
+        input.val(+input.val() - q);
     });
 
     // languages
@@ -73,4 +75,6 @@ $(document).ready(function () {
     }
 
 });
+
+
 

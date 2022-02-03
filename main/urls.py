@@ -15,7 +15,7 @@ urlpatterns = [
     path('wholesale/<str:category_slug>', ProductWholeSaleListView.as_view(), name='category_wholesale_product_list'),
     path('category/<str:category_slug>', ProductListView.as_view(), name='category_product_list'),
     # path('category/<str:category_slug>', WholeSaleProductView.as_view(), name='wholesale_product_list'),
-    path('<str:category_slug>/<slug:slug>/', ProductDetailView.as_view(), name='product'),
+    path('<str:category_slug>/<int:pk>/', ProductDetailView.as_view(), name='product'),
     # path('edit-profile', UserEditView.as_view(), name='edit_profile'),
     path('edit-profile', edit_profile, name='edit_profile'),
 

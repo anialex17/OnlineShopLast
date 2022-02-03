@@ -27,6 +27,12 @@
             </tr>
             </thead>
             <tbody>
+            <p class="pb-3">
+            {% if messages %}
+            {% for message in messages%}
+            {{ message }}
+             {% endfor %}
+            {% endif %}</p>
 
             {% for item in basket.productItems.all %}
             <tr class="py-3">
@@ -40,12 +46,16 @@
                 </th>
                 <td class="font-weight-bold align-middle">
                     <span class="d-sm-none">{% trans 'Product name' %}</span>
-                    <a href="{% url 'product' item.product.category.url item.product.url %}"
+                    <a href="{% url 'product' item.product.category.url item.product.pk %}"
                        class="site-color food-name">{{ item.product.title }}</a>
                 </td>
                 <td class="align-middle">
                     <span class="d-sm-none font-weight-bold">{% trans 'Food Price' %}</span>
+                    {% if item.product.new_price  %}
+                    <span class="food-price">{{ item.product.new_price }}</span>
+                    {% else %}
                     <span class="food-price">{{ item.product.price }}</span>
+                    {% endif %}
                     <span>{% trans 'amd' %} </span>
                 </td>
                 <td class="quantity align-middle">
