@@ -12,7 +12,12 @@
         <h1 class="header site-color">{% trans 'Food Details' %}</h1>
     </div>
     <!--End of menu-header-->
-
+            <p class="pb-3">
+            {% if messages %}
+            {% for message in messages%}
+            {{ message }}
+             {% endfor %}
+            {% endif %}</p>
     <div class="container py-4 mt-2">
 
         <div class="d-flex">
@@ -26,36 +31,41 @@
                         {% if product.new_price %}
                         <del><span>{{ product.price }}</span>{% trans 'dr' %}</del>
                         <span class="font-weight-bold"><span id="food-price">{{ product.new_price }}</span>{% trans 'dr' %}</span>
-                         {% else %}
+                        {% else %}
                         <span class="font-weight-bold"><span id="food-price">{{ product.price }}</span>{% trans 'dr' %}</span>
                         {% endif %}
                     </div>
                     <div class="description py-2">
                         <p>
-                        {{ product.description }}
+                            {{ product.description }}
                         </p>
                     </div>
-<!--                    <div class="food-type font-weight-bold">-->
-<!--                        <span>{% trans 'Food Type' %} : <span>{{ product.product_type }}</span></span>-->
-<!--                    </div>-->
-                    <form class="product-form js-product-form" data-login="{% if user.is_authenticated %}is_active{% endif %}" action="{% url 'add_to_basket' %}" method="post">
+                    <!--                    <div class="food-type font-weight-bold">-->
+                    <!--                        <span>{% trans 'Food Type' %} : <span>{{ product.product_type }}</span></span>-->
+                    <!--                    </div>-->
+                    <!--                    <form class="product-form js-product-form" data-login="{% if user.is_authenticated %}is_active{% endif %}" action="{% url 'add_to_basket' %}" method="post">-->
+                    <form class="product-form js-product-form"
+                          data-login="{% if user.is_authenticated %}is_active{% endif %}" method="post">
                         {% csrf_token %}
 
                         <div class="add-to-basket-block d-flex flex-wrap py-3">
                             <button type="button" class="btn shadow-none js-btn-dec flex-center mr-2 js-btn-dec">
                                 <i class="fas fa-minus site-color"></i>
                             </button>
-                            {%if product.wholesale%}
-                            <input type="text" value="10" data-change-size="10" class="product-quantity" name="product_quantity">
-                            {%else%}
-                            <input type="text" value="10" data-change-size="10" class="product-quantity" name="product_quantity">
-
+                            {% if product.wholesale %}
+                            <input type="text" value="{{product.min_order_quantity}}" data-change-size="10"
+                                   class="product-quantity" name="product_quantity">
+                            {% else %}
+                            <input type="text" value="{{product.start_quantity}}"
+                                   data-change-size="{{product.start_quantity}}" class="product-quantity"
+                                   name="product_quantity">
                             {% endif %}
                             <button type="button" class="btn shadow-none js-btn-inc flex-center mr-2 js-btn-inc">
                                 <i class="fas fa-plus site-color"></i>
                             </button>
-                            <input type="text" hidden name="product_url" value="{{ product_item.url }}">
-                            <button type="submit" class="btn shadow-none add-to-basket-btn" data-toggle="modal" data-target="#add-to-basket">
+                            <input type="text" hidden name="product_url" value="{{ product.pk }}">
+                            <button type="submit" class="btn shadow-none add-to-basket-btn" data-toggle="modal"
+                                    data-target="#add-to-basket">
                                 <span>{% trans 'Add to Basket' %}</span>
                             </button>
                         </div>
@@ -67,13 +77,14 @@
 
             <div class="other-products-container">
                 <h5 class="dishes-header">{% trans 'Similar Dishes' %}</h5>
-        {% for product in products %}
+                {% for product in products %}
                 <div class="food-block d-flex py-2">
-                    <a href="{% url 'product' product.category.url product.url %}" class="d-block food-image">
+                    <a href="{% url 'product' product.category.url product.pk %}" class="d-block food-image">
                         <img src="{{ product.image.url }}" alt="" class="img product-pic">
                     </a>
                     <div class="pl-2">
-                        <a href="{% url 'product' product.category.url product.url %}" class="title font-weight-bold site-color">{{ product.title }}</a>
+                        <a href="{% url 'product' product.category.url product.pk %}"
+                           class="title font-weight-bold site-color">{{ product.title }}</a>
                         <div class="description">
                             <span>
                                 {{ product.description|truncatewords:6 }}
@@ -84,7 +95,7 @@
                     <!--food-info-->
                 </div>
                 <!--food-block-->
-        {% endfor %}
+                {% endfor %}
 
             </div>
             <!--other-products-container-->

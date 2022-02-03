@@ -40,20 +40,16 @@ class Measurement(models.Model):
 
 
 class Product(models.Model):
-    # SALE_TYPE = (('WHOLESALE', 'մեծածախ'), ('RETAIL', 'մանրածախ'))
 
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, verbose_name='Կատեգորիա', null=True, blank=True, db_constraint=False)
     title = models.CharField(max_length=255, verbose_name='Անուն')
     image = models.ImageField(upload_to='media', null=True, blank=True, verbose_name='Նկար')
-    url = models.SlugField(unique=True)
+    # url = models.SlugField(unique=True)
     description = models.TextField(verbose_name='Նկարագրություն')
     price = models.DecimalField(max_digits=10, decimal_places=0, verbose_name='Գին')
     new_price = models.DecimalField(max_digits=10, decimal_places=0, blank=True, null=True, verbose_name='Նոր գին')
     measurement = models.ForeignKey(Measurement, on_delete=models.SET_NULL, null=True, verbose_name='Չափման միավոր')
-    # start_quantity_kg = models.DecimalField(max_digits=10, decimal_places=2, verbose_name='Սկզբնական չափ (կգ)', blank=True, null=True)
-    # start_quantity_item = models.PositiveIntegerField(verbose_name='Սկզբնական չափ (հատ)', blank=True, null=True)
     start_quantity = models.DecimalField(default=1, max_digits=10, decimal_places=2, verbose_name='Սկզբնական չափ')
-    # sale_type = models.CharField(max_length=20, choices=SALE_TYPE, null=True, verbose_name='վածարքի տեսակ')
     wholesale = models.BooleanField(default=False)
     min_order_quantity = models.DecimalField(max_digits=10, decimal_places=2, verbose_name='Պատվերի մինիմալ չափ', null=True, blank=True)
 
@@ -65,9 +61,8 @@ class Product(models.Model):
         return self.title
 
     @property
-    def ct_model(self):
-        return self._meta.model_name
-
+    # def ct_model(self):
+    #     return self._meta.model_name
     def get_absolute_url(self):
         return reverse('product_detail', kwargs={"slug": self.url})
 
@@ -110,7 +105,11 @@ class ProductItem(models.Model):
     quantity = models.DecimalField(default=1, verbose_name="Քանակ", max_digits=10, decimal_places=1)
 
     def total_price(self):
-        return self.product.price * self.quantity
+        if self.product.new_price:
+            return self.product.new_price * self.quantity
+        else:
+            return self.product.price * self.quantity
+
 
     def qty(self):
         if self.product.start_quantity=='item':
@@ -139,8 +138,12 @@ class Basket(models.Model):
     def finale_price(self):
         finale_price = 0
         for i in self.productItems.all():
-            finale_price += i.product.price * i.quantity
+            if i.product.new_price:
+                finale_price += i.product.new_price * i.quantity
+            else:
+                finale_price += i.product.price * i.quantity
         return finale_price
+
 
     def total_quantity(self):
         total = 0

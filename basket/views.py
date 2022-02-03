@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.shortcuts import render, redirect
 from django.http import JsonResponse, HttpResponseRedirect
 import datetime
@@ -28,7 +29,8 @@ def add_to_basket(request):
 
     if request.method == "POST":
         customer = request.user.customer
-        product = Product.objects.get(url=request.POST.get('product_url'))
+        # product = Product.objects.get(url=request.POST.get('product_url'))
+        product = Product.objects.get(pk=request.POST.get('product_url'))
         product_quantity = request.POST.get('product_quantity')
         basket = Basket.objects.get(customer=customer)
         product_item, created = ProductItem.objects.get_or_create(product=product, customer=customer)
@@ -36,10 +38,17 @@ def add_to_basket(request):
             product_item.quantity = product_quantity
             basket.productItems.add(product_item)
             product_item.save()
+            messages.success(request, 'The product is successfully added to your basket')
+            # messages.add_message(request, messages.INFO, 'The product is successfully added to your basket')
+            return HttpResponseRedirect(request.META['HTTP_REFERER'])
+
         else:
             product_item.quantity = product_quantity
             product_item.save()
-    return redirect('basket')
+            messages.add_message(request, messages.INFO, 'The product is successfully added to your basket')
+            return HttpResponseRedirect(request.META['HTTP_REFERER'])
+
+
 
 
 def basket_remove(request):
@@ -50,6 +59,9 @@ def basket_remove(request):
         basket.productItems.remove(product_item)
         product_item.delete()
         del product_item
+        messages.success(request, 'The product is successfully deleted')
+        # messages.add_message(request, messages.INFO, 'The product is successfully deleted')
+        # return HttpResponseRedirect(request.META['HTTP_REFERER'])
     return redirect('basket')
 
 

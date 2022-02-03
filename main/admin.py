@@ -6,8 +6,8 @@ from django.contrib.contenttypes.admin import GenericTabularInline
 
 @admin.register(Product)
 class ProductAdmin(TranslationAdmin):
-    list_display = ('title', 'price')
-    prepopulated_fields = {'url': ('title',)}
+    list_display = ('pk', 'title', 'price')
+    # prepopulated_fields = {'url': ('title',)}
     save_on_top = True
 
 

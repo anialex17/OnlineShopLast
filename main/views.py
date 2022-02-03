@@ -65,7 +65,8 @@ class ProductDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['products'] = Product.objects.filter(category__url=self.kwargs.get("category_slug")).select_related('category')
-        context['product_item'] = Product.objects.filter(url=self.kwargs.get("slug")).first()
+        # context['product_item'] = Product.objects.filter(url=self.kwargs.get("slug")).first()
+        context['product_item'] = Product.objects.get(pk=self.kwargs.get("pk"))
         context['register_form'] = RegisterUserForm()
         context['form'] = LoginUserForm()
         return context
@@ -82,11 +83,13 @@ def register(request):
             # url = str(round(time.time() * 1000))
             send_activate_mail(request=request, user=user)
             # login(request, user)
-            messages.success(request, 'send_activate_mail Ok!!!')
+            messages.success(request, 'Activate code has been sent successfully!!!')
             return redirect('home')
         else:
-            messages.error(request, 'Upss!!!')
-            # return redirect(request.META.get('HTTP_REFERER'))
+            register_form = RegisterUserForm(request.POST)
+            print(register_form.errors)
+            messages.error(request, 'Something is wrong. Try again!')
+            return redirect(request.META.get('HTTP_REFERER'))
 
     else:
         register_form = RegisterUserForm(request.POST)
