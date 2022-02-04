@@ -6,8 +6,9 @@ from django.contrib.contenttypes.admin import GenericTabularInline
 
 @admin.register(Product)
 class ProductAdmin(TranslationAdmin):
-    list_display = ('pk', 'title', 'price')
+    list_display = ('pk', 'title', 'price', 'wholesale')
     # prepopulated_fields = {'url': ('title',)}
+    list_filter = ('wholesale',)
     save_on_top = True
 
 
@@ -24,37 +25,13 @@ class CustomerAdmin(TranslationAdmin):
 
 @admin.register(ProductItem)
 class ProductItemAdmin(admin.ModelAdmin):
-    list_display = ('customer', 'product', 'quantity')
+    list_display = ('id', 'customer', 'product', 'quantity')
     list_filter = ('customer', 'product')
-
-
-# class ProductItemInline(admin.TabularInline):
-#     model = ProductItem
-#     extra = 1
 
 
 class ProductItemInline(admin.TabularInline):
     model = Order.product_items.through
     extra = 0
-
-#
-# class ShippingInline(admin.TabularInline):
-#     model = Shipping
-#     extra = 1
-
-
-# @admin.register(Shipping)
-# class ShippingAdmin(admin.ModelAdmin):
-#     list_display = ('customer', 'date_shipping', 'time_shipping')
-#     list_filter = ('customer', 'date_shipping', 'time_shipping')
-#     readonly_fields = ('customer', 'order', 'city', 'address', 'phone', 'date_shipping', 'time_shipping', 'payment_type')
-#
-
-# class ShippingInline(admin.TabularInline):
-#     model = Shipping
-#     extra = 0
-#     readonly_fields = ('customer', 'order', 'city', 'address', 'phone', 'date_shipping', 'time_shipping')
-#     fk_name = 'order'
 
 
 @admin.register(Order)

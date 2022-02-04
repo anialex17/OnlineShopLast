@@ -78,28 +78,21 @@
                         {{ order.date_added | date:"d M Y"}}
                     </div>
                     {% for product in order.product_items.all %}
+
                     <div class="product-info">
                         <div class="food-name-block">
-                            <a href="#" class="food-name site-color">{{ product.product }}</a>
+                            <a href="#" class="food-name site-color">{{ product }}</a>
                         </div>
                         <div class="quantity">
                             <span class="order-info">{{ product.quantity }}{{ product.product.measurement }}</span>
                         </div>
                     </div>
                     {% endfor %}
-
-
                 </div>
             </div>
-
-
         </div>
-        <!--row-->
         {% endfor %}
-
-
     </div>
-    <!--End of container-->
 </section>
 
 {% endblock %}

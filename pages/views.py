@@ -63,5 +63,9 @@ class TermsOrderView(GetContextDataMixin):
     context_object_name = "order"
 
 
-def about_us(request):
-    return render(request, 'pages/about-us.html')
+# def about_us(request):
+#     return render(request, 'pages/about-us.html')
+
+class AboutUs(GetContextDataMixin):
+    model = TermsOrder
+    template_name = 'pages/about-us.html'

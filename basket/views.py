@@ -29,11 +29,13 @@ def add_to_basket(request):
 
     if request.method == "POST":
         customer = request.user.customer
-        # product = Product.objects.get(url=request.POST.get('product_url'))
         product = Product.objects.get(pk=request.POST.get('product_url'))
         product_quantity = request.POST.get('product_quantity')
         basket = Basket.objects.get(customer=customer)
-        product_item, created = ProductItem.objects.get_or_create(product=product, customer=customer)
+        if product.wholesale:
+            product_item, created = ProductItem.objects.get_or_create(product=product, customer=customer, wholesale=True)
+        else:
+            product_item, created = ProductItem.objects.get_or_create(product=product, customer=customer)
         if created:
             product_item.quantity = product_quantity
             basket.productItems.add(product_item)
@@ -41,12 +43,12 @@ def add_to_basket(request):
             messages.success(request, 'The product is successfully added to your basket')
             # messages.add_message(request, messages.INFO, 'The product is successfully added to your basket')
             return HttpResponseRedirect(request.META['HTTP_REFERER'])
-
         else:
             product_item.quantity = product_quantity
             product_item.save()
             messages.add_message(request, messages.INFO, 'The product is successfully added to your basket')
             return HttpResponseRedirect(request.META['HTTP_REFERER'])
+            # return redirect('home')
 
 
 
@@ -114,6 +116,7 @@ def order(request):
                 return redirect('payment')
             elif order.payment_type=='TYPE_PAYMENT_CASH':
                 return redirect('success')
+
     else:
         form = OrderForm()
     return render(request, 'basket/order.html', {'form':form})

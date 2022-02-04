@@ -36,7 +36,7 @@ class WholeSaleView(GetContextDataMixin):
     queryset = Category.objects.annotate(cnt=Count('product', filter=F('product__wholesale'))).filter(cnt__gt=0)
 
 
-class ProductListView(ListView):
+class ProductListView(GetContextDataMixin):
     model = Product
     template_name = 'main/menu.html'
     context_object_name = "products"
@@ -46,7 +46,7 @@ class ProductListView(ListView):
         return Product.objects.filter(category__url=self.kwargs.get("category_slug"),wholesale=False).select_related('category')
 
 
-class ProductWholeSaleListView(ListView):
+class ProductWholeSaleListView(GetContextDataMixin):
     model = Product
     template_name = 'main/menu.html'
     context_object_name = "products"
