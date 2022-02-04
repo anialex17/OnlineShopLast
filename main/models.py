@@ -102,6 +102,8 @@ class Customer(models.Model):
 class ProductItem(models.Model):
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE, null=True, verbose_name="Օգտագործող")
     product = models.ForeignKey(Product, on_delete=models.CASCADE, verbose_name="Ապրանք")
+    # order = models.ForeignKey('Order', on_delete=models.CASCADE, verbose_name="Պատվեր" )
+    wholesale = models.BooleanField(default=False)
     quantity = models.DecimalField(default=1, verbose_name="Քանակ", max_digits=10, decimal_places=1)
 
     def total_price(self):
@@ -117,7 +119,7 @@ class ProductItem(models.Model):
         return self.quantity
 
     def __str__(self):
-        return f'{self.product.title}---{self.quantity}{self.product.measurement} -- {self.total_price()}dr\n'
+        return f'{self.product.title} - {self.quantity}{self.product.measurement} - {self.total_price()}dr\n'
 
     class Meta:
         verbose_name = 'Ընտրված ապրանք'
@@ -198,10 +200,8 @@ class Order(models.Model):
     payment_type = models.CharField(max_length=100, choices=PAYMENT_TYPE_CHOICES, null=True)
     date_added = models.DateTimeField(auto_now_add=True, verbose_name="Ավելացվել է", null=True)
 
-
     def __str__(self):
         return f'{self.id} {self.customer.user.first_name}'
-
 
     class Meta:
         verbose_name = 'Պատվեր'
@@ -209,80 +209,11 @@ class Order(models.Model):
         ordering = ['date_added']
 
 
-# def save_order(sender, instance, **kwargs):
-#     instance.order.save()
-#
-#
-# post_save.connect(save_order, sender=Order)
 
 
 
 
 
 
-# class Order(models.Model):
-#
-#     STATUS_CHOICES = (
-#         ('STATUS_NEW', 'Նոր պատվեր'),
-#         ('STATUS_READY', 'Պատվերը պատրաստ է'),
-#         ('STATUS_COMPLETED', 'Պատվերը առաքված է'),
-#     )
-#
-#     # PAYMENT_TYPE_CHOICES = (
-#     #     ('TYPE_PAYMENT_CASH', 'Կանխիկ'),
-#     #     ('TYPE_PAYMENT_NON_CASH', 'Անկանխիկ')
-#     # )
-#
-#     customer = models.ForeignKey(Customer, on_delete=models.CASCADE, verbose_name="Պատվեր կատարող")
-#     product_items = models.ManyToManyField(ProductItem, verbose_name="Պատվերի ապրանքներ")
-#     date_added = models.DateTimeField(auto_now_add=True, verbose_name="Ավելացվել է", null=True)
-#     finale_price = models.PositiveIntegerField(default=0, verbose_name="Ընդհանուր գումար")
-#     delivery_cost = models.PositiveIntegerField(default=0, verbose_name="Առաքման արժեք")
-#     status = models.CharField(max_length=100, choices=STATUS_CHOICES, default='STATUS_NEW')
-#     # payment_type = models.CharField(max_length=100, choices=PAYMENT_TYPE_CHOICES, null=True)
-#
-#
-#
-#     def __str__(self):
-#         return str(self.customer.user.first_name)
-#
-#
-#     class Meta:
-#         verbose_name = 'Պատվեր'
-#         verbose_name_plural = 'Պատվերներ'
-#         ordering = ['date_added']
-#
-#
-# class Time_Shipping(models.Model):
-#     time_shipping = models.CharField(max_length=100, verbose_name="Առաքման ժամ")
-#
-#     def __str__(self):
-#         return self.time_shipping
-#
-#     class Meta:
-#         verbose_name = 'Առաքման ժամ'
-#         verbose_name_plural = 'Առաքման ժամեր'
-#
-#
-#
-# class Shipping(models.Model):
-#     PAYMENT_TYPE_CHOICES = (
-#         ('TYPE_PAYMENT_CASH', 'Կանխիկ'),
-#         ('TYPE_PAYMENT_NON_CASH', 'Անկանխիկ')
-#     )
-#     customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, null=True, verbose_name="Պատվիրատու", related_name='shipping_customer')
-#     order = models.ForeignKey(Order, on_delete=models.SET_NULL, null=True, verbose_name="Պատվեր", related_name='shipping')
-#     time_shipping = models.ForeignKey(Time_Shipping, on_delete=models.SET_NULL, null=True, verbose_name="Առաքման ժամ")
-#     city = models.CharField(max_length=200, null=False, verbose_name="Քաղաք")
-#     address = models.CharField(max_length=200, null=False, verbose_name="Հասցե")
-#     phone = models.CharField(max_length=100, verbose_name="Հեռախոսահամար")
-#     # date_time_shipping = models.DateField(verbose_name="Պատվերի օր", null=True)
-#     date_shipping = models.DateField(verbose_name="Առաքման օր", null=True)
-#     payment_type = models.CharField(max_length=100, choices=PAYMENT_TYPE_CHOICES, null=True)
-#
-#     def __str__(self):
-#         return str(self.customer)
-#
-#     class Meta:
-#         verbose_name = 'Առաքում'
-#         verbose_name_plural = 'Առաքումներ'
+
+

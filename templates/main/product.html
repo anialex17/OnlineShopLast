@@ -12,14 +12,14 @@
         <h1 class="header site-color">{% trans 'Food Details' %}</h1>
     </div>
     <!--End of menu-header-->
-            <p class="pb-3">
+
+    <div class="container py-4 mt-2">
+            <p class="pb-3" style="color: red">
             {% if messages %}
             {% for message in messages%}
             {{ message }}
              {% endfor %}
             {% endif %}</p>
-    <div class="container py-4 mt-2">
-
         <div class="d-flex">
             <div class="product-container d-flex pl-2 pr-lg-4">
                 <div class="food-img">
@@ -45,7 +45,7 @@
                     <!--                    </div>-->
                     <!--                    <form class="product-form js-product-form" data-login="{% if user.is_authenticated %}is_active{% endif %}" action="{% url 'add_to_basket' %}" method="post">-->
                     <form class="product-form js-product-form"
-                          data-login="{% if user.is_authenticated %}is_active{% endif %}" method="post">
+                          data-login="{% if user.is_authenticated %}is_active{% endif %}" action="{% url 'add_to_basket' %}" method="post">
                         {% csrf_token %}
 
                         <div class="add-to-basket-block d-flex flex-wrap py-3">

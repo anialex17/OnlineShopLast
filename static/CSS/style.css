@@ -531,9 +531,7 @@ body {
     color: white;
     transition: 0.3s;
     border-radius: 0.3rem;
-    width: 150px;
     border: transparent;
-    height: 40px;
 }
 
 .menu-content .add-to-basket-btn:hover,
