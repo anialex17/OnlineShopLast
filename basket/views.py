@@ -2,9 +2,7 @@ from django.contrib import messages
 from django.shortcuts import render, redirect
 from django.http import JsonResponse, HttpResponseRedirect
 import datetime
-
 from django.views.generic import CreateView, UpdateView
-
 from main.forms import RegisterUserForm, LoginUserForm
 from main.views import GetContextDataMixin
 from main.models import *
@@ -24,6 +22,33 @@ def basket(request):
     return render(request, 'basket/basket.html', context)
 
 
+# def add_to_basket(request):
+#     form = AddToBasketForm(request.POST)
+#
+#     if request.method == "POST":
+#         customer = request.user.customer
+#         product = Product.objects.get(pk=request.POST.get('product_url'))
+#         product_quantity = request.POST.get('product_quantity')
+#         basket = Basket.objects.get(customer=customer)
+#         if product.wholesale:
+#             product_item = ProductItem.objects.create(product=product, customer=customer, wholesale=True)
+#         else:
+#             product_item = ProductItem.objects.create(product=product, customer=customer)
+#         print(basket.productItems.all())
+#         print(product_item)
+#         if product_item in basket.productItems.all():
+#             product_item.quantity = product_quantity
+#             product_item.save()
+#             messages.success(request, 'The product is successfully added to your basket')
+#             return HttpResponseRedirect(request.META['HTTP_REFERER'])
+#         else:
+#             product_item.quantity = product_quantity
+#             basket.productItems.add(product_item)
+#             product_item.save()
+#             messages.add_message(request, messages.INFO, 'The product is successfully added to your basket')
+#             return HttpResponseRedirect(request.META['HTTP_REFERER'])
+
+
 def add_to_basket(request):
     form = AddToBasketForm(request.POST)
 
@@ -33,24 +58,20 @@ def add_to_basket(request):
         product_quantity = request.POST.get('product_quantity')
         basket = Basket.objects.get(customer=customer)
         if product.wholesale:
-            product_item, created = ProductItem.objects.get_or_create(product=product, customer=customer, wholesale=True)
+            product_item, created = ProductItem.objects.get_or_create(product=product, customer=customer, wholesale=True, order=None)
         else:
-            product_item, created = ProductItem.objects.get_or_create(product=product, customer=customer)
+            product_item, created = ProductItem.objects.get_or_create(product=product, customer=customer, order=None)
         if created:
             product_item.quantity = product_quantity
             basket.productItems.add(product_item)
             product_item.save()
             messages.success(request, 'The product is successfully added to your basket')
-            # messages.add_message(request, messages.INFO, 'The product is successfully added to your basket')
             return HttpResponseRedirect(request.META['HTTP_REFERER'])
         else:
             product_item.quantity = product_quantity
             product_item.save()
             messages.add_message(request, messages.INFO, 'The product is successfully added to your basket')
             return HttpResponseRedirect(request.META['HTTP_REFERER'])
-            # return redirect('home')
-
-
 
 
 def basket_remove(request):
@@ -59,8 +80,8 @@ def basket_remove(request):
         basket = Basket.objects.get(customer=customer)
         product_item = ProductItem.objects.get(pk=request.POST.get('remove_item'))
         basket.productItems.remove(product_item)
-        product_item.delete()
-        del product_item
+        # product_item.delete()
+        # del product_item
         messages.success(request, 'The product is successfully deleted')
         # messages.add_message(request, messages.INFO, 'The product is successfully deleted')
         # return HttpResponseRedirect(request.META['HTTP_REFERER'])
@@ -111,15 +132,36 @@ def order(request):
             else:
                 order = Order.objects.create(**form.cleaned_data,customer=customer,basket=basket, finale_price=basket.finale_price(), delivery_cost=500)
             for item in basket.productItems.all():
-                order.product_items.add(item)
+                item.order=order
+                item.save()
+                basket.productItems.remove(item)
+                # order.product_items.add(item)
             if order.payment_type=='TYPE_PAYMENT_NON_CASH':
                 return redirect('payment')
             elif order.payment_type=='TYPE_PAYMENT_CASH':
                 return redirect('success')
-
     else:
         form = OrderForm()
     return render(request, 'basket/order.html', {'form':form})
+# def order(request):
+#     if request.method =='POST':
+#         customer = request.user.customer
+#         basket = Basket.objects.get(customer=customer)
+#         form = OrderForm(data=request.POST)
+#         if form.is_valid():
+#             if basket.finale_price() > 10000:
+#                 order = Order.objects.create(**form.cleaned_data,customer=customer,basket=basket, finale_price=basket.finale_price())
+#             else:
+#                 order = Order.objects.create(**form.cleaned_data,customer=customer,basket=basket, finale_price=basket.finale_price(), delivery_cost=500)
+#             for item in basket.productItems.all():
+#                 order.product_items.add(item)
+#             if order.payment_type=='TYPE_PAYMENT_NON_CASH':
+#                 return redirect('payment')
+#             elif order.payment_type=='TYPE_PAYMENT_CASH':
+#                 return redirect('success')
+#     else:
+#         form = OrderForm()
+#     return render(request, 'basket/order.html', {'form':form})
 
 # def order(request):
 #     if request.method =='POST':
@@ -141,8 +183,6 @@ def order(request):
 #     else:
 #         form = ShippingForm()
 #     return render(request, 'basket/order.html', {'form':form})
-
-
 
 
 # def order(request):
