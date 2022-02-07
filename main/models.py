@@ -34,28 +34,25 @@ class Measurement(models.Model):
         verbose_name = 'Չափման միավոր'
         verbose_name_plural = 'Չափման միավորներ'
 
-#
-# class SaleType(models.Model):
-#     wholesale = models.CharField(max_length=)
-
 
 class Product(models.Model):
 
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, verbose_name='Կատեգորիա', null=True, blank=True, db_constraint=False)
     title = models.CharField(max_length=255, verbose_name='Անուն')
     image = models.ImageField(upload_to='media', null=True, blank=True, verbose_name='Նկար')
-    # url = models.SlugField(unique=True)
     description = models.TextField(verbose_name='Նկարագրություն')
     price = models.DecimalField(max_digits=10, decimal_places=0, verbose_name='Գին')
     new_price = models.DecimalField(max_digits=10, decimal_places=0, blank=True, null=True, verbose_name='Նոր գին')
     measurement = models.ForeignKey(Measurement, on_delete=models.SET_NULL, null=True, verbose_name='Չափման միավոր')
     start_quantity = models.DecimalField(default=1, max_digits=10, decimal_places=2, verbose_name='Սկզբնական չափ')
-    wholesale = models.BooleanField(default=False)
+    wholesale = models.BooleanField(default=False, verbose_name='Մեծածախ')
     min_order_quantity = models.DecimalField(max_digits=10, decimal_places=2, verbose_name='Պատվերի մինիմալ չափ', null=True, blank=True)
 
     class Meta:
         verbose_name = 'Ապրանք'
         verbose_name_plural = 'Ապրանքներ'
+        ordering = ['-id']
+
 
     def __str__(self):
         return self.title
@@ -86,11 +83,13 @@ class Customer(models.Model):
     phone = models.CharField(max_length=20, verbose_name='Հեռախոսահամար', null=True, blank=True)
     address = models.TextField(verbose_name='Հասցե', null=True, blank=True)
     orders = models.ManyToManyField('Order', verbose_name='Պատվերներ', related_name='related_order',blank=True )
-    is_email_verified = models.BooleanField(default=False)
+    # is_email_verified = models.BooleanField(default=False)
 
     class Meta:
         verbose_name = 'Օգտագործող'
         verbose_name_plural = 'Օգտագործողներ'
+        ordering = ['-id']
+
 
     def __str__(self):
         return f'{self.user.first_name} {self.user.last_name}'
@@ -102,8 +101,8 @@ class Customer(models.Model):
 class ProductItem(models.Model):
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE, null=True, verbose_name="Օգտագործող")
     product = models.ForeignKey(Product, on_delete=models.CASCADE, verbose_name="Ապրանք")
-    # order = models.ForeignKey('Order', on_delete=models.CASCADE, verbose_name="Պատվեր" )
-    wholesale = models.BooleanField(default=False)
+    order = models.ForeignKey('Order', on_delete=models.CASCADE, verbose_name="Պատվեր", related_name='product_item', null=True, blank=True)
+    wholesale = models.BooleanField(default=False, verbose_name='Մեծածախ')
     quantity = models.DecimalField(default=1, verbose_name="Քանակ", max_digits=10, decimal_places=1)
 
     def total_price(self):
@@ -188,7 +187,7 @@ class Order(models.Model):
 
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE, verbose_name="Պատվեր կատարող", related_name='related_orders')
     time_shipping = models.ForeignKey(Time_Shipping, on_delete=models.SET_NULL, null=True, verbose_name="Առաքման ժամ")
-    product_items = models.ManyToManyField(ProductItem, verbose_name="Պատվերի ապրանքներ")
+    # product_items = models.ManyToManyField(ProductItem, verbose_name="Պատվերի ապրանքներ")
     basket = models.ForeignKey(Basket, verbose_name='Զամբյուղ', on_delete=models.CASCADE,related_name='related_basket_orders', null=True, blank=True)
     finale_price = models.PositiveIntegerField(default=0, verbose_name="Ընդհանուր գումար")
     delivery_cost = models.PositiveIntegerField(default=0, verbose_name="Առաքման արժեք")
@@ -206,7 +205,7 @@ class Order(models.Model):
     class Meta:
         verbose_name = 'Պատվեր'
         verbose_name_plural = 'Պատվերներ'
-        ordering = ['date_added']
+        ordering = ['-date_added']
 
 
 

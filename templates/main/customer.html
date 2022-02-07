@@ -75,9 +75,9 @@
             <div class="col-md-6 py-2">
                 <div class="p-3 ordered-product order">
                     <div class="food-name-block">
-                        {{ order.date_added | date:"d M Y"}}
+                        {{ order.date_added | date:"d M Y,  H:i"}}
                     </div>
-                    {% for product in order.product_items.all %}
+                    {% for product in order.product_item.all %}
 
                     <div class="product-info">
                         <div class="food-name-block">
