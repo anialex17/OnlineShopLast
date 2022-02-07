@@ -136,7 +136,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 gettext = lambda s: s
 LANGUAGES = (
     ('hy', gettext('Armenian')),
-    ('ru', gettext('Russia')),
+    ('ru', gettext('Russian')),
     ('en', gettext('English')),
 )
 

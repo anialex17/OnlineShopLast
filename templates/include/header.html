@@ -64,67 +64,35 @@
                         <span class="product-quantity">{{ request.user.customer.baskets.total_quantity }}</span>
                     </a>
                 </li>
-                 <li class="nav-item d-none languages">
-                        {% get_current_language as LANGUAGE_CODE %}
-                        <form action="{% url 'set_language' %}" method="post">
-                            {% csrf_token %}
-                            <input type="hidden" name="next" value="{{ redirect_to }}">
-                            <select name="language" id="">
-                                {% get_available_languages as LANGUAGES %}
-                                {% get_language_info_list for LANGUAGES as languages %}
-                                {% for language in languages %}
-                                    <option value="{{ language.code }}"
-                                            {% if language.code == LANGUAGE_CODE %}selected{% endif %}>
-                                        {{ language.name_local }} ({{ language.code }})
-                                    </option>
-                                {% endfor %}
-                            </select>
-                            <input type="submit" value="Change lang" class="p-1 submit-language">
-                        </form>
-                    </li>
+                <li>
+                    <form action="{% url 'set_language' %}" class="site-lang-form" method="post">
+                        {% csrf_token %}
+                        <input name="next" type="hidden" value="{{ redirect_to }}">
+                    <div class="language-dropdown" tabindex="0">
 
-                <li class="nav-item nav-height dropdown lang-drop lang-old">
-                    <span class="nav-link site-color font-weight-bold nav-height">
-                        <form action="{% url 'set_language' %}" class="site-lang-form" method="post">
-                            {% csrf_token %}
-                            <input name="next" type="hidden" value="{{ redirect_to }}">
-                            <select name="language" id="page-language-select">
-                                {% get_current_language as LANGUAGE_CODE %}
-                                {% get_available_languages as LANGUAGES %}
-                                {% get_language_info_list for LANGUAGES as languages %}
-                                {% for language in languages %}
-                                       <option value="{{ language.code }}"{% if language.code == LANGUAGE_CODE %}
-                                               selected{% endif %}>
-                                             {{ language.name_local|slice:'0' }}
-                                                   {{ language.code }}
-                                           </option>
-                                {% endfor %}
-                            </select>
-                        </form>
-                    </span>
+                        <select name="language" id="page-language-select">
+                            {% get_current_language as LANGUAGE_CODE %}
+                            {% get_available_languages as LANGUAGES %}
+                            {% get_language_info_list for LANGUAGES as languages %}
+                            {% for language in languages %}
+                            <option value="{{ language.code }}"{% if language.code == LANGUAGE_CODE %}
+                                    selected{% endif %}>
+                                {{ language.name_local|slice:'0' }}
+                                {{ language.code }}
+                            </option>
+                            {% endfor %}
+                        </select>
+                        <div class="lang-background"></div>
+                        <div class="flags">
+                            <img id="hy" class="flag display" src="{% static 'Images/icons/armenia.png' %}" alt="Armenia Flag" />
+
+                            <img id="ru" class="flag" src="{% static 'Images/icons/russia.png' %}" alt="Russia Flag" />
+
+                            <img id="en" class="flag" src="{% static 'Images/icons/united-states.png' %}" alt="United States Flag" />
+                        </div>
+                    </div>
+                    </form>
                 </li>
-
-<!--                <li>-->
-<!--                    <div class="language-dropdown" tabindex="0">-->
-
-<!--                        <select>-->
-<!--                            <option value="armenian" selected>Armenian</option>-->
-<!--                            <option value="russian">Russian</option>-->
-<!--                            <option value="english">English</option>-->
-<!--                        </select>-->
-
-<!--                        <div class="lang-background"></div>-->
-
-<!--                        <div class="flags">-->
-<!--                            <img id="armenian" class="flag display" src="{% static 'Images/icons/armenia.png' %}" alt="Armenia Flag" />-->
-
-<!--                            <img id="russian" class="flag" src="{% static 'Images/icons/russia.png' %}" alt="Russia Flag" />-->
-
-<!--                            <img id="english" class="flag" src="{% static 'Images/icons/united-states.png' %}" alt="United States Flag" />-->
-<!--                        </div>-->
-
-<!--                    </div>-->
-<!--                </li>-->
             </ul>
         </div>
     </div>
@@ -183,24 +151,3 @@
     </div>
 </div>
 
-<script>
-    // Languages
-    $('.navbar .nav-item.dropdown .dropdown-item').each((i, el) => {
-        $(el).on('click', (event) => {
-            event.preventDefault()
-
-            $('.languages select option').each((i, option) => {
-                if ($(el).text() === $(option).val()) {
-                    $(option).attr('selected', 'selected')
-                } else {
-                    $(option).removeAttr('selected')
-                }
-            })
-
-            $('.auth-user-lang').val($(el).text())
-
-            const submit_language = $('.languages .submit-language')
-            $(submit_language[0]).click()
-        })
-    })
-</script>

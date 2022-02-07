@@ -213,7 +213,3 @@ class Order(models.Model):
 
 
 
-
-
-
-

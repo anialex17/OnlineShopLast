@@ -15,11 +15,7 @@ $(document).ready(function () {
         input.val(+input.val() - q);
     });
 
-    // languages
-    // $('#page-language-select').select2();
-    $('#page-language-select').on('change', function () {
-        $(this).parents('form').submit();
-    });
+
 
     // registration & login
     $('.sign-in-register-block .sign-in').on('click', function (){
@@ -70,29 +66,39 @@ $(document).ready(function () {
 
     let span = document.getElementsByClassName("modalclose")[0];
 
-    span.onclick = function() {
-        modal.style.display = "none";
+    if (span) {
+
+        span.onclick = function () {
+            modal.style.display = "none";
+        }
     }
 
 });
 
-// Language dropdown
+// languages
+// $('#page-language-select').select2();
+$('#page-language-select').on('change', function () {
+    $(this).parents('form').submit();
+});
 
-let currentLanguage = 'armenian';
+// Language dropdown
+function updateflags(id)  {
+    $('.flags .flag').removeClass('display')
+    $('#'+id).addClass('display')
+}
 
 const onLanguageChange = (event) => {
-    let newLanguage = event.target.value;
-
-    if (newLanguage !== currentLanguage) {
-        let currentLanguageSelector = '.language-dropdown .flag[id="'+ currentLanguage +'"]';
-        let newLanguageSelector = '.language-dropdown .flag[id="'+ newLanguage +'"]';
-
-        document.querySelector(currentLanguageSelector).classList.remove('display');
-        document.querySelector(newLanguageSelector).classList.add('display');
-        currentLanguage = newLanguage;
-    }
+    localStorage.setItem('lang', event.target.value);
 };
 
-document
-    .querySelector('.language-dropdown select')
-    .addEventListener('change', onLanguageChange);
+$('#page-language-select').on('change', onLanguageChange)
+
+function updateLanguage() {
+    const currentLanguage = $('#page-language-select').val()
+    const lang = localStorage.getItem('lang');
+    $('#page-language-select').val(lang || currentLanguage)
+    updateflags(lang || currentLanguage)
+    localStorage.setItem('lang', 'hy');
+}
+
+updateLanguage();
