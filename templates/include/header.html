@@ -51,8 +51,6 @@
                             data-target="#sign-in-modal">
                         <span class="d-lg-none font-weight-bold pr-2">{% trans 'SIGN IN' %}</span>
                         <i class="fas fa-sign-in-alt"></i>
-                        <!--<i class="fas fa-sign-out-alt"></i>-->
-                        <!--<i class="fas fa-user"></i>-->
                     </button>
                     <div class="pb-1 sign-in-basket-line">|</div>
                 </li>
@@ -61,7 +59,13 @@
                     <a class="nav-link site-color font-weight-bold nav-height basket" href="{% url 'basket' %}">
                         <span class="d-lg-none pr-2">{% trans 'Basket' %}</span>
                         <i class="fas fa-shopping-basket"></i>
+                        {% if request.user.is_authenticated %}
                         <span class="product-quantity">{{ request.user.customer.baskets.total_quantity }}</span>
+                        {% else %}
+                        <span class="product-quantity">{{ basket.total_quantity }}</span>
+
+                        {% endif %}
+
                     </a>
                 </li>
                 <li>

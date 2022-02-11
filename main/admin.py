@@ -67,7 +67,7 @@ class OrderAdmin(admin.ModelAdmin):
 
 @admin.register(Basket)
 class BasketAdmin(admin.ModelAdmin):
-    list_display = ('customer',)
+    list_display = ('customer','session_key')
 
 
 @admin.register(Measurement)

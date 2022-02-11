@@ -1,5 +1,5 @@
 from django import forms
-
+import datetime
 from main.models import Basket, ProductItem, Order, Time_Shipping
 
 
@@ -28,7 +28,7 @@ class OrderForm(forms.ModelForm):
                                             'placeholder': "+374 ** ******"}),
             'date_shipping': forms.DateInput(
                 attrs={'type': "date", 'id': "start", 'class': "date-input", 'name': "trip-start",
-                       'value': "2021-12-15", 'min': "2021-12-15", 'max': "2022-12-31"}),
+                       'value': "2021-12-15", 'min': datetime.datetime.today()}),
             'time_shipping': forms.Select(attrs={'type': "text", 'class': "form-control shadow-none", 'id': "name",
                                                  'placeholder': "Time"}),
             'payment_type': forms.Select(attrs={'type': "text", 'class': "form-control shadow-none", 'id': "name",
