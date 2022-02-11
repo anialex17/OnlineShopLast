@@ -98,7 +98,9 @@ function updateLanguage() {
     const lang = localStorage.getItem('lang');
     $('#page-language-select').val(lang || currentLanguage)
     updateflags(lang || currentLanguage)
-    localStorage.setItem('lang', 'hy');
+    localStorage.setItem('lang', currentLanguage);
 }
 
 updateLanguage();
+
+

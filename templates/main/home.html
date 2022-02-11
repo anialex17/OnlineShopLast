@@ -6,24 +6,24 @@
     <section class="home-content divider">
         <div class="right-bottom-bg">
             <div class="container">
-
-                <div class="header-block">
-                    <h1 class="header mb-5">{% trans 'Our Menu' %}</h1>
-                    <p style="color: red" class="header-text text-center">
-                        {% if messages %}
+                {% if messages %}
                 {% for message in messages %}
-                {{ message }}
+                <div class="d-flex justify-content-center mb-3">
+                    <div class="message">
+                        {{ message }}
+                    </div>
+                </div>
                 {% endfor %}
                 {% endif %}
-
-                    </p>
+                <div class="header-block justify-content-center">
+                    <h1 class="header mb-5">{% trans 'Our Menu' %}</h1>
                 </div>
 
 
-                <div class="row">
+                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-2 row-cols-lg-3">
                     {% for category in categories %}
 
-                        <div class="col-sm-4 py-2 px-sm-2">
+                        <div class="col py-2 px-sm-2">
                             <a href="{% url 'category_product_list' category.url %}" class="product-item">
                                 <img src="{{ category.image.url }}" alt="" class="img product-pic">
 

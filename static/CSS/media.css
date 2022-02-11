@@ -160,12 +160,10 @@
         padding-top: 30px;
     }
 }
-@media only screen and (max-width: 1200px){
-    .nav-link {
-        font-size: 14px;
-    }
+@media only screen and (min-width: 1200px){
+
     .nav-item {
-        padding-right: 5px;
+        padding-right: 30px;
     }
 }
 

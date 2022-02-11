@@ -9,7 +9,7 @@
 
     <div class="container py-2">
 
-        <div class="header-block">
+        <div class="header-block d-flex justify-content-center">
             <h3 class="site-color py-3 header">
                 <i class="fas fa-shopping-basket"></i>
                 <span class="font-weight-bold">{% trans 'My Basket' %}</span>
@@ -27,12 +27,15 @@
             </tr>
             </thead>
             <tbody>
-            <p class="pb-3">
             {% if messages %}
-            {% for message in messages%}
-            {{ message }}
-             {% endfor %}
-            {% endif %}</p>
+            {% for message in messages %}
+            <div class="d-flex justify-content-center pt-1 pb-3">
+                <div class="message">
+                    {{ message }}
+                </div>
+            </div>
+            {% endfor %}
+            {% endif %}
 
             {% for item in basket.productItems.all %}
             <tr class="py-3">
@@ -117,19 +120,14 @@
                 <a href="{% url 'home' %}" class="btn shadow-none btn-lg"><span><i class="fas fa-angle-left"></i>&nbsp;&nbsp;{% trans 'Continue Ordering' %}</span></a>
 
                 {% if request.user.is_authenticated %}
-<!--                <a href="{% url 'ordering' %}">-->
-<!--                    <button type="submit" class="btn shadow-none btn-lg"><span>{% trans 'Order' %}&nbsp;&nbsp;<i-->
-<!--                          class="fas fa-angle-right"></i></span></button>-->
-<!--                </a>-->
+
                 <a class="btn shadow-none btn-lg" href="{% url 'ordering' %}">{% trans 'Order' %}<span>&nbsp;&nbsp;<i class="fas fa-angle-right"></i></span></a>
                 {% else %}
 
-                <a class="btn shadow-none btn-lg"  href="{% url 'home' %}">{% trans 'Order' %}<span>&nbsp;&nbsp;<i class="fas fa-angle-right"></i></span>
-<!--                <button type="submit" class="btn shadow-none btn-lg">{% trans 'Order' %}</button>-->
-                </a>
-<!--                <button type="submit" class="btn shadow-none btn-lg">{% trans 'Order' %}</button>-->
+                <a class="btn shadow-none btn-lg"  href="{% url 'home' %}">{% trans 'Order' %}<span>&nbsp;&nbsp;<i class="fas fa-angle-right"></i></span></a>
 
                 {% endif %}
+
             </div>
             <div class="order-summary">
                 <div class="cost">
@@ -150,5 +148,57 @@
         </div>
     </div>
 </section>
+<div class="modal fade" id="sign-in-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="sign-in-register-block">
+                    <button type="button" class="btn shadow-none sign-in site-color">{% trans 'Sign In' %}</button>
+                    <span class="line"></span>
+                    <button type="button" class="btn shadow-none register">{% trans 'Register' %}</button>
+                </div>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="{% url 'login' %}" method="post" class="login-form">
+                    {% csrf_token %}
+                    {{ form.non_field_errors }}
+                    {% for field in form %}
+                    <div class="form-group py-2">
+                        {{ field }}
+                        {{ field.errors }}
+                    </div>
+                    {% endfor %}
+                    <div class="pt-4">
+                        <button type="submit"
+                                class="btn btn-block shadow-none modal-sign-in-btn">{% trans 'Sign In' %}
+                        </button>
+                    </div>
+                </form>
+                <form action="{% url 'register' %}" method="post" class="register-form d-none">
+                    {% csrf_token %}
+                    <div style="background: red">{{register_form.errors}}</div>
+
+                    {{ register_form.non_field_errors }}
+                    {% for field in register_form %}
+                    <div class="form-group py-2">
+                        {{ field.errors }}
+                        {{ field }}
+                    </div>
+                    {% endfor %}
+                    <div class="pt-4">
+                        <button type="submit"
+                                class="btn btn-block shadow-none modal-sign-in-btn">{% trans 'Register' %}
+                        </button>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer"></div>
+        </div>
+    </div>
+</div>
 
 {% endblock %}

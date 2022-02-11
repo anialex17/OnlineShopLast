@@ -27,8 +27,7 @@ class OrderForm(forms.ModelForm):
             'phone': forms.TextInput(attrs={'type': "text", 'class': "form-control shadow-none", 'id': "name",
                                             'placeholder': "+374 ** ******"}),
             'date_shipping': forms.DateInput(
-                attrs={'type': "date", 'id': "start", 'class': "date-input", 'name': "trip-start",
-                       'value': "2021-12-15", 'min': "2021-12-15", 'max': "2022-12-31"}),
+                attrs={'type': "date", 'id': "start", 'class': "date-input", 'name': "trip-start"}),
             'time_shipping': forms.Select(attrs={'type': "text", 'class': "form-control shadow-none", 'id': "name",
                                                  'placeholder': "Time"}),
             'payment_type': forms.Select(attrs={'type': "text", 'class': "form-control shadow-none", 'id': "name",

@@ -15,10 +15,10 @@
                     <a class="nav-link site-color font-weight-bold nav-height"
                        href="{% url 'home' %}">{% trans 'HOME' %}</a>
                 </li>
-                <li class="nav-item nav-height">
-                    <a class="nav-link site-color font-weight-bold nav-height"
-                       href="{% url 'terms_order' %}">{% trans 'ORDER' %}</a>
-                </li>
+<!--                <li class="nav-item nav-height">-->
+<!--                    <a class="nav-link site-color font-weight-bold nav-height"-->
+<!--                       href="{% url 'terms_order' %}">{% trans 'ORDER' %}</a>-->
+<!--                </li>-->
                 <!--                <li class="nav-item nav-height">-->
                 <!--                    <a class="nav-link site-color font-weight-bold nav-height"-->
                 <!--                       href="{% url 'gallery' %}">{% trans 'GALLERY' %}</a>-->
@@ -27,14 +27,14 @@
                     <a class="nav-link site-color font-weight-bold nav-height"
                        href="{% url 'wholesale' %}">{% trans 'WHOLESALE' %}</a>
                 </li>
-                <li class="nav-item nav-height">
-                    <a class="nav-link site-color font-weight-bold nav-height"
-                       href="{% url 'contact' %}">{% trans 'CONTACT' %}</a>
-                </li>
-                <li class="nav-item nav-height">
-                    <a class="nav-link site-color font-weight-bold nav-height"
-                       href="{% url 'about_us' %}">{% trans 'ABOUT US' %}</a>
-                </li>
+<!--                <li class="nav-item nav-height">-->
+<!--                    <a class="nav-link site-color font-weight-bold nav-height"-->
+<!--                       href="{% url 'contact' %}">{% trans 'CONTACT' %}</a>-->
+<!--                </li>-->
+<!--                <li class="nav-item nav-height">-->
+<!--                    <a class="nav-link site-color font-weight-bold nav-height"-->
+<!--                       href="{% url 'about_us' %}">{% trans 'ABOUT US' %}</a>-->
+<!--                </li>-->
                 {% if request.user.is_authenticated %}
                 <li class="nav-item nav-height">
                     <a class="nav-link site-color font-weight-bold nav-height"
@@ -51,8 +51,6 @@
                             data-target="#sign-in-modal">
                         <span class="d-lg-none font-weight-bold pr-2">{% trans 'SIGN IN' %}</span>
                         <i class="fas fa-sign-in-alt"></i>
-                        <!--<i class="fas fa-sign-out-alt"></i>-->
-                        <!--<i class="fas fa-user"></i>-->
                     </button>
                     <div class="pb-1 sign-in-basket-line">|</div>
                 </li>
@@ -64,7 +62,7 @@
                         <span class="product-quantity">{{ request.user.customer.baskets.total_quantity }}</span>
                     </a>
                 </li>
-                <li>
+                <li class="pl-5">
                     <form action="{% url 'set_language' %}" class="site-lang-form" method="post">
                         {% csrf_token %}
                         <input name="next" type="hidden" value="{{ redirect_to }}">

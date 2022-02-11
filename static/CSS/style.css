@@ -65,6 +65,19 @@ body {
     overflow: hidden;
     text-overflow: ellipsis;
 }
+.message {
+    font-size: 18px;
+    background-clip: padding-box;
+    border: 1px solid rgba(0,0,0,.05);
+    border-radius: 5px;
+    box-shadow: 0 0.125rem 0.25rem rgb(0 0 0 / 8%);
+    position: relative;
+    overflow: hidden;
+    color: #535353;
+    background-color: #FFFFFF;
+    padding: 15px;
+    bottom: 8px;
+}
 
 /* End of My Template Classes */
 
@@ -447,7 +460,7 @@ body {
 /* Menu Page */
 
 .menu-content .container {
-    background: url(./../Images/menu/bg/bg-menu.jpg) repeat-y center center;
+    /*background: url(./../Images/menu/bg/bg-menu.jpg) repeat-y center center;*/
     position: relative;
 }
 .semitransparent {
@@ -474,26 +487,28 @@ body {
     font-size: 28px;
     font-weight: 500;
 }
+.menu-content .price {
+    color: #535353;
+}
 .category-product-discount {
     font-size: 20px;
 }
 .category-product-quantity {
-    font-size: 22px;
+    font-size: 20px;
 }
 
 .menu-content .food-info {
     font-size: 24px;
-    border-bottom: 2px dashed white;
+    border-bottom: 2px dashed #d50c0d;
 }
 
 .menu-content .food-info .food-name {
-    color: white;
     text-decoration: none;
     transition: 0.3s;
 }
 
 .menu-content .food-info .food-name:hover {
-    color: #d50c0d;
+    color: #8a3232;
 }
 
 .menu-content .food-type,
@@ -516,7 +531,7 @@ body {
 
 .menu-content .add-to-basket-block input {
     color: #6c757d;
-    width: 40px;
+    width: 75px;
     height: 40px;
     font-size: 30px;
     font-weight: 500;
@@ -539,8 +554,14 @@ body {
     background-image: linear-gradient(#e60203 0.61%, #910001 99.56%);
 }
 .menu-content .food-container {
-    background: #00000080;
+    background: #FFFFFF;
     padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0px 3px 26px rgb(0 0 0 / 7%);
+    border: 1px solid transparent;
+}
+.menu-content .food-container:hover{
+    border: 1px solid #c9c9c9;
 }
 
 .menu-content .food-container img {
@@ -703,12 +724,18 @@ body {
     color: #6c757d;
     border-radius: 0;
     padding: 0;
-    width: 40px;
+    width: 70px;
     height: 40px;
-    font-size: 20px;
+    font-size: 25px;
     font-weight: bold;
     background-color: #f8f9fa;
     text-align: center;
+}
+
+.product-content .add-to-basket-block .btn-dec,
+.product-content .add-to-basket-block .btn-inc {
+    top: 50%;
+    transform: translateY(-50%);
 }
 
 .product-content .add-to-basket-btn {

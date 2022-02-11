@@ -65,12 +65,12 @@ def add_to_basket(request):
             product_item.quantity = product_quantity
             basket.productItems.add(product_item)
             product_item.save()
-            messages.success(request, 'The product is successfully added to your basket')
+            messages.success(request, 'The product was successfully added to your basket')
             return HttpResponseRedirect(request.META['HTTP_REFERER'])
         else:
             product_item.quantity = product_quantity
             product_item.save()
-            messages.add_message(request, messages.INFO, 'The product is successfully added to your basket')
+            messages.add_message(request, messages.INFO, 'The product was successfully added to your basket')
             return HttpResponseRedirect(request.META['HTTP_REFERER'])
 
 
@@ -82,7 +82,7 @@ def basket_remove(request):
         basket.productItems.remove(product_item)
         # product_item.delete()
         # del product_item
-        messages.success(request, 'The product is successfully deleted')
+        messages.success(request, 'The product was successfully deleted')
         # messages.add_message(request, messages.INFO, 'The product is successfully deleted')
         # return HttpResponseRedirect(request.META['HTTP_REFERER'])
     return redirect('basket')
