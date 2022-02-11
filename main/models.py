@@ -57,6 +57,7 @@ class Product(models.Model):
     def __str__(self):
         return self.title
 
+
     @property
     # def ct_model(self):
     #     return self._meta.model_name
@@ -99,11 +100,13 @@ class Customer(models.Model):
 
 
 class ProductItem(models.Model):
-    customer = models.ForeignKey(Customer, on_delete=models.CASCADE, null=True, verbose_name="Օգտագործող")
+    customer = models.ForeignKey(Customer,blank=True, null=True, on_delete=models.CASCADE, verbose_name="Օգտագործող")
     product = models.ForeignKey(Product, on_delete=models.CASCADE, verbose_name="Ապրանք")
     order = models.ForeignKey('Order', on_delete=models.CASCADE, verbose_name="Պատվեր", related_name='product_item', null=True, blank=True)
     wholesale = models.BooleanField(default=False, verbose_name='Մեծածախ')
     quantity = models.DecimalField(default=1, verbose_name="Քանակ", max_digits=10, decimal_places=1)
+    session_key=models.CharField(max_length=1024, blank=True, null=True)
+
 
     def total_price(self):
         if self.product.new_price:
@@ -127,14 +130,18 @@ class ProductItem(models.Model):
 
 
 class Basket(models.Model):
-    customer = models.OneToOneField(Customer, on_delete=models.CASCADE, related_name='baskets',
+    customer = models.OneToOneField(Customer, blank=True, null=True, on_delete=models.CASCADE, related_name='baskets',
                                     verbose_name="Օգտագործող")
     productItems = models.ManyToManyField(ProductItem, related_name='product_item', blank=True,
                                           verbose_name="Զամբյուղի ապրանք")
     delivery_cost = models.PositiveIntegerField(default=0, verbose_name="Առաքման արժեքը")
+    session_key=models.CharField(max_length=1024, blank=True, null=True)
 
     def __str__(self):
-        return str(self.customer.user.username)
+        if self.customer:
+            return str(self.customer.user.username)
+        else:
+            return str(self.session_key)
 
     def finale_price(self):
         finale_price = 0
@@ -144,7 +151,6 @@ class Basket(models.Model):
             else:
                 finale_price += i.product.price * i.quantity
         return finale_price
-
 
     def total_quantity(self):
         total = 0

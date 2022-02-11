@@ -15,7 +15,8 @@ from .models import *
 
 
 class GetContextDataMixin(ListView):
-    def get_context_data(self, **kwargs):
+
+    def get_context_data(self,**kwargs):
         context = super().get_context_data(**kwargs)
         context['register_form'] = RegisterUserForm()
         context['form'] = LoginUserForm()
@@ -64,9 +65,11 @@ class ProductDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['products'] = Product.objects.filter(category__url=self.kwargs.get("category_slug")).select_related('category')
-        # context['product_item'] = Product.objects.filter(url=self.kwargs.get("slug")).first()
         context['product_item'] = Product.objects.get(pk=self.kwargs.get("pk"))
+        if context['product_item'].wholesale:
+            context['products'] = Product.objects.filter(category__url=self.kwargs.get("category_slug"), wholesale=True).select_related('category')
+        else:
+            context['products'] = Product.objects.filter(category__url=self.kwargs.get("category_slug"), wholesale=False).select_related('category')
         context['register_form'] = RegisterUserForm()
         context['form'] = LoginUserForm()
         return context
@@ -129,35 +132,32 @@ def user_login(request):
 
         user = authenticate(request, username=username, password=password)
         login(request, user)
+        if request.session.get('basket_id'):
+            basket = Basket.objects.get(id=request.session['basket_id'])
+            customer = Customer.objects.get(user=request.user)
+            customer_basket = Basket.objects.filter(customer=customer).first()
+            for item in basket.productItems.all():
+                item.session_key=None
+                item.customer=customer
+                item.save()
+                for i in customer_basket.productItems.all():
+                    if item.product==i.product:
+                        i.quantity=item.quantity
+                        i.save()
+                        item.delete()
+                        break
+                else:
+                    customer_basket.productItems.add(item)
+            basket.session_key = None
+            # basket.delete()
+            customer_basket.save()
+
         messages.add_message(request, messages.SUCCESS,f'Welcome {user.username}')
         return redirect(reverse('home'))
 
     return render(request, 'include/header.html')
 
 
-    # if request.method == 'POST':
-    #     context = {'data': request.POST}
-    #     username = request.POST.get('username')
-    #     password = request.POST.get('password')
-    #     user = authenticate(request, username=username, password=password)
-    #     form = LoginUserForm(data=request.POST)
-    #     if form.is_valid():
-    #         user = form.get_user()
-    #         # if not user.is_email_verifited:
-    #         #     messages.add_message(request, messages.ERROR,'Email is not verified, please check your email inbox')
-    #         #     return render(request, 'include/header.html', {'form': form}, status=401)
-    #         login(request, user)
-    #         return redirect('home')
-    #
-    #     else:
-    #         form.errors
-    #         return redirect('home')
-    #
-    # else:
-    #     form = LoginUserForm()
-    #     return redirect('home')
-    #
-    # return render(request, 'include/header.html', {'form': form})
 
 
 def logout_user(request):

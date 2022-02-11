@@ -1,5 +1,6 @@
 from django.urls import path
 from .views import *
+from basket.views import *
 
 urlpatterns = [
     path('password/', PasswordsChangeView.as_view(), name='password_change'),

@@ -59,7 +59,13 @@
                     <a class="nav-link site-color font-weight-bold nav-height basket" href="{% url 'basket' %}">
                         <span class="d-lg-none pr-2">{% trans 'Basket' %}</span>
                         <i class="fas fa-shopping-basket"></i>
+                        {% if request.user.is_authenticated %}
                         <span class="product-quantity">{{ request.user.customer.baskets.total_quantity }}</span>
+                        {% else %}
+                        <span class="product-quantity">{{ basket.total_quantity }}</span>
+
+                        {% endif %}
+
                     </a>
                 </li>
                 <li class="pl-5">
