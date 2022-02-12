@@ -38,7 +38,7 @@
                 {% if request.user.is_authenticated %}
                 <li class="nav-item nav-height">
                     <a class="nav-link site-color font-weight-bold nav-height"
-                       href="{% url 'profile' request.user.id %}">{{ user.username }}</a>
+                       href="{% url 'profile' request.user.id %}">{{ user.first_name }} {{ user.last_name }}</a>
 
                 </li>
                 <li class="nav-item nav-height">
@@ -62,8 +62,8 @@
                         {% if request.user.is_authenticated %}
                         <span class="product-quantity">{{ request.user.customer.baskets.total_quantity }}</span>
                         {% else %}
+<!--                        <span class="product-quantity">{{ request.session.session_key }}</span>-->
                         <span class="product-quantity">{{ basket.total_quantity }}</span>
-
                         {% endif %}
 
                     </a>
