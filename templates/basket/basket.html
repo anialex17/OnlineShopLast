@@ -124,7 +124,8 @@
                 <a class="btn shadow-none btn-lg" href="{% url 'ordering' %}">{% trans 'Order' %}<span>&nbsp;&nbsp;<i class="fas fa-angle-right"></i></span></a>
                 {% else %}
 
-                <a class="btn shadow-none btn-lg"  href="{% url 'home' %}">{% trans 'Order' %}<span>&nbsp;&nbsp;<i class="fas fa-angle-right"></i></span></a>
+                <a class="btn shadow-none btn-lg" data-toggle="modal"
+                   data-target="#sign-in-modal">{% trans 'Order' %}<span>&nbsp;&nbsp;<i class="fas fa-angle-right"></i></span></a>
 
                 {% endif %}
 

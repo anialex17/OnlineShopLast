@@ -11,15 +11,18 @@
     <div class="product-header text-center flex-center">
         <h1 class="header site-color">{% trans 'Food Details' %}</h1>
     </div>
+    {% if messages %}
+    {% for message in messages %}
+    <div class="d-flex justify-content-center pt-1 pb-3">
+        <div class="message">
+            {{ message }}
+        </div>
+    </div>
+    {% endfor %}
+    {% endif %}
     <!--End of menu-header-->
 
     <div class="container py-4 mt-2">
-            <p class="pb-3" style="color: red">
-            {% if messages %}
-            {% for message in messages%}
-            {{ message }}
-             {% endfor %}
-            {% endif %}</p>
         <div class="d-flex">
             <div class="product-container d-flex pl-2 pr-lg-4">
                 <div class="food-img">
@@ -35,7 +38,7 @@
                         <span class="font-weight-bold"><span id="food-price">{{ product.price }}</span>{% trans 'dr' %}</span>
                         {% endif %}
                     </div>
-                    <div class="description py-2">
+                    <div class="description pt-2">
                         <p>
                             {{ product.description }}
                         </p>
@@ -48,8 +51,8 @@
                           data-login="{% if user.is_authenticated %}is_active{% endif %}" action="{% url 'add_to_basket' %}" method="post">
                         {% csrf_token %}
 
-                        <div class="add-to-basket-block d-flex flex-wrap py-3">
-                            <button type="button" class="btn shadow-none js-btn-dec flex-center mr-2 js-btn-dec">
+                        <div class="add-to-basket-block d-flex flex-wrap">
+                            <button type="button" class="btn shadow-none js-btn-dec flex-center mr-2 mt-3 js-btn-dec">
                                 <i class="fas fa-minus site-color"></i>
                             </button>
                             {% if product.wholesale %}
@@ -57,14 +60,14 @@
                                    class="product-quantity" name="product_quantity">
                             {% else %}
                             <input type="text" value="{{product.start_quantity}}"
-                                   data-change-size="{{product.start_quantity}}" class="product-quantity"
+                                   data-change-size="{{product.start_quantity}}" class="product-quantity mt-3"
                                    name="product_quantity">
                             {% endif %}
-                            <button type="button" class="btn shadow-none js-btn-inc flex-center mr-2 js-btn-inc">
+                            <button type="button" class="btn shadow-none js-btn-inc flex-center mr-2 mt-3 js-btn-inc">
                                 <i class="fas fa-plus site-color"></i>
                             </button>
                             <input type="text" hidden name="product_url" value="{{ product.pk }}">
-                            <button type="submit" class="btn shadow-none add-to-basket-btn" data-toggle="modal"
+                            <button type="submit" class="btn shadow-none add-to-basket-btn mt-3" data-toggle="modal"
                                     data-target="#add-to-basket">
                                 <span>{% trans 'Add to Basket' %}</span>
                             </button>
@@ -76,7 +79,7 @@
             <!--product-container-->
 
             <div class="other-products-container">
-                <h5 class="dishes-header">{% trans 'Similar Dishes' %}</h5>
+                <h5 class="dishes-header">{% trans 'Similar products' %}</h5>
                 {% for product in products %}
                 <div class="food-block d-flex py-2">
                     <a href="{% url 'product' product.category.url product.pk %}" class="d-block food-image">
@@ -89,7 +92,6 @@
                             <span>
                                 {{ product.description|truncatewords:6 }}
                             </span>
-                            <span>...</span>
                         </div>
                     </div>
                     <!--food-info-->

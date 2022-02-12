@@ -355,8 +355,7 @@ body {
 }
 
 .home-content .header-block .header {
-    font-family: 'Great Vibes', cursive, sans-serif;
-    font-size: 44px;
+    font-family: sans-serif;
     text-align: center;
     color: #d50c0d;
     position: relative;
@@ -578,7 +577,7 @@ body {
     background: #FFFFFF;
 }
 .menu-content .header {
-    font-family: 'Great Vibes', cursive, sans-serif;
+    font-family: sans-serif;
     font-weight: bold;
     position: relative;
 }
@@ -611,6 +610,7 @@ body {
 
 .product-content .container {
     box-shadow: -1px -2px 7px rgb(0 0 0 / 8%);
+    background-color: #FFFFFF;
 }
 
 .product-content .product-header {
@@ -622,9 +622,8 @@ body {
 }
 
 .product-content .product-header .header {
-    font-size: 40px;
     font-weight: bold;
-    font-family: 'Great Vibes', cursive, sans-serif;
+    font-family: sans-serif;
     position: relative;
 }
 .product-content .product-header .header:before {
@@ -924,7 +923,7 @@ body {
 /* Basket Page */
 
 .basket-content .header {
-    font-family: 'Great Vibes', cursive, sans-serif;
+    font-family: sans-serif;
 }
 
 .basket-content .food-name,
@@ -1134,14 +1133,17 @@ body {
 }
 
 .contact-content .send-btn .btn {
-    background-color: #d50c0d;
-    color: white;
+    background-image: linear-gradient(#d50c0d 0.61%, #a10809 99.56%);
+    box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.1)!important;
     font-weight: bold;
-    transition: 0.1s;
+    color: white;
+    transition: 0.3s;
+    border-radius: 0.3rem;
+    border: transparent;
 }
 
 .contact-content .send-btn .btn:hover {
-    background-color: #b5090a;
+    background-image: linear-gradient(#e60203 0.61%, #910001 99.56%);
 }
 
 .contact-content .form-name-lastname .form-group {
@@ -1178,7 +1180,7 @@ body {
 
 .about-us-content .about-us-header-part .header {
     font-weight: bold;
-    font-family: 'Great Vibes', cursive, sans-serif;
+    font-family: sans-serif;
     position: relative;
 }
 .about-us-content .about-us-header-part .header:before {
@@ -1216,6 +1218,15 @@ body {
 
 /* End of About Us page */
 
+/* Privacy */
+
+.privacy-content .container .header {
+    font-weight: bold;
+    font-family: sans-serif;
+}
+
+/* End of Privacy */
+
 
 /* How to Order */
 
@@ -1224,7 +1235,7 @@ body {
     height: 40px;
 }
 .order-content .container .header {
-    font-family: 'Great Vibes', cursive, sans-serif;
+    font-family: sans-serif;
     font-weight: bold;
 }
 
@@ -1243,14 +1254,17 @@ body {
 }
 
 .user-content .confirm-block .confirm {
-    background-color: #d50c0d;
-    color: white;
+    background-image: linear-gradient(#d50c0d 0.61%, #a10809 99.56%);
+    box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.1)!important;
     font-weight: bold;
-    transition: 0.1s;
+    color: white;
+    transition: 0.3s;
+    border-radius: 0.3rem;
+    border: transparent;
 }
 
 .user-content .confirm-block .confirm:hover {
-    background-color: #c50e0f;
+    background-image: linear-gradient(#e60203 0.61%, #910001 99.56%);
 }
 
 .user-content .order {
@@ -1426,8 +1440,40 @@ body {
     color: #535353;
     text-transform: uppercase;
 }
+.change-btn {
+    background-image: linear-gradient(#d50c0d 0.61%, #a10809 99.56%);
+    box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.1)!important;
+    font-weight: bold;
+    color: white;
+    transition: 0.3s;
+    border-radius: 0.3rem;
+    border: transparent;
+}
+.change-btn:hover {
+    background-image: linear-gradient(#e60203 0.61%, #910001 99.56%);
+}
 
 /* End of Personal */
+
+/* Success page*/
+
+.success-content {
+    margin-top: 90px;
+}
+.success-header {
+    color: #535353;
+}
+.success-link {
+    font-weight: bold;
+    font-size: 20px;
+    text-decoration: none;
+}
+.success-link:hover {
+    color: #8a3232;
+    text-decoration: none;
+}
+
+/* End of Success */
 
 
 /*start of pae numbers*/

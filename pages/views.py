@@ -69,3 +69,8 @@ class TermsOrderView(GetContextDataMixin):
 class AboutUs(GetContextDataMixin):
     model = TermsOrder
     template_name = 'pages/about-us.html'
+
+
+class Privacy(GetContextDataMixin):
+    model = TermsOrder
+    template_name = 'pages/privacy.html'

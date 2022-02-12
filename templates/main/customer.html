@@ -8,7 +8,7 @@
     <div class="container py-2">
 
         <div class="header text-center pb-4 pt-2">
-            <h5 class="site-color font-weight-bold">{% trans 'Personal information' %}</h5>
+            <h1 class="site-color font-weight-bold">{% trans 'Personal information' %}</h1>
             <span>{% trans 'You can change your personal information' %}</span>
         </div>
 
@@ -61,9 +61,9 @@
                 <button type="submit" class="btn shadow-none btn-lg confirm">{% trans 'Confirm' %}</button>
             </div>
         </form>
-        <div class="">
+        <div>
             <a href="{% url 'password_change' %}">
-                <button type="button" class="btn btn-danger">{% trans 'Change Password' %}</button>
+                <button type="button" class="btn btn-danger change-btn">{% trans 'Change Password' %}</button>
             </a>
         </div>
 

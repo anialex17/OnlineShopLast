@@ -9,4 +9,5 @@ urlpatterns = [
     path('contact/', ContactView.as_view(), name='contact'),
     # path('about-us/', about_us, name='about_us'),
     path('about-us/', AboutUs.as_view(), name='about_us'),
+    path('privacy/', Privacy.as_view(), name='privacy'),
 ]

@@ -12,6 +12,7 @@ from .email import send_activate_mail
 from django.db.models import Count, F
 from .forms import *
 from .models import *
+import uuid
 
 
 class GetContextDataMixin(ListView):
@@ -67,9 +68,9 @@ class ProductDetailView(DetailView):
         context = super().get_context_data(**kwargs)
         context['product_item'] = Product.objects.get(pk=self.kwargs.get("pk"))
         if context['product_item'].wholesale:
-            context['products'] = Product.objects.filter(category__url=self.kwargs.get("category_slug"), wholesale=True).select_related('category')
+            context['products'] = Product.objects.filter(category__url=self.kwargs.get("category_slug"), wholesale=True).select_related('category')[:5]
         else:
-            context['products'] = Product.objects.filter(category__url=self.kwargs.get("category_slug"), wholesale=False).select_related('category')
+            context['products'] = Product.objects.filter(category__url=self.kwargs.get("category_slug"), wholesale=False).select_related('category')[:5]
         context['register_form'] = RegisterUserForm()
         context['form'] = LoginUserForm()
         return context
