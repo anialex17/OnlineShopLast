@@ -2,6 +2,7 @@ from django.contrib.auth.tokens import default_token_generator
 from django.contrib.auth.views import PasswordChangeView
 from django.contrib.auth import login, logout, authenticate, views
 from django.contrib import messages
+from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.utils.http import urlsafe_base64_decode
@@ -12,7 +13,7 @@ from .email import send_activate_mail
 from django.db.models import Count, F
 from .forms import *
 from .models import *
-
+import uuid
 
 class GetContextDataMixin(ListView):
 
@@ -100,64 +101,78 @@ def register(request):
     return render(request, 'include/header.html', {'register_form': register_form})
 
 
-# class LoginView(views.View):
-#
-#     def get(self, request, *args, **kwargs):
-#         form = LoginUserForm(request.POST or None)
-#         print(form)
-#         print(request.POST)
-#         context = {'form':form}
-#         return redirect(reverse('home'))
-#
-#     def post(self, request, *args, **kwargs):
-#         form = LoginUserForm(request.POST or None)
-#         if form.is_valid():
-#             context = {'data': request.POST}
-#             username = request.POST.get('username')
-#             password = request.POST.get('password')
-#             user= authenticate(request, username=username, password=password)
-#             login(request, user)
-#             return redirect(reverse('home'))
-#         context = {
-#             'form':form
-#         }
-#         return redirect(reverse('home'))
-
-
 def user_login(request):
     if request.method == 'POST':
-        context = {'data': request.POST}
-        username = request.POST.get('username')
-        password = request.POST.get('password')
-
-        user = authenticate(request, username=username, password=password)
-        login(request, user)
-        if request.session.get('basket_id'):
-            basket = Basket.objects.get(id=request.session['basket_id'])
-            customer = Customer.objects.get(user=request.user)
-            customer_basket = Basket.objects.filter(customer=customer).first()
-            for item in basket.productItems.all():
-                item.session_key=None
-                item.customer=customer
-                item.save()
-                for i in customer_basket.productItems.all():
-                    if item.product==i.product:
-                        i.quantity=item.quantity
-                        i.save()
-                        item.delete()
-                        break
-                else:
-                    customer_basket.productItems.add(item)
-            basket.session_key = None
-            # basket.delete()
-            customer_basket.save()
-
-        messages.add_message(request, messages.SUCCESS,f'Welcome {user.username}')
-        return redirect(reverse('home'))
-
+        form = LoginUserForm(data=request.POST)
+        if form.is_valid():
+            context = {'data': request.POST}
+            username = request.POST.get('username')
+            password = request.POST.get('password')
+            user = authenticate(request, username=username, password=password)
+            login(request, user)
+            if request.session.get('basket_id'):
+                basket = Basket.objects.get(id=request.session['basket_id'])
+                customer = Customer.objects.get(user=request.user)
+                customer_basket = Basket.objects.filter(customer=customer).first()
+                for item in basket.productItems.all():
+                    item.session_key=None
+                    item.customer=customer
+                    item.save()
+                    for i in customer_basket.productItems.all():
+                        if item.product==i.product:
+                            i.quantity=item.quantity
+                            i.save()
+                            item.delete()
+                            break
+                    else:
+                        customer_basket.productItems.add(item)
+                basket.session_key = None
+                # basket.delete()
+                customer_basket.save()
+                messages.add_message(request, messages.SUCCESS,f'Welcome {user.first_name} {user.last_name}')
+                return redirect(reverse('home'))
+            else:
+                messages.add_message(request, messages.SUCCESS,f'Welcome {user.first_name} {user.last_name}')
+                return redirect(reverse('home'))
+        else:
+            form = LoginUserForm(request.POST or None)
+            messages.add_message(request, messages.WARNING,'Something is wrong. Try again!')
+            return redirect(reverse('home'))
     return render(request, 'include/header.html')
 
 
+# def user_login(request):
+#     if request.method == 'POST':
+#         context = {'data': request.POST}
+#         username = request.POST.get('username')
+#         password = request.POST.get('password')
+#
+#         user = authenticate(request, username=username, password=password)
+#         login(request, user)
+#         if request.session.get('basket_id'):
+#             basket = Basket.objects.get(id=request.session['basket_id'])
+#             customer = Customer.objects.get(user=request.user)
+#             customer_basket = Basket.objects.filter(customer=customer).first()
+#             for item in basket.productItems.all():
+#                 item.session_key=None
+#                 item.customer=customer
+#                 item.save()
+#                 for i in customer_basket.productItems.all():
+#                     if item.product==i.product:
+#                         i.quantity=item.quantity
+#                         i.save()
+#                         item.delete()
+#                         break
+#                 else:
+#                     customer_basket.productItems.add(item)
+#             basket.session_key = None
+#             # basket.delete()
+#             customer_basket.save()
+#
+#         messages.add_message(request, messages.SUCCESS,f'Welcome {user.username}')
+#         return redirect(reverse('home'))
+#
+#     return render(request, 'include/header.html')
 
 
 def logout_user(request):

@@ -7,6 +7,7 @@ from main.forms import RegisterUserForm, LoginUserForm
 from main.views import GetContextDataMixin
 from main.models import *
 from .forms import AddToBasketForm, OrderForm
+import uuid
 
 
 def basket(request):

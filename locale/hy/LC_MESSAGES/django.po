@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-02-05 14:35+0400\n"
+"POT-Creation-Date: 2022-02-12 17:41+0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -42,60 +42,69 @@ msgstr "Քանակ"
 msgid "Total"
 msgstr "Ընդհանուր"
 
-#: templates/basket/basket.html:26 templates/basket/basket.html:87
+#: templates/basket/basket.html:26 templates/basket/basket.html:90
 msgid "Delete"
 msgstr "Ջնջել"
 
-#: templates/basket/basket.html:48
+#: templates/basket/basket.html:51
 msgid "Product name"
 msgstr "Ապրանքի անվանում"
 
-#: templates/basket/basket.html:53
+#: templates/basket/basket.html:56
 msgid "Food Price"
 msgstr "Ապրանքի գին"
 
-#: templates/basket/basket.html:59 templates/basket/basket.html:84
-#: templates/basket/basket.html:139 templates/basket/basket.html:145
+#: templates/basket/basket.html:62 templates/basket/basket.html:87
+#: templates/basket/basket.html:137 templates/basket/basket.html:142
 msgid "amd"
 msgstr "դրամ"
 
-#: templates/basket/basket.html:62
+#: templates/basket/basket.html:65
 msgid "Product Quantity"
 msgstr "Ապրանքի քանակ"
 
-#: templates/basket/basket.html:82
+#: templates/basket/basket.html:85
 msgid "Total Price"
 msgstr "Ընդհանուր գին"
 
-#: templates/basket/basket.html:109
+#: templates/basket/basket.html:112
 msgid "Delivery"
 msgstr "Առաքում"
 
-#: templates/basket/basket.html:113
+#: templates/basket/basket.html:116
 msgid "Free delivery in case of"
 msgstr "Անվճար առաքում"
 
-#: templates/basket/basket.html:113
+#: templates/basket/basket.html:116
 msgid "dr and over."
 msgstr "դրամ և ավել"
 
-#: templates/basket/basket.html:117
+#: templates/basket/basket.html:120
 msgid "Continue Ordering"
 msgstr "Շարունաել գնումները"
 
-#: templates/basket/basket.html:121 templates/basket/basket.html:124
-#: templates/basket/basket.html:127 templates/basket/basket.html:128
-#: templates/basket/basket.html:130 templates/basket/order.html:67
+#: templates/basket/basket.html:124 templates/basket/basket.html:127
+#: templates/basket/order.html:67
 msgid "Order"
 msgstr "Պատվիրել"
 
-#: templates/basket/basket.html:137
+#: templates/basket/basket.html:135
 msgid "Shipping Price"
 msgstr "Առաքման գին"
 
-#: templates/basket/basket.html:143
+#: templates/basket/basket.html:140
 msgid "Total Price "
 msgstr "Ընդհանուր գին"
+
+#: templates/basket/basket.html:156 templates/basket/basket.html:176
+#: templates/include/header.html:111 templates/include/header.html:131
+msgid "Sign In"
+msgstr "Մուտք"
+
+#: templates/basket/basket.html:158 templates/basket/basket.html:193
+#: templates/include/header.html:113 templates/include/header.html:148
+msgid "Register"
+msgstr "Գրանցվել"
 
 #: templates/basket/order.html:16
 msgid "City"
@@ -108,7 +117,7 @@ msgstr "Հասցե՝"
 
 #: templates/basket/order.html:32 templates/pages/contact.html:132
 msgid "Phone number"
-msgstr "Հեռախոսահամար՝"
+msgstr "Հեռ․՝"
 
 #: templates/basket/order.html:40
 msgid "Date"
@@ -134,12 +143,20 @@ msgstr "Ընդհանուր դրույթներ"
 msgid "How to order"
 msgstr "Ինչպես պատվիրել"
 
-#: templates/include/footer.html:25 templates/pages/contact.html:26
+#: templates/include/footer.html:27
+msgid "About Us"
+msgstr "Մեր մասին"
+
+#: templates/include/footer.html:32 templates/pages/contact.html:11
+msgid "Contact"
+msgstr "Կապ"
+
+#: templates/include/footer.html:38 templates/pages/contact.html:26
 #: templates/pages/contact.html:44 templates/pages/contact.html:138
 msgid "Email"
 msgstr "Էլ․ հասցե"
 
-#: templates/include/footer.html:26 templates/main/customer.html:53
+#: templates/include/footer.html:41 templates/main/customer.html:53
 msgid "Phone"
 msgstr "Հեռախոսահամար"
 
@@ -175,17 +192,9 @@ msgstr "ԵԼՔ"
 msgid "SIGN IN"
 msgstr "ՄՈՒՏՔ"
 
-#: templates/include/header.html:62
+#: templates/include/header.html:60
 msgid "Basket"
 msgstr "ԶԱՄԲՅՈՒՂ"
-
-#: templates/include/header.html:139 templates/include/header.html:159
-msgid "Sign In"
-msgstr "Մուտք"
-
-#: templates/include/header.html:141 templates/include/header.html:176
-msgid "Register"
-msgstr "Գրանցվել"
 
 #: templates/main/customer.html:11
 msgid "Personal information"
@@ -222,23 +231,24 @@ msgstr "Փոխել գաղտնաբառը"
 msgid "My orders"
 msgstr "Իմ պատվերները"
 
-#: templates/main/home.html:11 templates/main/wholesale.html:11
+#: templates/main/home.html:19 templates/main/wholesale.html:11
 msgid "Our Menu"
 msgstr "Կատեգորիա"
 
-#: templates/main/menu.html:46 templates/main/menu.html:47
-#: templates/main/menu.html:50 templates/main/product.html:32
+#: templates/main/menu.html:47 templates/main/menu.html:48
+#: templates/main/menu.html:51 templates/main/product.html:32
 #: templates/main/product.html:33 templates/main/product.html:35
 msgid "dr"
 msgstr "դր"
 
-#: templates/main/menu.html:55
+#: templates/main/menu.html:56
 msgid "Min order quantity "
 msgstr "Պատվերի մինիմալ չափ"
 
-#: templates/main/menu.html:81 templates/main/product.html:69
-msgid "Add to Basket"
-msgstr "Ավելացնել զամբյուղ"
+#: templates/main/menu.html:82 templates/main/product.html:69
+#, fuzzy
+msgid "Add to Card"
+msgstr "Ավելացնել"
 
 #: templates/main/password_success.html:5
 msgid "Password Update"
@@ -263,10 +273,6 @@ msgstr "Նմանատիպ ապրանքներ"
 #: templates/pages/about-us.html:11
 msgid "About Vitamix"
 msgstr "Vitamix֊ի մասին"
-
-#: templates/pages/contact.html:11
-msgid "Contact"
-msgstr "Կապ"
 
 #: templates/pages/contact.html:16
 msgid "For customers"
