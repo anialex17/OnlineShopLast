@@ -1,19 +1,26 @@
+from django.contrib.auth.forms import PasswordResetForm
 from django.contrib.auth.tokens import default_token_generator
 from django.contrib.auth.views import PasswordChangeView
 from django.contrib.auth import login, logout, authenticate, views
 from django.contrib import messages
-from django.http import HttpResponseRedirect
+from django.core.mail import send_mail
+from django.http import HttpResponseRedirect, BadHeaderError, HttpResponse
 from django.shortcuts import render, redirect
+from django.template.loader import render_to_string
 from django.urls import reverse_lazy
-from django.utils.http import urlsafe_base64_decode
 from django import views
 from django.views import View
 from django.views.generic import ListView, UpdateView, DetailView, CreateView
 from .email import send_activate_mail
-from django.db.models import Count, F
+from django.db.models import Count, F, Q
 from .forms import *
 from .models import *
 import uuid
+from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
+from django.contrib.auth.tokens import default_token_generator
+from django.utils.encoding import force_bytes
+
+
 
 
 class GetContextDataMixin(ListView):
@@ -46,7 +53,7 @@ class ProductListView(GetContextDataMixin):
 #     paginate_by = 12
 
     def get_queryset(self):
-        return Product.objects.filter(category__url=self.kwargs.get("category_slug"),wholesale=False).select_related('category')
+        return Product.objects.filter(category__url=self.kwargs.get("category_slug"),wholesale=False).select_related('category','measurement')
 
 
 class ProductWholeSaleListView(GetContextDataMixin):
@@ -56,7 +63,7 @@ class ProductWholeSaleListView(GetContextDataMixin):
 #     paginate_by = 12
 
     def get_queryset(self):
-        return Product.objects.filter(category__url=self.kwargs.get("category_slug"), wholesale=True).select_related('category')
+        return Product.objects.filter(category__url=self.kwargs.get("category_slug"), wholesale=True).select_related('category', 'measurement')
 
 
 class ProductDetailView(DetailView):
@@ -69,9 +76,9 @@ class ProductDetailView(DetailView):
         context = super().get_context_data(**kwargs)
         context['product_item'] = Product.objects.get(pk=self.kwargs.get("pk"))
         if context['product_item'].wholesale:
-            context['products'] = Product.objects.filter(category__url=self.kwargs.get("category_slug"), wholesale=True).select_related('category')[:5]
+            context['products'] = Product.objects.filter(category__url=self.kwargs.get("category_slug"), wholesale=True).select_related('category', 'measurement')[:5]
         else:
-            context['products'] = Product.objects.filter(category__url=self.kwargs.get("category_slug"), wholesale=False).select_related('category')[:5]
+            context['products'] = Product.objects.filter(category__url=self.kwargs.get("category_slug"), wholesale=False).select_related('category', 'measurement')[:5]
         context['register_form'] = RegisterUserForm()
         context['form'] = LoginUserForm()
         return context
@@ -81,12 +88,17 @@ def register(request):
     if request.method == 'POST':
         register_form = RegisterUserForm(request.POST)
         if register_form.is_valid():
-            user = register_form.save()
-            import time
+            user = register_form.save(commit=False)
+            email = register_form.cleaned_data.get('email')
+            if User.objects.filter(email=email):
+                messages.warning(request, 'This email is already in use!')
+                return redirect('home')
+            else:
+                send_activate_mail(request=request, user=user)
             customer = Customer.objects.create(user=user, phone=register_form.cleaned_data['phone'])
             Basket.objects.create(customer=customer)
             # url = str(round(time.time() * 1000))
-            send_activate_mail(request=request, user=user)
+            # send_activate_mail(request=request, user=user)
             # login(request, user)
             messages.success(request, 'Activate code has been sent successfully!!!')
             return redirect('home')
@@ -128,7 +140,7 @@ def user_login(request):
                     else:
                         customer_basket.productItems.add(item)
                 basket.session_key = None
-                # basket.delete()
+                basket.delete()
                 customer_basket.save()
                 messages.add_message(request, messages.SUCCESS,f'Welcome {user.first_name} {user.last_name}')
                 return redirect(reverse('home'))
@@ -243,3 +255,32 @@ class VerificationView(View):
         else:
             messages.success(request, 'Activation link is invalid!')
             return redirect('home')
+
+
+def password_reset_request(request):
+    if request.method == "POST":
+        password_reset_form = PasswordResetForm(request.POST)
+        if password_reset_form.is_valid():
+            data = password_reset_form.cleaned_data['email']
+            associated_users = User.objects.filter(Q(email=data))
+            if associated_users.exists():
+                for user in associated_users:
+                    subject = "Password Reset Requested"
+                    email_template_name = "main/email_password_reset.txt"
+                    c = {
+                    "email":user.email,
+                    'domain':'127.0.0.1:8000',
+                    'site_name': 'Website',
+                    "uid": urlsafe_base64_encode(force_bytes(user.pk)),
+                    "user": user,
+                    'token': default_token_generator.make_token(user),
+                    'protocol': 'http',
+                    }
+                    email = render_to_string(email_template_name, c)
+                    try:
+                        send_mail(subject, email, 'admin@example.com' , [user.email], fail_silently=False)
+                    except BadHeaderError:
+                        return HttpResponse('Invalid header found.')
+                    return redirect ("/password_reset/done/")
+    password_reset_form = PasswordResetForm()
+    return render(request=request, template_name="main/password_reset.html", context={"password_reset_form":password_reset_form})

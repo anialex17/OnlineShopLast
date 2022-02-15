@@ -42,7 +42,8 @@ INSTALLED_APPS = [
     'main',
     'pages',
     'basket',
-    'payment'
+    'payment',
+    'debug_toolbar',
 ]
 
 MIDDLEWARE = [
@@ -54,6 +55,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "debug_toolbar.middleware.DebugToolbarMiddleware",
+
 ]
 
 ROOT_URLCONF = 'config.urls'
@@ -153,3 +156,5 @@ EMAIL_USE_TLS = False
 EMAIL_USE_SSL = True
 EMAIL_HOST_USER = 'netfornetenyu@gmail.com'
 EMAIL_HOST_PASSWORD = 'gktdswimqoccnvvw'
+
+INTERNAL_IPS = ["127.0.0.1",]

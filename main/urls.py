@@ -5,6 +5,7 @@ from basket.views import *
 urlpatterns = [
     path('password/', PasswordsChangeView.as_view(), name='password_change'),
     path('password_success/', password_success, name='password_success'),
+    path('password_reset/', password_reset_request, name='password_reset'),
     path('profile/<int:pk>/', customer, name='profile'),
     path('', HomeView.as_view(), name='home'),
     path('wholesale', WholeSaleView.as_view(), name='wholesale'),

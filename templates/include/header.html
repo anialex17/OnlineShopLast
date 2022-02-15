@@ -117,8 +117,12 @@
                 </button>
             </div>
             <div class="modal-body">
+
                 <form action="{% url 'login' %}" method="post" class="login-form">
                     {% csrf_token %}
+                        {% if error %}
+                    <h3>{{ error }}</h3>
+                        {% endif %}
                     {{ form.non_field_errors }}
                     {% for field in form %}
                     <div class="form-group py-2">
@@ -132,6 +136,7 @@
                         </button>
                     </div>
                 </form>
+                <a href="{% url 'password_reset'%}">forget password</a>
                 <form action="{% url 'register' %}" method="post" class="register-form d-none">
                     {% csrf_token %}
                     <div style="background: red">{{register_form.errors}}</div>

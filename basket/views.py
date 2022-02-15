@@ -63,7 +63,7 @@ def add_to_basket(request):
         if request.user.is_authenticated:
             customer = request.user.customer
             product = Product.objects.get(pk=request.POST.get('product_url'))
-            product_quantity = request.POST.get('product_quantity')
+            product_quantity = request.POST.get('product_quantity').replace(",", ".")
             basket = Basket.objects.get(customer=customer)
             if product.wholesale:
                 product_item, created = ProductItem.objects.get_or_create(product=product, customer=customer,wholesale=True, order=None)
