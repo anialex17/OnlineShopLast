@@ -167,7 +167,7 @@ class SignInView(FormView):
             messages.add_message(self.request, messages.SUCCESS,f'Welcome {user.username}')
         else:
             messages.warning(self.request, 'Login or password are invalid! Please try again!')
-            return redirect('login')
+            return redirect('home')
         return super().form_valid(form)
 
     def get_success_url(self):

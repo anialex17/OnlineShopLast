@@ -1218,6 +1218,9 @@ body {
     justify-content: center;
     text-align: center;
 }
+.about-us-content h3,p {
+    color: #535353;
+}
 
 /* End of About Us page */
 
@@ -1226,6 +1229,10 @@ body {
 .privacy-content .container .header {
     font-weight: bold;
     font-family: sans-serif;
+}
+
+.privacy-content h3, p, li {
+    color: #535353;
 }
 
 /* End of Privacy */
@@ -1240,6 +1247,16 @@ body {
 .order-content .container .header {
     font-family: sans-serif;
     font-weight: bold;
+}
+.order-content h3, p {
+    color: #535353;
+}
+.order-content th {
+    background-color: #dee2e6;
+}
+.order-content .table-body tr:hover {
+    background-color: #d50c0d;
+    color: #FFFFFF;
 }
 
 /* End of How to Order */

@@ -4,92 +4,51 @@
 {% block title%}VitaMix | Order{% endblock %}
 
 {% block content %}
-<section class="order-content pb-4 divider">
-
-    <div class="container py-2">
-
-        <h1 class="header site-color py-3">{% trans 'How to order?' %}</h1>
-
-        <ol>
-            <li>
-                <span>{% trans 'Fill in your address where to ship' %}</span>
-            </li>
-            <li>
-                <span>{% trans 'Choose your favorite dish or product from many restaurants և specialty stores' %}</span>
-            </li>
-            <li>
-                <span>{% trans 'Place an online order through the website or meat.am mobile application' %}</span>
-            </li>
-            <li>
-                <span>{% trans 'Choose the payment method' %}</span>
-                <ul class="py-3">
-                    <li><span>{% trans 'Payment on the spot after delivery' %}</span></li>
-                    <li><span>{% trans 'Credit card with website or mobile application' %}</span></li>
-                    <li>
-                        <div class="d-flex align-items-center py-2">
-                            <div class="cards-img">
-                                <img src="{% static 'Images/footer/cards.jpg' %}" alt="cards" class="img">
-                            </div>
-                            <span class="pl-3">{% trans 'through payment systems' %}</span>
-                        </div>
-                    </li>
-                </ul>
-            </li>
-            <li><span>{% trans 'Open the door, we are already on the threshold' %}</span></li>
-        </ol>
-
-        <h5 class="font-weight-bold">{% trans 'How long does it take to deliver?' %}</h5>
-
-        <p>
-            {% trans 'The average delivery time is 40 minutes, depending on the cooking time.
-            as well as the distance between your location and the restaurant.' %}
-
-        </p>
-
-        <h5 class="font-weight-bold">{% trans 'How much does shipping cost?' %}</h5>
-
-        <p>{% trans 'Shipping cost varies depending on' %}</p>
-
-        <ul>
-            <li>{% trans 'distance from the food point / specialty և customer' %}</li>
-            <li>{% trans 'How many food outlets / specialty stores deliver?' %}</li>
-            <li>{% trans 'weather conditions' %}</li>
-            <li>{% trans 'due to traffic congestion.' %} </li>
-        </ul>
-
-        <p>{% trans 'You can see the cost of delivery at the moment in the data on the item page' %}</p>
-
-
-        <table class="table table-bordered">
-            <thead>
-            <tr>
-                <th scope="col">{% trans 'Distance:' %}</th>
-                <th scope="col">{% trans 'Order from 1 point' %}</th>
-                <th scope="col">{% trans 'order from each of the following items' %}</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <td>{% trans 'up to 3 km' %}</td>
-                <td>{% trans '400 dram' %}</td>
-                <td>{% trans '400 drams each' %}</td>
-            </tr>
-            <tr>
-                <td>{% trans '3,01 – 5km' %}</td>
-                <td>{% trans '600 dram' %}մ</td>
-                <td>{% trans '600 drams each' %}</td>
-            </tr>
-            <tr>
-                <td>{% trans '5,01 - 7km' %}</td>
-                <td>{% trans '800 dram' %}</td>
-                <td>{% trans '800-drams each' %}</td>
-            </tr>
-            </tbody>
-        </table>
-
-
+<section class="order-content divider">
+    <div class="container">
+        <div class="pt-3">
+            <h1 class="header site-color py-3">{% trans 'Delivery and payment' %}</h1>
+        </div>
+        <div>
+            <p>The cost of order delivery in Yerevan is 500 drams.</p>
+        </div>
+        <div>
+            <h3 class="py-2">Payment method</h3>
+            <p>Payment at Vitamix.am can be made in two ways: online or in person. Online payments are made through Idram, cash և POS-terminal payment systems. They are serviced Cardholders with Visa և Master Card. Cash payments are made upon delivery at the moment in AMD.</p>
+            <p>The use of cash registers does not have to be remotely related to the sale of electronic communications or television shops. / Basis17.06.16 ՀՕ-116-N /</p>
+        </div>
+        <div>
+            <h3 class="py-2">Delivery order</h3>
+            <p>Delivery is carried out in Yerevan within 1 hour, depending on the number of delivery points.</p>
+        </div>
+        <div>
+            <p>The following tariffs apply for delivery.</p>
+        </div>
+        <div class="pt-3 pb-5">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">City</th>
+                    <th scope="col">Price</th>
+                </tr>
+                </thead>
+                <tbody class="table-body">
+                <tr>
+                    <td>Yerevan</td>
+                    <td>500</td>
+                </tr>
+                <tr>
+                    <td>Argavand</td>
+                    <td>700</td>
+                </tr>
+                <tr>
+                    <td>Noragavit</td>
+                    <td>1000</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
-    <!--End of container-->
 </section>
 
 {% endblock %}
