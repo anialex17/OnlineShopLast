@@ -37,26 +37,6 @@ def basket(request):
     return render(request, 'basket/basket.html', context)
 
 
-
-
-# def add_to_basket(request):
-#     form = AddToBasketForm(request.POST)
-#     if request.method == "POST":
-#         customer = request.user.customer
-#         product = Product.objects.get(pk=request.POST.get('product_url'))
-#         product_quantity = request.POST.get('product_quantity')
-#         basket = Basket.objects.get(customer=customer)
-#         if product.wholesale:
-#             product_item, created = ProductItem.objects.get_or_create(product=product, customer=customer, wholesale=True, order=None)
-#         else:
-#             product_item, created = ProductItem.objects.get_or_create(product=product, customer=customer, order=None)
-#         product_item.quantity = product_quantity
-#         basket.productItems.add(product_item)
-#         product_item.save()
-#         messages.success(request, 'The product is successfully added to your basket')
-#         return HttpResponseRedirect(request.META['HTTP_REFERER'])
-
-
 def add_to_basket(request):
     form = AddToBasketForm(request.POST)
     if request.method == "POST":

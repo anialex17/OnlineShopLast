@@ -63,6 +63,7 @@ ROOT_URLCONF = 'config.urls'
 
 TEMPLATES = [
     {
+
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
@@ -158,3 +159,5 @@ EMAIL_HOST_USER = 'netfornetenyu@gmail.com'
 EMAIL_HOST_PASSWORD = 'gktdswimqoccnvvw'
 
 INTERNAL_IPS = ["127.0.0.1",]
+
+AUTHENTICATION_BACKENDS = ('django.contrib.auth.backends.ModelBackend',)

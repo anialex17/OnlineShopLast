@@ -5,8 +5,8 @@ from .models import *
 
 
 class RegisterUserForm(UserCreationForm):
-    username = forms.CharField(widget=forms.TextInput(
-        attrs={'type': "text", 'class': "form-control shadow-none", 'id': "name", 'placeholder': "username"}))
+    # username = forms.CharField(widget=forms.TextInput(
+    #     attrs={'type': "text", 'class': "form-control shadow-none", 'id': "name", 'placeholder': "username"}))
     first_name = forms.CharField(widget=forms.TextInput(
         attrs={'type': "text", 'class': "form-control shadow-none", 'id': "name", 'placeholder': "First Name"}))
     last_name = forms.CharField(widget=forms.TextInput(
@@ -23,12 +23,14 @@ class RegisterUserForm(UserCreationForm):
 
     class Meta:
         model = User
-        fields = ('first_name', 'last_name', 'email', 'phone', 'username', 'password1', 'password2')
+        fields = ('first_name', 'last_name', 'email', 'phone', 'password1', 'password2')
 
 
-class LoginUserForm(AuthenticationForm):
-    username = forms.CharField(widget=forms.TextInput(
-        attrs={'type': "text", 'class': "form-control shadow-none", 'id': "name", 'placeholder': "Name"}))
+class LoginUserForm(forms.Form):
+    # username = forms.CharField(widget=forms.TextInput(
+    #     attrs={'type': "text", 'class': "form-control shadow-none", 'id': "name", 'placeholder': "Name"}))
+    email = forms.EmailField(widget=forms.EmailInput(
+        attrs={'type': "email", 'class': "form-control shadow-none", 'id': "name", 'placeholder': "Email"}))
     password = forms.CharField(widget=forms.PasswordInput(
         attrs={'type': "password", 'class': "form-control shadow-none", 'id': "password", 'placeholder': "Password"}))
 
@@ -38,12 +40,12 @@ class EditUserForm(UserChangeForm):
         attrs={'class': 'form-control', 'placeholder': 'Your First Name', 'id': 'formGroupExampleInput2'}))
     last_name = forms.CharField(max_length=100, widget=forms.TextInput(
         attrs={'class': 'form-control', 'placeholder': 'Your Last Name', 'id': 'formGroupExampleInput2'}))
-    username = forms.CharField(widget=forms.TextInput(
-        attrs={'class': 'form-control', 'placeholder': 'Your username', 'id': 'formGroupExampleInput2'}))
+    # username = forms.CharField(widget=forms.TextInput(
+    #     attrs={'class': 'form-control', 'placeholder': 'Your username', 'id': 'formGroupExampleInput2'}))
 
     class Meta:
         model = User
-        fields = ('username', 'first_name', 'last_name')
+        fields = ('first_name', 'last_name')
 
 
 class EditCustomerForm(forms.ModelForm):
@@ -54,12 +56,6 @@ class EditCustomerForm(forms.ModelForm):
             'phone':forms.TextInput(attrs={'class': 'form-control','placeholder': 'Your phone' }),
             'address':forms.TextInput(attrs={'class': 'form-control','placeholder': 'Your address'})
         }
-
-
-# class ProfileForm(forms.ModelForm):
-#     class Meta:
-#         model = Customer
-#         fields = ('phone', 'address')
 
 
 class PasswordChangingForm(PasswordChangeForm):

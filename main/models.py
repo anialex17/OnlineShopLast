@@ -1,13 +1,13 @@
 from django.utils import timezone
 import datetime
 from django.contrib.auth import get_user_model
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, AbstractUser
 from django.db import models
 from django.db.models.signals import post_save
 from django.urls import reverse
 from django.db.models.signals import post_save
 from django.utils.safestring import mark_safe
-
+from django.utils.translation import gettext_lazy as _
 # User = get_user_model()
 
 
@@ -77,6 +77,14 @@ class Image(models.Model):
 
     def __str__(self):
         return str(self.id)
+
+
+# class User(AbstractUser):
+#     # username = None
+#     email = models.EmailField(_('email_address'),unique=True)
+#
+#     USERNAME_FIELD = 'email'
+#     REQUIRED_FIELDS = ['username']
 
 
 class Customer(models.Model):

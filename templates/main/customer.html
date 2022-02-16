@@ -37,10 +37,10 @@
         <!--        </form>-->
         <form action="{% url 'edit_profile' %}" method="post" enctype="multipart/form-data">
             {% csrf_token %}
-            <div class="form-group">
-                <label for="formGroupExampleInput">{%trans 'Username'%}</label>
-                {{user_form.username}}
-            </div>
+<!--            <div class="form-group">-->
+<!--                <label for="formGroupExampleInput">{%trans 'Username'%}</label>-->
+<!--                {{user_form.username}}-->
+<!--            </div>-->
             <div class="form-group">
                 <label for="formGroupExampleInput2">{%trans 'Last Name'%}</label>
                 {{user_form.last_name}}
