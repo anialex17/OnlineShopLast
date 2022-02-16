@@ -136,6 +136,9 @@ body {
 .modal .modal-sign-in-btn:hover {
     background-color: #b5090a;
 }
+.modal .modal-footer a:hover{
+    color: #d50c0d;
+}
 
 .custom-checkbox .custom-control-label::before {
     transition: all 0.5s ease;
@@ -1457,7 +1460,9 @@ body {
 
 /* Success page*/
 
-.success-content {
+.success-content,
+.password-reset-content,
+.password-reset-confirm-content {
     margin-top: 90px;
 }
 .success-header {
@@ -1474,6 +1479,59 @@ body {
 }
 
 /* End of Success */
+
+/* Password-Reset Page */
+
+.password-reset-content button,
+.password-reset-confirm-content button,
+.reset-complete-link-btn {
+    background-image: linear-gradient(#d50c0d 0.61%, #a10809 99.56%);
+    box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.1)!important;
+    font-weight: bold;
+    color: white;
+    transition: 0.3s;
+    border-radius: 0.3rem;
+    border: transparent;
+    margin-left: 10px;
+    height: calc(1.5em + 0.75rem + 2px);
+}
+.password-reset-content h1, p, li,
+.password-reset-confirm-content h1, p, li {
+    color: #535353;
+}
+.password-reset-content button:hover,
+.password-reset-confirm-content button:hover,
+.reset-complete-link-btn:hover {
+    background-image: linear-gradient(#e60203 0.61%, #910001 99.56%);
+}
+.password-reset-content label,
+.password-reset-confirm-content label {
+    padding-right: 10px;
+    color: #535353;
+}
+.password-reset-content input,
+.password-reset-confirm-content input {
+    height: calc(1.5em + 0.75rem + 2px);
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    top: 10px;
+}
+.password-reset-content input:focus {
+    border-color: #d50c0d;
+}
+.password-reset-confirm-content ul {
+    margin-top: 10px;
+}
+
+/* End Of Password-Reset */
 
 
 /*start of pae numbers*/

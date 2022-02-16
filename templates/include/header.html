@@ -136,7 +136,6 @@
                         </button>
                     </div>
                 </form>
-                <a href="{% url 'password_reset'%}">forget password</a>
                 <form action="{% url 'register' %}" method="post" class="register-form d-none">
                     {% csrf_token %}
                     <div style="background: red">{{register_form.errors}}</div>
@@ -155,7 +154,9 @@
                     </div>
                 </form>
             </div>
-            <div class="modal-footer"></div>
+            <div class="modal-footer d-flex justify-content-center">
+                <a href="{% url 'password_reset'%}" class="site-color">Forgot password</a>
+            </div>
         </div>
     </div>
 </div>
