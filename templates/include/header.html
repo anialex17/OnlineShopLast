@@ -27,14 +27,7 @@
                     <a class="nav-link site-color font-weight-bold nav-height"
                        href="{% url 'wholesale' %}">{% trans 'WHOLESALE' %}</a>
                 </li>
-<!--                <li class="nav-item nav-height">-->
-<!--                    <a class="nav-link site-color font-weight-bold nav-height"-->
-<!--                       href="{% url 'contact' %}">{% trans 'CONTACT' %}</a>-->
-<!--                </li>-->
-<!--                <li class="nav-item nav-height">-->
-<!--                    <a class="nav-link site-color font-weight-bold nav-height"-->
-<!--                       href="{% url 'about_us' %}">{% trans 'ABOUT US' %}</a>-->
-<!--                </li>-->
+
                 {% if request.user.is_authenticated %}
                 <li class="nav-item nav-height">
                     <a class="nav-link site-color font-weight-bold nav-height"
@@ -155,7 +148,7 @@
                 </form>
             </div>
             <div class="modal-footer d-flex justify-content-center">
-                <a href="{% url 'password_reset'%}" class="site-color">Forgot password</a>
+                <a href="{% url 'password_reset'%}" class="site-color">{% trans 'Forgot password' %}</a>
             </div>
         </div>
     </div>

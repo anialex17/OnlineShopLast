@@ -68,7 +68,7 @@
                                                 {% if product.wholesale %}
                                                 <input type="text" value="{{product.min_order_quantity}}" data-change-size="10" class="product-quantity" name="product_quantity">
                                                 {% else %}
-                                                <input type="text" value="{{product.start_quantity}}" data-change-size="{{product.start_quantity}}" class="product-quantity" name="product_quantity">
+                                                <input type="text" value="{{product.min_order_quantity}}" data-change-size="{{product.start_quantity}}" class="product-quantity" name="product_quantity">
                                                 {% endif %}
                                             </h2>
                                             <button type="button" class="btn shadow-none btn-inc flex-center mr-1 ml-1 js-btn-inc">

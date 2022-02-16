@@ -11,36 +11,9 @@
             <h1 class="site-color font-weight-bold">{% trans 'Personal information' %}</h1>
             <span>{% trans 'You can change your personal information' %}</span>
         </div>
-
-        <!--        <form action="{% url 'edit_profile' %}" method="post" enctype="multipart/form-data">-->
-        <!--            {% csrf_token %}-->
-
-        <!--            <div class="row form-item">-->
-        <!--                <div class="form-group site-color col-sm-6">-->
-        <!--                    <label for="user_name" class="col-form-label font-weight-bold"></label>-->
-        <!--                    {{ form.username }}-->
-        <!--                </div>-->
-        <!--                <div class="form-group site-color col-sm-6">-->
-        <!--                    <label for="user_name" class="col-form-label font-weight-bold"></label>-->
-        <!--                    {{ form.first_name }}-->
-        <!--                </div>-->
-        <!--                <div class="form-group site-color col-sm-6">-->
-        <!--                    <label for="user_name" class="col-form-label font-weight-bold"></label>-->
-        <!--                    {{ form.last_name }}-->
-        <!--                </div>-->
-
-        <!--            </div>-->
-        <!--            <div class="confirm-block d-flex justify-content-end">-->
-        <!--                <button type="submit" class="btn shadow-none btn-lg confirm">{% trans 'Confirm' %}</button>-->
-        <!--            </div>-->
-
-        <!--        </form>-->
         <form action="{% url 'edit_profile' %}" method="post" enctype="multipart/form-data">
             {% csrf_token %}
-<!--            <div class="form-group">-->
-<!--                <label for="formGroupExampleInput">{%trans 'Username'%}</label>-->
-<!--                {{user_form.username}}-->
-<!--            </div>-->
+
             <div class="form-group">
                 <label for="formGroupExampleInput2">{%trans 'Last Name'%}</label>
                 {{user_form.last_name}}

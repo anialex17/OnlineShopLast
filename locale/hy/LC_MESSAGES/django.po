@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-02-12 17:41+0400\n"
+"POT-Creation-Date: 2022-02-16 13:06+0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -55,7 +55,7 @@ msgid "Food Price"
 msgstr "Ապրանքի գին"
 
 #: templates/basket/basket.html:62 templates/basket/basket.html:87
-#: templates/basket/basket.html:137 templates/basket/basket.html:142
+#: templates/basket/basket.html:138 templates/basket/basket.html:143
 msgid "amd"
 msgstr "դրամ"
 
@@ -79,30 +79,30 @@ msgstr "Անվճար առաքում"
 msgid "dr and over."
 msgstr "դրամ և ավել"
 
-#: templates/basket/basket.html:120
+#: templates/basket/basket.html:120 templates/payment/success.html:16
 msgid "Continue Ordering"
 msgstr "Շարունաել գնումները"
 
-#: templates/basket/basket.html:124 templates/basket/basket.html:127
+#: templates/basket/basket.html:124 templates/basket/basket.html:128
 #: templates/basket/order.html:67
 msgid "Order"
 msgstr "Պատվիրել"
 
-#: templates/basket/basket.html:135
+#: templates/basket/basket.html:136
 msgid "Shipping Price"
 msgstr "Առաքման գին"
 
-#: templates/basket/basket.html:140
+#: templates/basket/basket.html:141
 msgid "Total Price "
 msgstr "Ընդհանուր գին"
 
-#: templates/basket/basket.html:156 templates/basket/basket.html:176
-#: templates/include/header.html:111 templates/include/header.html:131
+#: templates/basket/basket.html:157 templates/basket/basket.html:177
+#: templates/include/header.html:111 templates/include/header.html:135
 msgid "Sign In"
 msgstr "Մուտք"
 
-#: templates/basket/basket.html:158 templates/basket/basket.html:193
-#: templates/include/header.html:113 templates/include/header.html:148
+#: templates/basket/basket.html:159 templates/basket/basket.html:194
+#: templates/include/header.html:113 templates/include/header.html:152
 msgid "Register"
 msgstr "Գրանցվել"
 
@@ -140,11 +140,13 @@ msgid "General Terms and Conditions"
 msgstr "Ընդհանուր դրույթներ"
 
 #: templates/include/footer.html:20
-msgid "How to order"
-msgstr "Ինչպես պատվիրել"
+msgid "Privacy policy"
+msgstr ""
 
 #: templates/include/footer.html:27
-msgid "About Us"
+#, fuzzy
+#| msgid "About Us"
+msgid "About us"
 msgstr "Մեր մասին"
 
 #: templates/include/footer.html:32 templates/pages/contact.html:11
@@ -236,8 +238,8 @@ msgid "Our Menu"
 msgstr "Կատեգորիա"
 
 #: templates/main/menu.html:47 templates/main/menu.html:48
-#: templates/main/menu.html:51 templates/main/product.html:32
-#: templates/main/product.html:33 templates/main/product.html:35
+#: templates/main/menu.html:51 templates/main/product.html:35
+#: templates/main/product.html:36 templates/main/product.html:38
 msgid "dr"
 msgstr "դր"
 
@@ -245,7 +247,7 @@ msgstr "դր"
 msgid "Min order quantity "
 msgstr "Պատվերի մինիմալ չափ"
 
-#: templates/main/menu.html:82 templates/main/product.html:69
+#: templates/main/menu.html:82 templates/main/product.html:72
 #, fuzzy
 msgid "Add to Card"
 msgstr "Ավելացնել"
@@ -262,12 +264,14 @@ msgstr "Ձեր գաղտնաբառը հաջողությամբ փոփոխված է
 msgid "Food Details"
 msgstr "Ապրանքի նկարագրություն"
 
-#: templates/main/product.html:44
+#: templates/main/product.html:47
 msgid "Food Type"
 msgstr "Ապրանքի տեսակ"
 
-#: templates/main/product.html:79
-msgid "Similar Dishes"
+#: templates/main/product.html:82
+#, fuzzy
+#| msgid "Similar Dishes"
+msgid "Similar products"
 msgstr "Նմանատիպ ապրանքներ"
 
 #: templates/pages/about-us.html:11
@@ -486,3 +490,6 @@ msgstr ""
 #: venv/lib/python3.8/site-packages/django/views/templates/default_urlconf.html:249
 msgid "Connect, get help, or contribute"
 msgstr ""
+
+#~ msgid "How to order"
+#~ msgstr "Ինչպես պատվիրել"
