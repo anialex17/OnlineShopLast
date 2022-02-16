@@ -19,6 +19,7 @@ class Category(models.Model):
     class Meta:
         verbose_name = 'Կաեգորիա'
         verbose_name_plural = 'Կատեգորիաներ'
+        ordering = ['id']
 
     def __str__(self):
         return self.title

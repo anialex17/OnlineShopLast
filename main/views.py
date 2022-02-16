@@ -14,7 +14,6 @@ from .email import send_activate_mail
 from django.db.models import Count, F, Q
 from .forms import *
 from .models import *
-import uuid
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.contrib.auth.tokens import default_token_generator
 from django.utils.encoding import force_bytes
@@ -28,6 +27,7 @@ class GetContextDataMixin(ListView):
         context = super().get_context_data(**kwargs)
         context['register_form'] = RegisterUserForm()
         context['form'] = LoginUserForm()
+        context['basket'] = Basket.objects.filter(customer=None).first()
         return context
 
 
@@ -245,6 +245,8 @@ class VerificationView(View):
 
 
 def password_reset_request(request):
+    register_form = RegisterUserForm()
+    form = LoginUserForm()
     if request.method == "POST":
         password_reset_form = PasswordResetForm(request.POST)
         if password_reset_form.is_valid():
@@ -270,6 +272,4 @@ def password_reset_request(request):
                         return HttpResponse('Invalid header found.')
                     return redirect ("/password_reset/done/")
     password_reset_form = PasswordResetForm()
-    register_form = RegisterUserForm()
-    form = LoginUserForm()
     return render(request=request, template_name="main/password_reset.html", context={"password_reset_form":password_reset_form, 'form':form, 'register_form':register_form})
