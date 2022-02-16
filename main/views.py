@@ -1,16 +1,15 @@
 from django.contrib.auth.forms import PasswordResetForm
-from django.contrib.auth.tokens import default_token_generator
 from django.contrib.auth.views import PasswordChangeView
 from django.contrib.auth import login, logout, authenticate, views
 from django.contrib import messages
 from django.core.mail import send_mail
-from django.http import HttpResponseRedirect, BadHeaderError, HttpResponse
-from django.shortcuts import render, redirect
+from django.http import BadHeaderError, HttpResponse
+from django.shortcuts import render, redirect, get_object_or_404
 from django.template.loader import render_to_string
 from django.urls import reverse_lazy
 from django import views
 from django.views import View
-from django.views.generic import ListView, UpdateView, DetailView, CreateView
+from django.views.generic import ListView, UpdateView, DetailView, CreateView, FormView
 from .email import send_activate_mail
 from django.db.models import Count, F, Q
 from .forms import *
@@ -90,6 +89,12 @@ def register(request):
         if register_form.is_valid():
             user = register_form.save(commit=False)
             email = register_form.cleaned_data.get('email')
+
+            # generate username from email
+            username_from_email = email.split('@')[0]
+            username = ''.join(e for e in username_from_email if e.isalnum())
+            user.username = username
+
             if User.objects.filter(email=email):
                 messages.warning(request, 'This email is already in use!')
                 return redirect('home')
@@ -114,18 +119,34 @@ def register(request):
     return render(request, 'include/header.html', {'register_form': register_form})
 
 
-def user_login(request):
-    if request.method == 'POST':
-        form = LoginUserForm(data=request.POST)
-        if form.is_valid():
-            context = {'data': request.POST}
-            username = request.POST.get('username')
-            password = request.POST.get('password')
-            user = authenticate(request, username=username, password=password)
-            login(request, user)
-            if request.session.get('basket_id'):
-                basket = Basket.objects.get(id=request.session['basket_id'])
-                customer = Customer.objects.get(user=request.user)
+class SignInView(FormView):
+    template_name = 'include/header.html'
+    form_class = LoginUserForm
+    # success_url = reverse_lazy('customer')
+
+    def get(self, request, *args, **kwargs):
+        if self.request.user.is_authenticated:
+            return redirect(self.get_success_url())
+        return super().get(request, *args, **kwargs)
+
+    def form_valid(self, form):
+        email = form.cleaned_data.get('email')
+        password = form.cleaned_data.get('password')
+        users = User.objects.all()
+        user = None
+
+        for user_item in users:
+            if user_item.email == email:
+                user = user_item
+
+        username = User.objects.get(email=email) if user else None
+        authenticated_user = authenticate(username=username, password=password)
+
+        if authenticated_user is not None:
+            login(self.request, user)
+            if self.request.session.get('basket_id'):
+                basket = Basket.objects.get(id=self.request.session['basket_id'])
+                customer = Customer.objects.get(user=self.request.user)
                 customer_basket = Basket.objects.filter(customer=customer).first()
                 for item in basket.productItems.all():
                     item.session_key=None
@@ -142,50 +163,16 @@ def user_login(request):
                 basket.session_key = None
                 basket.delete()
                 customer_basket.save()
-                messages.add_message(request, messages.SUCCESS,f'Welcome {user.first_name} {user.last_name}')
-                return redirect(reverse('home'))
-            else:
-                messages.add_message(request, messages.SUCCESS,f'Welcome {user.first_name} {user.last_name}')
-                return redirect(reverse('home'))
+
+            messages.add_message(self.request, messages.SUCCESS,f'Welcome {user.username}')
         else:
-            form = LoginUserForm(request.POST or None)
-            messages.add_message(request, messages.WARNING,'Something is wrong. Try again!')
-            return redirect(reverse('home'))
-    return render(request, 'include/header.html')
+            messages.warning(self.request, 'Login or password are invalid! Please try again!')
+            return redirect('login')
+        return super().form_valid(form)
 
-
-# def user_login(request):
-#     if request.method == 'POST':
-#         context = {'data': request.POST}
-#         username = request.POST.get('username')
-#         password = request.POST.get('password')
-#
-#         user = authenticate(request, username=username, password=password)
-#         login(request, user)
-#         if request.session.get('basket_id'):
-#             basket = Basket.objects.get(id=request.session['basket_id'])
-#             customer = Customer.objects.get(user=request.user)
-#             customer_basket = Basket.objects.filter(customer=customer).first()
-#             for item in basket.productItems.all():
-#                 item.session_key=None
-#                 item.customer=customer
-#                 item.save()
-#                 for i in customer_basket.productItems.all():
-#                     if item.product==i.product:
-#                         i.quantity=item.quantity
-#                         i.save()
-#                         item.delete()
-#                         break
-#                 else:
-#                     customer_basket.productItems.add(item)
-#             basket.session_key = None
-#             # basket.delete()
-#             customer_basket.save()
-#
-#         messages.add_message(request, messages.SUCCESS,f'Welcome {user.username}')
-#         return redirect(reverse('home'))
-#
-#     return render(request, 'include/header.html')
+    def get_success_url(self):
+        profile = get_object_or_404(Customer, user=self.request.user)
+        return reverse('home')
 
 
 def logout_user(request):
@@ -197,7 +184,7 @@ def customer(request, pk):
     customer = Customer.objects.get(user=request.user)
     orders = Order.objects.filter(customer=customer)
     user_form = EditUserForm(initial={
-        'username': request.user.username,
+        # 'username': request.user.username,
         'first_name': request.user.first_name,
         'last_name': request.user.last_name,
     })
@@ -278,9 +265,11 @@ def password_reset_request(request):
                     }
                     email = render_to_string(email_template_name, c)
                     try:
-                        send_mail(subject, email, 'admin@example.com' , [user.email], fail_silently=False)
+                        send_mail(subject, email, 'netfornetenyu@gmail.com' , [user.email], fail_silently=False)
                     except BadHeaderError:
                         return HttpResponse('Invalid header found.')
                     return redirect ("/password_reset/done/")
     password_reset_form = PasswordResetForm()
-    return render(request=request, template_name="main/password_reset.html", context={"password_reset_form":password_reset_form})
+    register_form = RegisterUserForm()
+    form = LoginUserForm()
+    return render(request=request, template_name="main/password_reset.html", context={"password_reset_form":password_reset_form, 'form':form, 'register_form':register_form})
