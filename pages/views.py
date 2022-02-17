@@ -17,22 +17,22 @@ from django.core.mail import send_mail
 
 def message(request):
     if request.method == 'POST':
-        form = ContactForm(request.POST)
-        if form.is_valid():
-            form.save()
-            mail = send_mail(form.cleaned_data['name']+form.cleaned_data['lastname'], form.cleaned_data['message'],form.cleaned_data['email'],
+        contact_form = ContactForm(request.POST)
+        if contact_form.is_valid():
+            contact_form.save()
+            mail = send_mail(contact_form.cleaned_data['name']+contact_form.cleaned_data['lastname'], contact_form.cleaned_data['message'],contact_form.cleaned_data['email'],
                               ['netfornetenyu@gmail.com'], fail_silently=False)
             if mail:
-                messages.success(request, 'Ok!!!')
+                messages.success(request, 'Նամակը հաջողությամբ ուղարկված է!')
                 return redirect('home')
             else:
-                messages.error(request, 'Upss!!!')
+                messages.error(request, 'Ինչ֊որ բան սխալ է։ Փորձեք կրկին!')
         else:
-            messages.error(request, 'Upss!!!')
+            messages.error(request, 'Ինչ֊որ բան սխալ է։ Փորձեք կրկին!')
 
     else:
-        form = ContactForm()
-    return render(request, 'pages/contact.html', {'form': form})
+        contact_form = ContactForm()
+    return render(request, 'pages/contact.html', {'contact_form': contact_form})
 
 
 
@@ -43,7 +43,7 @@ class ContactView(GetContextDataMixin):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['form'] = ContactForm()
+        context['contact_form'] = ContactForm()
         return context
 
 

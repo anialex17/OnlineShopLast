@@ -34,21 +34,21 @@
                     </div>
                     <!--help-block-->
 
-                    <div class="text-center help-block">
-                        {% for contact in contacts %}
-                        <div class="site-color pt-3">
-                            <i class="fas fa-money-check-alt"></i>
-                        </div>
-                        <div class="help pt-3 pb-2">{% trans 'Payment issues' %}</div>
-                        <div class="email-block">
-                            <span>{% trans 'Email' %}: </span>
-                            <span class="email site-color">{{ contact.email }}</span>
-                        </div>
-                        <div class="phone-number">
-                            <span>{% trans 'Response time: 1 working day' %}</span>
-                        </div>
-                        {% endfor %}
-                    </div>
+<!--                    <div class="text-center help-block">-->
+<!--                        {% for contact in contacts %}-->
+<!--                        <div class="site-color pt-3">-->
+<!--                            <i class="fas fa-money-check-alt"></i>-->
+<!--                        </div>-->
+<!--                        <div class="help pt-3 pb-2">{% trans 'Payment issues' %}</div>-->
+<!--                        <div class="email-block">-->
+<!--                            <span>{% trans 'Email' %}: </span>-->
+<!--                            <span class="email site-color">{{ contact.email }}</span>-->
+<!--                        </div>-->
+<!--                        <div class="phone-number">-->
+<!--                            <span>{% trans 'Response time: 1 working day' %}</span>-->
+<!--                        </div>-->
+<!--                        {% endfor %}-->
+<!--                    </div>-->
                     <!--help-block-->
                 </div>
 
@@ -66,40 +66,26 @@
                     <div class="d-sm-flex justify-content-between form-name-lastname">
                         <div class="form-group py-2 pr-sm-2">
                             <label for="name_contact" class="col-form-label font-weight-bold d-none"></label>
-                            {{form.name}}
+                            {{contact_form.name}}
                         </div>
 
                         <div class="form-group py-2 pl-sm-2">
                             <label for="lastname_contact" class="col-form-label font-weight-bold d-none"></label>
-                            {{ form.lastname }}
+                            {{ contact_form.lastname }}
                         </div>
                     </div>
 
 
                     <div class="form-group py-2">
                         <label for="email_contact" class="col-form-label font-weight-bold d-none"></label>
-                        {{ form.email }}
+                        {{ contact_form.email }}
                     </div>
 
                     <div class="form-group">
                         <label for="exampleFormControlTextarea1" class="d-none"></label>
-                        {{ form.message }}
+                        {{ contact_form.message }}
                     </div>
 
-                    <!--upload file-->
-{#                    <div class="form_hint font-weight-bold py-2">{% trans 'Attach file' %}</div>#}
-{#                    <div class="form_block fl site-color">#}
-{#                        <label class="d-flex">#}
-{#                            <i class="fas fa-upload"></i>#}
-{#                            {{ form.file }}#}
-{#                            <span class="input_button font-weight-bold">{% trans 'Download' %}</span>#}
-{#                            <span class="file_name font-weight-bold pl-2"></span>#}
-{#                        </label>#}
-{#                        <span class="file_delete font-weight-bold">#}
-{#                        <i class="fas fa-times"></i>#}
-{#                    </span>#}
-{#                    </div>#}
-                    <!--End of upload file-->
 
                     <div class="pt-4 send-btn">
                         <button type="submit" class="btn btn-block shadow-none">{% trans 'Send' %}</button>
