@@ -1173,6 +1173,9 @@ body {
     padding-top: 22px;
     padding-bottom: 22px;
 }
+.contact-content h3, p {
+    color: #535353;
+}
 
 /* End of Contact Page */
 
