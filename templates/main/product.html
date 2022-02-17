@@ -59,7 +59,7 @@
                             <input type="text" value="{{product.min_order_quantity}}" data-change-size="10"
                                    class="product-quantity" name="product_quantity">
                             {% else %}
-                            <input type="text" value="{{product.start_quantity}}"
+                            <input type="text" value="{{product.min_order_quantity}}"
                                    data-change-size="{{product.start_quantity}}" class="product-quantity mt-3"
                                    name="product_quantity">
                             {% endif %}
@@ -69,7 +69,7 @@
                             <input type="text" hidden name="product_url" value="{{ product.pk }}">
                             <button type="submit" class="btn shadow-none add-to-basket-btn mt-3" data-toggle="modal"
                                     data-target="#add-to-basket">
-                                <span>{% trans 'Add to Card' %}</span>
+                                <span>{% trans "Add to Card" %}</span>
                             </button>
                         </div>
                     </form>

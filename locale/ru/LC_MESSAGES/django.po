@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-02-16 13:06+0400\n"
+"POT-Creation-Date: 2022-02-17 13:10+0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -32,7 +32,7 @@ msgstr "Изображение"
 msgid "Name"
 msgstr "Название"
 
-#: templates/basket/basket.html:23
+#: templates/basket/basket.html:23 templates/pages/order.html:32
 msgid "Price"
 msgstr "Цена"
 
@@ -99,20 +99,28 @@ msgid "Total Price "
 msgstr "Итоговая цена"
 
 #: templates/basket/basket.html:157 templates/basket/basket.html:177
-#: templates/include/header.html:111 templates/include/header.html:135
+#: templates/include/header.html:104 templates/include/header.html:128
 msgid "Sign In"
 msgstr "Войти"
 
 #: templates/basket/basket.html:159 templates/basket/basket.html:194
-#: templates/include/header.html:113 templates/include/header.html:152
+#: templates/include/header.html:106 templates/include/header.html:145
 msgid "Register"
 msgstr "Регистрация"
 
-#: templates/basket/order.html:16
+#: templates/basket/fail.html:5
+msgid "Try again"
+msgstr "Попробовать снова"
+
+#: templates/basket/fail.html:6
+msgid "Something is wrong"
+msgstr "Что-то пошло не так"
+
+#: templates/basket/order.html:16 templates/pages/order.html:31
 msgid "City"
 msgstr "Город"
 
-#: templates/basket/order.html:24 templates/main/customer.html:57
+#: templates/basket/order.html:24 templates/main/customer.html:30
 #: templates/pages/contact.html:127
 msgid "Address"
 msgstr "Адрес"
@@ -126,14 +134,10 @@ msgid "Date"
 msgstr "Дата"
 
 #: templates/basket/order.html:48
-#, fuzzy
-#| msgid "Delivery"
 msgid "Delivery time"
 msgstr "Время доставки"
 
-#: templates/basket/order.html:56
-#, fuzzy
-#| msgid "Choose the payment method"
+#: templates/basket/order.html:56 templates/pages/order.html:16
 msgid "Payment method"
 msgstr "Выберите метод оплаты"
 
@@ -141,13 +145,11 @@ msgstr "Выберите метод оплаты"
 msgid "General Terms and Conditions"
 msgstr "Общие положения и условия"
 
-#: templates/include/footer.html:20
+#: templates/include/footer.html:20 templates/pages/privacy.html:10
 msgid "Privacy policy"
-msgstr ""
+msgstr "Политика конфиденциальности"
 
 #: templates/include/footer.html:27
-#, fuzzy
-#| msgid "About Us"
 msgid "About us"
 msgstr "О нас"
 
@@ -160,7 +162,7 @@ msgstr "Связь"
 msgid "Email"
 msgstr "Email"
 
-#: templates/include/footer.html:41 templates/main/customer.html:53
+#: templates/include/footer.html:41 templates/main/customer.html:26
 msgid "Phone"
 msgstr "Номер телефона"
 
@@ -180,25 +182,30 @@ msgstr "ГАЛЕРЕЯ"
 msgid "WHOLESALE"
 msgstr "ОПТОВЫЕ ПРОДАЖИ"
 
-#: templates/include/header.html:32
-msgid "CONTACT"
-msgstr "ОБРАТНАЯ СВЯЗЬ"
-
-#: templates/include/header.html:36
-msgid "ABOUT US"
-msgstr "О НАС"
-
-#: templates/include/header.html:46
+#: templates/include/header.html:39
 msgid "Logout"
 msgstr "Выйти"
 
-#: templates/include/header.html:52
+#: templates/include/header.html:45
 msgid "SIGN IN"
 msgstr "Войти"
 
-#: templates/include/header.html:60
+#: templates/include/header.html:53
 msgid "Basket"
 msgstr "Корзина"
+
+#: templates/include/header.html:151
+msgid "Forgot password"
+msgstr "Изменить пароль"
+
+#: templates/main/activate-failed.html:3
+msgid "Someone went wrong with your link"
+msgstr "Что-то не так со ссылкой"
+
+#: templates/main/activate.html:8
+msgid "Please use the link below to verify your account."
+msgstr ""
+"Пожалуйста, воспользуйтесь ссылкой ниже, чтобы подтвердить ваш аккаунт."
 
 #: templates/main/customer.html:11
 msgid "Personal information"
@@ -208,30 +215,24 @@ msgstr "Личная информация"
 msgid "You can change your personal information"
 msgstr "Вы можете изменить личную информацию"
 
-#: templates/main/customer.html:34 templates/main/customer.html:61
-msgid "Confirm"
-msgstr "Подтвердить"
-
-#: templates/main/customer.html:41
-msgid "Username"
-msgstr "Имя пользователя"
-
-#: templates/main/customer.html:45
-#, fuzzy
-#| msgid "Name"
+#: templates/main/customer.html:18
 msgid "Last Name"
 msgstr "Название"
 
-#: templates/main/customer.html:49
+#: templates/main/customer.html:22
 msgid "First Name"
 msgstr "Имя"
 
-#: templates/main/customer.html:66 templates/main/password_change.html:5
+#: templates/main/customer.html:34
+msgid "Confirm"
+msgstr "Подтвердить"
+
+#: templates/main/customer.html:39 templates/main/password_change.html:5
 #: templates/main/password_change.html:15
 msgid "Change Password"
 msgstr "Изменить пароль"
 
-#: templates/main/customer.html:70
+#: templates/main/customer.html:43
 msgid "My orders"
 msgstr "Мои заказы"
 
@@ -250,17 +251,76 @@ msgid "Min order quantity "
 msgstr "Минимальное количество заказа"
 
 #: templates/main/menu.html:82 templates/main/product.html:72
-#, fuzzy
-#| msgid "Add to Basket"
 msgid "Add to Card"
 msgstr "В корзину"
+
+#: templates/main/password_reset.html:11
+msgid "Reset Password"
+msgstr "Изменить пароль"
+
+#: templates/main/password_reset.html:14
+msgid ""
+"Forgot your password? Enter your email address below, and we will email "
+"instructions for setting a new one."
+msgstr ""
+"Забыли пароль? Введите вашу электронную почту ниже. и мы отправим вам на "
+"почту инструкции для смены пароля."
+
+#: templates/main/password_reset.html:20
+msgid "Send email"
+msgstr "Отправить письмо"
+
+#: templates/main/password_reset_complete.html:11
+msgid "Password reset complete"
+msgstr "Обновление пароля"
+
+#: templates/main/password_reset_complete.html:14
+msgid "Your password has been set. You may go ahead and log in now."
+msgstr "Ваш пароль изменен. Вы можете продолжить и войти в систему сейчас."
+
+#: templates/main/password_reset_complete.html:17
+msgid "Log in"
+msgstr "Войти"
+
+#: templates/main/password_reset_confirm.html:11
+msgid "Password Reset Confirm"
+msgstr "Подтверждение сброса пароля"
+
+#: templates/main/password_reset_confirm.html:15
+msgid "Please enter your new password."
+msgstr "Пожалуйста, введите ваш новый пароль."
+
+#: templates/main/password_reset_confirm.html:21
+msgid "Reset password"
+msgstr "Изменить пароль"
+
+#: templates/main/password_reset_done.html:11
+msgid "Password reset sent"
+msgstr "Обновление пароля"
+
+#: templates/main/password_reset_done.html:14
+msgid ""
+"We've emailed you instructions for setting your password, if an account "
+"exists with the email you entered. You should receive them shortly. "
+msgstr ""
+"Мы отправили вам инструкции по установке пароля, если существует учетная "
+"запись с введенным вами адресом электронной почты. Вы должны получить их в "
+"ближайшее время."
+
+#: templates/main/password_reset_done.html:15
+msgid ""
+"If you don't receive an email, please make sure you've entered the address "
+"you registered with, and check your spam folder."
+msgstr ""
+"Если вы не получили электронное письмо, убедитесь, что вы ввели адрес, "
+"который указали при регистрации, и проверьте папку со спамом."
 
 #: templates/main/password_success.html:5
 msgid "Password Update"
 msgstr "Обновление пароля"
 
 #: templates/main/password_success.html:14
-msgid "Your Password was changed successfull"
+msgid "Your Password was changed successfully"
 msgstr "Ваш пароль был успешно изменен"
 
 #: templates/main/product.html:12
@@ -272,14 +332,65 @@ msgid "Food Type"
 msgstr "Тип товара"
 
 #: templates/main/product.html:82
-#, fuzzy
-#| msgid "Similar Dishes"
 msgid "Similar products"
 msgstr "Похожие товары"
 
-#: templates/pages/about-us.html:11
-msgid "About Vitamix"
-msgstr "О Vitamix"
+#: templates/pages/about-us.html:10
+msgid "About Us"
+msgstr "О нас"
+
+#: templates/pages/about-us.html:13
+msgid ""
+"Vitamix.am is an online trading platform that allows you to shop without "
+"leaving home."
+msgstr ""
+"Vitamix.am — торговая онлайн-платформа, позволяющая делать покупки,не выходя "
+"из дома."
+
+#: templates/pages/about-us.html:16
+msgid "Our Advantages"
+msgstr "Наши преимущества"
+
+#: templates/pages/about-us.html:19
+msgid ""
+"The services provided by Vitamix.am stand out with the following advantages"
+msgstr ""
+"Услуги, предоставляемые Vitamix.am, отличаются следующими преимуществами:"
+
+#: templates/pages/about-us.html:24
+msgid "High quality service based on customer feedback and requirements"
+msgstr ""
+"Услуги, предоставляемые Vitamix.am, отличаются следующими преимуществами:"
+
+#: templates/pages/about-us.html:27
+msgid "Fast delivery up to 1 hour"
+msgstr "Быстрая доставка в течение 1 часа"
+
+#: templates/pages/about-us.html:30
+msgid ""
+"Through Vitamix.am you can make secure online transactions with different "
+"payment methods. The site allows you to pay both in cash and make purchases "
+"through the POS terminal և IDram payment system."
+msgstr ""
+"Через Vitamix.am вы можете совершать безопасные онлайн-платежи различными "
+"способами оплаты. Сайт позволяет оплачивать как наличными, так и совершать "
+"покупки через POS-терминал и платежную систему IDram."
+
+#: templates/pages/about-us.html:33
+msgid ""
+"Ahead of each holiday, Vitamix.am presents a special section, thanks to "
+"which shopping becomes easier and more purposeful."
+msgstr ""
+"В преддверии каждого праздника Vitamix.am представляет специальный раздел, в "
+"котором Ваши покупки станут проще и целенаправленнее."
+
+#: templates/pages/about-us.html:38
+msgid "We wish you a pleasant shopping"
+msgstr "Желаем вам приятных покупок"
+
+#: templates/pages/about-us.html:39
+msgid "With love, Vitamix.am"
+msgstr "С любовью, Vitamix.am"
 
 #: templates/pages/contact.html:16
 msgid "For customers"
@@ -329,124 +440,163 @@ msgstr "только для заказов"
 msgid "Gallery"
 msgstr "Галерея"
 
-#: templates/pages/order.html:11
-msgid "How to order?"
-msgstr "Как заказать?"
+#: templates/pages/order.html:10
+msgid "Delivery and payment"
+msgstr "Время доставки"
 
-#: templates/pages/order.html:15
-msgid "Fill in your address where to ship"
-msgstr "Заполните ваш адрес для доставки"
+#: templates/pages/order.html:13
+msgid "The cost of order delivery in Yerevan is 500 drams."
+msgstr "Стоимость доставки заказа по Еревану - 500 драм."
+
+#: templates/pages/order.html:17
+msgid ""
+"Payment at Vitamix.am can be made in two ways: online or in person. Online "
+"payments are made through Idram, cash և POS-terminal payment systems. They "
+"are serviced Cardholders with Visa և Master Card. Cash payments are made "
+"upon delivery at the moment in AMD."
+msgstr ""
+"Оплату на Vitamix.am можно произвести двумя способами: онлайн или по факту "
+"доставки. Онлайн платежи осуществляются через Idram, наличные и POS-"
+"терминальные платежные системы. Они обслуживают держателей карт Visa и "
+"Master Card. Оплата наличными осуществляется по факту доставки в драмах."
 
 #: templates/pages/order.html:18
 msgid ""
-"Choose your favorite dish or product from many restaurants և specialty stores"
+"The use of cash registers does not have to be remotely related to the sale "
+"of electronic communications or television shops. / Basis17.06.16 ՀՕ-116-N /"
 msgstr ""
-"Выберите ваше любимое блюдо или товар из множеств ресторанов или магазинов"
+"Использование кассовых аппаратов не должно быть отдаленно связано с продажей "
+"электронных средств связи или телемагазинами. / Basis17.06.16 ՀՕ-116-N /"
 
 #: templates/pages/order.html:21
-msgid "Place an online order through the website or meat.am mobile application"
-msgstr "Оформить заказ через веб-сайт или мобильное приложение"
+msgid "Delivery order"
+msgstr "Время доставки"
 
-#: templates/pages/order.html:24
-msgid "Choose the payment method"
-msgstr "Выберите метод оплаты"
+#: templates/pages/order.html:22
+msgid ""
+"Delivery is carried out in Yerevan within 1 hour, depending on the number of "
+"delivery points."
+msgstr ""
+"Доставка осуществляется по Еревану в течение 1 часа, в зависимости от "
+"количества пунктов выдачи"
 
-#: templates/pages/order.html:26
-msgid "Payment on the spot after delivery"
-msgstr "Оплата по факту доставки"
+#: templates/pages/order.html:25
+msgid "The following tariffs apply for delivery."
+msgstr "На доставку действуют следующие тарифы."
 
-#: templates/pages/order.html:27
-msgid "Credit card with website or mobile application"
-msgstr "Кредитной картой через сайт или приложение"
-
-#: templates/pages/order.html:33
-msgid "through payment systems"
-msgstr "через платежные системы"
-
-#: templates/pages/order.html:38
-msgid "Open the door, we are already on the threshold"
-msgstr "Откройте дверь, мы уже подъезжаем"
+#: templates/pages/order.html:37
+msgid "Yerevan"
+msgstr "Ереван"
 
 #: templates/pages/order.html:41
-msgid "How long does it take to deliver?"
-msgstr "Как долго длится доставка"
+msgid "Argavand"
+msgstr "Аргаванд"
 
-#: templates/pages/order.html:49
-msgid "How much does shipping cost?"
-msgstr "Сколько стоит доставка"
+#: templates/pages/order.html:45
+msgid "Noragavit"
+msgstr "Норагавит"
 
-#: templates/pages/order.html:51
-msgid "Shipping cost varies depending on"
-msgstr "Цена доставки зависит от"
-
-#: templates/pages/order.html:54
-msgid "distance from the food point / specialty և customer"
-msgstr "расстояние от точки / "
-
-#: templates/pages/order.html:55
-msgid "How many food outlets / specialty stores deliver?"
-msgstr ""
-
-#: templates/pages/order.html:56
-msgid "weather conditions"
-msgstr "погодные условия"
-
-#: templates/pages/order.html:57
-msgid "due to traffic congestion."
-msgstr "состояние трафика на дорогах"
-
-#: templates/pages/order.html:60
+#: templates/pages/privacy.html:13
 msgid ""
-"You can see the cost of delivery at the moment in the data on the item page"
-msgstr "Вы можете увидеть стоимость доставки в момент оплаты на странице"
+"The purpose of this policy is to inform Vitamix.am visitors what data is "
+"collected to register on the site and how it is used."
+msgstr ""
+"Целью данной политики является информирование посетителей Vitamix.amо том, "
+"для чего собираются данные для регистрации на сайте и как они используются."
 
-#: templates/pages/order.html:66
-msgid "Distance:"
-msgstr "Расстояние:"
+#: templates/pages/privacy.html:14
+msgid "Personal Information Protection"
+msgstr "Личная информация"
 
-#: templates/pages/order.html:67
-msgid "Order from 1 point"
-msgstr "Заказ от 1 единицы"
+#: templates/pages/privacy.html:15
+msgid ""
+"For the site registration it is required to provide the following personal "
+"information:`email, first name, last name: For the sake of providing safe "
+"and convenient service the information you provide is used for the following "
+"purposes:"
+msgstr ""
+"Для регистрации на сайте необходимо предоставить следующую личную "
+"информацию: электронная почта, имя, фамилия: В целях обеспечения безопасного "
+"и удобного обслуживания предоставленная вами информация используется в "
+"следующих целях:"
 
-#: templates/pages/order.html:68
-msgid "order from each of the following items"
-msgstr "заказать каждый из следующих товаров"
+#: templates/pages/privacy.html:17
+msgid "For maintenance"
+msgstr "Для поддержки"
 
-#: templates/pages/order.html:73
-msgid "up to 3 km"
-msgstr "до 3-х км"
+#: templates/pages/privacy.html:18
+msgid "For support in case of technical difficulties"
+msgstr "Для поддержки в случае технических трудностей"
 
-#: templates/pages/order.html:74
-msgid "400 dram"
-msgstr "400 драм"
+#: templates/pages/privacy.html:19
+msgid "To meet your needs more effectively"
+msgstr "Для более эффективного удовлетворения ваших потребностей"
 
-#: templates/pages/order.html:75
-msgid "400 drams each"
-msgstr "400 драм каждый"
+#: templates/pages/privacy.html:20
+msgid "To keep you informed about news or new services"
+msgstr "Чтобы держать вас в курсе новостей или новых услуг"
 
-#: templates/pages/order.html:78
-msgid "3,01 – 5km"
-msgstr "3,01 – 5 км"
+#: templates/pages/privacy.html:21
+msgid "To send information about special offers"
+msgstr "Для отправки информации о специальных предложениях"
 
-#: templates/pages/order.html:79
-msgid "600 dram"
-msgstr "600 драм"
+#: templates/pages/privacy.html:24
+msgid ""
+"Vitamix.am ensures the confidentiality of the information you provide to the "
+"party."
+msgstr ""
+"Vitamix.am обеспечивает конфиденциальность информации, которую вы "
+"предоставляете стороне"
 
-#: templates/pages/order.html:80
-msgid "600 drams each"
-msgstr "600 драм каждый"
+#: templates/pages/privacy.html:26
+msgid "Other information collected while visiting the site"
+msgstr "Другая информация, собранная во время посещения сайта"
 
-#: templates/pages/order.html:83
-msgid "5,01 - 7km"
-msgstr "5,01 - 7 км"
+#: templates/pages/privacy.html:27
+msgid ""
+"While visiting Vitamix.am website, certain information about your computer "
+"is collected. For example, when you visited our site, what pages you "
+"visited, browser type, internet service provider name (UCOM, Vivacell…) and "
+"other similar information."
+msgstr ""
+"При посещении сайта Vitamix.am собирается определенная информация о вашем "
+"компьютере. Например, когда вы посетили наш сайт, какие страницы вы "
+"посетили, тип браузера, название интернет-провайдера (UCOM, Vivacell…) и "
+"другая аналогичная информация."
 
-#: templates/pages/order.html:84
-msgid "800 dram"
-msgstr "800 драм"
+#: templates/pages/privacy.html:28
+msgid ""
+"The information collected is not personal, it allows you to count the number "
+"of visitors, compile statistics on page visits. This information allows us "
+"to keep track of our site and make it as user-friendly as possible."
+msgstr ""
+"Собранная информация не является личной, она позволяет подсчитать количество "
+"посетителей, вести статистику посещений страниц. Эта информация позволяет "
+"нам отслеживать наш сайт и делать его максимально удобным для пользователя."
 
-#: templates/pages/order.html:85
-msgid "800-drams each"
-msgstr "800 драм каждый"
+#: templates/pages/privacy.html:29
+msgid "Use of cookies"
+msgstr "Использование файлов cookie"
+
+#: templates/pages/privacy.html:30
+msgid ""
+"Vitamix.am uses cookie files. Cookies are small text files that are "
+"generated on the website. When you visit the site, cookie files are accepted "
+"and stored on your computer’s browser software. Cookies are safe for your "
+"computer and don’t collect personal information. Due to them, the site visit "
+"becomes faster and more convenient."
+msgstr ""
+"Vitamix.am использует файлы cookie. Файлы cookie — это небольшие текстовые "
+"файлы, которые создаются на веб-сайте. Когда вы посещаете сайт, файлы cookie "
+"принимаются и сохраняются в программном обеспечении браузера вашего "
+"компьютера. Файлы cookie безопасны для вашего компьютера и не собирают "
+"личную информацию. Благодаря им посещение сайта становится быстрее и удобнее."
+
+#: templates/payment/success.html:10
+#, fuzzy
+#| msgid "Your Password was changed successfull"
+msgid "Your order has been successfully placed!"
+msgstr "Ваш пароль был успешно изменен"
 
 #: venv/lib/python3.8/site-packages/django/views/templates/default_urlconf.html:7
 #: venv/lib/python3.8/site-packages/django/views/templates/default_urlconf.html:221
@@ -492,6 +642,114 @@ msgstr ""
 #: venv/lib/python3.8/site-packages/django/views/templates/default_urlconf.html:249
 msgid "Connect, get help, or contribute"
 msgstr ""
+
+#~ msgid "We"
+#~ msgstr "Мы"
+
+#~ msgid "If you don"
+#~ msgstr "Если Вы не"
+
+#~ msgid "CONTACT"
+#~ msgstr "ОБРАТНАЯ СВЯЗЬ"
+
+#~ msgid "ABOUT US"
+#~ msgstr "О НАС"
+
+#~ msgid "Username"
+#~ msgstr "Имя пользователя"
+
+#~ msgid "About Vitamix"
+#~ msgstr "О Vitamix"
+
+#~ msgid "How to order?"
+#~ msgstr "Как заказать?"
+
+#~ msgid "Fill in your address where to ship"
+#~ msgstr "Заполните ваш адрес для доставки"
+
+#~ msgid ""
+#~ "Choose your favorite dish or product from many restaurants և specialty "
+#~ "stores"
+#~ msgstr ""
+#~ "Выберите ваше любимое блюдо или товар из множеств ресторанов или магазинов"
+
+#~ msgid ""
+#~ "Place an online order through the website or meat.am mobile application"
+#~ msgstr "Оформить заказ через веб-сайт или мобильное приложение"
+
+#~ msgid "Choose the payment method"
+#~ msgstr "Выберите метод оплаты"
+
+#~ msgid "Payment on the spot after delivery"
+#~ msgstr "Оплата по факту доставки"
+
+#~ msgid "Credit card with website or mobile application"
+#~ msgstr "Кредитной картой через сайт или приложение"
+
+#~ msgid "through payment systems"
+#~ msgstr "через платежные системы"
+
+#~ msgid "Open the door, we are already on the threshold"
+#~ msgstr "Откройте дверь, мы уже подъезжаем"
+
+#~ msgid "How long does it take to deliver?"
+#~ msgstr "Как долго длится доставка"
+
+#~ msgid "How much does shipping cost?"
+#~ msgstr "Сколько стоит доставка"
+
+#~ msgid "Shipping cost varies depending on"
+#~ msgstr "Цена доставки зависит от"
+
+#~ msgid "distance from the food point / specialty և customer"
+#~ msgstr "расстояние от точки / "
+
+#~ msgid "weather conditions"
+#~ msgstr "погодные условия"
+
+#~ msgid "due to traffic congestion."
+#~ msgstr "состояние трафика на дорогах"
+
+#~ msgid ""
+#~ "You can see the cost of delivery at the moment in the data on the item "
+#~ "page"
+#~ msgstr "Вы можете увидеть стоимость доставки в момент оплаты на странице"
+
+#~ msgid "Distance:"
+#~ msgstr "Расстояние:"
+
+#~ msgid "Order from 1 point"
+#~ msgstr "Заказ от 1 единицы"
+
+#~ msgid "order from each of the following items"
+#~ msgstr "заказать каждый из следующих товаров"
+
+#~ msgid "up to 3 km"
+#~ msgstr "до 3-х км"
+
+#~ msgid "400 dram"
+#~ msgstr "400 драм"
+
+#~ msgid "400 drams each"
+#~ msgstr "400 драм каждый"
+
+#~ msgid "3,01 – 5km"
+#~ msgstr "3,01 – 5 км"
+
+#~ msgid "600 dram"
+#~ msgstr "600 драм"
+
+#~ msgid "600 drams each"
+#~ msgstr "600 драм каждый"
+
+#~ msgid "5,01 - 7km"
+#~ msgstr "5,01 - 7 км"
+
+#~ msgid "800 dram"
+#~ msgstr "800 драм"
+
+#~ msgid "800-drams each"
+#~ msgstr "800 драм каждый"
 
 #~ msgid "How to order"
 #~ msgstr "Как заказать"

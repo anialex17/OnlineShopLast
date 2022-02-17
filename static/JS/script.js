@@ -11,8 +11,10 @@ $(document).ready(function () {
         const input = $(this).parent().find('.product-quantity');
         input.val(parseFloat(`${input.val()}`.replaceAll(',', '.')))
         let q = parseFloat(`${input.data('change-size')}`.replaceAll(',', '.'))
-        if (+input.val() === q) return
-        input.val(+input.val() - q);
+        // if (+input.val() <= q) return
+        q = +input.val() <= q ? q : +input.val()
+        // input.val(+input.val() - q);
+        input.val(q)
     });
 
 

@@ -220,7 +220,7 @@ class Order(models.Model):
     class Meta:
         verbose_name = 'Պատվեր'
         verbose_name_plural = 'Պատվերներ'
-        ordering = ['-date_added']
+        ordering = ['date_shipping', 'time_shipping']
 
 
 

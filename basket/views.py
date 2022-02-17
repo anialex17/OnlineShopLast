@@ -119,7 +119,7 @@ def change_qty_minus(request):
         product_item = ProductItem.objects.get(pk=request.POST.get('decrement_item'))
         if product_item and product_item.product.wholesale == False:
             product_item.quantity -= product_item.product.start_quantity
-            if product_item.quantity <= 0:
+            if product_item.quantity < product_item.product.min_order_quantity:
                 product_item.delete()
             else:
                 product_item.save()

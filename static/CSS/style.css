@@ -1482,6 +1482,13 @@ body {
 .password-reset-confirm-content {
     margin-top: 90px;
 }
+.password-reset-confirm-content .helptext {
+    display: none;
+}
+.password-reset-confirm-content .confirm-form input, label {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
 .success-header {
     color: #535353;
 }
