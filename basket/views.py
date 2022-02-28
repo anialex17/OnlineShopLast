@@ -1,4 +1,5 @@
 from django.contrib import messages
+from django.contrib.sites import requests
 from django.shortcuts import render, redirect
 from django.http import JsonResponse, HttpResponseRedirect
 import datetime
@@ -6,8 +7,11 @@ from django.views.generic import CreateView, UpdateView
 from main.forms import RegisterUserForm, LoginUserForm
 from main.views import GetContextDataMixin
 from main.models import *
+from payment.forms import PaymentForm, PaymentResponseForm
+from payment.models import Payment, PaymentResponse
 from .forms import AddToBasketForm, OrderForm
 import uuid
+from django.core.mail import send_mail
 
 
 def basket(request):
@@ -46,9 +50,11 @@ def add_to_basket(request):
             product_quantity = request.POST.get('product_quantity').replace(",", ".")
             basket = Basket.objects.get(customer=customer)
             if product.wholesale:
-                product_item, created = ProductItem.objects.get_or_create(product=product, customer=customer,wholesale=True, order=None)
+                product_item, created = ProductItem.objects.get_or_create(product=product, customer=customer,
+                                                                          wholesale=True, order=None)
             else:
-                product_item, created = ProductItem.objects.get_or_create(product=product, customer=customer,order=None)
+                product_item, created = ProductItem.objects.get_or_create(product=product, customer=customer,
+                                                                          order=None)
             product_item.quantity = product_quantity
             basket.productItems.add(product_item)
             product_item.save()
@@ -66,7 +72,8 @@ def add_to_basket(request):
             product = Product.objects.get(pk=request.POST.get('product_url'))
             product_quantity = request.POST.get('product_quantity')
             if product.wholesale:
-                product_item, created = ProductItem.objects.get_or_create(product=product,session_key=basket.session_key,
+                product_item, created = ProductItem.objects.get_or_create(product=product,
+                                                                          session_key=basket.session_key,
                                                                           wholesale=True, order=None)
             else:
                 product_item, created = ProductItem.objects.get_or_create(product=product, order=None,
@@ -133,6 +140,8 @@ def change_qty_minus(request):
 
 
 def order(request):
+    form = PaymentForm()
+    form_response = PaymentResponseForm()
     if request.method == 'POST':
         customer = request.user.customer
         basket = Basket.objects.get(customer=customer)
@@ -150,17 +159,26 @@ def order(request):
                 basket.productItems.remove(item)
                 # order.product_items.add(item)
             if order.payment_type == 'TYPE_PAYMENT_NON_CASH':
-                return redirect('payment')
+                # send_mail('Պատվեր',f'Նոր պատվեր-{order.customer.user.first_name} {order.customer.user.last_name}-ի կողմից', 'netfornetenyu@gmail.com', ['netfornetenyu@gmail.com'], fail_silently=False)
+                # return redirect('payment')
+                payment = Payment.objects.create(description=f'online payment {request.user.first_name}',
+                                                 order_id=order.id,
+                                                 amount=basket.finale_price)
+                # payment = PaymentForm(description=f'online payment {request.user.first_name}',
+                #                                  order_id=order.id,
+                #                                  amount=basket.finale_price)
+                data = {payment.description: f'online payment {request.user.first_name}', payment.order_id: order.id,
+                        payment.amount: basket.finale_price()}
+                payment_request = requests.post('https://servicestest.ameriabank.am/VPOS/api/VPOS/InitPayment', data=data)
+                payment_response = PaymentResponse.objects.create(payment_id=payment_request.payment_id,
+                                                                   response_code=payment_request.response_code,
+                                                                   response_message=payment_request.response_message)
+
+                return redirect('https://servicestest.ameriabank.am/VPOS/Payments/Pay ? id =@ id & lang =@lang')
             elif order.payment_type == 'TYPE_PAYMENT_CASH':
+                send_mail('Պատվեր',f'Նոր պատվեր-{order.customer.user.first_name} {order.customer.user.last_name}-ի կողմից',
+                          'netfornetenyu@gmail.com', ['netfornetenyu@gmail.com'], fail_silently=False)
                 return redirect('success')
     else:
         form = OrderForm()
     return render(request, 'basket/order.html', {'form': form})
-
-
-
-
-
-
-
-

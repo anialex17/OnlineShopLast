@@ -32,5 +32,4 @@ class OrderForm(forms.ModelForm):
                                                  'placeholder': "Time"}),
             'payment_type': forms.Select(attrs={'type': "text", 'class': "form-control shadow-none", 'id': "name",
                                                  'placeholder': "Payment type"}),
-
         }

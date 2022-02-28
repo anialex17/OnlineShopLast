@@ -53,7 +53,7 @@
                                 {% endif %}
                             </div>
                             <div class="price py-2 site-color">
-                                    <span class="category-product-quantity">{% trans 'Min order quantity ' %}{{product.min_order_quantity}}{{product.measurement}}</span>
+                                    <span class="category-product-quantity">{% trans 'Min order quantity-' %}{{product.min_order_quantity}}{{product.measurement}}</span>
                             </div>
                             <div class="add-to-basket-block">
                                 <form class="product-form js-product-form" data-login="{% if user.is_authenticated %}is_active{% endif %}" action="{% url 'add_to_basket' %}" method="post">

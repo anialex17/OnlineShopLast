@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-02-17 13:10+0400\n"
+"POT-Creation-Date: 2022-02-26 12:28+0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -121,11 +121,11 @@ msgid "City"
 msgstr "Город"
 
 #: templates/basket/order.html:24 templates/main/customer.html:30
-#: templates/pages/contact.html:127
+#: templates/pages/contact.html:114
 msgid "Address"
 msgstr "Адрес"
 
-#: templates/basket/order.html:32 templates/pages/contact.html:132
+#: templates/basket/order.html:32 templates/pages/contact.html:119
 msgid "Phone number"
 msgstr "Номер телефона"
 
@@ -157,8 +157,8 @@ msgstr "О нас"
 msgid "Contact"
 msgstr "Связь"
 
-#: templates/include/footer.html:38 templates/pages/contact.html:26
-#: templates/pages/contact.html:44 templates/pages/contact.html:138
+#: templates/include/footer.html:38 templates/pages/contact.html:27
+#: templates/pages/contact.html:45 templates/pages/contact.html:125
 msgid "Email"
 msgstr "Email"
 
@@ -247,8 +247,8 @@ msgid "dr"
 msgstr "др"
 
 #: templates/main/menu.html:56
-msgid "Min order quantity "
-msgstr "Минимальное количество заказа"
+msgid "Min order quantity-"
+msgstr "Минимальное количество заказа-"
 
 #: templates/main/menu.html:82 templates/main/product.html:72
 msgid "Add to Card"
@@ -392,47 +392,47 @@ msgstr "Желаем вам приятных покупок"
 msgid "With love, Vitamix.am"
 msgstr "С любовью, Vitamix.am"
 
-#: templates/pages/contact.html:16
+#: templates/pages/contact.html:17
 msgid "For customers"
 msgstr "Для покупателей"
 
-#: templates/pages/contact.html:24
+#: templates/pages/contact.html:25
 msgid "Help"
 msgstr "Помощь"
 
-#: templates/pages/contact.html:30
+#: templates/pages/contact.html:31
 msgid "Hot line"
 msgstr "Горячая линия"
 
-#: templates/pages/contact.html:42
+#: templates/pages/contact.html:43
 msgid "Payment issues"
 msgstr "Способы оплаты"
 
-#: templates/pages/contact.html:48
+#: templates/pages/contact.html:49
 msgid "Response time: 1 working day"
 msgstr "Время отклика: 1 рабочий день"
 
-#: templates/pages/contact.html:61
+#: templates/pages/contact.html:62
 msgid "Write us a message"
 msgstr "Написать нам сообщение"
 
-#: templates/pages/contact.html:62
+#: templates/pages/contact.html:63
 msgid "We are always ready to answer your questions"
 msgstr "Мы всегда готовы ответить на Ваши вопросы"
 
-#: templates/pages/contact.html:105
+#: templates/pages/contact.html:92
 msgid "Send"
 msgstr "Отправить"
 
-#: templates/pages/contact.html:117
+#: templates/pages/contact.html:104
 msgid "Head Office Address and Contacts"
 msgstr "Адрес головного офиса и контакты"
 
-#: templates/pages/contact.html:122
+#: templates/pages/contact.html:109
 msgid " Hot line"
 msgstr "Горячая линия"
 
-#: templates/pages/contact.html:123
+#: templates/pages/contact.html:110
 msgid "for orders only"
 msgstr "только для заказов"
 
@@ -593,10 +593,8 @@ msgstr ""
 "личную информацию. Благодаря им посещение сайта становится быстрее и удобнее."
 
 #: templates/payment/success.html:10
-#, fuzzy
-#| msgid "Your Password was changed successfull"
 msgid "Your order has been successfully placed!"
-msgstr "Ваш пароль был успешно изменен"
+msgstr "Ваш заказ успешно принят!"
 
 #: venv/lib/python3.8/site-packages/django/views/templates/default_urlconf.html:7
 #: venv/lib/python3.8/site-packages/django/views/templates/default_urlconf.html:221

@@ -1,5 +1,5 @@
 $(document).ready(function () {
-
+//
     $('.js-btn-inc').on('click', function () {
         const input = $(this).parent().find('.product-quantity');
         input.val(parseFloat(`${input.val()}`.replaceAll(',', '.')))
@@ -11,13 +11,33 @@ $(document).ready(function () {
         const input = $(this).parent().find('.product-quantity');
         input.val(parseFloat(`${input.val()}`.replaceAll(',', '.')))
         let q = parseFloat(`${input.data('change-size')}`.replaceAll(',', '.'))
+        let minWeight = q
         // if (+input.val() <= q) return
-        q = +input.val() <= q ? q : +input.val()
+        // q = +input.val() <= q ? q : +input.val()-q
+        if(+input.val() > minWeight ) {
+            q = +input.val() - q
+        } else {
+            return
+        }
+        // q = +input.val() + q <= q ? q : +input.val() - q
+        // console.log(q)
         // input.val(+input.val() - q);
         input.val(q)
     });
 
 
+    // $('.js-btn-inc').on('click', function () {
+    //     const input = $(this).parent().find('.product-quantity');
+    //     let q = parseFloat(input.data('change-size'));
+    //     input.val(+input.val() + q);
+    // });
+    //
+    // $('.js-btn-dec').on('click', function () {
+    //     const input = $(this).parent().find('.product-quantity');
+    //     let q = parseFloat(input.data('change-size'));
+    //     q = +input.val() - q <= q ? q : +input.val() - q
+    //     input.val(q)
+    // });
 
     // registration & login
     $('.sign-in-register-block .sign-in').on('click', function (){

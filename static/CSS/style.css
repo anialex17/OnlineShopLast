@@ -353,9 +353,9 @@ body {
 
 /* Home Page */
 
-.home-content {
-    background: url(./../Images/home/bg-1.png) no-repeat scroll left top;
-}
+/*.home-content {*/
+/*    background: url(./../Images/home/bg-1.png) no-repeat scroll left top;*/
+/*}*/
 
 .home-content .header-block .header {
     font-family: sans-serif;
@@ -400,12 +400,12 @@ body {
     margin: 0 auto;
 }
 
-.home-content .right-bottom-bg {
-    background: url(./../Images/home/bg-2.png) no-repeat scroll right bottom;
-}
+/*.home-content .right-bottom-bg {*/
+/*    background: url(./../Images/home/bg-2.png) no-repeat scroll right bottom;*/
+/*}*/
 
 .home-content .container {
-    padding-top: 60px;
+    padding-top: 5px;
     padding-bottom: 60px;
 }
 

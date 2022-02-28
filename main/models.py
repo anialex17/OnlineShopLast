@@ -130,7 +130,7 @@ class ProductItem(models.Model):
         return self.quantity
 
     def __str__(self):
-        return f'{self.product.title} - {self.quantity}{self.product.measurement} - {self.total_price()}dr\n'
+        return f'{self.product.title} - {self.quantity}{self.product.measurement}\n'
 
     class Meta:
         verbose_name = 'Ընտրված ապրանք'

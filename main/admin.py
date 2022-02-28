@@ -58,7 +58,7 @@ class ProductItemInline(admin.TabularInline):
 
 @admin.register(Order)
 class OrderAdmin(admin.ModelAdmin):
-    list_display = ('id', 'customer','date_shipping','status')
+    list_display = ('id', 'customer','date_shipping', 'time_shipping','status')
     list_display_links = ('id', 'customer','date_shipping','status')
     inlines = [ProductItemInline,]
     # exclude = ('product_items',)

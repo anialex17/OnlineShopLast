@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-02-17 13:10+0400\n"
+"POT-Creation-Date: 2022-02-26 12:27+0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -119,11 +119,11 @@ msgid "City"
 msgstr "Քաղաք՝"
 
 #: templates/basket/order.html:24 templates/main/customer.html:30
-#: templates/pages/contact.html:127
+#: templates/pages/contact.html:114
 msgid "Address"
 msgstr "Հասցե՝"
 
-#: templates/basket/order.html:32 templates/pages/contact.html:132
+#: templates/basket/order.html:32 templates/pages/contact.html:119
 msgid "Phone number"
 msgstr "Հեռ․՝"
 
@@ -155,8 +155,8 @@ msgstr "Մեր մասին"
 msgid "Contact"
 msgstr "Կապ"
 
-#: templates/include/footer.html:38 templates/pages/contact.html:26
-#: templates/pages/contact.html:44 templates/pages/contact.html:138
+#: templates/include/footer.html:38 templates/pages/contact.html:27
+#: templates/pages/contact.html:45 templates/pages/contact.html:125
 msgid "Email"
 msgstr "Էլ․ հասցե"
 
@@ -245,8 +245,8 @@ msgid "dr"
 msgstr "դր"
 
 #: templates/main/menu.html:56
-msgid "Min order quantity "
-msgstr "Պատվերի մինիմալ չափ"
+msgid "Min order quantity-"
+msgstr "Պատվերի մինիմալ չափ-"
 
 #: templates/main/menu.html:82 templates/main/product.html:72
 msgid "Add to Card"
@@ -317,7 +317,6 @@ msgid "Password Update"
 msgstr "Գաղտնաբառի փոփոխում"
 
 #: templates/main/password_success.html:14
-
 msgid "Your Password was changed successfully"
 msgstr "Ձեր գաղտնաբառը հաջողությամբ փոփոխված է"
 
@@ -330,12 +329,10 @@ msgid "Food Type"
 msgstr "Ապրանքի տեսակ"
 
 #: templates/main/product.html:82
-
 msgid "Similar products"
 msgstr "Նմանատիպ ապրանքներ"
 
 #: templates/pages/about-us.html:10
-
 msgid "About Us"
 msgstr "Մեր մասին"
 
@@ -393,47 +390,47 @@ msgstr "Ձեզ մաղթում ենք հաճելի գնումներ"
 msgid "With love, Vitamix.am"
 msgstr "Սիրով՝ Vitamix.am"
 
-#: templates/pages/contact.html:16
+#: templates/pages/contact.html:17
 msgid "For customers"
 msgstr "Պատվիրատուներին"
 
-#: templates/pages/contact.html:24
+#: templates/pages/contact.html:25
 msgid "Help"
 msgstr "Օգնություն"
 
-#: templates/pages/contact.html:30
+#: templates/pages/contact.html:31
 msgid "Hot line"
 msgstr "Թեժ գիծ"
 
-#: templates/pages/contact.html:42
+#: templates/pages/contact.html:43
 msgid "Payment issues"
 msgstr "Վճարման տարբերակներ"
 
-#: templates/pages/contact.html:48
+#: templates/pages/contact.html:49
 msgid "Response time: 1 working day"
 msgstr "Արձագանք՝ 1 աշխատանքային օրում "
 
-#: templates/pages/contact.html:61
+#: templates/pages/contact.html:62
 msgid "Write us a message"
 msgstr "Գրել մեզ"
 
-#: templates/pages/contact.html:62
+#: templates/pages/contact.html:63
 msgid "We are always ready to answer your questions"
 msgstr "Մենք միշտ պատրաստ ենք պատասխանել ձեր հարցերին"
 
-#: templates/pages/contact.html:105
+#: templates/pages/contact.html:92
 msgid "Send"
 msgstr "Ուղարկել"
 
-#: templates/pages/contact.html:117
+#: templates/pages/contact.html:104
 msgid "Head Office Address and Contacts"
 msgstr "Գլխավոր գրասենյակի հասցեն և տվյալները"
 
-#: templates/pages/contact.html:122
+#: templates/pages/contact.html:109
 msgid " Hot line"
 msgstr "Թեժ գիծ"
 
-#: templates/pages/contact.html:123
+#: templates/pages/contact.html:110
 msgid "for orders only"
 msgstr "Միայն պատվերների համար"
 
@@ -442,7 +439,6 @@ msgid "Gallery"
 msgstr "Նկարներ"
 
 #: templates/pages/order.html:10
-
 msgid "Delivery and payment"
 msgstr "Առաքում"
 
@@ -472,7 +468,6 @@ msgstr ""
 "վաճառքի իրականացման գործունեության մասով /Հիմք17.06.16 ՀՕ-116-Ն /"
 
 #: templates/pages/order.html:21
-
 msgid "Delivery order"
 msgstr "Առաքում"
 
@@ -510,7 +505,6 @@ msgstr ""
 "օգտագործվում:"
 
 #: templates/pages/privacy.html:14
-
 msgid "Personal Information Protection"
 msgstr "Անձնական տվյալներ"
 
@@ -599,9 +593,8 @@ msgstr ""
 "օգտվելը դառնում է ավելի արագ և հարմարավետ:"
 
 #: templates/payment/success.html:10
-
 msgid "Your order has been successfully placed!"
-msgstr "Ձեր գաղտնաբառը հաջողությամբ փոփոխված է"
+msgstr "Ձեր պատվերը հաջողությամբ հաստատված է"
 
 #: venv/lib/python3.8/site-packages/django/views/templates/default_urlconf.html:7
 #: venv/lib/python3.8/site-packages/django/views/templates/default_urlconf.html:221

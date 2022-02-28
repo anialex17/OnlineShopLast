@@ -89,12 +89,10 @@ def register(request):
         if register_form.is_valid():
             user = register_form.save(commit=False)
             email = register_form.cleaned_data.get('email')
-
             # generate username from email
             username_from_email = email.split('@')[0]
             username = ''.join(e for e in username_from_email if e.isalnum())
             user.username = username
-
             if User.objects.filter(email=email):
                 messages.warning(request, 'This email is already in use!')
                 return redirect('home')
@@ -182,7 +180,7 @@ def logout_user(request):
 
 def customer(request, pk):
     customer = Customer.objects.get(user=request.user)
-    orders = Order.objects.filter(customer=customer)
+    orders = Order.objects.filter(customer=customer).order_by('-id')[:5]
     user_form = EditUserForm(initial={
         # 'username': request.user.username,
         'first_name': request.user.first_name,
