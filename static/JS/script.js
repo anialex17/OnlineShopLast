@@ -1,29 +1,61 @@
 $(document).ready(function () {
-//
+
+    $('.js-product-quantity').each(function (_, item) {
+        const numbers = $(item).html().split('.');
+        if (numbers[1] && numbers[1] === '0') {
+            $(item).html(numbers[0]);
+        }
+    });
+
+    function updateQuantityHandler(elem, type = 'inc') {
+        const input = $(elem).parent().find('.product-quantity');
+        const v = parseFloat(input.val());
+        const q = parseFloat(input.data('change-size'));
+        const a = parseFloat(input.data('min-order-qty'));
+        if (type === 'inc') {
+            input.val(v + q);
+        } else {
+            // input.val(v - q <= q ? q : v - q);
+            input.val(v - q <= a ? a : v - q);
+        }
+    }
+
     $('.js-btn-inc').on('click', function () {
-        const input = $(this).parent().find('.product-quantity');
-        input.val(parseFloat(`${input.val()}`.replaceAll(',', '.')))
-        let q = parseFloat(`${input.data('change-size')}`.replaceAll(',', '.'))
-        input.val(+input.val() + q);
+        updateQuantityHandler(this)
+    }).each(function (_, item) {
+        updateQuantityHandler(item);
     });
 
     $('.js-btn-dec').on('click', function () {
-        const input = $(this).parent().find('.product-quantity');
-        input.val(parseFloat(`${input.val()}`.replaceAll(',', '.')))
-        let q = parseFloat(`${input.data('change-size')}`.replaceAll(',', '.'))
-        let minWeight = q
-        // if (+input.val() <= q) return
-        // q = +input.val() <= q ? q : +input.val()-q
-        if(+input.val() > minWeight ) {
-            q = +input.val() - q
-        } else {
-            return
-        }
-        // q = +input.val() + q <= q ? q : +input.val() - q
-        // console.log(q)
-        // input.val(+input.val() - q);
-        input.val(q)
+        updateQuantityHandler(this, 'dec')
+    }).each(function (_, item) {
+        updateQuantityHandler(item, 'dec');
     });
+
+    // $('.js-btn-inc').on('click', function () {
+    //     const input = $(this).parent().find('.product-quantity');
+    //     input.val(parseFloat(`${input.val()}`.replaceAll(',', '.')))
+    //     let q = parseFloat(`${input.data('change-size')}`.replaceAll(',', '.'))
+    //     input.val(+input.val() + q);
+    // });
+    //
+    // $('.js-btn-dec').on('click', function () {
+    //     const input = $(this).parent().find('.product-quantity');
+    //     input.val(parseFloat(`${input.val()}`.replaceAll(',', '.')))
+    //     let q = parseFloat(`${input.data('change-size')}`.replaceAll(',', '.'))
+    //     let minWeight = q
+    //     // if (+input.val() <= q) return
+    //     // q = +input.val() <= q ? q : +input.val()-q
+    //     if(+input.val() > minWeight ) {
+    //         q = +input.val() - q
+    //     } else {
+    //         return
+    //     }
+    //     // q = +input.val() + q <= q ? q : +input.val() - q
+    //     // console.log(q)
+    //     // input.val(+input.val() - q);
+    //     input.val(q)
+    // });
 
 
     // $('.js-btn-inc').on('click', function () {
@@ -40,13 +72,13 @@ $(document).ready(function () {
     // });
 
     // registration & login
-    $('.sign-in-register-block .sign-in').on('click', function (){
+    $('.sign-in-register-block .sign-in').on('click', function () {
         $(this).addClass('site-color');
         $('.sign-in-register-block .register').removeClass('site-color');
         $('.login-form').removeClass('d-none');
         $('.register-form').addClass('d-none');
     })
-    $('.sign-in-register-block .register').on('click', function (){
+    $('.sign-in-register-block .register').on('click', function () {
         $(this).addClass('site-color');
         $('.sign-in-register-block .sign-in').removeClass('site-color');
         $('.register-form').removeClass('d-none');
@@ -65,7 +97,7 @@ $(document).ready(function () {
         }
     }
 
-    $(window).resize(function() {
+    $(window).resize(function () {
         fixedBottom();
     });
 
@@ -104,9 +136,9 @@ $('#page-language-select').on('change', function () {
 });
 
 // Language dropdown
-function updateflags(id)  {
+function updateflags(id) {
     $('.flags .flag').removeClass('display')
-    $('#'+id).addClass('display')
+    $('#' + id).addClass('display')
 }
 
 const onLanguageChange = (event) => {

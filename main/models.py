@@ -36,8 +36,12 @@ class Measurement(models.Model):
         verbose_name_plural = 'Չափման միավորներ'
 
 
-class Product(models.Model):
+class ProductManager(models.Manager):
+    def get_queryset(self):
+        return super().get_queryset().filter(is_published=True)
 
+
+class Product(models.Model):
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, verbose_name='Կատեգորիա', null=True, blank=True, db_constraint=False)
     title = models.CharField(max_length=255, verbose_name='Անուն')
     image = models.ImageField(upload_to='media', null=True, blank=True, verbose_name='Նկար')
@@ -45,15 +49,29 @@ class Product(models.Model):
     price = models.DecimalField(max_digits=10, decimal_places=0, verbose_name='Գին')
     new_price = models.DecimalField(max_digits=10, decimal_places=0, blank=True, null=True, verbose_name='Նոր գին')
     measurement = models.ForeignKey(Measurement, on_delete=models.SET_NULL, null=True, verbose_name='Չափման միավոր')
-    start_quantity = models.DecimalField(default=1, max_digits=10, decimal_places=2, verbose_name='Սկզբնական չափ')
+    start_quantity = models.DecimalField(default=1, max_digits=10, decimal_places=1, verbose_name='Սկզբնական չափ')
     wholesale = models.BooleanField(default=False, verbose_name='Մեծածախ')
-    min_order_quantity = models.DecimalField(max_digits=10, decimal_places=2, verbose_name='Պատվերի մինիմալ չափ', null=True, blank=True)
+    min_order_quantity = models.DecimalField(max_digits=10, decimal_places=1, verbose_name='Պատվերի մինիմալ չափ', null=True, blank=True)
+    is_published = models.BooleanField(default=True, verbose_name='Ակտիվ')
 
     class Meta:
         verbose_name = 'Ապրանք'
         verbose_name_plural = 'Ապրանքներ'
         ordering = ['-id']
 
+    # product_manager=ProductManager()
+
+    def get_start_quantity(self):
+        if str(self.start_quantity)[-1]=='0':
+            return int(self.start_quantity)
+        else:
+            return self.start_quantity
+
+    def get_min_order_quantity(self):
+        if str(self.min_order_quantity)[-1]=='0':
+            return int(self.min_order_quantity)
+        else:
+            return self.min_order_quantity
 
     def __str__(self):
         return self.title
@@ -80,26 +98,16 @@ class Image(models.Model):
         return str(self.id)
 
 
-# class User(AbstractUser):
-#     # username = None
-#     email = models.EmailField(_('email_address'),unique=True)
-#
-#     USERNAME_FIELD = 'email'
-#     REQUIRED_FIELDS = ['username']
-
-
 class Customer(models.Model):
     user = models.OneToOneField(User, verbose_name='Օգտագործող', on_delete=models.CASCADE)
     phone = models.CharField(max_length=20, verbose_name='Հեռախոսահամար', null=True, blank=True)
-    address = models.TextField(verbose_name='Հասցե', null=True, blank=True)
+    address = models.TextField(verbose_name='Հասցե', null=True, blank=True, max_length=500)
     orders = models.ManyToManyField('Order', verbose_name='Պատվերներ', related_name='related_order',blank=True )
-    # is_email_verified = models.BooleanField(default=False)
 
     class Meta:
         verbose_name = 'Օգտագործող'
         verbose_name_plural = 'Օգտագործողներ'
         ordering = ['-id']
-
 
     def __str__(self):
         return f'{self.user.first_name} {self.user.last_name}'
@@ -116,18 +124,22 @@ class ProductItem(models.Model):
     quantity = models.DecimalField(default=1, verbose_name="Քանակ", max_digits=10, decimal_places=1)
     session_key=models.CharField(max_length=1024, blank=True, null=True)
 
+    def get_quantity(self):
+        if str(self.quantity)[-1]=='0':
+            return int(self.quantity)
+        else:
+            return self.quantity
 
     def total_price(self):
         if self.product.new_price:
-            return self.product.new_price * self.quantity
+            return int(self.product.new_price * self.quantity)
         else:
-            return self.product.price * self.quantity
+            return int(self.product.price * self.quantity)
 
-
-    def qty(self):
-        if self.product.start_quantity=='item':
-            self.quantity=int(self.quantity)
-        return self.quantity
+    # def qty(self):
+    #     if self.product.start_quantity=='item':
+    #         self.quantity=int(self.quantity)
+    #     return self.quantity
 
     def __str__(self):
         return f'{self.product.title} - {self.quantity}{self.product.measurement}\n'
@@ -156,10 +168,10 @@ class Basket(models.Model):
         finale_price = 0
         for i in self.productItems.all():
             if i.product.new_price:
-                finale_price += i.product.new_price * i.quantity
+                finale_price += i.product.new_price * i.quantity + self.delivery_cost
             else:
-                finale_price += i.product.price * i.quantity
-        return finale_price
+                finale_price += i.product.price * i.quantity + self.delivery_cost
+        return int(finale_price)
 
     def total_quantity(self):
         total = 0
@@ -213,6 +225,7 @@ class Order(models.Model):
     date_shipping = models.DateField(verbose_name="Առաքման օր", null=True)
     payment_type = models.CharField(max_length=100, choices=PAYMENT_TYPE_CHOICES, null=True)
     date_added = models.DateTimeField(auto_now_add=True, verbose_name="Ավելացվել է", null=True)
+    comment = models.TextField(verbose_name='Մեկնաբանություն', blank=True, null=True)
 
     def __str__(self):
         return f'{self.id} {self.customer.user.first_name}'

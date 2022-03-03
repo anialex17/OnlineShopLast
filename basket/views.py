@@ -21,6 +21,9 @@ def basket(request):
     if request.user.is_authenticated:
         customer = request.user.customer
         basket = Basket.objects.get(customer_id=customer.id)
+        for product_item in basket.productItems.all():
+            if product_item.product.is_published==False:
+                product_item.delete()
         if basket.finale_price() < 10000:
             basket.delivery_cost = 500
         context = {'basket': basket, 'productItems': basket.productItems.all(), 'register_form': register_form,
@@ -34,6 +37,9 @@ def basket(request):
             request.session['basket_id'] = basket.id
             the_id = basket.id
         basket = Basket.objects.get(id=the_id)
+        for product_item in basket.productItems.all():
+            if product_item.product.is_published==False:
+                product_item.delete()
         if basket.finale_price() < 10000:
             basket.delivery_cost = 500
         context = {'basket': basket, 'productItems': basket.productItems.all(), 'register_form': register_form,
@@ -174,7 +180,7 @@ def order(request):
                                                                    response_code=payment_request.response_code,
                                                                    response_message=payment_request.response_message)
 
-                return redirect('https://servicestest.ameriabank.am/VPOS/Payments/Pay ? id =@ id & lang =@lang')
+                return redirect(f'https://servicestest.ameriabank.am/VPOS/Payments/Pay ? id =@ id & lang =@lang')
             elif order.payment_type == 'TYPE_PAYMENT_CASH':
                 send_mail('Պատվեր',f'Նոր պատվեր-{order.customer.user.first_name} {order.customer.user.last_name}-ի կողմից',
                           'netfornetenyu@gmail.com', ['netfornetenyu@gmail.com'], fail_silently=False)

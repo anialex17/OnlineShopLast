@@ -19,8 +19,6 @@ from django.contrib.auth.tokens import default_token_generator
 from django.utils.encoding import force_bytes
 
 
-
-
 class GetContextDataMixin(ListView):
 
     def get_context_data(self,**kwargs):
@@ -52,7 +50,7 @@ class ProductListView(GetContextDataMixin):
 #     paginate_by = 12
 
     def get_queryset(self):
-        return Product.objects.filter(category__url=self.kwargs.get("category_slug"),wholesale=False).select_related('category','measurement')
+        return Product.objects.filter(category__url=self.kwargs.get("category_slug"),wholesale=False, is_published=True).select_related('category','measurement')
 
 
 class ProductWholeSaleListView(GetContextDataMixin):
@@ -62,7 +60,7 @@ class ProductWholeSaleListView(GetContextDataMixin):
 #     paginate_by = 12
 
     def get_queryset(self):
-        return Product.objects.filter(category__url=self.kwargs.get("category_slug"), wholesale=True).select_related('category', 'measurement')
+        return Product.objects.filter(category__url=self.kwargs.get("category_slug"), wholesale=True, is_published=True).select_related('category', 'measurement')
 
 
 class ProductDetailView(DetailView):
@@ -180,7 +178,7 @@ def logout_user(request):
 
 def customer(request, pk):
     customer = Customer.objects.get(user=request.user)
-    orders = Order.objects.filter(customer=customer).order_by('-id')[:5]
+    orders = Order.objects.filter(related_order=customer).order_by('-id')
     user_form = EditUserForm(initial={
         # 'username': request.user.username,
         'first_name': request.user.first_name,

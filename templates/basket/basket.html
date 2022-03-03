@@ -71,7 +71,7 @@
                                 <i class="fas fa-minus site-color"></i>
                             </button>
                         </form>
-                        <span class="mr-2 product-quantity align-middle">{{item.qty}} {{item.product.measurement}}</span>
+                        <span class="mr-2 product-quantity align-middle">{{item.get_quantity}} {{item.product.measurement}}</span>
                         <form action="{% url 'change_qty_plus' %}" method="post">
                             {% csrf_token %}
                             <input type="number" hidden name="increment_item" value="{{ item.id }}">

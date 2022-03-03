@@ -46,14 +46,14 @@
                                 {% if product.new_price %}
                                     <span class="category-product-price"><span id="food-price">{{ product.new_price }}</span>{% trans 'dr' %}</span>
                                     <del><span class="category-product-discount">{{ product.price }}</span>{% trans 'dr' %}</del>
-                                    <span class="category-product-quantity">{{product.start_quantity}}{{product.measurement}}</span>
+                                    <span class="category-product-quantity">{{product.get_start_quantity}}{{product.measurement}}</span>
                                 {% else %}
                                     <span class="category-product-price"><span id="food-price">{{ product.price }}</span>{% trans 'dr' %}</span>
-                                    <span class="category-product-quantity">{{product.start_quantity}}{{product.measurement}}</span>
+                                    <span class="category-product-quantity">{{product.get_start_quantity}}{{product.measurement}}</span>
                                 {% endif %}
                             </div>
                             <div class="price py-2 site-color">
-                                    <span class="category-product-quantity">{% trans 'Min order quantity-' %}{{product.min_order_quantity}}{{product.measurement}}</span>
+                                    <span class="category-product-quantity">{% trans 'Min order quantity-' %}{{product.get_min_order_quantity}}{{product.measurement}}</span>
                             </div>
                             <div class="add-to-basket-block">
                                 <form class="product-form js-product-form" data-login="{% if user.is_authenticated %}is_active{% endif %}" action="{% url 'add_to_basket' %}" method="post">
@@ -66,9 +66,9 @@
                                             </button>
                                             <h2 id="counter-label" class="mr-1 ml-1">
                                                 {% if product.wholesale %}
-                                                <input type="text" value="{{product.min_order_quantity}}" data-change-size="10" class="product-quantity" name="product_quantity">
+                                                <input type="text" value="{{product.get_min_order_quantity}}" data-min-order-qty="{{product.get_min_order_quantity}}" data-change-size="10" class="product-quantity" name="product_quantity">
                                                 {% else %}
-                                                <input type="text" value="{{product.min_order_quantity}}" data-change-size="{{product.start_quantity}}" class="product-quantity" name="product_quantity">
+                                                <input type="text" value="{{product.get_min_order_quantity}}" data-min-order-qty="{{product.get_min_order_quantity}}" data-change-size="{{product.get_start_quantity}}" class="product-quantity" name="product_quantity">
                                                 {% endif %}
                                             </h2>
                                             <button type="button" class="btn shadow-none btn-inc flex-center mr-1 ml-1 js-btn-inc">
@@ -94,6 +94,5 @@
     </div>
     <!--End of container-->
 </section>
-<script src="{% static 'JS/basket.js' %}"></script>
 {% endblock %}
 
