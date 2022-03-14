@@ -46,10 +46,10 @@
                                 {% if product.new_price %}
                                     <span class="category-product-price"><span id="food-price">{{ product.new_price }}</span>{% trans 'dr' %}</span>
                                     <del><span class="category-product-discount">{{ product.price }}</span>{% trans 'dr' %}</del>
-                                    <span class="category-product-quantity">{{product.get_start_quantity}}{{product.measurement}}</span>
+                                    <span class="category-product-quantity">1{{product.measurement}}</span>
                                 {% else %}
                                     <span class="category-product-price"><span id="food-price">{{ product.price }}</span>{% trans 'dr' %}</span>
-                                    <span class="category-product-quantity">{{product.get_start_quantity}}{{product.measurement}}</span>
+                                    <span class="category-product-quantity">1{{product.measurement}}</span>
                                 {% endif %}
                             </div>
                             <div class="price py-2 site-color">
@@ -65,11 +65,7 @@
                                                 <i class="fas fa-minus site-color"></i>
                                             </button>
                                             <h2 id="counter-label" class="mr-1 ml-1">
-                                                {% if product.wholesale %}
-                                                <input type="text" value="{{product.get_min_order_quantity}}" data-min-order-qty="{{product.get_min_order_quantity}}" data-change-size="10" class="product-quantity" name="product_quantity">
-                                                {% else %}
                                                 <input type="text" value="{{product.get_min_order_quantity}}" data-min-order-qty="{{product.get_min_order_quantity}}" data-change-size="{{product.get_start_quantity}}" class="product-quantity" name="product_quantity">
-                                                {% endif %}
                                             </h2>
                                             <button type="button" class="btn shadow-none btn-inc flex-center mr-1 ml-1 js-btn-inc">
                                                 <i class="fas fa-plus site-color"></i>
@@ -90,7 +86,24 @@
                 </div>
             {% endfor %}
         </div>
+            {% if page_obj.has_other_pages %}
+            <div class="pegination pb-3">
+                <div class="nav-links">
+                    {% for p in page_obj.paginator.page_range %}
+                    {% if page_obj.number == p %}
+                    <span class="page-numbers current"> {{ p }}</span>
+                    {% elif p > page_obj.number|add:-3 and p < page_obj.number|add:3 %}
+                    <a class="page-numbers" href="?page={{ p }}">{{ p }}</a>
+                    {% endif %}
+                    {% endfor %}
+                    {% if page_obj.has_next %}
 
+                    <a class="page-numbers" href="?page={{ page_obj.next_page_number }}"><i
+                            class="fa fa-angle-right" aria-hidden="true"></i></a>
+                    {% endif %}
+                </div>
+            </div>
+            {% endif %}
     </div>
     <!--End of container-->
 </section>

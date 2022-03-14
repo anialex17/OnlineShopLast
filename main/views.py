@@ -33,6 +33,7 @@ class HomeView(GetContextDataMixin):
     model = Category
     template_name = 'main/home.html'
     context_object_name = 'categories'
+    paginate_by = 6
     queryset = Category.objects.annotate(cnt=Count('product')).filter(product__wholesale=False).filter(cnt__gt=0)
 
 
@@ -40,6 +41,7 @@ class WholeSaleView(GetContextDataMixin):
     model = Category
     template_name = 'main/wholesale.html'
     context_object_name = 'categories'
+    paginate_by = 6
     queryset = Category.objects.annotate(cnt=Count('product', filter=F('product__wholesale'))).filter(cnt__gt=0)
 
 
@@ -47,7 +49,7 @@ class ProductListView(GetContextDataMixin):
     model = Product
     template_name = 'main/menu.html'
     context_object_name = "products"
-#     paginate_by = 12
+    paginate_by = 6
 
     def get_queryset(self):
         return Product.objects.filter(category__url=self.kwargs.get("category_slug"),wholesale=False, is_published=True).select_related('category','measurement')
@@ -57,7 +59,7 @@ class ProductWholeSaleListView(GetContextDataMixin):
     model = Product
     template_name = 'main/menu.html'
     context_object_name = "products"
-#     paginate_by = 12
+    paginate_by = 6
 
     def get_queryset(self):
         return Product.objects.filter(category__url=self.kwargs.get("category_slug"), wholesale=True, is_published=True).select_related('category', 'measurement')
@@ -98,9 +100,6 @@ def register(request):
                 send_activate_mail(request=request, user=user)
             customer = Customer.objects.create(user=user, phone=register_form.cleaned_data['phone'])
             Basket.objects.create(customer=customer)
-            # url = str(round(time.time() * 1000))
-            # send_activate_mail(request=request, user=user)
-            # login(request, user)
             messages.success(request, 'Activate code has been sent successfully!!!')
             return redirect('home')
         else:
@@ -178,7 +177,7 @@ def logout_user(request):
 
 def customer(request, pk):
     customer = Customer.objects.get(user=request.user)
-    orders = Order.objects.filter(related_order=customer).order_by('-id')
+    orders = Order.objects.filter(customer=customer).order_by('-id')
     user_form = EditUserForm(initial={
         # 'username': request.user.username,
         'first_name': request.user.first_name,

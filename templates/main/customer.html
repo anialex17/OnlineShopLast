@@ -54,10 +54,10 @@
 
                     <div class="product-info">
                         <div class="food-name-block">
-                            <a href="#" class="food-name site-color">{{ product }}</a>
+                            <a href="#" class="food-name site-color">{{ product.product.title }}</a>
                         </div>
                         <div class="quantity">
-                            <span class="order-info">{{ product.quantity }}{{ product.product.measurement }}</span>
+                            <span class="order-info">{{ product.get_quantity }} {{ product.product.measurement }}</span>
                         </div>
                     </div>
                     {% endfor %}

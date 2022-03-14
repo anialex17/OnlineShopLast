@@ -34,8 +34,10 @@
                         {% if product.new_price %}
                         <del><span>{{ product.price }}</span>{% trans 'dr' %}</del>
                         <span class="font-weight-bold"><span id="food-price">{{ product.new_price }}</span>{% trans 'dr' %}</span>
+                        <span class="category-product-quantity">1{{product.measurement}}</span>
                         {% else %}
                         <span class="font-weight-bold"><span id="food-price">{{ product.price }}</span>{% trans 'dr' %}</span>
+                        <span class="category-product-quantity">1{{product.measurement}}</span>
                         {% endif %}
                     </div>
                     <div class="description pt-2">
@@ -43,6 +45,9 @@
                             {{ product.description }}
                         </p>
                     </div>
+                            <div class="price py-2 site-color">
+                                    <span class="category-product-quantity">{% trans 'Min order quantity-' %}{{product.get_min_order_quantity}}{{product.measurement}}</span>
+                            </div>
                     <!--                    <div class="food-type font-weight-bold">-->
                     <!--                        <span>{% trans 'Food Type' %} : <span>{{ product.product_type }}</span></span>-->
                     <!--                    </div>-->
@@ -53,22 +58,17 @@
 
                         <div class="add-to-basket-block d-flex flex-wrap">
                             <button type="button" class="btn shadow-none js-btn-dec flex-center mr-2 mt-3 js-btn-dec">
-                                <i class="fas fa-minus site-color"></i>
-                            </button>
-                            {% if product.wholesale %}
-                            <input type="text" value="{{product.min_order_quantity}}" data-change-size="10"
-                                   class="product-quantity" name="product_quantity">
-                            {% else %}
-                            <input type="text" value="{{product.min_order_quantity}}"
-                                   data-change-size="{{product.start_quantity}}" class="product-quantity mt-3"
-                                   name="product_quantity">
-                            {% endif %}
-                            <button type="button" class="btn shadow-none js-btn-inc flex-center mr-2 mt-3 js-btn-inc">
-                                <i class="fas fa-plus site-color"></i>
-                            </button>
-                            <input type="text" hidden name="product_url" value="{{ product.pk }}">
-                            <button type="submit" class="btn shadow-none add-to-basket-btn mt-3" data-toggle="modal"
-                                    data-target="#add-to-basket">
+                                                <i class="fas fa-minus site-color"></i>
+                                            </button>
+
+                            <input type="text" value="{{product.get_min_order_quantity}}" data-min-order-qty="{{product.get_min_order_quantity}}" data-change-size="{{product.get_start_quantity}}" class="product-quantity mt-3" name="product_quantity">
+
+
+                           <button type="button" class="btn shadow-none js-btn-inc flex-center mr-2 mt-3 js-btn-inc">
+                                                <i class="fas fa-plus site-color"></i>
+                                            </button>
+                                            <input type="text" hidden name="product_url" value="{{ product.pk }}">
+                            <button type="submit" class="btn shadow-none add-to-basket-btn mt-3" data-toggle="modal" data-target="#add-to-basket">
                                 <span>{% trans "Add to Card" %}</span>
                             </button>
                         </div>

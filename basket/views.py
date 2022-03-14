@@ -2,8 +2,6 @@ from django.contrib import messages
 from django.contrib.sites import requests
 from django.shortcuts import render, redirect
 from django.http import JsonResponse, HttpResponseRedirect
-import datetime
-from django.views.generic import CreateView, UpdateView
 from main.forms import RegisterUserForm, LoginUserForm
 from main.views import GetContextDataMixin
 from main.models import *
@@ -114,10 +112,12 @@ def change_qty_plus(request):
         else:
             basket = Basket.objects.get(id=request.session['basket_id'])
         product_item = ProductItem.objects.get(pk=request.POST.get('increment_item'))
-        if product_item and product_item.product.wholesale == False:
+        # if product_item and product_item.product.wholesale == False:
+        #     product_item.quantity += product_item.product.start_quantity
+        # elif product_item and product_item.product.wholesale:
+        #     product_item.quantity += 10
+        if product_item:
             product_item.quantity += product_item.product.start_quantity
-        elif product_item and product_item.product.wholesale:
-            product_item.quantity += 10
         product_item.save()
         return redirect('basket')
 
@@ -130,18 +130,18 @@ def change_qty_minus(request):
         else:
             basket = Basket.objects.get(id=request.session['basket_id'])
         product_item = ProductItem.objects.get(pk=request.POST.get('decrement_item'))
-        if product_item and product_item.product.wholesale == False:
+        if product_item:
             product_item.quantity -= product_item.product.start_quantity
             if product_item.quantity < product_item.product.min_order_quantity:
                 product_item.delete()
             else:
                 product_item.save()
-        elif product_item and product_item.product.wholesale:
-            product_item.quantity -= 10
-            if product_item.quantity < product_item.product.min_order_quantity:
-                product_item.delete()
-            else:
-                product_item.save()
+        # elif product_item and product_item.product.wholesale:
+        #     product_item.quantity -= 10
+        #     if product_item.quantity < product_item.product.min_order_quantity:
+        #         product_item.delete()
+        #     else:
+        #         product_item.save()
         return redirect('basket')
 
 
@@ -161,6 +161,10 @@ def order(request):
                                              finale_price=basket.finale_price(), delivery_cost=500)
             for item in basket.productItems.all():
                 item.order = order
+                if item.product.new_price:
+                    item.price=item.product.new_price*item.quantity
+                else:
+                    item.price = item.product.price*item.quantity
                 item.save()
                 basket.productItems.remove(item)
                 # order.product_items.add(item)
@@ -188,3 +192,6 @@ def order(request):
     else:
         form = OrderForm()
     return render(request, 'basket/order.html', {'form': form})
+
+
+

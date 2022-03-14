@@ -1,14 +1,8 @@
-from django.utils import timezone
-import datetime
-from django.contrib.auth import get_user_model
-from django.contrib.auth.models import User, AbstractUser
+from django.contrib.auth.models import User
 from django.db import models
-from django.db.models.signals import post_save
 from django.urls import reverse
-from django.db.models.signals import post_save
-from django.utils.safestring import mark_safe
-from django.utils.translation import gettext_lazy as _
-# User = get_user_model()
+from django.utils.html import format_html
+from django.contrib import admin
 
 
 class Category(models.Model):
@@ -44,14 +38,14 @@ class ProductManager(models.Manager):
 class Product(models.Model):
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, verbose_name='Կատեգորիա', null=True, blank=True, db_constraint=False)
     title = models.CharField(max_length=255, verbose_name='Անուն')
-    image = models.ImageField(upload_to='media', null=True, blank=True, verbose_name='Նկար')
+    image = models.ImageField(upload_to='media', null=True, blank=True, verbose_name='Նկար \n (Ոչ պակաս քան 400*400)')
     description = models.TextField(verbose_name='Նկարագրություն')
     price = models.DecimalField(max_digits=10, decimal_places=0, verbose_name='Գին')
     new_price = models.DecimalField(max_digits=10, decimal_places=0, blank=True, null=True, verbose_name='Նոր գին')
     measurement = models.ForeignKey(Measurement, on_delete=models.SET_NULL, null=True, verbose_name='Չափման միավոր')
-    start_quantity = models.DecimalField(default=1, max_digits=10, decimal_places=1, verbose_name='Սկզբնական չափ')
+    start_quantity = models.DecimalField(default=1, max_digits=10, decimal_places=1, verbose_name='Ավելացման/պակասեցման չափ')
     wholesale = models.BooleanField(default=False, verbose_name='Մեծածախ')
-    min_order_quantity = models.DecimalField(max_digits=10, decimal_places=1, verbose_name='Պատվերի մինիմալ չափ', null=True, blank=True)
+    min_order_quantity = models.DecimalField(max_digits=10, decimal_places=1, verbose_name='Պատվերի մինիմալ չափ')
     is_published = models.BooleanField(default=True, verbose_name='Ակտիվ')
 
     class Meta:
@@ -122,6 +116,7 @@ class ProductItem(models.Model):
     order = models.ForeignKey('Order', on_delete=models.CASCADE, verbose_name="Պատվեր", related_name='product_item', null=True, blank=True)
     wholesale = models.BooleanField(default=False, verbose_name='Մեծածախ')
     quantity = models.DecimalField(default=1, verbose_name="Քանակ", max_digits=10, decimal_places=1)
+    price = models.DecimalField(verbose_name="Գին", max_digits=10, decimal_places=1, blank=True, null=True)
     session_key=models.CharField(max_length=1024, blank=True, null=True)
 
     def get_quantity(self):
@@ -129,6 +124,14 @@ class ProductItem(models.Model):
             return int(self.quantity)
         else:
             return self.quantity
+
+    # def total_price(self):
+    #     if self.product.new_price:
+    #         self.price=int(self.product.new_price * self.quantity)
+    #         return self.price
+    #     else:
+    #         self.price=int(self.product.price * self.quantity)
+    #         return self.price
 
     def total_price(self):
         if self.product.new_price:
