@@ -155,9 +155,9 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 465
 EMAIL_USE_TLS = False
 EMAIL_USE_SSL = True
-EMAIL_HOST_USER = 'netfornetenyu@gmail.com'
+EMAIL_HOST_USER = 'vitamix.company.2022@gmail.com'
 # EMAIL_HOST_PASSWORD = 'gktdswimqoccnvvw'
-EMAIL_HOST_PASSWORD = '03011990ANI'
+EMAIL_HOST_PASSWORD = 'Vitamix.2022'
 
 
 INTERNAL_IPS = ["127.0.0.1",]

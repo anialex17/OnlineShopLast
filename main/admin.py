@@ -13,7 +13,7 @@ class ProductAdmin(TranslationAdmin):
     list_filter = ('wholesale', 'category', 'is_published')
     save_on_top = True
     list_editable = ('is_published',)
-
+    search_fields = ('title',)
 
 @admin.register(Category)
 class CategoryAdmin(TranslationAdmin):
@@ -24,15 +24,16 @@ class CategoryAdmin(TranslationAdmin):
 class OrderInline(admin.TabularInline):
     model = Order
     extra = 0
-    fields = ('customer', 'date_shipping', 'time_shipping','payment_type', 'finale_price', 'delivery_cost', 'city', 'address', 'phone', 'comment','status')
-    readonly_fields = ('customer', 'date_shipping', 'time_shipping','payment_type', 'finale_price', 'delivery_cost', 'city', 'address', 'phone', 'comment','status')
+    fields = ('customer', 'date_shipping', 'time_shipping', 'payment_type', 'finale_price', 'delivery_cost', 'city', 'address', 'phone', 'comment','status')
+    readonly_fields = ('customer', 'date_shipping', 'time_shipping', 'payment_type', 'finale_price', 'delivery_cost', 'city', 'address', 'phone', 'comment','status')
 
 
 @admin.register(Customer)
 class CustomerAdmin(TranslationAdmin):
     list_display = ('user',)
-    fields = ('user', 'phone','address')
-    inlines = [OrderInline,]
+    fields = ('user', 'phone', 'address')
+    inlines = [OrderInline, ]
+    search_fields = ('user',)
 
 
 # @admin.register(ProductItem)

@@ -120,13 +120,18 @@
                 <a href="{% url 'home' %}" class="btn shadow-none btn-lg"><span><i class="fas fa-angle-left"></i>&nbsp;&nbsp;{% trans 'Continue Ordering' %}</span></a>
 
                 {% if request.user.is_authenticated %}
-
+                    {% if basket.finale_price > 3000 %}
                 <a class="btn shadow-none btn-lg" href="{% url 'ordering' %}">{% trans 'Order' %}<span>&nbsp;&nbsp;<i class="fas fa-angle-right"></i></span></a>
+                    {% else %}
+                    <p>{% trans 'You can place an order starting from 3000 AMD․' %}</p>
+                    {% endif %}
                 {% else %}
-
+                    {% if basket.finale_price > 3000 %}
                 <a class="btn shadow-none btn-lg" data-toggle="modal"
                    data-target="#sign-in-modal">{% trans 'Order' %}<span>&nbsp;&nbsp;<i class="fas fa-angle-right"></i></span></a>
-
+                      {% else %}
+                    <p>{% trans 'You can place an order starting from 3000 AMD․' %}</p>
+                    {% endif %}
                 {% endif %}
 
             </div>

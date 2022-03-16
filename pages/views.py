@@ -21,7 +21,7 @@ def message(request):
         if contact_form.is_valid():
             contact_form.save()
             mail = send_mail(contact_form.cleaned_data['name']+contact_form.cleaned_data['lastname'], contact_form.cleaned_data['message'],contact_form.cleaned_data['email'],
-                              ['netfornetenyu@gmail.com'], fail_silently=False)
+                              ['vitamix.company.2022@gmail.com'], fail_silently=False)
             if mail:
                 messages.success(request, 'Նամակը հաջողությամբ ուղարկված է!')
                 return redirect('home')

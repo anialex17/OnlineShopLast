@@ -169,25 +169,28 @@ def order(request):
                 basket.productItems.remove(item)
                 # order.product_items.add(item)
             if order.payment_type == 'TYPE_PAYMENT_NON_CASH':
-                # send_mail('Պատվեր',f'Նոր պատվեր-{order.customer.user.first_name} {order.customer.user.last_name}-ի կողմից', 'netfornetenyu@gmail.com', ['netfornetenyu@gmail.com'], fail_silently=False)
+                send_mail('Պատվեր',f'Նոր պատվեր-{order.customer.user.first_name} {order.customer.user.last_name}-ի կողմից',
+                          'vitamix.company.2022@gmail.com', ['vitamix.company.2022@gmail.com'], fail_silently=False)
+                return redirect('success')
+                # send_mail('Պատվեր',f'Նոր պատվեր-{order.customer.user.first_name} {order.customer.user.last_name}-ի կողմից', 'vitamix.company.2022@gmail.com', ['vitamix.company.2022@gmail.com'], fail_silently=False)
                 # return redirect('payment')
-                payment = Payment.objects.create(description=f'online payment {request.user.first_name}',
-                                                 order_id=order.id,
-                                                 amount=basket.finale_price)
+                # payment = Payment.objects.create(description=f'online payment {request.user.first_name}',
+                #                                  order_id=order.id,
+                #                                  amount=basket.finale_price)
                 # payment = PaymentForm(description=f'online payment {request.user.first_name}',
                 #                                  order_id=order.id,
                 #                                  amount=basket.finale_price)
-                data = {payment.description: f'online payment {request.user.first_name}', payment.order_id: order.id,
-                        payment.amount: basket.finale_price()}
-                payment_request = requests.post('https://servicestest.ameriabank.am/VPOS/api/VPOS/InitPayment', data=data)
-                payment_response = PaymentResponse.objects.create(payment_id=payment_request.payment_id,
-                                                                   response_code=payment_request.response_code,
-                                                                   response_message=payment_request.response_message)
-
-                return redirect(f'https://servicestest.ameriabank.am/VPOS/Payments/Pay ? id =@ id & lang =@lang')
+                # data = {payment.description: f'online payment {request.user.first_name}', payment.order_id: order.id,
+                #         payment.amount: basket.finale_price()}
+                # payment_request = requests.post('https://servicestest.ameriabank.am/VPOS/api/VPOS/InitPayment', data=data)
+                # payment_response = PaymentResponse.objects.create(payment_id=payment_request.payment_id,
+                #                                                    response_code=payment_request.response_code,
+                #                                                    response_message=payment_request.response_message)
+                #
+                # return redirect(f'https://servicestest.ameriabank.am/VPOS/Payments/Pay ? id =@ id & lang =@lang')
             elif order.payment_type == 'TYPE_PAYMENT_CASH':
                 send_mail('Պատվեր',f'Նոր պատվեր-{order.customer.user.first_name} {order.customer.user.last_name}-ի կողմից',
-                          'netfornetenyu@gmail.com', ['netfornetenyu@gmail.com'], fail_silently=False)
+                          'vitamix.company.2022@gmail.com', ['vitamix.company.2022@gmail.com'], fail_silently=False)
                 return redirect('success')
     else:
         form = OrderForm()

@@ -171,9 +171,9 @@ class Basket(models.Model):
         finale_price = 0
         for i in self.productItems.all():
             if i.product.new_price:
-                finale_price += i.product.new_price * i.quantity + self.delivery_cost
+                finale_price += i.product.new_price * i.quantity
             else:
-                finale_price += i.product.price * i.quantity + self.delivery_cost
+                finale_price += i.product.price * i.quantity
         return int(finale_price)
 
     def total_quantity(self):
