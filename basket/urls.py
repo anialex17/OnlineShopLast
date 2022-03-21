@@ -9,5 +9,7 @@ urlpatterns = [
     path('ordering/', views.order, name='ordering'),
     path('change_qty_plus/', views.change_qty_plus, name='change_qty_plus'),
     path('change_qty_minus/', views.change_qty_minus, name='change_qty_minus'),
+    # path('payment_response/<str:orderID>/<str:resposneCode>/<str:paymentID>/<str:opaque>/', views.payment_response, name='payment_response'),
+    path('payment_response/', views.payment_response, name='payment_response'),
 
 ]

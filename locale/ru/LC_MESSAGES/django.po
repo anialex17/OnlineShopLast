@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-03-15 12:53+0400\n"
+"POT-Creation-Date: 2022-03-19 17:42+0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -32,7 +32,7 @@ msgstr "Изображение"
 msgid "Name"
 msgstr "Название"
 
-#: templates/basket/basket.html:23 templates/pages/order.html:32
+#: templates/basket/basket.html:23
 msgid "Price"
 msgstr "Цена"
 
@@ -112,7 +112,7 @@ msgstr "Войти"
 msgid "Register"
 msgstr "Регистрация"
 
-#: templates/basket/fail.html:5
+#: templates/basket/fail.html:5 templates/payment/fail.html:16
 msgid "Try again"
 msgstr "Попробовать снова"
 
@@ -120,7 +120,7 @@ msgstr "Попробовать снова"
 msgid "Something is wrong"
 msgstr "Что-то пошло не так"
 
-#: templates/basket/order.html:16 templates/pages/order.html:31
+#: templates/basket/order.html:16
 msgid "City"
 msgstr "Город"
 
@@ -141,7 +141,7 @@ msgstr "Дата"
 msgid "Delivery time"
 msgstr "Время доставки"
 
-#: templates/basket/order.html:56 templates/pages/order.html:16
+#: templates/basket/order.html:56
 msgid "Payment method"
 msgstr "Выберите метод оплаты"
 
@@ -153,7 +153,7 @@ msgstr "Комментарий"
 msgid "General Terms and Conditions"
 msgstr "Общие положения и условия"
 
-#: templates/include/footer.html:20 templates/pages/privacy.html:10
+#: templates/include/footer.html:20
 msgid "Privacy policy"
 msgstr "Политика конфиденциальности"
 
@@ -245,8 +245,8 @@ msgid "My orders"
 msgstr "Мои заказы"
 
 #: templates/main/home.html:19 templates/main/wholesale.html:11
-msgid "Our Menu"
-msgstr "Категория"
+msgid "Categories"
+msgstr "Категории"
 
 #: templates/main/menu.html:47 templates/main/menu.html:48
 #: templates/main/menu.html:51 templates/main/product.html:35
@@ -349,56 +349,33 @@ msgstr "О нас"
 
 #: templates/pages/about-us.html:13
 msgid ""
-"Vitamix.am is an online trading platform that allows you to shop without "
-"leaving home."
+"Vitamix.am is an online trading platform that allows you to shop online."
 msgstr ""
-"Vitamix.am — торговая онлайн-платформа, позволяющая делать покупки,не выходя "
-"из дома."
+"Vitamix.am — торговая онлайн-платформа, позволяющая делать онлайн покупки."
 
-#: templates/pages/about-us.html:16
-msgid "Our Advantages"
-msgstr "Наши преимущества"
-
-#: templates/pages/about-us.html:19
+#: templates/pages/about-us.html:17
 msgid ""
-"The services provided by Vitamix.am stand out with the following advantages"
+"The services provided by Vitamix.am stand out with the following advantages․"
 msgstr ""
-"Услуги, предоставляемые Vitamix.am, отличаются следующими преимуществами:"
+"Услуги, предоставляемые Vitamix.am, отличаются следующими преимуществами․"
 
-#: templates/pages/about-us.html:24
-msgid "High quality service based on customer feedback and requirements"
-msgstr ""
-"Услуги, предоставляемые Vitamix.am, отличаются следующими преимуществами:"
+#: templates/pages/about-us.html:23
+msgid "High quality service based on customer feedback and requirements․"
+msgstr "Высокое качество обслуживания на основе отзывов и требований клиентов․"
 
 #: templates/pages/about-us.html:27
-msgid "Fast delivery up to 1 hour"
-msgstr "Быстрая доставка в течение 1 часа"
-
-#: templates/pages/about-us.html:30
 msgid ""
 "Through Vitamix.am you can make secure online transactions with different "
 "payment methods. The site allows you to pay both in cash and make purchases "
-"through the POS terminal և IDram payment system."
+"through the POS terminal and bank card․"
 msgstr ""
 "Через Vitamix.am вы можете совершать безопасные онлайн-платежи различными "
 "способами оплаты. Сайт позволяет оплачивать как наличными, так и совершать "
-"покупки через POS-терминал и платежную систему IDram."
+"покупки через POS-терминал и через банковская карта."
 
 #: templates/pages/about-us.html:33
-msgid ""
-"Ahead of each holiday, Vitamix.am presents a special section, thanks to "
-"which shopping becomes easier and more purposeful."
-msgstr ""
-"В преддверии каждого праздника Vitamix.am представляет специальный раздел, в "
-"котором Ваши покупки станут проще и целенаправленнее."
-
-#: templates/pages/about-us.html:38
-msgid "We wish you a pleasant shopping"
-msgstr "Желаем вам приятных покупок"
-
-#: templates/pages/about-us.html:39
-msgid "With love, Vitamix.am"
-msgstr "С любовью, Vitamix.am"
+msgid "We wish you a pleasant shopping. With love, Vitamix.am"
+msgstr "Желаем вам приятных покупок․ С любовью Vitamix.am․"
 
 #: templates/pages/contact.html:17
 msgid "For customers"
@@ -452,153 +429,146 @@ msgstr "Галерея"
 msgid "Delivery and payment"
 msgstr "Время доставки"
 
-#: templates/pages/order.html:13
-msgid "The cost of order delivery in Yerevan is 500 drams."
-msgstr "Стоимость доставки заказа по Еревану - 500 драм."
+#: templates/pages/order.html:14
+msgid "Payment methods"
+msgstr "Выберите метод оплаты"
+
+#: templates/pages/order.html:15
+msgid "Payment for the order in vitamix.am is made in several ways."
+msgstr "Оплата заказа в Vitamix.am производится несколькими способами."
+
+#: templates/pages/order.html:16
+msgid ""
+"Online payment. Online payments on our site are made through  Master, Visa, "
+"Arca bank card."
+msgstr ""
+"Онлайн платеж. Онлайн-платежи на нашем сайте осуществляются через платежную "
+"систему Master, Visa и Arca."
 
 #: templates/pages/order.html:17
 msgid ""
-"Payment at Vitamix.am can be made in two ways: online or in person. Online "
-"payments are made through Idram, cash և POS-terminal payment systems. They "
-"are serviced Cardholders with Visa և Master Card. Cash payments are made "
-"upon delivery at the moment in AMD."
+"Cash: This means that You pay for the delivery of the product You ordered "
+"when receiving the order in cash. After selecting this option on the "
+"relevant page of the site, You also indicate whether it is necessary to "
+"bring a small one. The sender provides Your cash register receipt. If for "
+"any reason You have not been provided with a cash register receipt, You must "
+"notify us immediately."
 msgstr ""
-"Оплату на Vitamix.am можно произвести двумя способами: онлайн или по факту "
-"доставки. Онлайн платежи осуществляются через Idram, наличные и POS-"
-"терминальные платежные системы. Они обслуживают держателей карт Visa и "
-"Master Card. Оплата наличными осуществляется по факту доставки в драмах."
+"Наличные: Это означает, что Вы оплачиваете доставку заказанного Вами товара "
+"при получении заказа наличными. Выбрав эту опцию на соответствующей странице "
+"сайта, Вы также указываете, нужно ли приносить мелоч, курьер предоставляет "
+"Вам кассовый чек. Если по какой-либо причине Вам не предоставили кассовый "
+"чек, Вы должны немедленно известить нас."
 
 #: templates/pages/order.html:18
 msgid ""
-"The use of cash registers does not have to be remotely related to the sale "
-"of electronic communications or television shops. / Basis17.06.16 ՀՕ-116-N /"
+"By payment card when receiving the order. If You choose this option, our "
+"courier will bring You a POS terminal, and You will be able to pay on the "
+"spot with Your card and get the appropriate coupon."
 msgstr ""
-"Использование кассовых аппаратов не должно быть отдаленно связано с продажей "
-"электронных средств связи или телемагазинами. / Basis17.06.16 ՀՕ-116-N /"
+"Платежной картой при получении заказа. Если Вы выбираете этот вариант, наш "
+"курьер привезет вам POS-терминал, и Вы сможете расплачиваться картой на "
+"месте и получить соответствующий купон."
 
 #: templates/pages/order.html:21
-msgid "Delivery order"
-msgstr "Время доставки"
-
-#: templates/pages/order.html:22
 msgid ""
-"Delivery is carried out in Yerevan within 1 hour, depending on the number of "
-"delivery points."
+" The delivery cost is 500 AMD in case of purchases up to 10000 AMD. Free "
+"delivery in case of 10.000 AMD and over. Delivery time changes periodically "
+"depending on the number of orders and other conditions. Delivery time may "
+"differ from actual delivery time."
 msgstr ""
-"Доставка осуществляется по Еревану в течение 1 часа, в зависимости от "
-"количества пунктов выдачи"
+"При заказе на сумму не выше 10000 драм, стоимость доставки составляет 500 "
+"драм. Бесплатная доставка при сумме 10.000 драм и выше. Срок доставки "
+"периодически меняется в зависимости от количества заказов и других условий. "
+"Срок доставки может отличаться от фактического."
 
-#: templates/pages/order.html:25
-msgid "The following tariffs apply for delivery."
-msgstr "На доставку действуют следующие тарифы."
+#: templates/pages/order.html:26
+msgid "Return or exchange of ordered goods."
+msgstr "Возврат или обмен заказанного товар"
 
-#: templates/pages/order.html:37
-msgid "Yerevan"
-msgstr "Ереван"
+#: templates/pages/order.html:29
+msgid ""
+"If your purchase has not undergone any quality or quantity changes, you can "
+"return it within 1 day by submitting the receipt."
+msgstr ""
+"Если товар не потерпел качественных и количественных изменений, то вы можете "
+"в течение 1-ого дня вернуть его, представив кассовый чек или счет-фактуру. "
 
-#: templates/pages/order.html:41
-msgid "Argavand"
-msgstr "Аргаванд"
+#: templates/pages/order.html:30
+msgid ""
+"However, if Your wish to return the product is conditioned by its quality "
+"features, You can replace the product with another one with the help of our "
+"courier."
+msgstr ""
+"Однако, если Ваше желание вернуть товар обусловлено его качественными "
+"характеристиками, Вы можете заменить товар другим с помощью нашего курьера."
 
-#: templates/pages/order.html:45
-msgid "Noragavit"
-msgstr "Норагавит"
+#: templates/pages/privacy.html:10
+msgid "Privacy Policy"
+msgstr "Политика конфиденциальности"
 
 #: templates/pages/privacy.html:13
 msgid ""
-"The purpose of this policy is to inform Vitamix.am visitors what data is "
-"collected to register on the site and how it is used."
+"This Privacy Policy describes how we handle your personal information for "
+"our services."
 msgstr ""
-"Целью данной политики является информирование посетителей Vitamix.amо том, "
-"для чего собираются данные для регистрации на сайте и как они используются."
+"Данная политика конфиденциальности дает описание использования нами ваших "
+"личных данных."
 
 #: templates/pages/privacy.html:14
 msgid "Personal Information Protection"
 msgstr "Личная информация"
 
 #: templates/pages/privacy.html:15
-msgid ""
-"For the site registration it is required to provide the following personal "
-"information:`email, first name, last name: For the sake of providing safe "
-"and convenient service the information you provide is used for the following "
-"purposes:"
-msgstr ""
-"Для регистрации на сайте необходимо предоставить следующую личную "
-"информацию: электронная почта, имя, фамилия: В целях обеспечения безопасного "
-"и удобного обслуживания предоставленная вами информация используется в "
-"следующих целях:"
+msgid "We may collect and store the following personal information."
+msgstr "Мы можем собирать и хранить следующую личную информацию.."
 
 #: templates/pages/privacy.html:17
-msgid "For maintenance"
-msgstr "Для поддержки"
+msgid "Your email address, phone number, physical contact information"
+msgstr "Адрес электронной почты, имя и фамилия, номер(а) телефона."
 
 #: templates/pages/privacy.html:18
-msgid "For support in case of technical difficulties"
-msgstr "Для поддержки в случае технических трудностей"
+msgid ""
+"Your bank account details if the payment is made via bank transfer. Please "
+"keep in mind that we DO NOT possess your payment (credit or debit) card "
+"information since all online financial transactions are made through the "
+"AmeriaBank payment systems."
+msgstr ""
+"Банковские реквизиты, если вы оплатили заказ через банковский перевод. Мы НЕ "
+"владеем какими-либо данными Вашей платежной карты, так как онлайн платежи в "
+"нашем сайте осуществляются исключительно через платежные системы AmeriaBank."
 
 #: templates/pages/privacy.html:19
-msgid "To meet your needs more effectively"
-msgstr "Для более эффективного удовлетворения ваших потребностей"
+msgid "Your shopping history, ‘Favorites’ list, viewed items etc."
+msgstr "История ваших покупок в сайте, список избранных товаров и т.д."
 
 #: templates/pages/privacy.html:20
-msgid "To keep you informed about news or new services"
-msgstr "Чтобы держать вас в курсе новостей или новых услуг"
+msgid ""
+"Your shipping address and other information you provide to ship an item."
+msgstr ""
+"Адрес(а) доставки, дополнительная информация, предоставляемая для доставки."
 
 #: templates/pages/privacy.html:21
-msgid "To send information about special offers"
-msgstr "Для отправки информации о специальных предложениях"
+msgid "Your correspondence sent to us."
+msgstr "Ваша с нами корреспонденция․"
 
 #: templates/pages/privacy.html:24
+msgid "Non disclosure"
+msgstr "Раскрытие Информации"
+
+#: templates/pages/privacy.html:25
 msgid ""
-"Vitamix.am ensures the confidentiality of the information you provide to the "
-"party."
+"The information you provide is absolutely private and cannot be shared with "
+"a third party."
 msgstr ""
-"Vitamix.am обеспечивает конфиденциальность информации, которую вы "
-"предоставляете стороне"
+"Сведения, предоставляемые вами, считаются абсолютно секретными и не могут "
+"быть раскрыты какой-то третей стороне."
 
-#: templates/pages/privacy.html:26
-msgid "Other information collected while visiting the site"
-msgstr "Другая информация, собранная во время посещения сайта"
-
-#: templates/pages/privacy.html:27
-msgid ""
-"While visiting Vitamix.am website, certain information about your computer "
-"is collected. For example, when you visited our site, what pages you "
-"visited, browser type, internet service provider name (UCOM, Vivacell…) and "
-"other similar information."
-msgstr ""
-"При посещении сайта Vitamix.am собирается определенная информация о вашем "
-"компьютере. Например, когда вы посетили наш сайт, какие страницы вы "
-"посетили, тип браузера, название интернет-провайдера (UCOM, Vivacell…) и "
-"другая аналогичная информация."
-
-#: templates/pages/privacy.html:28
-msgid ""
-"The information collected is not personal, it allows you to count the number "
-"of visitors, compile statistics on page visits. This information allows us "
-"to keep track of our site and make it as user-friendly as possible."
-msgstr ""
-"Собранная информация не является личной, она позволяет подсчитать количество "
-"посетителей, вести статистику посещений страниц. Эта информация позволяет "
-"нам отслеживать наш сайт и делать его максимально удобным для пользователя."
-
-#: templates/pages/privacy.html:29
-msgid "Use of cookies"
-msgstr "Использование файлов cookie"
-
-#: templates/pages/privacy.html:30
-msgid ""
-"Vitamix.am uses cookie files. Cookies are small text files that are "
-"generated on the website. When you visit the site, cookie files are accepted "
-"and stored on your computer’s browser software. Cookies are safe for your "
-"computer and don’t collect personal information. Due to them, the site visit "
-"becomes faster and more convenient."
-msgstr ""
-"Vitamix.am использует файлы cookie. Файлы cookie — это небольшие текстовые "
-"файлы, которые создаются на веб-сайте. Когда вы посещаете сайт, файлы cookie "
-"принимаются и сохраняются в программном обеспечении браузера вашего "
-"компьютера. Файлы cookie безопасны для вашего компьютера и не собирают "
-"личную информацию. Благодаря им посещение сайта становится быстрее и удобнее."
+#: templates/payment/fail.html:10
+#, fuzzy
+#| msgid "Something is wrong"
+msgid "Something is wrong.Try again!"
+msgstr "Что-то пошло не так"
 
 #: templates/payment/success.html:10
 msgid "Your order has been successfully placed!"
@@ -648,6 +618,168 @@ msgstr ""
 #: venv/lib/python3.8/site-packages/django/views/templates/default_urlconf.html:249
 msgid "Connect, get help, or contribute"
 msgstr ""
+
+#~ msgid "Our Advantages"
+#~ msgstr "Наши преимущества"
+
+#~ msgid ""
+#~ "Ahead of each holiday, Vitamix.am presents a special section, thanks to "
+#~ "which shopping becomes easier and more purposeful."
+#~ msgstr ""
+#~ "В преддверии каждого праздника Vitamix.am представляет специальный "
+#~ "раздел, в котором Ваши покупки станут проще и целенаправленнее."
+
+#~ msgid "With love, Vitamix.am"
+#~ msgstr "С любовью, Vitamix.am"
+
+#~ msgid ""
+#~ "If the product You bought has not undergone any qualitative or "
+#~ "quantitative changes, You can return it within 14 days by presenting the "
+#~ "cash register receipt or invoice, except for the products that are not "
+#~ "subject to return or exchange according to the RA legislation."
+#~ msgstr ""
+#~ "Если купленный Вами товар не претерпел качественных или количественных "
+#~ "изменений, Вы можете вернуть его в течение 14 дней, предъявив кассовый "
+#~ "чек или счет, за исключением товаров, которые не подлежат возврату или "
+#~ "обмену в соответствии с законодательством РА."
+
+#~ msgid ""
+#~ "The same goes for cases where You have mistakenly ordered a product from "
+#~ "the same product group but of a different brand, and You want to replace "
+#~ "it with your own. In such cases, You will be charged only the difference "
+#~ "in the prices of the goods, if any."
+#~ msgstr ""
+#~ "То же самое касается случаев, когда Вы по ошибке заказали товар из той же "
+#~ "группы товаров, но другого бренда и хотите заменить его своим "
+#~ "предпочтенным. В таких случаях с Вас будет взиматься только разница в "
+#~ "цене товара, если таковая имеется."
+
+#~ msgid "Our Menu"
+#~ msgstr "Категория"
+
+#~ msgid ""
+#~ "The use of cash registers does not have to be remotely related to the "
+#~ "sale of electronic communications or television shops. / Basis17.06.16 "
+#~ "ՀՕ-116-N /"
+#~ msgstr ""
+#~ "Использование кассовых аппаратов не должно быть отдаленно связано с "
+#~ "продажей электронных средств связи или телемагазинами. / Basis17.06.16 "
+#~ "ՀՕ-116-N /"
+
+#~ msgid "Fast delivery up to 1 hour"
+#~ msgstr "Быстрая доставка в течение 1 часа"
+
+#~ msgid "The cost of order delivery in Yerevan is 500 drams."
+#~ msgstr "Стоимость доставки заказа по Еревану - 500 драм."
+
+#~ msgid ""
+#~ "Payment at Vitamix.am can be made in two ways: online or in person. "
+#~ "Online payments are made through Idram, cash և POS-terminal payment "
+#~ "systems. They are serviced Cardholders with Visa և Master Card. Cash "
+#~ "payments are made upon delivery at the moment in AMD."
+#~ msgstr ""
+#~ "Оплату на Vitamix.am можно произвести двумя способами: онлайн или по "
+#~ "факту доставки. Онлайн платежи осуществляются через Idram, наличные и POS-"
+#~ "терминальные платежные системы. Они обслуживают держателей карт Visa и "
+#~ "Master Card. Оплата наличными осуществляется по факту доставки в драмах."
+
+#~ msgid "Delivery order"
+#~ msgstr "Время доставки"
+
+#~ msgid ""
+#~ "Delivery is carried out in Yerevan within 1 hour, depending on the number "
+#~ "of delivery points."
+#~ msgstr ""
+#~ "Доставка осуществляется по Еревану в течение 1 часа, в зависимости от "
+#~ "количества пунктов выдачи"
+
+#~ msgid "The following tariffs apply for delivery."
+#~ msgstr "На доставку действуют следующие тарифы."
+
+#~ msgid "Yerevan"
+#~ msgstr "Ереван"
+
+#~ msgid "Argavand"
+#~ msgstr "Аргаванд"
+
+#~ msgid "Noragavit"
+#~ msgstr "Норагавит"
+
+#~ msgid ""
+#~ "The purpose of this policy is to inform Vitamix.am visitors what data is "
+#~ "collected to register on the site and how it is used."
+#~ msgstr ""
+#~ "Целью данной политики является информирование посетителей Vitamix.amо "
+#~ "том, для чего собираются данные для регистрации на сайте и как они "
+#~ "используются."
+
+#~ msgid ""
+#~ "For the site registration it is required to provide the following "
+#~ "personal information:`email, first name, last name: For the sake of "
+#~ "providing safe and convenient service the information you provide is used "
+#~ "for the following purposes:"
+#~ msgstr ""
+#~ "Для регистрации на сайте необходимо предоставить следующую личную "
+#~ "информацию: электронная почта, имя, фамилия: В целях обеспечения "
+#~ "безопасного и удобного обслуживания предоставленная вами информация "
+#~ "используется в следующих целях:"
+
+#~ msgid "For maintenance"
+#~ msgstr "Для поддержки"
+
+#~ msgid "For support in case of technical difficulties"
+#~ msgstr "Для поддержки в случае технических трудностей"
+
+#~ msgid "To meet your needs more effectively"
+#~ msgstr "Для более эффективного удовлетворения ваших потребностей"
+
+#~ msgid "To keep you informed about news or new services"
+#~ msgstr "Чтобы держать вас в курсе новостей или новых услуг"
+
+#~ msgid "To send information about special offers"
+#~ msgstr "Для отправки информации о специальных предложениях"
+
+#~ msgid "Other information collected while visiting the site"
+#~ msgstr "Другая информация, собранная во время посещения сайта"
+
+#~ msgid ""
+#~ "While visiting Vitamix.am website, certain information about your "
+#~ "computer is collected. For example, when you visited our site, what pages "
+#~ "you visited, browser type, internet service provider name (UCOM, "
+#~ "Vivacell…) and other similar information."
+#~ msgstr ""
+#~ "При посещении сайта Vitamix.am собирается определенная информация о вашем "
+#~ "компьютере. Например, когда вы посетили наш сайт, какие страницы вы "
+#~ "посетили, тип браузера, название интернет-провайдера (UCOM, Vivacell…) и "
+#~ "другая аналогичная информация."
+
+#~ msgid ""
+#~ "The information collected is not personal, it allows you to count the "
+#~ "number of visitors, compile statistics on page visits. This information "
+#~ "allows us to keep track of our site and make it as user-friendly as "
+#~ "possible."
+#~ msgstr ""
+#~ "Собранная информация не является личной, она позволяет подсчитать "
+#~ "количество посетителей, вести статистику посещений страниц. Эта "
+#~ "информация позволяет нам отслеживать наш сайт и делать его максимально "
+#~ "удобным для пользователя."
+
+#~ msgid "Use of cookies"
+#~ msgstr "Использование файлов cookie"
+
+#~ msgid ""
+#~ "Vitamix.am uses cookie files. Cookies are small text files that are "
+#~ "generated on the website. When you visit the site, cookie files are "
+#~ "accepted and stored on your computer’s browser software. Cookies are safe "
+#~ "for your computer and don’t collect personal information. Due to them, "
+#~ "the site visit becomes faster and more convenient."
+#~ msgstr ""
+#~ "Vitamix.am использует файлы cookie. Файлы cookie — это небольшие "
+#~ "текстовые файлы, которые создаются на веб-сайте. Когда вы посещаете сайт, "
+#~ "файлы cookie принимаются и сохраняются в программном обеспечении браузера "
+#~ "вашего компьютера. Файлы cookie безопасны для вашего компьютера и не "
+#~ "собирают личную информацию. Благодаря им посещение сайта становится "
+#~ "быстрее и удобнее."
 
 #~ msgid "We"
 #~ msgstr "Мы"

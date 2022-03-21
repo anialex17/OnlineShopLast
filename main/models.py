@@ -174,7 +174,7 @@ class Basket(models.Model):
                 finale_price += i.product.new_price * i.quantity
             else:
                 finale_price += i.product.price * i.quantity
-        return int(finale_price)
+        return finale_price
 
     def total_quantity(self):
         total = 0
@@ -214,6 +214,10 @@ class Order(models.Model):
         ('BUYING_TYPE_SELF', 'Հաճախորդը կմոտենա'),
         ('BUYING_TYPE_DELIVERY', 'Արաքում')
     )
+    PAYMENT= (
+        ('PAID', 'Վճարված է'),
+        ('NOT PAID', 'Վճարված չէ')
+    )
 
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE, verbose_name="Պատվեր կատարող", related_name='related_orders')
     time_shipping = models.ForeignKey(Time_Shipping, on_delete=models.SET_NULL, null=True, verbose_name="Առաքման ժամ")
@@ -229,6 +233,7 @@ class Order(models.Model):
     payment_type = models.CharField(max_length=100, choices=PAYMENT_TYPE_CHOICES, null=True)
     date_added = models.DateTimeField(auto_now_add=True, verbose_name="Ավելացվել է", null=True)
     comment = models.TextField(verbose_name='Մեկնաբանություն', blank=True, null=True)
+    pay = models.CharField(max_length=10,verbose_name='Վճարման կարգավիճակ',choices=PAYMENT, default='NOT PAID')
 
     def __str__(self):
         return f'{self.id} {self.customer.user.first_name}'

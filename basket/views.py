@@ -1,7 +1,10 @@
+import json
+import requests
 from django.contrib import messages
-from django.contrib.sites import requests
 from django.shortcuts import render, redirect
 from django.http import JsonResponse, HttpResponseRedirect
+from django.urls import reverse_lazy
+
 from main.forms import RegisterUserForm, LoginUserForm
 from main.views import GetContextDataMixin
 from main.models import *
@@ -20,7 +23,7 @@ def basket(request):
         customer = request.user.customer
         basket = Basket.objects.get(customer_id=customer.id)
         for product_item in basket.productItems.all():
-            if product_item.product.is_published==False:
+            if product_item.product.is_published == False:
                 product_item.delete()
         if basket.finale_price() < 10000:
             basket.delivery_cost = 500
@@ -36,7 +39,7 @@ def basket(request):
             the_id = basket.id
         basket = Basket.objects.get(id=the_id)
         for product_item in basket.productItems.all():
-            if product_item.product.is_published==False:
+            if product_item.product.is_published == False:
                 product_item.delete()
         if basket.finale_price() < 10000:
             basket.delivery_cost = 500
@@ -145,7 +148,7 @@ def change_qty_minus(request):
         return redirect('basket')
 
 
-def order(request):
+def order(request, *args, **kwargs):
     form = PaymentForm()
     form_response = PaymentResponseForm()
     if request.method == 'POST':
@@ -162,39 +165,78 @@ def order(request):
             for item in basket.productItems.all():
                 item.order = order
                 if item.product.new_price:
-                    item.price=item.product.new_price*item.quantity
+                    item.price = item.product.new_price * item.quantity
                 else:
-                    item.price = item.product.price*item.quantity
+                    item.price = item.product.price * item.quantity
                 item.save()
-                basket.productItems.remove(item)
                 # order.product_items.add(item)
-            if order.payment_type == 'TYPE_PAYMENT_NON_CASH':
-                send_mail('Պատվեր',f'Նոր պատվեր-{order.customer.user.first_name} {order.customer.user.last_name}-ի կողմից',
+            if order.payment_type == 'TYPE_PAYMENT_CASH':
+                send_mail('Պատվեր',
+                          f'Նոր պատվեր-{order.customer.user.first_name} {order.customer.user.last_name}-ի կողմից',
                           'vitamix.company.2022@gmail.com', ['vitamix.company.2022@gmail.com'], fail_silently=False)
+                for item in basket.productItems.all():
+                    basket.productItems.remove(item)
                 return redirect('success')
-                # send_mail('Պատվեր',f'Նոր պատվեր-{order.customer.user.first_name} {order.customer.user.last_name}-ի կողմից', 'vitamix.company.2022@gmail.com', ['vitamix.company.2022@gmail.com'], fail_silently=False)
-                # return redirect('payment')
-                # payment = Payment.objects.create(description=f'online payment {request.user.first_name}',
-                #                                  order_id=order.id,
-                #                                  amount=basket.finale_price)
-                # payment = PaymentForm(description=f'online payment {request.user.first_name}',
-                #                                  order_id=order.id,
-                #                                  amount=basket.finale_price)
-                # data = {payment.description: f'online payment {request.user.first_name}', payment.order_id: order.id,
-                #         payment.amount: basket.finale_price()}
-                # payment_request = requests.post('https://servicestest.ameriabank.am/VPOS/api/VPOS/InitPayment', data=data)
-                # payment_response = PaymentResponse.objects.create(payment_id=payment_request.payment_id,
-                #                                                    response_code=payment_request.response_code,
-                #                                                    response_message=payment_request.response_message)
-                #
-                # return redirect(f'https://servicestest.ameriabank.am/VPOS/Payments/Pay ? id =@ id & lang =@lang')
-            elif order.payment_type == 'TYPE_PAYMENT_CASH':
-                send_mail('Պատվեր',f'Նոր պատվեր-{order.customer.user.first_name} {order.customer.user.last_name}-ի կողմից',
-                          'vitamix.company.2022@gmail.com', ['vitamix.company.2022@gmail.com'], fail_silently=False)
-                return redirect('success')
+            elif order.payment_type == 'TYPE_PAYMENT_NON_CASH':
+                payment = Payment.objects.create(description=f'online payment {request.user.first_name}',
+                                                 order_id=2522045,
+                                                 # amount=order.finale_price+order.delivery_cost)
+                                                 amount=10)
+
+                url = "https://servicestest.ameriabank.am/VPOS/api/VPOS/InitPayment"
+
+                payload = json.dumps({
+                    "ClientID": "01df3a48-3bda-45ea-891c-0667ba982ba4",
+                    # "Amount": order.finale_price,
+                    "Amount": 10,
+                    "OrderID": 2522078,
+                    "BackURL": "http://127.0.0.1:8000/hy/payment_response/",
+                    "Username": "3d19541048",
+                    "Password": "lazY2k",
+                    "Description": "Payment"
+                })
+                headers = {
+                    'Content-Type': 'application/json'
+                }
+                response = requests.request("POST", url, headers=headers, data=payload)
+                response_data=response.json()
+
+
+                # print(response2.GET.get('orderID'))
+                if response_data['ResponseCode'] == 1:
+                    # for item in basket.productItems.all():
+                    #     basket.productItems.remove(item)
+                    return redirect(f'https://servicestest.ameriabank.am/VPOS/Payments/Pay?id={response_data["PaymentID"]}&lang=am')
+                else:
+                    return redirect('fail')
     else:
         form = OrderForm()
     return render(request, 'basket/order.html', {'form': form})
 
 
+def payment_response(request):
+    orderID = request.GET.get('orderID', '')
+    resposneCode = request.GET.get('resposneCode', '')
+    paymentID = request.GET.get('paymentID', '')
+    order = Order.objects.get(id = orderID)
+    if resposneCode!='00':
+        return redirect('fail')
+    url = 'https://servicestest.ameriabank.am/VPOS/api/VPOS/GetPaymentDetails'
+    payload = json.dumps({
+        "PaymentID": paymentID,
+        "Username": "3d19541048",
+        "Password": "lazY2k"
+    })
+    headers = {
+        'Content-Type': 'application/json'
+    }
+    get_payment_detail = requests.request("POST", url, headers=headers, data=payload)
+    response_payment_detail = get_payment_detail.json()
+    order.pay='PAID'
+    context = {
+        'Amount':response_payment_detail['Amount'],
+        'ClientName':response_payment_detail['ClientName'],
+        'CardNumber':response_payment_detail['CardNumber'],
+    }
+    return render(request, 'pages/payment_response.html', context)
 

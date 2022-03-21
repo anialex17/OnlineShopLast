@@ -4,9 +4,9 @@ from django.db import models
 class Payment(models.Model):
     currency_choices = (('051', 'AMD'),('978', 'EUR'), ('840', 'USD'), ('643', 'RUB'))
 
-    client_id = models.CharField(verbose_name='Merchant ID', max_length=255)
-    username = models.CharField(verbose_name='Merchant username', max_length=255)
-    password = models.CharField(verbose_name='Merchant password', max_length=255)
+    client_id = models.CharField(verbose_name='Merchant ID', max_length=255, blank=True, null=True)
+    username = models.CharField(verbose_name='Merchant username', max_length=255, blank=True, null=True)
+    password = models.CharField(verbose_name='Merchant password', max_length=255, blank=True, null=True)
     currency = models.CharField(verbose_name='Transaction currency', max_length=3, choices=currency_choices, default='AMD', null=True)
     description = models.TextField(verbose_name='Description of the transaction')
     order_id = models.IntegerField(verbose_name='Unique ID of the transaction')

@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load static %}
+
+
+{% block content%}
+<section class="success-content">
+    <div class="container">
+        <div class="d-flex justify-content-center pt-5">
+            <h3 class="success-header">{% trans 'Your order has been successfully placed!' %}</h3>
+        </div>
+        <div class="d-flex justify-content-center pt-5">
+            <a href="{% url 'home' %}" class="site-color success-link">
+                <span>
+                    <i class="fas fa-angle-left"></i>
+                    &nbsp;&nbsp;{% trans 'Continue Ordering' %}
+                </span>
+            </a>
+            <p>{{ ClientName }}</p>
+            <p>{{ Amount }}</p>
+            <p>{{ CardNumber }}</p>
+        </div>
+    </div>
+</section>
+{% endblock%}

@@ -70,12 +70,12 @@ class ProductItemInline(admin.TabularInline):
 
 @admin.register(Order)
 class OrderAdmin(admin.ModelAdmin):
-    list_display = ('id', 'customer','date_shipping', 'time_shipping','status_colored')
+    list_display = ('id', 'customer','date_shipping', 'time_shipping','status_colored', 'pay')
     list_display_links = ('id', 'customer','date_shipping')
     inlines = [ProductItemInline,]
     save_on_top = True
     readonly_fields=('customer','payment_type', 'finale_price', 'delivery_cost', 'date_shipping', 'time_shipping', 'city', 'address', 'phone' )
-    fields = ('status','customer','payment_type', 'finale_price', 'delivery_cost', 'date_shipping', 'time_shipping', 'city', 'address', 'phone', 'comment' )
+    fields = ('status','pay','customer','payment_type', 'finale_price', 'delivery_cost', 'date_shipping', 'time_shipping', 'city', 'address', 'phone', 'comment' )
     list_filter = ('customer','status')
 
     def status_colored(self, obj):
