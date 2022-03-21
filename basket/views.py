@@ -189,7 +189,7 @@ def order(request, *args, **kwargs):
                     "ClientID": "01df3a48-3bda-45ea-891c-0667ba982ba4",
                     # "Amount": order.finale_price,
                     "Amount": 10,
-                    "OrderID": 2522078,
+                    "OrderID": 2522079,
                     "BackURL": "http://127.0.0.1:8000/hy/payment_response/",
                     "Username": "3d19541048",
                     "Password": "lazY2k",
@@ -204,8 +204,6 @@ def order(request, *args, **kwargs):
 
                 # print(response2.GET.get('orderID'))
                 if response_data['ResponseCode'] == 1:
-                    # for item in basket.productItems.all():
-                    #     basket.productItems.remove(item)
                     return redirect(f'https://servicestest.ameriabank.am/VPOS/Payments/Pay?id={response_data["PaymentID"]}&lang=am')
                 else:
                     return redirect('fail')
@@ -218,7 +216,9 @@ def payment_response(request):
     orderID = request.GET.get('orderID', '')
     resposneCode = request.GET.get('resposneCode', '')
     paymentID = request.GET.get('paymentID', '')
-    order = Order.objects.get(id = orderID)
+    order = Order.objects.get(id = 16)
+    customer = request.user.customer
+    basket = Basket.objects.get(customer=customer)
     if resposneCode!='00':
         return redirect('fail')
     url = 'https://servicestest.ameriabank.am/VPOS/api/VPOS/GetPaymentDetails'
@@ -234,6 +234,8 @@ def payment_response(request):
     response_payment_detail = get_payment_detail.json()
     order.pay='PAID'
     order.save()
+    for item in basket.productItems.all():
+        basket.productItems.remove(item)
     context = {
         'Amount':response_payment_detail['Amount'],
         'ClientName':response_payment_detail['ClientName'],
