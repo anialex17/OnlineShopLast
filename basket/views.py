@@ -233,6 +233,7 @@ def payment_response(request):
     get_payment_detail = requests.request("POST", url, headers=headers, data=payload)
     response_payment_detail = get_payment_detail.json()
     order.pay='PAID'
+    order.save()
     context = {
         'Amount':response_payment_detail['Amount'],
         'ClientName':response_payment_detail['ClientName'],
