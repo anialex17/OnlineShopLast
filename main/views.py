@@ -177,7 +177,7 @@ def logout_user(request):
 
 def customer(request, pk):
     customer = Customer.objects.get(user=request.user)
-    orders = Order.objects.filter(customer=customer).order_by('-id')
+    orders = Order.objects.filter(customer=customer).order_by('-id')[:5]
     user_form = EditUserForm(initial={
         # 'username': request.user.username,
         'first_name': request.user.first_name,

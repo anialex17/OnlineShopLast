@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-03-19 17:42+0400\n"
+"POT-Creation-Date: 2022-03-22 14:56+0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -58,6 +58,7 @@ msgstr "Цена продукта"
 
 #: templates/basket/basket.html:62 templates/basket/basket.html:87
 #: templates/basket/basket.html:143 templates/basket/basket.html:148
+#: templates/pages/payment_response.html:12
 msgid "amd"
 msgstr "др"
 
@@ -81,7 +82,8 @@ msgstr "Бесплатная доставка в случае"
 msgid "dr and over."
 msgstr "драм и больше"
 
-#: templates/basket/basket.html:120 templates/payment/success.html:16
+#: templates/basket/basket.html:120 templates/pages/payment_response.html:18
+#: templates/payment/success.html:16
 msgid "Continue Ordering"
 msgstr "Продолжить покупки"
 
@@ -503,6 +505,18 @@ msgstr ""
 "Однако, если Ваше желание вернуть товар обусловлено его качественными "
 "характеристиками, Вы можете заменить товар другим с помощью нашего курьера."
 
+#: templates/pages/payment_response.html:10 templates/payment/success.html:10
+msgid "Your order has been successfully placed!"
+msgstr "Ваш заказ успешно принят!"
+
+#: templates/pages/payment_response.html:11
+msgid "Payer"
+msgstr "Плательщик"
+
+#: templates/pages/payment_response.html:12
+msgid "Amount"
+msgstr "Сумма"
+
 #: templates/pages/privacy.html:10
 msgid "Privacy Policy"
 msgstr "Политика конфиденциальности"
@@ -569,10 +583,6 @@ msgstr ""
 #| msgid "Something is wrong"
 msgid "Something is wrong.Try again!"
 msgstr "Что-то пошло не так"
-
-#: templates/payment/success.html:10
-msgid "Your order has been successfully placed!"
-msgstr "Ваш заказ успешно принят!"
 
 #: venv/lib/python3.8/site-packages/django/views/templates/default_urlconf.html:7
 #: venv/lib/python3.8/site-packages/django/views/templates/default_urlconf.html:221

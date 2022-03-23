@@ -3,16 +3,13 @@ import requests
 from django.contrib import messages
 from django.shortcuts import render, redirect
 from django.http import JsonResponse, HttpResponseRedirect
-from django.urls import reverse_lazy
-
 from main.forms import RegisterUserForm, LoginUserForm
 from main.views import GetContextDataMixin
 from main.models import *
-from payment.forms import PaymentForm, PaymentResponseForm
-from payment.models import Payment, PaymentResponse
 from .forms import AddToBasketForm, OrderForm
 import uuid
 from django.core.mail import send_mail
+from payment.models import PaymentData
 
 
 def basket(request):
@@ -149,8 +146,6 @@ def change_qty_minus(request):
 
 
 def order(request, *args, **kwargs):
-    form = PaymentForm()
-    form_response = PaymentResponseForm()
     if request.method == 'POST':
         customer = request.user.customer
         basket = Basket.objects.get(customer=customer)
@@ -178,18 +173,13 @@ def order(request, *args, **kwargs):
                     basket.productItems.remove(item)
                 return redirect('success')
             elif order.payment_type == 'TYPE_PAYMENT_NON_CASH':
-                payment = Payment.objects.create(description=f'online payment {request.user.first_name}',
-                                                 order_id=2522045,
-                                                 # amount=order.finale_price+order.delivery_cost)
-                                                 amount=10)
-
+                payment = PaymentData.objects.create(user=request.user, amount=order.finale_price, order_id=order.id)
                 url = "https://servicestest.ameriabank.am/VPOS/api/VPOS/InitPayment"
-
                 payload = json.dumps({
                     "ClientID": "01df3a48-3bda-45ea-891c-0667ba982ba4",
                     # "Amount": order.finale_price,
                     "Amount": 10,
-                    "OrderID": 2522079,
+                    "OrderID": 2522087,
                     "BackURL": "http://127.0.0.1:8000/hy/payment_response/",
                     "Username": "3d19541048",
                     "Password": "lazY2k",
@@ -199,12 +189,11 @@ def order(request, *args, **kwargs):
                     'Content-Type': 'application/json'
                 }
                 response = requests.request("POST", url, headers=headers, data=payload)
-                response_data=response.json()
-
-
+                response_data = response.json()
                 # print(response2.GET.get('orderID'))
                 if response_data['ResponseCode'] == 1:
-                    return redirect(f'https://servicestest.ameriabank.am/VPOS/Payments/Pay?id={response_data["PaymentID"]}&lang=am')
+                    return redirect(
+                        f'https://servicestest.ameriabank.am/VPOS/Payments/Pay?id={response_data["PaymentID"]}&lang=am')
                 else:
                     return redirect('fail')
     else:
@@ -213,13 +202,14 @@ def order(request, *args, **kwargs):
 
 
 def payment_response(request):
+    customer = request.user.customer
     orderID = request.GET.get('orderID', '')
     resposneCode = request.GET.get('resposneCode', '')
     paymentID = request.GET.get('paymentID', '')
-    order = Order.objects.get(id = 16)
-    customer = request.user.customer
     basket = Basket.objects.get(customer=customer)
-    if resposneCode!='00':
+    order = Order.objects.get(basket=basket, id=116)
+    payment = PaymentData.objects.get(user=request.user, order=order)
+    if resposneCode != '00':
         return redirect('fail')
     url = 'https://servicestest.ameriabank.am/VPOS/api/VPOS/GetPaymentDetails'
     payload = json.dumps({
@@ -232,14 +222,41 @@ def payment_response(request):
     }
     get_payment_detail = requests.request("POST", url, headers=headers, data=payload)
     response_payment_detail = get_payment_detail.json()
-    order.pay='PAID'
+    order.pay = 'PAID'
     order.save()
+    payment.payment_id = paymentID
+    payment.response_code = resposneCode
+    payment.order.id = orderID
+    payment.save()
+
     for item in basket.productItems.all():
         basket.productItems.remove(item)
     context = {
-        'Amount':response_payment_detail['Amount'],
-        'ClientName':response_payment_detail['ClientName'],
-        'CardNumber':response_payment_detail['CardNumber'],
+        'Amount': response_payment_detail['Amount'],
+        'ClientName': response_payment_detail['ClientName'],
+        'CardNumber': response_payment_detail['CardNumber'],
     }
     return render(request, 'pages/payment_response.html', context)
 
+
+# def cancel_payment(self, request, **kwargs):
+#     customer = request.user.customer
+#     order = Order.objects.get(customer=customer, id=self.kwargs['order_id'])
+#     print(self.kwargs)
+#     payment = PaymentData.objects.get(order_id=order.id)
+#     if order.pay=='CANCEL':
+#         url = "https://servicestest.ameriabank.am/VPOS/api/VPOS/CancelPayment"
+#         payload = json.dumps({
+#             "PaymentID": payment.payment_id,
+#             "Username": "3d19541048",
+#             "Password": "lazY2k"
+#         })
+#         headers = {
+#             'Content-Type': 'application/json'
+#         }
+#         cancel_payment_data = requests.request("POST", url, headers=headers, data=payload)
+#         cancel_payment_data_response = cancel_payment_data.json()
+#         if cancel_payment_data_response["ResponseCode"] == 00:
+#             return render(request, 'success.html')
+#         else:
+#             return redirect('fail')
