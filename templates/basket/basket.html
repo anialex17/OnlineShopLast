@@ -15,6 +15,9 @@
                 <span class="font-weight-bold">{% trans 'My Basket' %}</span>
             </h3>
         </div>
+        {% if not basket.productItems.all %}
+            <p class="text-center"  style="color: #535353; ">Your cart is empty...</p>
+            {% else %}
         <table class="table py-3">
             <thead class="thead-light">
             <tr>
@@ -37,7 +40,9 @@
             {% endfor %}
             {% endif %}
 
+
             {% for item in basket.productItems.all %}
+
             <tr class="py-3">
                 <th scope="row">
 
@@ -100,6 +105,7 @@
             </tr>
 
             {% endfor %}
+            {% endif%}
             </tbody>
         </table>
         <div class="basket-order-part d-flex flex-wrap">
@@ -135,6 +141,7 @@
                 {% endif %}
 
             </div>
+            {% if basket.productItems.all %}
             <div class="order-summary">
                 <div class="cost">
                     <div class="shipping-price py-3 font-weight-bold">
@@ -150,6 +157,7 @@
                 </div>
 
             </div>
+            {% endif %}
         </div>
     </div>
 </section>

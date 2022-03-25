@@ -24,6 +24,7 @@ urlpatterns += i18n_patterns(
     path('reset/done/',
          views.PasswordResetCompleteView.as_view(template_name='main/password_reset_complete.html'),
          name='password_reset_complete'),
+    path('api/', include('api.urls'))
 )
 
 if settings.DEBUG:
