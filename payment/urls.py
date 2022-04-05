@@ -5,6 +5,5 @@ from basket.views import *
 urlpatterns = [
     path('success/', success, name='success'),
     path('fail/', fail, name='fail'),
-    path('payment/', payment, name='payment'),
 
 ]

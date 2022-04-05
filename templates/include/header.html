@@ -128,6 +128,8 @@
                                 class="btn btn-block shadow-none modal-sign-in-btn">{% trans 'Sign In' %}
                         </button>
                     </div>
+<!--                     <a href="{% url 'social:begin' 'facebook' %}" class="btn-foursquare btn btn-block" style="color: blue">Sign In with Facebook</a>-->
+<!--                    <a href="{% url 'social:begin' 'google-oauth2' %}" class="btn btn-block">Google+</a>-->
                 </form>
                 <form action="{% url 'register' %}" method="post" class="register-form d-none">
                     {% csrf_token %}

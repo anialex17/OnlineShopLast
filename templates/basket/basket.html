@@ -16,7 +16,7 @@
             </h3>
         </div>
         {% if not basket.productItems.all %}
-            <p class="text-center"  style="color: #535353; ">Your cart is empty...</p>
+            <p class="text-center"  style="color: #535353; ">{% trans 'Your cart is empty...' %}</p>
             {% else %}
         <table class="table py-3">
             <thead class="thead-light">

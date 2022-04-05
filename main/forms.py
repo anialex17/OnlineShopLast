@@ -1,6 +1,5 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, UserChangeForm, PasswordChangeForm
-from django.contrib.auth.models import User
 from .models import *
 
 
@@ -40,6 +39,7 @@ class EditUserForm(UserChangeForm):
         attrs={'class': 'form-control', 'placeholder': 'Your First Name', 'id': 'formGroupExampleInput2'}))
     last_name = forms.CharField(max_length=100, widget=forms.TextInput(
         attrs={'class': 'form-control', 'placeholder': 'Your Last Name', 'id': 'formGroupExampleInput2'}))
+
     # username = forms.CharField(widget=forms.TextInput(
     #     attrs={'class': 'form-control', 'placeholder': 'Your username', 'id': 'formGroupExampleInput2'}))
 
@@ -53,8 +53,8 @@ class EditCustomerForm(forms.ModelForm):
         model = Customer
         fields = ('phone', 'address')
         widgets = {
-            'phone':forms.TextInput(attrs={'class': 'form-control','placeholder': 'Your phone' }),
-            'address':forms.TextInput(attrs={'class': 'form-control','placeholder': 'Your address'})
+            'phone': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Your phone'}),
+            'address': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Your address'})
         }
 
 

@@ -14,7 +14,6 @@ from django.core.mail import send_mail
 #     success_url = '/'
 
 
-
 def message(request):
     if request.method == 'POST':
         contact_form = ContactForm(request.POST)
@@ -33,7 +32,6 @@ def message(request):
     else:
         contact_form = ContactForm()
     return render(request, 'pages/contact.html', {'contact_form': contact_form})
-
 
 
 class ContactView(GetContextDataMixin):

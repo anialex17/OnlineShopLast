@@ -1,14 +1,15 @@
 import json
-from payment.models import PaymentData
 import requests
+import decimal
+
+from payment.models import PaymentData
+from modeltranslation.admin import TranslationAdmin
+
 from django.contrib import admin, messages
 from django.db.models import QuerySet
-from .models import *
-from modeltranslation.admin import TranslationAdmin
-from django.contrib.contenttypes.admin import GenericTabularInline
 from django.utils.safestring import mark_safe
-from django.utils.html import format_html
-import decimal
+
+from .models import *
 
 
 @admin.register(Product)
@@ -20,9 +21,10 @@ class ProductAdmin(TranslationAdmin):
     list_editable = ('is_published',)
     search_fields = ('title',)
 
+
 @admin.register(Category)
 class CategoryAdmin(TranslationAdmin):
-    list_display = ('title',)
+    list_display = ('id','title',)
     prepopulated_fields = {'url': ('title',)}
 
 
@@ -35,7 +37,7 @@ class OrderInline(admin.TabularInline):
 
 @admin.register(Customer)
 class CustomerAdmin(TranslationAdmin):
-    list_display = ('user',)
+    list_display = ('id','user',)
     fields = ('user', 'phone', 'address')
     inlines = [OrderInline, ]
     search_fields = ('user',)
@@ -63,14 +65,7 @@ class ProductItemInline(admin.TabularInline):
     def get_measurement(self, object):
         return object.product.measurement
 
-    # def get_price(self, object):
-    #     if object.product.new_price:
-    #         return object.product.new_price * object.quantity
-    #     else:
-    #         return object.product.price * object.quantity
-
     get_measurement.short_description = "Չափման միավոր"
-    # get_price.short_description = "Ընդհանուր գումար"
 
 
 class DecimalEncoder(json.JSONEncoder):
@@ -89,61 +84,61 @@ class OrderAdmin(admin.ModelAdmin):
     readonly_fields=('customer','payment_type', 'finale_price', 'delivery_cost', 'date_shipping', 'time_shipping', 'city', 'address', 'phone' )
     fields = ('status','pay','refund','customer','payment_type', 'finale_price', 'delivery_cost', 'date_shipping', 'time_shipping', 'city', 'address', 'phone', 'comment' )
     list_filter = ('customer','status')
-    actions = ['cancel_payment', 'refund_payment']
+    # actions = ['cancel_payment', 'refund_payment']
 
-    @admin.action(description='Cancel Payment')
-    def cancel_payment(self, request, qs: QuerySet):
-        customer=request.user.customer
-        current_order = qs.get(customer=customer)
-        order = Order.objects.get(customer=customer, id=current_order.id)
-        payment = PaymentData.objects.get(user=request.user,order=order)
-        url = "https://servicestest.ameriabank.am/VPOS/api/VPOS/CancelPayment"
-        print('_______________________')
-        print(payment.payment_id)
-
-        payload = json.dumps({
-            "PaymentID": payment.payment_id,
-            "Username": "3d19541048",
-            "Password": "lazY2k"
-        })
-        headers = {
-            'Content-Type': 'application/json'
-        }
-        cancel_payment_data = requests.request("POST", url, headers=headers, data=payload)
-        cancel_payment_data_response = cancel_payment_data.json()
-        if cancel_payment_data_response["ResponseCode"] == "00":
-            qs.update(pay=Order.CANCEL)
-            self.message_user(request, f'Վճարումը հաջողությամբ չեղարկվեց։')
-        else:
-            self.message_user(request, f'Վճարման չեղարկումը չի հաջողվել։ Փորձեք կրկին։',level=messages.ERROR )
-
-    @admin.action(description='Refund Payment')
-    def refund_payment(self, request, qs: QuerySet):
-        customer = request.user.customer
-        current_order = qs.get(customer=customer)
-        order = Order.objects.get(customer=customer, id=current_order.id)
-        payment = PaymentData.objects.get(user=request.user, order=order)
-        url = "https://servicestest.ameriabank.am/VPOS/api/VPOS/RefundPayment"
-        payload = json.dumps({
-            "PaymentID": payment.payment_id,
-            "Username": "3d19541048",
-            "Password": "lazY2k",
-            "Amount": decimal.Decimal(order.refund)
-        }, cls=DecimalEncoder)
-        headers = {
-            'Content-Type': 'application/json'
-        }
-        refund_payment_data = requests.request("POST", url, headers=headers, data=payload)
-        refund_payment_data_response = refund_payment_data.json()
-        print(refund_payment_data_response)
-        print(refund_payment_data_response["ResponseCode"])
-        if refund_payment_data_response["ResponseCode"] == "00":
-            qs.update(pay=Order.REFUND)
-            payment.amount_refund=order.refund
-            payment.save()
-            self.message_user(request, f'Ետ վերադարձը հաջողությամբ կատարվեց։')
-        else:
-            self.message_user(request, f'Ետ վերադարձը չի հաջողվել։ Փորձեք կրկին։', level=messages.ERROR)
+    # @admin.action(description='Cancel Payment')
+    # def cancel_payment(self, request, qs: QuerySet):
+    #     customer=request.user.customer
+    #     current_order = qs.get(customer=customer)
+    #     order = Order.objects.get(customer=customer, id=current_order.id)
+    #     payment = PaymentData.objects.get(user=request.user,order=order)
+    #     url = "https://servicestest.ameriabank.am/VPOS/api/VPOS/CancelPayment"
+    #     print('_______________________')
+    #     print(payment.payment_id)
+    #
+    #     payload = json.dumps({
+    #         "PaymentID": payment.payment_id,
+    #         "Username": "3d19541048",
+    #         "Password": "lazY2k"
+    #     })
+    #     headers = {
+    #         'Content-Type': 'application/json'
+    #     }
+    #     cancel_payment_data = requests.request("POST", url, headers=headers, data=payload)
+    #     cancel_payment_data_response = cancel_payment_data.json()
+    #     if cancel_payment_data_response["ResponseCode"] == "00":
+    #         qs.update(pay=Order.CANCEL)
+    #         self.message_user(request, f'Վճարումը հաջողությամբ չեղարկվեց։')
+    #     else:
+    #         self.message_user(request, f'Վճարման չեղարկումը չի հաջողվել։ Փորձեք կրկին։',level=messages.ERROR )
+    #
+    # @admin.action(description='Refund Payment')
+    # def refund_payment(self, request, qs: QuerySet):
+    #     customer = request.user.customer
+    #     current_order = qs.get(customer=customer)
+    #     order = Order.objects.get(customer=customer, id=current_order.id)
+    #     payment = PaymentData.objects.get(user=request.user, order=order)
+    #     url = "https://servicestest.ameriabank.am/VPOS/api/VPOS/RefundPayment"
+    #     payload = json.dumps({
+    #         "PaymentID": payment.payment_id,
+    #         "Username": "3d19541048",
+    #         "Password": "lazY2k",
+    #         "Amount": decimal.Decimal(order.refund)
+    #     }, cls=DecimalEncoder)
+    #     headers = {
+    #         'Content-Type': 'application/json'
+    #     }
+    #     refund_payment_data = requests.request("POST", url, headers=headers, data=payload)
+    #     refund_payment_data_response = refund_payment_data.json()
+    #     print(refund_payment_data_response)
+    #     print(refund_payment_data_response["ResponseCode"])
+    #     if refund_payment_data_response["ResponseCode"] == "00":
+    #         qs.update(pay=Order.REFUND)
+    #         payment.amount_refund=order.refund
+    #         payment.save()
+    #         self.message_user(request, f'Ետ վերադարձը հաջողությամբ կատարվեց։')
+    #     else:
+    #         self.message_user(request, f'Ետ վերադարձը չի հաջողվել։ Փորձեք կրկին։', level=messages.ERROR)
 
     def status_colored(self, obj):
         if obj.status=='STATUS_READY':
@@ -152,12 +147,15 @@ class OrderAdmin(admin.ModelAdmin):
             return mark_safe('<b style="background:{};">{}</b>'.format('green', 'Պատվերը առաքված է'))
         elif obj.status=='STATUS_NEW':
             return mark_safe('<b style="background:{};">{}</b>'.format('red', 'Նոր պատվեր'))
+        elif obj.status=='CANCEL':
+            return mark_safe('<b style="background:{};">{}</b>'.format('blue', 'Չեղարկված'))
 
     status_colored.short_description = 'Ստատուս'
 
-# @admin.register(Basket)
-# class BasketAdmin(admin.ModelAdmin):
-#     list_display = ('id','customer','session_key')
+
+@admin.register(Basket)
+class BasketAdmin(admin.ModelAdmin):
+    list_display = ('id','customer','session_key')
 
 
 @admin.register(Measurement)
@@ -167,3 +165,4 @@ class MeasurementAdmin(TranslationAdmin):
 
 admin.site.register(Time_Shipping)
 # admin.site.register(Image)
+admin.site.register(ProductItem)

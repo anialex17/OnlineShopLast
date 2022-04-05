@@ -12,7 +12,6 @@ class SendMessage(models.Model):
     lastname = models.CharField(max_length=100, verbose_name="Ազգանուն")
     email = models.EmailField(verbose_name="Էլեկտրոնային հասցե")
     message = models.TextField(verbose_name="Նամակ")
-    file = models.FileField(upload_to='files', blank=True, verbose_name="Ֆայլ")
     created_at = models.DateTimeField(auto_now_add=True,null=True, verbose_name="Ստեղծվոլ է")
 
     def __str__(self):

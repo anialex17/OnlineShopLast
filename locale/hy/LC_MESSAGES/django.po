@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-03-22 14:56+0400\n"
+"POT-Creation-Date: 2022-03-25 13:31+0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -22,92 +22,96 @@ msgstr ""
 msgid "My Basket"
 msgstr "Իմ զամբյուղը"
 
-#: templates/basket/basket.html:21
+#: templates/basket/basket.html:19
+msgid "Your cart is empty..."
+msgstr "Ձեր զամբյուղը դատարկ է..."
+
+#: templates/basket/basket.html:24
 msgid "Image"
 msgstr "Նկար"
 
-#: templates/basket/basket.html:22
+#: templates/basket/basket.html:25
 msgid "Name"
 msgstr "Անուն"
 
-#: templates/basket/basket.html:23
+#: templates/basket/basket.html:26
 msgid "Price"
 msgstr "Գին"
 
-#: templates/basket/basket.html:24
+#: templates/basket/basket.html:27
 msgid "Quantity"
 msgstr "Քանակ"
 
-#: templates/basket/basket.html:25
+#: templates/basket/basket.html:28
 msgid "Total"
 msgstr "Ընդհանուր"
 
-#: templates/basket/basket.html:26 templates/basket/basket.html:90
+#: templates/basket/basket.html:29 templates/basket/basket.html:95
 msgid "Delete"
 msgstr "Ջնջել"
 
-#: templates/basket/basket.html:51
+#: templates/basket/basket.html:56
 msgid "Product name"
 msgstr "Ապրանքի անվանում"
 
-#: templates/basket/basket.html:56
+#: templates/basket/basket.html:61
 msgid "Food Price"
 msgstr "Ապրանքի գին"
 
-#: templates/basket/basket.html:62 templates/basket/basket.html:87
-#: templates/basket/basket.html:143 templates/basket/basket.html:148
+#: templates/basket/basket.html:67 templates/basket/basket.html:92
+#: templates/basket/basket.html:150 templates/basket/basket.html:155
 #: templates/pages/payment_response.html:12
 msgid "amd"
 msgstr "դրամ"
 
-#: templates/basket/basket.html:65
+#: templates/basket/basket.html:70
 msgid "Product Quantity"
 msgstr "Ապրանքի քանակ"
 
-#: templates/basket/basket.html:85
+#: templates/basket/basket.html:90
 msgid "Total Price"
 msgstr "Ընդհանուր գին"
 
-#: templates/basket/basket.html:112
+#: templates/basket/basket.html:118
 msgid "Delivery"
 msgstr "Առաքում"
 
-#: templates/basket/basket.html:116
+#: templates/basket/basket.html:122
 msgid "Free delivery in case of"
 msgstr "Անվճար առաքում"
 
-#: templates/basket/basket.html:116
+#: templates/basket/basket.html:122
 msgid "dr and over."
 msgstr "դրամ և ավել"
 
-#: templates/basket/basket.html:120 templates/pages/payment_response.html:18
+#: templates/basket/basket.html:126 templates/pages/payment_response.html:18
 #: templates/payment/success.html:16
 msgid "Continue Ordering"
 msgstr "Շարունաել գնումները"
 
-#: templates/basket/basket.html:124 templates/basket/basket.html:131
+#: templates/basket/basket.html:130 templates/basket/basket.html:137
 #: templates/basket/order.html:75
 msgid "Order"
 msgstr "Պատվիրել"
 
-#: templates/basket/basket.html:126 templates/basket/basket.html:133
+#: templates/basket/basket.html:132 templates/basket/basket.html:139
 msgid "You can place an order starting from 3000 AMD․"
 msgstr "Պատվիրել կարող եք 3000 դրամից ավել գնումնարի դեպքում։"
 
-#: templates/basket/basket.html:141
+#: templates/basket/basket.html:148
 msgid "Shipping Price"
 msgstr "Առաքման գին"
 
-#: templates/basket/basket.html:146
+#: templates/basket/basket.html:153
 msgid "Total Price "
 msgstr "Ընդհանուր գին"
 
-#: templates/basket/basket.html:162 templates/basket/basket.html:182
+#: templates/basket/basket.html:170 templates/basket/basket.html:190
 #: templates/include/header.html:104 templates/include/header.html:128
 msgid "Sign In"
 msgstr "Մուտք"
 
-#: templates/basket/basket.html:164 templates/basket/basket.html:199
+#: templates/basket/basket.html:172 templates/basket/basket.html:207
 #: templates/include/header.html:106 templates/include/header.html:145
 msgid "Register"
 msgstr "Գրանցվել"

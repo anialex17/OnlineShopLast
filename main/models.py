@@ -1,8 +1,6 @@
 from django.contrib.auth.models import User
 from django.db import models
 from django.urls import reverse
-from django.utils.html import format_html
-from django.contrib import admin
 
 
 class Category(models.Model):
@@ -55,8 +53,6 @@ class Product(models.Model):
         verbose_name_plural = 'Ապրանքներ'
         ordering = ['-id']
 
-    # product_manager=ProductManager()
-
     def get_start_quantity(self):
         if str(self.start_quantity)[-1] == '0':
             return int(self.start_quantity)
@@ -73,8 +69,6 @@ class Product(models.Model):
         return self.title
 
     @property
-    # def ct_model(self):
-    #     return self._meta.model_name
     def get_absolute_url(self):
         return reverse('product_detail', kwargs={"slug": self.url})
 
@@ -126,14 +120,6 @@ class ProductItem(models.Model):
             return int(self.quantity)
         else:
             return self.quantity
-
-    # def total_price(self):
-    #     if self.product.new_price:
-    #         self.price=int(self.product.new_price * self.quantity)
-    #         return self.price
-    #     else:
-    #         self.price=int(self.product.price * self.quantity)
-    #         return self.price
 
     def total_price(self):
         if self.product.new_price:
@@ -209,26 +195,29 @@ class Order(models.Model):
     PAID = 'PAID'
     REFUND = 'REFUND'
     NOT_PAID = 'NOT_PAID'
+    FAILED = 'FAILED'
 
     STATUS_CHOICES = (
-        ('STATUS_NEW', 'Նոր պատվեր'),
-        ('STATUS_READY', 'Պատվերը պատրաստ է'),
-        ('STATUS_COMPLETED', 'Պատվերը առաքված է'),
-    )
+                         ('STATUS_NEW', 'Նոր պատվեր'),
+                         ('STATUS_READY', 'Պատվերը պատրաստ է'),
+                         ('STATUS_COMPLETED', 'Պատվերը առաքված է'),
+                         ('CANCEL', 'Չեղարկված'))
 
     PAYMENT_TYPE_CHOICES = (
-        ('TYPE_PAYMENT_CASH', 'Կանխիկ'),
-        ('TYPE_PAYMENT_NON_CASH', 'Անկանխիկ')
+                    ('TYPE_PAYMENT_CASH', 'Կանխիկ'),
+                     # ('TYPE_PAYMENT_NON_CASH', 'Անկանխիկ')
     )
     BUYING_TYPE_CHOICES = (
         ('BUYING_TYPE_SELF', 'Հաճախորդը կմոտենա'),
         ('BUYING_TYPE_DELIVERY', 'Արաքում')
     )
+
     PAYMENT = (
         (PAID, 'Վճարված է'),
         (NOT_PAID, 'Վճարված չէ'),
         (CANCEL, 'Չեղարկված'),
-        (REFUND, 'Հետ վերադարձ')
+        (REFUND, 'Հետ վերադարձ'),
+        (FAILED, 'Ձախողված')
     )
 
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE, verbose_name="Պատվեր կատարող",
@@ -247,7 +236,7 @@ class Order(models.Model):
     payment_type = models.CharField(max_length=100, choices=PAYMENT_TYPE_CHOICES, null=True)
     date_added = models.DateTimeField(auto_now_add=True, verbose_name="Ավելացվել է", null=True)
     comment = models.TextField(verbose_name='Մեկնաբանություն', blank=True, null=True)
-    pay = models.CharField(max_length=10, verbose_name='Վճարման կարգավիճակ', choices=PAYMENT, default='NOT PAID')
+    pay = models.CharField(max_length=10, verbose_name='Վճարման կարգավիճակ', choices=PAYMENT, default=NOT_PAID)
     refund = models.DecimalField(verbose_name='Հետ վերադարձվող գումարի չափ, եթե արկա է։', max_digits=10,
                                  decimal_places=1, null=True, blank=True)
 

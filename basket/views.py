@@ -157,6 +157,7 @@ def order(request, *args, **kwargs):
             else:
                 order = Order.objects.create(**form.cleaned_data, customer=customer, basket=basket,
                                              finale_price=basket.finale_price(), delivery_cost=500)
+            customer.orders.add(order)
             for item in basket.productItems.all():
                 item.order = order
                 if item.product.new_price:
@@ -239,24 +240,24 @@ def payment_response(request):
     return render(request, 'pages/payment_response.html', context)
 
 
-# def cancel_payment(self, request, **kwargs):
-#     customer = request.user.customer
-#     order = Order.objects.get(customer=customer, id=self.kwargs['order_id'])
-#     print(self.kwargs)
-#     payment = PaymentData.objects.get(order_id=order.id)
-#     if order.pay=='CANCEL':
-#         url = "https://servicestest.ameriabank.am/VPOS/api/VPOS/CancelPayment"
-#         payload = json.dumps({
-#             "PaymentID": payment.payment_id,
-#             "Username": "3d19541048",
-#             "Password": "lazY2k"
-#         })
-#         headers = {
-#             'Content-Type': 'application/json'
-#         }
-#         cancel_payment_data = requests.request("POST", url, headers=headers, data=payload)
-#         cancel_payment_data_response = cancel_payment_data.json()
-#         if cancel_payment_data_response["ResponseCode"] == 00:
-#             return render(request, 'success.html')
-#         else:
-#             return redirect('fail')
+def cancel_payment(self, request, **kwargs):
+    customer = request.user.customer
+    order = Order.objects.get(customer=customer, id=self.kwargs['order_id'])
+    print(self.kwargs)
+    payment = PaymentData.objects.get(order_id=order.id)
+    if order.pay=='CANCEL':
+        url = "https://servicestest.ameriabank.am/VPOS/api/VPOS/CancelPayment"
+        payload = json.dumps({
+            "PaymentID": payment.payment_id,
+            "Username": "3d19541048",
+            "Password": "lazY2k"
+        })
+        headers = {
+            'Content-Type': 'application/json'
+        }
+        cancel_payment_data = requests.request("POST", url, headers=headers, data=payload)
+        cancel_payment_data_response = cancel_payment_data.json()
+        if cancel_payment_data_response["ResponseCode"] == 00:
+            return render(request, 'success.html')
+        else:
+            return redirect('fail')

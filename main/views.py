@@ -7,16 +7,17 @@ from django.http import BadHeaderError, HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.template.loader import render_to_string
 from django.urls import reverse_lazy
-from django import views
 from django.views import View
-from django.views.generic import ListView, UpdateView, DetailView, CreateView, FormView
-from .email import send_activate_mail
+from django.views.generic import ListView, DetailView, FormView
 from django.db.models import Count, F, Q
-from .forms import *
-from .models import *
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.contrib.auth.tokens import default_token_generator
 from django.utils.encoding import force_bytes
+
+
+from .email import send_activate_mail
+from .forms import *
+from .models import *
 
 
 class GetContextDataMixin(ListView):
@@ -104,7 +105,6 @@ def register(request):
             return redirect('home')
         else:
             register_form = RegisterUserForm(request.POST)
-            print(register_form.errors)
             messages.error(request, 'Something is wrong. Try again!')
             return redirect(request.META.get('HTTP_REFERER'))
 
@@ -138,7 +138,7 @@ class SignInView(FormView):
         authenticated_user = authenticate(username=username, password=password)
 
         if authenticated_user is not None:
-            login(self.request, user)
+            login(self.request, user,  backend='django.contrib.auth.backends.ModelBackend')
             if self.request.session.get('basket_id'):
                 basket = Basket.objects.get(id=self.request.session['basket_id'])
                 customer = Customer.objects.get(user=self.request.user)

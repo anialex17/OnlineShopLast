@@ -4,14 +4,10 @@ from django.core.mail import EmailMessage
 from django.urls import reverse
 from django.utils.encoding import force_bytes
 from django.utils.http import urlsafe_base64_encode
-
 from django.conf import settings
 
 
 def send_activate_mail(request, user):
-    user.is_active = False
-    user.save()
-
     current_site = get_current_site(request)
     email_body = {
         'user': user,
@@ -20,19 +16,15 @@ def send_activate_mail(request, user):
         'token': default_token_generator.make_token(user),
     }
 
-    link = reverse('activate', kwargs={
+    link = reverse('activate-account', kwargs={
         'uidb64': email_body['uid'],
         'token': email_body['token']
     })
 
-    site_protocol = 'http'
-    if request.is_secure():
-        site_protocol = 'https'
-
-    email_subject = 'Активируйте вашу учетную запись!'
-    activate_url = f'{site_protocol}://{current_site.domain}{link}'
-    email_message = f'Привет, {user.username}, ' \
-                    f'Перейдите по ссылке ниже, чтобы активировать свой аккаунт \n ' \
+    email_subject = 'Activate your account!'
+    activate_url = f'{request.META.get("HTTP_ORIGIN")}{link}'
+    email_message = f'Hi {user.username}. ' \
+                    f'Follow the link below to activate your account \n ' \
                     f'{activate_url}'
 
     email = EmailMessage(
