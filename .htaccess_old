@@ -1,0 +1,25 @@
+# Редирект с http на https создан автоматически при заказе бесплатного ssl-сертификата
+RewriteEngine On
+RewriteCond %{SERVER_PORT} !^443$
+RewriteRule .* https://%{SERVER_NAME}%{REQUEST_URI} [R,L]
+# Конец редиректа
+
+# Редирект с https://vitamix.am/
+Options +FollowSymLinks
+RewriteEngine On
+RewriteCond %{HTTP_HOST} ^vitamix.am$ [NC]
+RewriteRule ^(.*)$ https://www.vitamix.am/$1 [R=301,L]
+# Конец редиректа
+
+# Редирект с http на https создан автоматически при заказе бесплатного ssl-сертификата
+RewriteEngine On
+RewriteCond %{SERVER_PORT} !^443$
+RewriteRule .* https://%{SERVER_NAME}%{REQUEST_URI} [R,L]
+# Конец редиректа
+
+# Редирект с https://alexanrealty.am/
+Options +FollowSymLinks
+RewriteEngine On
+RewriteCond %{HTTP_HOST} ^alexanrealty.am$ [NC]
+RewriteRule ^(.*)$ https://www.alexanrealty.am/$1 [R=301,L]
+# Конец редиректа

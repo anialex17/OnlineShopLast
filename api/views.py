@@ -56,6 +56,7 @@ class ProductDetailView(generics.RetrieveAPIView):
 class CategoryListView(generics.ListAPIView):
     serializer_class = CategoryListSerializer
     pagination_class = APIListPagination
+    # permission_classes = [AllowAny]
 
     def get_queryset(self):
         categories = Category.objects.annotate(cnt=Count('product')).filter(product__wholesale=False).filter(cnt__gt=0)

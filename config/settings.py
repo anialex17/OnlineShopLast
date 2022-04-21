@@ -1,6 +1,6 @@
 import os
 from pathlib import Path
-from decouple import config
+# from decouple import config
 from datetime import timedelta
 
 
@@ -11,12 +11,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 # SECRET_KEY = 'django-insecure-97l_hp82dby9b8fuk+z+s0f(c5_o2%!cb=y2)zhtkvc#*$-v20'
-SECRET_KEY = config('SECRET_KEY')
+SECRET_KEY ='django-insecure-97l_hp82dby9b8fuk+z+s0f(c5_o2%!cb=y2)zhtkvc#*$-v20'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['vitamix.am','www.vitamix.am', 'localhost','127.0.0.1']
 
 # Application definition
 
@@ -107,6 +107,15 @@ DATABASES = {
     }
 }
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'u1627519_default',
+#         'USER': 'u1627519_default',
+#         'PASSWORD': '5w22GMc37gHlzjA0',
+#         'HOST': 'localhost',
+#     }
+# }
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
 
@@ -169,8 +178,8 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 465
 EMAIL_USE_TLS = False
 EMAIL_USE_SSL = True
-EMAIL_HOST_USER = config('EMAIL_HOST_USER')
-EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
+EMAIL_HOST_USER = 'vitamix.company.2022@gmail.com'
+EMAIL_HOST_PASSWORD = 'Vitamix.2022'
 
 
 INTERNAL_IPS = ["127.0.0.1", ]
@@ -232,8 +241,8 @@ SIMPLE_JWT = {
 SOCIAL_AUTH_JSONFIELD_ENABLED = True
 SOCIAL_AUTH_URL_NAMESPACE = 'social'
 
-SOCIAL_AUTH_FACEBOOK_OAUTH2_KEY = config('SOCIAL_AUTH_FACEBOOK_OAUTH2_KEY')
-SOCIAL_AUTH_FACEBOOK_OAUTH2_SECRET = config('SOCIAL_AUTH_FACEBOOK_OAUTH2_SECRET')
 
-SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = config('SOCIAL_AUTH_GOOGLE_OAUTH2_KEY')
-SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = config('SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET')
+SOCIAL_AUTH_FACEBOOK_OAUTH2_KEY = '673576883859074'
+SOCIAL_AUTH_FACEBOOK_OAUTH2_SECRET = '6d8f6f64530240d6d4947b88d939f6ac'
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '826835690891-8egn528vq74va5nhr4gvgphf0cs32am8.apps.googleusercontent.com'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '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'
